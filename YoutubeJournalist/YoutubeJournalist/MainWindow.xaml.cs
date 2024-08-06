@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
+using YoutubeJournalist.Core.Data;
+using YoutubeJournalist.Core.WebAPI.Base;
+using YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3;
 
 namespace YoutubeJournalist
 {
@@ -20,9 +13,29 @@ namespace YoutubeJournalist
     /// </summary>
     public partial class MainWindow : Window
     {
+        IWebAPIService _service;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            var configuration = new Configuration();
+            _service = new Service(configuration.ApiKey, configuration.MaxSearchResults);
+
+            this.DataContext = configuration;
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (!String.IsNullOrWhiteSpace(this.SearchTB.Text))
+                this.OutputLB.ItemsSource = await _service.Search(this.SearchTB.Text);
+
+            else
+                this.OutputLB.ItemsSource = new List<SearchResult>() { new SearchResult()
+                {
+                    Name = "Error",
+                    Description = "Please Enter Search Text"
+                }};
         }
     }
 }
