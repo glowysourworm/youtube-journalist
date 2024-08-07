@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\wpf-custom-utilities\src\WpfCustomUtilities\WpfCustomUtilities.csproj" />
     <ProjectReference Include="..\YoutubeJournalist.Core\YoutubeJournalist.Core.csproj" />
   </ItemGroup>
 

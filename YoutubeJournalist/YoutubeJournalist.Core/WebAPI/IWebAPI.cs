@@ -16,9 +16,29 @@ namespace YoutubeJournalist.Core.WebAPI
         IClientService ServiceBase { get; }
 
         /// <summary>
-        /// Runs Youtube search for channel entities
+        /// Searches for videos using query method - as a user would from their main page
         /// </summary>
         /// <exception cref="Exception">Service error</exception>
-        YoutubeServiceSearchChannelsData SearchChannels(string pageToken);
+        YoutubeServiceResponse<Youtube_SearchResult> SearchVideos(string searchString, string pageToken = null);
+
+        /// <summary>
+        /// Searches for playlists using query method - as a user would from their main page
+        /// </summary>
+        /// <exception cref="Exception">Service error</exception>
+        YoutubeServiceResponse<Youtube_SearchResult> SearchPlaylists(string searchString, string pageToken = null);
+
+        /// <summary>
+        /// Searches for channels using query method - as a user would from their main page
+        /// </summary>
+        /// <exception cref="Exception">Service error</exception>
+        YoutubeServiceResponse<Youtube_SearchResult> SearchChannels(string searchString, string pageToken = null);
+
+        /// <summary>
+        /// Searches for a user's channels - relies heavily on permissions for whoever is
+        /// logged in, what they can see from their permissions, and so on. Also, returns
+        /// user's channel as part of search results.
+        /// </summary>
+        /// <exception cref="Exception">Service error</exception>
+        YoutubeServiceResponse<Youtube_Channel> SearchUserChannels(string userHandle, string pageToken = null);
     }
 }

@@ -300,7 +300,7 @@ Create Table Youtube_Channel(
 	-- Status: ChannelStatus
 	Status_ETag varchar(50),
 	Status_IsLinked bit null,
-	Status_LongUploadsStatus varchar(50),
+	Status_LongUploadsStatus varchar,
 	Status_MadeForKids bit null,
 	Status_PrivacyStatus varchar(50),
 	Status_SelfDeclaredMadeForKids bit null,

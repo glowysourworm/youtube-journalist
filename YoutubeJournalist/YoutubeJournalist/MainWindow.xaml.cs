@@ -31,23 +31,22 @@ namespace YoutubeJournalist
         {
             try
             {
-                if (!String.IsNullOrWhiteSpace(this.SearchTB.Text))
-                    this.OutputLB.ItemsSource = _controller.GetChannels().Channels;
-
-                else
-                    this.OutputLB.ItemsSource = new List<Youtube_Channel>() { new Youtube_Channel()
-                {
-                    Id = "No Channel",
-                    Kind = "No Kind",
-                    ETag = "No ETag",
-                    ContentOwnerDetails_ETag = "No Owner ETag",
-                    ContentOwnerDetails_ContentOwner = "No Content Owner"
-                }};
+                this.OutputLB.ItemsSource = _controller.GetChannels(this.SearchTB.Text ?? "");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+
+                // Shuts down -> OnClosed()
+                App.Current.Shutdown();
             }
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            _controller.Dispose();
+
+            base.OnClosed(e);
         }
     }
 }

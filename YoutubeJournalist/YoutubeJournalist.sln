@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YoutubeJournalist", "Youtub
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YoutubeJournalist.Core", "YoutubeJournalist.Core\YoutubeJournalist.Core.csproj", "{B475EF26-360D-4987-99A7-C672E0019CF6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExternalDependencies", "ExternalDependencies", "{CA895CC4-F0E6-4433-B886-2F5704975080}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfCustomUtilities", "..\..\wpf-custom-utilities\src\WpfCustomUtilities\WpfCustomUtilities.csproj", "{49D37A48-E64B-4D55-8680-2294E5814FF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +25,16 @@ Global
 		{B475EF26-360D-4987-99A7-C672E0019CF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B475EF26-360D-4987-99A7-C672E0019CF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B475EF26-360D-4987-99A7-C672E0019CF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49D37A48-E64B-4D55-8680-2294E5814FF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49D37A48-E64B-4D55-8680-2294E5814FF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49D37A48-E64B-4D55-8680-2294E5814FF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49D37A48-E64B-4D55-8680-2294E5814FF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{49D37A48-E64B-4D55-8680-2294E5814FF4} = {CA895CC4-F0E6-4433-B886-2F5704975080}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {801840A9-40CC-4C8B-86FA-184DCC545EEB}
