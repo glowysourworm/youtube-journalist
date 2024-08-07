@@ -49,6 +49,8 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
                 var item = new SearchResult();
                 item.Name = resultItem.Id?.ToString() ?? "No - Id";
 
+                resultItem.
+
                 switch (resultItem.Id.Kind)
                 {
                     case "youtube#video":
