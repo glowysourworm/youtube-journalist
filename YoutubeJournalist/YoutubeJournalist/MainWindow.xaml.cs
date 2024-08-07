@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
 using System.Windows;
 
-using YoutubeJournalist.Core.Data;
-using YoutubeJournalist.Core.WebAPI.Base;
+using YoutubeJournalist.Core;
 using YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3;
 
 namespace YoutubeJournalist
@@ -13,29 +14,40 @@ namespace YoutubeJournalist
     /// </summary>
     public partial class MainWindow : Window
     {
-        IWebAPIService _service;
+        Controller _controller;
 
         public MainWindow()
         {
             InitializeComponent();
 
             var configuration = new Configuration();
-            _service = new Service(configuration.ApiKey, configuration.MaxSearchResults);
+
+            _controller = new Controller(configuration);
 
             this.DataContext = configuration;
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (!String.IsNullOrWhiteSpace(this.SearchTB.Text))
-                this.OutputLB.ItemsSource = await _service.Search(this.SearchTB.Text);
+            try
+            {
+                if (!String.IsNullOrWhiteSpace(this.SearchTB.Text))
+                    this.OutputLB.ItemsSource = _controller.GetChannels().Channels;
 
-            else
-                this.OutputLB.ItemsSource = new List<SearchResult>() { new SearchResult()
+                else
+                    this.OutputLB.ItemsSource = new List<Youtube_Channel>() { new Youtube_Channel()
                 {
-                    Name = "Error",
-                    Description = "Please Enter Search Text"
+                    Id = "No Channel",
+                    Kind = "No Kind",
+                    ETag = "No ETag",
+                    ContentOwnerDetails_ETag = "No Owner ETag",
+                    ContentOwnerDetails_ContentOwner = "No Content Owner"
                 }};
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

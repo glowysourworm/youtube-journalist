@@ -1,13 +1,40 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
+    <TargetFramework>net4.8</TargetFramework>
+	<UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="YoutubeJournalistEntityModel.edmx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EntityDeploy Include="YoutubeJournalistEntityModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>YoutubeJournalistEntityModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.5.1" />
     <PackageReference Include="Google.Apis.YouTube.v3" Version="1.68.0.3421" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<Reference Include="System.Configuration" />
+	<Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Security" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="YoutubeJournalistEntityModel.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>YoutubeJournalistEntityModel.edmx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

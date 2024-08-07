@@ -2,13 +2,24 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
+    <TargetFramework>net4.8</TargetFramework>
     <UseWPF>true</UseWPF>
+    <IsPublishable>True</IsPublishable>
+    <StartupObject>YoutubeJournalist.App</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\YoutubeJournalist.Core\YoutubeJournalist.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
   </ItemGroup>
 
 </Project>
