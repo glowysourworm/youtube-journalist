@@ -10,6 +10,7 @@ CREATE DATABASE YoutubeJournalist
 GO
 
 USE YoutubeJournalist;
+GO
 
 -- Our Table for helping to manage users
 Create Table "User"(
@@ -44,15 +45,38 @@ Create Table UserEmail(
 );
 GO
 
-Create Table Youtube_Thumbnail(
-	ETag varchar(50),
-	Height bigint,
-	Width bigint,
-	"Url" varchar(900) not null, -- Warning! Maximum key length for a clustered index is 900 bytes
+Create Table Youtube_ThumbnailDetails(
 
-	Primary Key("Url")
+	Our_Id int not null IDENTITY(1,1),
+	ETag varchar(50),
+
+	Default__Url varchar(max),
+	Default__ETag varchar(50),
+	Default__Height bigint,
+	Default__Width bigint,
+
+	High_Url varchar(max),
+	High_ETag varchar(50),
+	High_Height bigint,
+	High_Width bigint,
+
+	Maxres_Url varchar(max),
+	Maxres_ETag varchar(50),
+	Maxres_Height bigint,
+	Maxres_Width bigint,
+
+	Medium_Url varchar(max),
+	Medium_ETag varchar(50),
+	Medium_Height bigint,
+	Medium_Width bigint,
+
+	Standard_Url varchar(max),
+	Standard_ETag varchar(50),
+	Standard_Height bigint,
+	Standard_Width bigint,
+
+	Primary Key(Our_Id)
 );
-GO
 
 Create Table Youtube_SearchResult(
 	Our_Id int not null IDENTITY(1,1),
@@ -72,18 +96,10 @@ Create Table Youtube_SearchResult(
 	Snippet_PublishedAtDateTimeOffset datetimeoffset null,
 	Snippet_PublishedAtRaw varchar(50),
 	Snippet_Title varchar(100),
-	Snippet_ThumbnailDetails_Default__Url varchar(900) null, -- Nullable foreign key
-	Snippet_ThumbnailDetails_High_Url varchar(900) null, -- Nullable foreign key
-	Snippet_ThumbnailDetails_Maxres_Url varchar(900) null, -- Nullable foreign key
-	Snippet_ThumbnailDetails_Medium_Url varchar(900) null, -- Nullable foreign key
-	Snippet_ThumbnailDetails_Standard_Url varchar(900) null, -- Nullable foreign key
+	Snippet_ThumbnailDetailsId int not null,
 	
 	Primary Key(Our_Id),
-	Foreign Key(Snippet_ThumbnailDetails_Default__Url) References Youtube_Thumbnail("Url"),
-	Foreign Key(Snippet_ThumbnailDetails_High_Url) References Youtube_Thumbnail("Url"),
-	Foreign Key(Snippet_ThumbnailDetails_Maxres_Url) References Youtube_Thumbnail("Url"),
-	Foreign Key(Snippet_ThumbnailDetails_Medium_Url) References Youtube_Thumbnail("Url"),
-	Foreign Key(Snippet_ThumbnailDetails_Standard_Url) References Youtube_Thumbnail("Url")
+	Foreign Key(Snippet_ThumbnailDetailsId) References Youtube_ThumbnailDetails(Our_Id)
 );
 GO
 
@@ -259,6 +275,29 @@ Create Table Youtube_ChannelBrandingSettings(
 );
 GO
 
+Create Table Youtube_ChannelSnippet(
+
+	Our_Id int not null IDENTITY(1,1),
+	Country varchar(50),
+	CustomUrl varchar(max),
+	DefaultLanguage varchar(50),
+	"Description" varchar(max),
+	ETag varchar(50),
+	Localized_Description varchar(max),		-- NOTE: Different entity than other snippets "ChannelLocalization"
+	Localized_ETag varchar(50),				-- NOTE: Different entity than other snippets "ChannelLocalization"
+	Localized_Title varchar(500),			-- NOTE: Different entity than other snippets "ChannelLocalization"
+	PublishedAt datetime null,
+	PublishedAtDateTimeOffset datetimeoffset null,
+	PublishedAtRaw varchar(50),
+	-- Tags (skipped) Should be part of call for video list detail
+	ThumbnailDetailsId int not null, 
+	Title varchar(500),
+
+	Primary Key(Our_Id),
+	Foreign Key(ThumbnailDetailsId) References Youtube_ThumbnailDetails(Our_Id)
+
+);
+
 Create Table Youtube_Channel(
 	Our_ChannelAuditDetailsId int NOT NULL,
 	Our_ChannelBrandingSettingsId int NOT NULL,
@@ -270,7 +309,7 @@ Create Table Youtube_Channel(
 	Primary Key (Id),
 	Foreign Key (Our_ChannelAuditDetailsId) References Youtube_ChannelAuditDetails(Our_Id),
 	Foreign Key (Our_ChannelBrandingSettingsId) References Youtube_ChannelBrandingSettings(Our_Id),
-	Foreign Key (Our_SnippetId) References Youtube_ChannelAuditDetails(Our_Id),
+	Foreign Key (Our_SnippetId) References Youtube_ChannelSnippet(Our_Id),
 
 	-- ContentDetails: ChannelContentDetails
 	ChannelContentDetails_ETag varchar(50),
@@ -314,24 +353,6 @@ Create Table Youtube_Channel(
 );
 GO
 
-Create Table Youtube_TopicCategory(
-	"Url" varchar(900) not null,
-	ChannelId varchar(50) not null,
-
-	Primary Key("Url"),
-	Foreign Key(ChannelId) References Youtube_Channel(Id)
-);
-GO
-
-Create Table Youtube_TopicId(
-	"Url" varchar(900) not null,
-	ChannelId varchar(50) not null,
-
-	Primary Key("Url"),
-	Foreign Key(ChannelId) References Youtube_Channel(Id)
-);
-GO
-
 Create Table Youtube_ChannelConversationPing(
 	Our_Id int NOT NULL IDENTITY(1,1),
 	Our_ChannelId varchar(50) NOT NULL,
@@ -341,5 +362,159 @@ Create Table Youtube_ChannelConversationPing(
 
 	Primary Key (Our_Id),
 	Foreign Key (Our_ChannelId) References Youtube_Channel(Id)
+);
+GO
+
+Create Table Youtube_VideoStatistics(
+
+	Our_Id int not null IDENTITY(1,1),
+	ETag varchar(50),
+	CommentCount bigint null,
+	DislikeCount bigint null,
+	FavoriteCount bigint not null,
+	LikeCount bigint not null,
+	ViewCount bigint not null,
+
+	Primary Key(Our_Id)
+);
+GO
+
+Create Table Youtube_VideoStatus(
+
+	Our_Id int not null IDENTITY(1,1),
+	ETag varchar(50),
+	Embeddable bit null,
+	FailureReason varchar(max),
+	License varchar(max),
+	MadeForKids bit null,
+	PrivacyStatus varchar(100),
+	PublicStatsViewable bit null,
+	PublishAt datetime null,
+	PublishAtDateTimeOffset datetimeoffset null,
+	PublishAtRaw varchar(100),
+	RejectionReason varchar(max),
+	SelfDeclaredMadeForKids bit null,
+	UploadStatus varchar(100),
+	"Description" varchar(max),
+
+	Primary Key(Our_Id)
+);
+GO
+
+Create Table Youtube_VideoSnippet(
+
+	Our_Id int not null IDENTITY(1,1),
+	CategoryId varchar(50),
+	ChannelId varchar(50),
+	ChannelTitle varchar(500),
+	DefaultAudioLanguage varchar(50),
+	DefaultLanguage varchar(50),
+	"Description" varchar(max),
+	ETag varchar(50),
+	LiveBroadcastContent varchar(50),
+	Localized_Description varchar(max),
+	Localized_ETag varchar(50),
+	Localized_Title varchar(500),
+	PublishedAt datetime null,
+	PublishedAtDateTimeOffset datetimeoffset null,
+	PublishedAtRaw varchar(50),
+	-- Tags (skipped) Should be part of call for video list detail
+	ThumbnailDetailsId int not null,
+	Title varchar(500),
+
+	Primary Key(Our_Id),
+	Foreign Key(ThumbnailDetailsId) References Youtube_ThumbnailDetails(Our_Id)
+);
+
+Create Table Youtube_Video(
+
+	Id varchar(50) not null,
+	Kind varchar(50),
+	ETag varchar(50),
+
+	SnippetId int not null,
+	StatisticsId int not null,
+	StatusId int not null,
+
+	AgeGating_AlcoholContent bit null,
+	AgeGating_ETag varchar(50),
+	AgeGating_Restricted bit null,
+	AgeGating_VideoGameRating varchar(50),
+
+	-- ContentDetails: VideoContentDetails
+	ContentDetails_Caption varchar(max),
+	-- ContentDetails.ContentRating:  ContentDetails_ContentRating (many localization fields) (skipped)
+	-- ConetntDetails.CountryRestriction:  ContentDetails_CountryRestriction (skipped)
+	ContentDetails_Definition varchar(50),
+	ContentDetails_Dimension varchar(50),
+	ContentDetails_Duration varchar(50),
+	ContentDetails_ETag varchar(50),
+	ContentDetails_HasCustomThumbnail bit null,
+	ContentDetails_LicensedContent bit null,
+	ContentDetails_Projection varchar(50),
+
+	--ContentDetails: VideoContentDetailsRegionRestricction
+	ContentDetails_RegionRestriction_ETag varchar(50),
+
+	-- VideoDetails: VideoFileDetails (skipped)
+	-- LiveStreamingDetails: VideoLiveStreamingDetails (skipped)
+	-- Localizations:  Dictionary<string, VideoLocalization> (skipped)
+
+	-- MonetizationDetails: VideoMonetizationDetails
+	MonetizationDetails_AccessPolicy_Allowed bit null, -- (skipped some of the region / localization detail)
+
+	-- Player: VideoPlayer (skipped) Didn't seem useful, just some html embed details
+	-- ProcessingDetails: VideoProcessingDetails (skipped) used for real time processing. No preview thumbnail.
+	-- ProjectDetails: VideoProjectDetails (skipped) See Youtube API reference, experimental field, "in the wild".
+	-- RecordingDetails: VideoRecordingDetails (skipped)
+	-- Suggestions: VideoSuggestions (skipped)
+	
+	-- TopicDetails: VideoTopicDetails
+	TopicDetails_ETag varchar(50),
+
+	Primary Key(Id),
+	Foreign Key(SnippetId) References Youtube_VideoSnippet(Our_Id),
+	Foreign Key(StatisticsId) References Youtube_VideoStatistics(Our_Id),
+	Foreign Key(StatusId) References Youtube_VideoStatus(Our_Id),
+);
+GO
+
+Create Table Youtube_TopicCategory(
+	"Url" varchar(900) not null,
+	ChannelId varchar(50) null, -- Treated as a loose foreign key to Youtube_Channel.Id
+	VideoId varchar(50) null,   -- Treated as a loose foreign key to Youtube_Video.Id
+
+	Primary Key("Url")
+);
+GO
+
+Create Table Youtube_TopicId(
+	"Url" varchar(900) not null,
+	ChannelId varchar(50) null, -- Treated as a loose foreign key to Youtube_Channel.Id
+	VideoId varchar(50) null,   -- Treated as a loose foreign key to Youtube_Video.Id
+	Relevant bit not null,		-- Youtube_Video field, used to mark relevant topics for the video entity 
+
+	Primary Key("Url")
+);
+GO
+
+Create Table Youtube_RegionRestriction(
+	Our_Id int not null IDENTITY(1,1),
+	VideoId varchar(50) not null,
+	Region varchar(50),
+	Blocked bit not null
+
+	Primary Key(Our_Id),
+	Foreign Key(VideoId) References Youtube_Video(Id)
+);
+GO
+
+Create Table Youtube_Tag(
+	Our_Id int not null Identity(1,1),
+	VideoId varchar(50) not null,
+	Tag varchar(150) not null,
+
+	Primary Key(Our_Id),
+	Foreign Key(VideoId) References Youtube_Video(Id)
 );
 GO

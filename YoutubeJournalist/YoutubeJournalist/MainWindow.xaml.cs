@@ -26,8 +26,14 @@ namespace YoutubeJournalist
 
             this.DataContext = configuration;
         }
+        protected override void OnClosed(EventArgs e)
+        {
+            _controller.Dispose();
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+            base.OnClosed(e);
+        }
+
+        private void SearchChannelsButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -42,11 +48,72 @@ namespace YoutubeJournalist
             }
         }
 
-        protected override void OnClosed(EventArgs e)
+        private void SearchVideosButton_Click(object sender, RoutedEventArgs e)
         {
-            _controller.Dispose();
+            try
+            {
+                this.OutputLB.ItemsSource = _controller.GetVideos(this.SearchTB.Text ?? "");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
 
-            base.OnClosed(e);
+                // Shuts down -> OnClosed()
+                App.Current.Shutdown();
+            }
+        }
+
+        private void SearchPlaylistsButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.OutputLB.ItemsSource = _controller.GetPlaylists(this.SearchTB.Text ?? "");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+                // Shuts down -> OnClosed()
+                App.Current.Shutdown();
+            }
+        }
+
+        private void FilterChannelsButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(this.SearchTB.Text))
+                    this.OutputLB.ItemsSource = _controller.GetChannelsByCategory(this.SearchTB.Text ?? "");
+
+                else
+                    MessageBox.Show("Must enter CategoryId for the search / filter");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+                // Shuts down -> OnClosed()
+                App.Current.Shutdown();
+            }
+        }
+
+        private void FilterVideosButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(this.SearchTB.Text))
+                    this.OutputLB.ItemsSource = _controller.GetVideosByCategory(this.SearchTB.Text ?? "");
+
+                else
+                    MessageBox.Show("Must enter CategoryId for the search / filter");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+                // Shuts down -> OnClosed()
+                App.Current.Shutdown();
+            }
         }
     }
 }

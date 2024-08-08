@@ -13,6 +13,7 @@ using YoutubeJournalist.ViewModel;
 using System.Collections.Generic;
 using YoutubeJournalist.Core;
 using WpfCustomUtilities.Extensions.Collection;
+using Google.Apis.YouTube.v3.Data;
 
 namespace YoutubeJournalist
 {
@@ -53,49 +54,11 @@ namespace YoutubeJournalist
                 // Query Youtube
                 var viewModels = _youtubeService.SearchChannels(searchString).Collection.Select(result =>
                 {
+                    // Add / Update -> SaveChanges()
+                    AddUpdateSearchResult(result);
 
-                    // Storey query results into local database
-                    // TODO: Check for Add-Or-Update
-                    if (result.Youtube_Thumbnail != null)
-                        _dbContext.Youtube_Thumbnail.AddObject(result.Youtube_Thumbnail);
-
-                    if (result.Youtube_Thumbnail1 != null)
-                        _dbContext.Youtube_Thumbnail.AddObject(result.Youtube_Thumbnail1);
-
-                    if (result.Youtube_Thumbnail2 != null)
-                        _dbContext.Youtube_Thumbnail.AddObject(result.Youtube_Thumbnail2);
-
-                    if (result.Youtube_Thumbnail3 != null)
-                        _dbContext.Youtube_Thumbnail.AddObject(result.Youtube_Thumbnail3);
-
-                    if (result.Youtube_Thumbnail4 != null)
-                        _dbContext.Youtube_Thumbnail.AddObject(result.Youtube_Thumbnail4);
-
-                    // Commit changes
-                    // _dbContext.SaveChanges();
-
-                    // AUTO_INCREMENT, or IDENTITY(1,1), try doing this using Attach method
-                    //
-
-                    // Set primary key
-                    //result.Our_Id = nextId;
-
-                    _dbContext.Youtube_SearchResult.AddObject(result);
-
-                    // Commit changes
-                    _dbContext.SaveChanges();
-
-                    // Return view model for query results
-                    return new SearchResultViewModel()
-                    {
-                        Created = result.Snippet_PublishedAt ?? DateTime.MinValue,
-                        Updated = result.Snippet_PublishedAt ?? DateTime.MinValue,
-                        Description = result.Snippet_Description ?? "No Descr.",
-                        ETag = result.Snippet_ETag ?? "NULL ETag",
-                        Id = result.Id_ChannelId ?? "NULL ID",
-                        Thumbnail = result.Snippet_ThumbnailDetails_Default__Url,
-                        Title = result.Snippet_Title ?? "No Title"
-                    };
+                    // Create new view model
+                    return CreateSearchViewModel(result);
 
                 }).Actualize();
 
@@ -105,6 +68,232 @@ namespace YoutubeJournalist
             {
                 throw ex;
             }
+        }
+        public IEnumerable<SearchResultViewModel> GetPlaylists(string searchString)
+        {
+            try
+            {
+                // Query Youtube
+                var viewModels = _youtubeService.SearchPlaylists(searchString).Collection.Select(result =>
+                {
+                    // Add / Update -> SaveChanges()
+                    AddUpdateSearchResult(result);
+
+                    // Create new view model
+                    return CreateSearchViewModel(result);
+
+                }).Actualize();
+
+                return viewModels;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public IEnumerable<SearchResultViewModel> GetVideos(string searchString)
+        {
+            try
+            {
+                // Query Youtube
+                var viewModels = _youtubeService.SearchVideos(searchString).Collection.Select(result =>
+                {
+                    // Add / Update -> SaveChanges()
+                    AddUpdateSearchResult(result);
+
+                    // Create new view model
+                    return CreateSearchViewModel(result);
+
+                }).Actualize();
+
+                return viewModels;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public IEnumerable<SearchResultViewModel> GetVideosByCategory(string categoryId)
+        {
+            try
+            {
+                // Query Youtube
+                var queryResult = _youtubeService.SearchWithFilterVideos(categoryId);
+
+                var viewModels = queryResult.Collection.Select(result =>
+                {
+                    // Add / Update -> SaveChanges()
+                    AddUpdateVideo(result);
+
+                    // Create new view model
+                    return CreateSearchViewModel(result);
+
+                }).Actualize();
+
+                // Loose Collections
+                foreach (var topicId in queryResult.LooseCollection1)
+                    _dbContext.Youtube_TopicId.AddObject(topicId);
+
+                foreach (var category in queryResult.LooseCollection2)
+                    _dbContext.Youtube_TopicCategory.AddObject(category);
+
+                _dbContext.SaveChanges();
+
+                return viewModels;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public IEnumerable<SearchResultViewModel> GetChannelsByCategory(string categoryId)
+        {
+            try
+            {
+                // Query Youtube
+                var queryResult = _youtubeService.SearchWithFilterChannels(categoryId);
+
+                var viewModels = queryResult.Collection.Select(result =>
+                {
+                    // Add / Update -> SaveChanges()
+                    AddUpdateChannel(result);
+
+                    // Create new view model
+                    return CreateSearchViewModel(result);
+
+                }).Actualize();
+
+                // Loose Collections
+                foreach (var topicId in queryResult.LooseCollection1)
+                    _dbContext.Youtube_TopicId.AddObject(topicId);
+
+                foreach (var category in queryResult.LooseCollection2)
+                    _dbContext.Youtube_TopicCategory.AddObject(category);
+
+                _dbContext.SaveChanges();
+
+                return viewModels;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private SearchResultViewModel CreateSearchViewModel(Youtube_SearchResult entity)
+        {
+            // Return view model for query results
+            return new SearchResultViewModel()
+            {
+                Created = entity.Snippet_PublishedAt ?? DateTime.MinValue,
+                Updated = entity.Snippet_PublishedAt ?? DateTime.MinValue,
+                Description = entity.Snippet_Description,
+                ETag = entity.Snippet_ETag ?? "NULL ETag",
+                Id = entity.Id_ChannelId ?? "NULL ID",
+                Thumbnail = entity.Youtube_ThumbnailDetails.Default__Url,
+                Title = entity.Snippet_Title ?? "No Title"
+            };
+        }
+        private SearchResultViewModel CreateSearchViewModel(Youtube_Video entity)
+        {
+            // Return view model for query results
+            return new SearchResultViewModel()
+            {
+                Created = entity.Youtube_VideoStatus.PublishAt ?? DateTime.MinValue,
+                Updated = entity.Youtube_VideoSnippet.PublishedAt ?? DateTime.MinValue,
+                Description = entity.Youtube_VideoSnippet.Description ?? "No Descr.",
+                ETag = entity.ETag ?? "NULL ETag",
+                Id = entity.Id ?? "NULL ID",
+                Thumbnail = entity.Youtube_VideoSnippet.Youtube_ThumbnailDetails.Default__Url,
+                Title = entity.Youtube_VideoSnippet.Title ?? "No Title"
+            };
+        }
+        private SearchResultViewModel CreateSearchViewModel(Youtube_Channel entity)
+        {
+            // Return view model for query results
+            return new SearchResultViewModel()
+            {
+                Created = entity.ContentOwnerDetails_TimeLinked ?? DateTime.MinValue,
+                //Updated = entity.ContentOwnerDetails_TimeLinkedDateTimeOffset.DateTime ?? DateTime.MinValue,
+                //Description = entity.Description ?? "No Descr.",
+                ETag = entity.ETag ?? "NULL ETag",
+                Id = entity.Id ?? "NULL ID",
+                Thumbnail = entity.Youtube_ChannelSnippet.Youtube_ThumbnailDetails.Default__Url,
+                Title = entity.Youtube_ChannelSnippet.Title ?? "No Title"
+            };
+        }
+
+        private void AddUpdateVideo(Youtube_Video entity)
+        {
+            // Storey query results into local database
+            // TODO: Check for Add-Or-Update
+            _dbContext.Youtube_Video.AddObject(entity);
+
+            // Foreign Key Relationships
+            //
+            // ThumbnailDetails
+            if (entity.Youtube_VideoSnippet?.Youtube_ThumbnailDetails != null)
+                _dbContext.Youtube_ThumbnailDetails.AddObject(entity.Youtube_VideoSnippet?.Youtube_ThumbnailDetails);
+
+            // VideoSnippet
+            if (entity.Youtube_VideoSnippet != null)
+                _dbContext.Youtube_VideoSnippet.AddObject(entity.Youtube_VideoSnippet);
+
+            // VideoStatus
+            if (entity.Youtube_VideoStatus != null)
+                _dbContext.Youtube_VideoStatus.AddObject(entity.Youtube_VideoStatus);
+
+            // VideoStatistics
+            if (entity.Youtube_VideoStatistics != null)
+                _dbContext.Youtube_VideoStatistics.AddObject(entity.Youtube_VideoStatistics);
+
+            // Commit changes
+            _dbContext.SaveChanges();
+        }
+        private void AddUpdateChannel(Youtube_Channel entity)
+        {
+            // Storey query results into local database
+            // TODO: Check for Add-Or-Update
+            _dbContext.Youtube_Channel.AddObject(entity);
+
+            // Foreign Key Relationships
+            //
+
+            // ChannelSnippet
+            if (entity.Youtube_ChannelSnippet != null)
+            {
+                _dbContext.Youtube_ChannelSnippet.AddObject(entity.Youtube_ChannelSnippet);
+
+                // ThumbnailDetails
+                if (entity.Youtube_ChannelSnippet?.Youtube_ThumbnailDetails != null)
+                    _dbContext.Youtube_ThumbnailDetails.AddObject(entity.Youtube_ChannelSnippet.Youtube_ThumbnailDetails);
+            }
+
+            // ChannelAuditDetails
+            if (entity.Youtube_ChannelAuditDetails != null)
+                _dbContext.Youtube_ChannelAuditDetails.AddObject(entity.Youtube_ChannelAuditDetails);
+
+            // ChannelBrandingSettings
+            if (entity.Youtube_ChannelBrandingSettings != null)
+                _dbContext.Youtube_ChannelBrandingSettings.AddObject(entity.Youtube_ChannelBrandingSettings);
+
+            //// ChannelStatistics
+            //if (entity.channel != null)
+            //    _dbContext.Youtube_VideoStatistics.AddObject(entity.Youtube_VideoStatistics);
+
+            // Commit changes
+            _dbContext.SaveChanges();
+        }
+        private void AddUpdateSearchResult(Youtube_SearchResult entity)
+        {
+            // Storey query results into local database
+            // TODO: Check for Add-Or-Update
+            _dbContext.Youtube_ThumbnailDetails.AddObject(entity.Youtube_ThumbnailDetails);
+
+            _dbContext.Youtube_SearchResult.AddObject(entity);
+
+            // Commit changes
+            _dbContext.SaveChanges();
         }
 
         public void Dispose()

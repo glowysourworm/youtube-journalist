@@ -27,10 +27,17 @@
             <TextBlock Text="Google Api Key" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" />
             <TextBox IsReadOnly="True" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding ApiKey}" Margin="5" HorizontalAlignment="Stretch" Height="32" FontSize="14" />
 
-            <TextBlock Grid.Row="1" Text="Search" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" />
+            <TextBlock Grid.Row="1" Text="Search / Filter" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" />
             <TextBox x:Name="SearchTB" Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" Margin="5" HorizontalAlignment="Stretch" Height="32" FontSize="14" />
 
-            <Button Grid.Row="3" Grid.Column="1" Click="Button_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Padding="10">Search</Button>
+            <StackPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+                <Button x:Name="SearchChannelsButton" Click="SearchChannelsButton_Click" Margin="5" Padding="10">Search Channels</Button>
+                <Button x:Name="SearchVideosButton" Click="SearchVideosButton_Click" Margin="5" Padding="10">Search Videos</Button>
+                <Button x:Name="SearchPlaylistsButton" Click="SearchPlaylistsButton_Click" Margin="5" Padding="10">Search Playlists</Button>
+                <Button x:Name="FilterChannelsButton" Click="FilterChannelsButton_Click" Margin="5" Padding="10">Filter Channels</Button>
+                <Button x:Name="FilterVideosButton" Click="FilterVideosButton_Click" Margin="5" Padding="10">Filter Videos</Button>
+            </StackPanel>
+            
             
         </Grid>
         
@@ -39,10 +46,11 @@
         <ListBox x:Name="OutputLB" Grid.Row="1" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Padding="3" FontSize="14" ToolTip="{Binding ContentOwnerDetails_ContentOwner}">
+                    <TextBlock Padding="3" FontSize="14" ToolTip="{Binding Description}">
+                        <Image Source="{Binding Thumbnail}" Height="20" Width="30" />
                         <Run Text="{Binding Id}" />
-                        <Run Text="{Binding Kind}" />
-                        <Run Text="{Binding ETag}" />
+                        <Run Text="{Binding Title}" />
+                        <Run Text="{Binding Created}" />
                     </TextBlock>
                 </DataTemplate>
             </ListBox.ItemTemplate>

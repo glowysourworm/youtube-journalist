@@ -21,22 +21,23 @@ using System.Xml.Serialization;
 
 [assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__SocialMed__UserI__267ABA7A", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.User), "SocialMediaLink", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.SocialMediaLink), true)]
 [assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__UserEmail__UserI__29572725", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.User), "UserEmail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.UserEmail), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__3E52440B", "Youtube_ChannelAuditDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ChannelAuditDetails), "Youtube_Channel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Channel), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__3F466844", "Youtube_ChannelBrandingSettings", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ChannelBrandingSettings), "Youtube_Channel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Channel), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__4316F928", "Youtube_Channel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_Channel), "Youtube_ChannelConversationPing", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_ChannelConversationPing), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_S__403A8C7D", "Youtube_ChannelAuditDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ChannelAuditDetails), "Youtube_Channel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Channel), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__3B75D760", "Youtube_ChannelSettings", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ChannelSettings), "Youtube_ChannelBrandingSettings", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_ChannelBrandingSettings), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__34C8D9D1", "Youtube_Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_Comment), "Youtube_CommentList", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_CommentList), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Snipp__2E1BDC42", "Youtube_CommentSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(YoutubeJournalist.Core.Youtube_CommentSnippet), "Youtube_Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Comment), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__33D4B598", "Youtube_CommentThread", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_CommentThread), "Youtube_CommentList", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_CommentList), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Snipp__30F848ED", "Youtube_CommentSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_CommentSnippet), "Youtube_CommentThread", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_CommentThread), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_T__Chann__4BAC3F29", "Youtube_Channel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_Channel), "Youtube_TopicCategory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_TopicCategory), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_T__Chann__4E88ABD4", "Youtube_Channel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_Channel), "Youtube_TopicId", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_TopicId), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_S__Snipp__2E1BDC42", "Youtube_Thumbnail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(YoutubeJournalist.Core.Youtube_Thumbnail), "Youtube_SearchResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_SearchResult), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_S__Snipp__2F10007B", "Youtube_Thumbnail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(YoutubeJournalist.Core.Youtube_Thumbnail), "Youtube_SearchResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_SearchResult), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_S__Snipp__300424B4", "Youtube_Thumbnail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(YoutubeJournalist.Core.Youtube_Thumbnail), "Youtube_SearchResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_SearchResult), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_S__Snipp__30F848ED", "Youtube_Thumbnail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(YoutubeJournalist.Core.Youtube_Thumbnail), "Youtube_SearchResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_SearchResult), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_S__Snipp__31EC6D26", "Youtube_Thumbnail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(YoutubeJournalist.Core.Youtube_Thumbnail), "Youtube_SearchResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_SearchResult), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__45F365D3", "Youtube_ChannelAuditDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ChannelAuditDetails), "Youtube_Channel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Channel), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__46E78A0C", "Youtube_ChannelBrandingSettings", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ChannelBrandingSettings), "Youtube_Channel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Channel), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__4AB81AF0", "Youtube_Channel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_Channel), "Youtube_ChannelConversationPing", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_ChannelConversationPing), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_S__47DBAE45", "Youtube_ChannelSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ChannelSnippet), "Youtube_Channel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Channel), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__403A8C7D", "Youtube_ChannelSettings", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ChannelSettings), "Youtube_ChannelBrandingSettings", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_ChannelBrandingSettings), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Thumb__4316F928", "Youtube_ThumbnailDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ThumbnailDetails), "Youtube_ChannelSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_ChannelSnippet), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__398D8EEE", "Youtube_Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_Comment), "Youtube_CommentList", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_CommentList), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Snipp__32E0915F", "Youtube_CommentSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(YoutubeJournalist.Core.Youtube_CommentSnippet), "Youtube_Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Comment), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__38996AB5", "Youtube_CommentThread", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_CommentThread), "Youtube_CommentList", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_CommentList), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Snipp__35BCFE0A", "Youtube_CommentSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_CommentSnippet), "Youtube_CommentThread", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_CommentThread), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_R__Video__5CD6CB2B", "Youtube_Video", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_Video), "Youtube_RegionRestriction", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_RegionRestriction), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_S__Snipp__2E1BDC42", "Youtube_ThumbnailDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ThumbnailDetails), "Youtube_SearchResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_SearchResult), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_T__Video__5FB337D6", "Youtube_Video", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_Video), "Youtube_Tag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Tag), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_V__Thumb__5165187F", "Youtube_ThumbnailDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ThumbnailDetails), "Youtube_VideoSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_VideoSnippet), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_V__Snipp__5441852A", "Youtube_VideoSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_VideoSnippet), "Youtube_Video", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Video), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_V__Stati__5535A963", "Youtube_VideoStatistics", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_VideoStatistics), "Youtube_Video", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Video), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_V__Statu__5629CD9C", "Youtube_VideoStatus", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_VideoStatus), "Youtube_Video", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Video), true)]
 
 #endregion
 
@@ -219,6 +220,22 @@ namespace YoutubeJournalist.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<Youtube_ChannelSnippet> Youtube_ChannelSnippet
+        {
+            get
+            {
+                if ((_Youtube_ChannelSnippet == null))
+                {
+                    _Youtube_ChannelSnippet = base.CreateObjectSet<Youtube_ChannelSnippet>("Youtube_ChannelSnippet");
+                }
+                return _Youtube_ChannelSnippet;
+            }
+        }
+        private ObjectSet<Youtube_ChannelSnippet> _Youtube_ChannelSnippet;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<Youtube_Comment> Youtube_Comment
         {
             get
@@ -283,18 +300,66 @@ namespace YoutubeJournalist.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Youtube_Thumbnail> Youtube_Thumbnail
+        public ObjectSet<Youtube_RegionRestriction> Youtube_RegionRestriction
         {
             get
             {
-                if ((_Youtube_Thumbnail == null))
+                if ((_Youtube_RegionRestriction == null))
                 {
-                    _Youtube_Thumbnail = base.CreateObjectSet<Youtube_Thumbnail>("Youtube_Thumbnail");
+                    _Youtube_RegionRestriction = base.CreateObjectSet<Youtube_RegionRestriction>("Youtube_RegionRestriction");
                 }
-                return _Youtube_Thumbnail;
+                return _Youtube_RegionRestriction;
             }
         }
-        private ObjectSet<Youtube_Thumbnail> _Youtube_Thumbnail;
+        private ObjectSet<Youtube_RegionRestriction> _Youtube_RegionRestriction;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Youtube_SearchResult> Youtube_SearchResult
+        {
+            get
+            {
+                if ((_Youtube_SearchResult == null))
+                {
+                    _Youtube_SearchResult = base.CreateObjectSet<Youtube_SearchResult>("Youtube_SearchResult");
+                }
+                return _Youtube_SearchResult;
+            }
+        }
+        private ObjectSet<Youtube_SearchResult> _Youtube_SearchResult;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Youtube_Tag> Youtube_Tag
+        {
+            get
+            {
+                if ((_Youtube_Tag == null))
+                {
+                    _Youtube_Tag = base.CreateObjectSet<Youtube_Tag>("Youtube_Tag");
+                }
+                return _Youtube_Tag;
+            }
+        }
+        private ObjectSet<Youtube_Tag> _Youtube_Tag;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Youtube_ThumbnailDetails> Youtube_ThumbnailDetails
+        {
+            get
+            {
+                if ((_Youtube_ThumbnailDetails == null))
+                {
+                    _Youtube_ThumbnailDetails = base.CreateObjectSet<Youtube_ThumbnailDetails>("Youtube_ThumbnailDetails");
+                }
+                return _Youtube_ThumbnailDetails;
+            }
+        }
+        private ObjectSet<Youtube_ThumbnailDetails> _Youtube_ThumbnailDetails;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -331,18 +396,66 @@ namespace YoutubeJournalist.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Youtube_SearchResult> Youtube_SearchResult
+        public ObjectSet<Youtube_Video> Youtube_Video
         {
             get
             {
-                if ((_Youtube_SearchResult == null))
+                if ((_Youtube_Video == null))
                 {
-                    _Youtube_SearchResult = base.CreateObjectSet<Youtube_SearchResult>("Youtube_SearchResult");
+                    _Youtube_Video = base.CreateObjectSet<Youtube_Video>("Youtube_Video");
                 }
-                return _Youtube_SearchResult;
+                return _Youtube_Video;
             }
         }
-        private ObjectSet<Youtube_SearchResult> _Youtube_SearchResult;
+        private ObjectSet<Youtube_Video> _Youtube_Video;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Youtube_VideoSnippet> Youtube_VideoSnippet
+        {
+            get
+            {
+                if ((_Youtube_VideoSnippet == null))
+                {
+                    _Youtube_VideoSnippet = base.CreateObjectSet<Youtube_VideoSnippet>("Youtube_VideoSnippet");
+                }
+                return _Youtube_VideoSnippet;
+            }
+        }
+        private ObjectSet<Youtube_VideoSnippet> _Youtube_VideoSnippet;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Youtube_VideoStatistics> Youtube_VideoStatistics
+        {
+            get
+            {
+                if ((_Youtube_VideoStatistics == null))
+                {
+                    _Youtube_VideoStatistics = base.CreateObjectSet<Youtube_VideoStatistics>("Youtube_VideoStatistics");
+                }
+                return _Youtube_VideoStatistics;
+            }
+        }
+        private ObjectSet<Youtube_VideoStatistics> _Youtube_VideoStatistics;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Youtube_VideoStatus> Youtube_VideoStatus
+        {
+            get
+            {
+                if ((_Youtube_VideoStatus == null))
+                {
+                    _Youtube_VideoStatus = base.CreateObjectSet<Youtube_VideoStatus>("Youtube_VideoStatus");
+                }
+                return _Youtube_VideoStatus;
+            }
+        }
+        private ObjectSet<Youtube_VideoStatus> _Youtube_VideoStatus;
 
         #endregion
 
@@ -413,6 +526,14 @@ namespace YoutubeJournalist.Core
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the Youtube_ChannelSnippet EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToYoutube_ChannelSnippet(Youtube_ChannelSnippet youtube_ChannelSnippet)
+        {
+            base.AddObject("Youtube_ChannelSnippet", youtube_ChannelSnippet);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the Youtube_Comment EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToYoutube_Comment(Youtube_Comment youtube_Comment)
@@ -445,11 +566,35 @@ namespace YoutubeJournalist.Core
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Youtube_Thumbnail EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Youtube_RegionRestriction EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToYoutube_Thumbnail(Youtube_Thumbnail youtube_Thumbnail)
+        public void AddToYoutube_RegionRestriction(Youtube_RegionRestriction youtube_RegionRestriction)
         {
-            base.AddObject("Youtube_Thumbnail", youtube_Thumbnail);
+            base.AddObject("Youtube_RegionRestriction", youtube_RegionRestriction);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Youtube_SearchResult EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToYoutube_SearchResult(Youtube_SearchResult youtube_SearchResult)
+        {
+            base.AddObject("Youtube_SearchResult", youtube_SearchResult);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Youtube_Tag EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToYoutube_Tag(Youtube_Tag youtube_Tag)
+        {
+            base.AddObject("Youtube_Tag", youtube_Tag);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Youtube_ThumbnailDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToYoutube_ThumbnailDetails(Youtube_ThumbnailDetails youtube_ThumbnailDetails)
+        {
+            base.AddObject("Youtube_ThumbnailDetails", youtube_ThumbnailDetails);
         }
     
         /// <summary>
@@ -469,11 +614,35 @@ namespace YoutubeJournalist.Core
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Youtube_SearchResult EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Youtube_Video EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToYoutube_SearchResult(Youtube_SearchResult youtube_SearchResult)
+        public void AddToYoutube_Video(Youtube_Video youtube_Video)
         {
-            base.AddObject("Youtube_SearchResult", youtube_SearchResult);
+            base.AddObject("Youtube_Video", youtube_Video);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Youtube_VideoSnippet EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToYoutube_VideoSnippet(Youtube_VideoSnippet youtube_VideoSnippet)
+        {
+            base.AddObject("Youtube_VideoSnippet", youtube_VideoSnippet);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Youtube_VideoStatistics EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToYoutube_VideoStatistics(Youtube_VideoStatistics youtube_VideoStatistics)
+        {
+            base.AddObject("Youtube_VideoStatistics", youtube_VideoStatistics);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Youtube_VideoStatus EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToYoutube_VideoStatus(Youtube_VideoStatus youtube_VideoStatus)
+        {
+            base.AddObject("Youtube_VideoStatus", youtube_VideoStatus);
         }
 
         #endregion
@@ -1187,6 +1356,150 @@ namespace YoutubeJournalist.Core
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        public global::System.String ChannelContentDetails_ETag
+        {
+            get
+            {
+                return _ChannelContentDetails_ETag;
+            }
+            set
+            {
+                OnChannelContentDetails_ETagChanging(value);
+                ReportPropertyChanging("ChannelContentDetails_ETag");
+                _ChannelContentDetails_ETag = StructuralObject.SetValidValue(value, true, "ChannelContentDetails_ETag");
+                ReportPropertyChanged("ChannelContentDetails_ETag");
+                OnChannelContentDetails_ETagChanged();
+            }
+        }
+        private global::System.String _ChannelContentDetails_ETag;
+        partial void OnChannelContentDetails_ETagChanging(global::System.String value);
+        partial void OnChannelContentDetails_ETagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ChannelContentDetails_RelatedPlaylistsData_Favorites
+        {
+            get
+            {
+                return _ChannelContentDetails_RelatedPlaylistsData_Favorites;
+            }
+            set
+            {
+                OnChannelContentDetails_RelatedPlaylistsData_FavoritesChanging(value);
+                ReportPropertyChanging("ChannelContentDetails_RelatedPlaylistsData_Favorites");
+                _ChannelContentDetails_RelatedPlaylistsData_Favorites = StructuralObject.SetValidValue(value, true, "ChannelContentDetails_RelatedPlaylistsData_Favorites");
+                ReportPropertyChanged("ChannelContentDetails_RelatedPlaylistsData_Favorites");
+                OnChannelContentDetails_RelatedPlaylistsData_FavoritesChanged();
+            }
+        }
+        private global::System.String _ChannelContentDetails_RelatedPlaylistsData_Favorites;
+        partial void OnChannelContentDetails_RelatedPlaylistsData_FavoritesChanging(global::System.String value);
+        partial void OnChannelContentDetails_RelatedPlaylistsData_FavoritesChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ChannelContentDetails_RelatedPlaylistsData_Likes
+        {
+            get
+            {
+                return _ChannelContentDetails_RelatedPlaylistsData_Likes;
+            }
+            set
+            {
+                OnChannelContentDetails_RelatedPlaylistsData_LikesChanging(value);
+                ReportPropertyChanging("ChannelContentDetails_RelatedPlaylistsData_Likes");
+                _ChannelContentDetails_RelatedPlaylistsData_Likes = StructuralObject.SetValidValue(value, true, "ChannelContentDetails_RelatedPlaylistsData_Likes");
+                ReportPropertyChanged("ChannelContentDetails_RelatedPlaylistsData_Likes");
+                OnChannelContentDetails_RelatedPlaylistsData_LikesChanged();
+            }
+        }
+        private global::System.String _ChannelContentDetails_RelatedPlaylistsData_Likes;
+        partial void OnChannelContentDetails_RelatedPlaylistsData_LikesChanging(global::System.String value);
+        partial void OnChannelContentDetails_RelatedPlaylistsData_LikesChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ChannelContentDetails_RelatedPlaylistsData_Uploads
+        {
+            get
+            {
+                return _ChannelContentDetails_RelatedPlaylistsData_Uploads;
+            }
+            set
+            {
+                OnChannelContentDetails_RelatedPlaylistsData_UploadsChanging(value);
+                ReportPropertyChanging("ChannelContentDetails_RelatedPlaylistsData_Uploads");
+                _ChannelContentDetails_RelatedPlaylistsData_Uploads = StructuralObject.SetValidValue(value, true, "ChannelContentDetails_RelatedPlaylistsData_Uploads");
+                ReportPropertyChanged("ChannelContentDetails_RelatedPlaylistsData_Uploads");
+                OnChannelContentDetails_RelatedPlaylistsData_UploadsChanged();
+            }
+        }
+        private global::System.String _ChannelContentDetails_RelatedPlaylistsData_Uploads;
+        partial void OnChannelContentDetails_RelatedPlaylistsData_UploadsChanging(global::System.String value);
+        partial void OnChannelContentDetails_RelatedPlaylistsData_UploadsChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ChannelContentDetails_RelatedPlaylistsData_WatchHistory
+        {
+            get
+            {
+                return _ChannelContentDetails_RelatedPlaylistsData_WatchHistory;
+            }
+            set
+            {
+                OnChannelContentDetails_RelatedPlaylistsData_WatchHistoryChanging(value);
+                ReportPropertyChanging("ChannelContentDetails_RelatedPlaylistsData_WatchHistory");
+                _ChannelContentDetails_RelatedPlaylistsData_WatchHistory = StructuralObject.SetValidValue(value, true, "ChannelContentDetails_RelatedPlaylistsData_WatchHistory");
+                ReportPropertyChanged("ChannelContentDetails_RelatedPlaylistsData_WatchHistory");
+                OnChannelContentDetails_RelatedPlaylistsData_WatchHistoryChanged();
+            }
+        }
+        private global::System.String _ChannelContentDetails_RelatedPlaylistsData_WatchHistory;
+        partial void OnChannelContentDetails_RelatedPlaylistsData_WatchHistoryChanging(global::System.String value);
+        partial void OnChannelContentDetails_RelatedPlaylistsData_WatchHistoryChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ChannelContentDetails_RelatedPlaylistsData_WatchLater
+        {
+            get
+            {
+                return _ChannelContentDetails_RelatedPlaylistsData_WatchLater;
+            }
+            set
+            {
+                OnChannelContentDetails_RelatedPlaylistsData_WatchLaterChanging(value);
+                ReportPropertyChanging("ChannelContentDetails_RelatedPlaylistsData_WatchLater");
+                _ChannelContentDetails_RelatedPlaylistsData_WatchLater = StructuralObject.SetValidValue(value, true, "ChannelContentDetails_RelatedPlaylistsData_WatchLater");
+                ReportPropertyChanged("ChannelContentDetails_RelatedPlaylistsData_WatchLater");
+                OnChannelContentDetails_RelatedPlaylistsData_WatchLaterChanged();
+            }
+        }
+        private global::System.String _ChannelContentDetails_RelatedPlaylistsData_WatchLater;
+        partial void OnChannelContentDetails_RelatedPlaylistsData_WatchLaterChanging(global::System.String value);
+        partial void OnChannelContentDetails_RelatedPlaylistsData_WatchLaterChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
         public global::System.String ContentOwnerDetails_ContentOwner
         {
             get
@@ -1595,150 +1908,6 @@ namespace YoutubeJournalist.Core
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String ChannelContentDetails_ETag
-        {
-            get
-            {
-                return _ChannelContentDetails_ETag;
-            }
-            set
-            {
-                OnChannelContentDetails_ETagChanging(value);
-                ReportPropertyChanging("ChannelContentDetails_ETag");
-                _ChannelContentDetails_ETag = StructuralObject.SetValidValue(value, true, "ChannelContentDetails_ETag");
-                ReportPropertyChanged("ChannelContentDetails_ETag");
-                OnChannelContentDetails_ETagChanged();
-            }
-        }
-        private global::System.String _ChannelContentDetails_ETag;
-        partial void OnChannelContentDetails_ETagChanging(global::System.String value);
-        partial void OnChannelContentDetails_ETagChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ChannelContentDetails_RelatedPlaylistsData_Favorites
-        {
-            get
-            {
-                return _ChannelContentDetails_RelatedPlaylistsData_Favorites;
-            }
-            set
-            {
-                OnChannelContentDetails_RelatedPlaylistsData_FavoritesChanging(value);
-                ReportPropertyChanging("ChannelContentDetails_RelatedPlaylistsData_Favorites");
-                _ChannelContentDetails_RelatedPlaylistsData_Favorites = StructuralObject.SetValidValue(value, true, "ChannelContentDetails_RelatedPlaylistsData_Favorites");
-                ReportPropertyChanged("ChannelContentDetails_RelatedPlaylistsData_Favorites");
-                OnChannelContentDetails_RelatedPlaylistsData_FavoritesChanged();
-            }
-        }
-        private global::System.String _ChannelContentDetails_RelatedPlaylistsData_Favorites;
-        partial void OnChannelContentDetails_RelatedPlaylistsData_FavoritesChanging(global::System.String value);
-        partial void OnChannelContentDetails_RelatedPlaylistsData_FavoritesChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ChannelContentDetails_RelatedPlaylistsData_Likes
-        {
-            get
-            {
-                return _ChannelContentDetails_RelatedPlaylistsData_Likes;
-            }
-            set
-            {
-                OnChannelContentDetails_RelatedPlaylistsData_LikesChanging(value);
-                ReportPropertyChanging("ChannelContentDetails_RelatedPlaylistsData_Likes");
-                _ChannelContentDetails_RelatedPlaylistsData_Likes = StructuralObject.SetValidValue(value, true, "ChannelContentDetails_RelatedPlaylistsData_Likes");
-                ReportPropertyChanged("ChannelContentDetails_RelatedPlaylistsData_Likes");
-                OnChannelContentDetails_RelatedPlaylistsData_LikesChanged();
-            }
-        }
-        private global::System.String _ChannelContentDetails_RelatedPlaylistsData_Likes;
-        partial void OnChannelContentDetails_RelatedPlaylistsData_LikesChanging(global::System.String value);
-        partial void OnChannelContentDetails_RelatedPlaylistsData_LikesChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ChannelContentDetails_RelatedPlaylistsData_Uploads
-        {
-            get
-            {
-                return _ChannelContentDetails_RelatedPlaylistsData_Uploads;
-            }
-            set
-            {
-                OnChannelContentDetails_RelatedPlaylistsData_UploadsChanging(value);
-                ReportPropertyChanging("ChannelContentDetails_RelatedPlaylistsData_Uploads");
-                _ChannelContentDetails_RelatedPlaylistsData_Uploads = StructuralObject.SetValidValue(value, true, "ChannelContentDetails_RelatedPlaylistsData_Uploads");
-                ReportPropertyChanged("ChannelContentDetails_RelatedPlaylistsData_Uploads");
-                OnChannelContentDetails_RelatedPlaylistsData_UploadsChanged();
-            }
-        }
-        private global::System.String _ChannelContentDetails_RelatedPlaylistsData_Uploads;
-        partial void OnChannelContentDetails_RelatedPlaylistsData_UploadsChanging(global::System.String value);
-        partial void OnChannelContentDetails_RelatedPlaylistsData_UploadsChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ChannelContentDetails_RelatedPlaylistsData_WatchHistory
-        {
-            get
-            {
-                return _ChannelContentDetails_RelatedPlaylistsData_WatchHistory;
-            }
-            set
-            {
-                OnChannelContentDetails_RelatedPlaylistsData_WatchHistoryChanging(value);
-                ReportPropertyChanging("ChannelContentDetails_RelatedPlaylistsData_WatchHistory");
-                _ChannelContentDetails_RelatedPlaylistsData_WatchHistory = StructuralObject.SetValidValue(value, true, "ChannelContentDetails_RelatedPlaylistsData_WatchHistory");
-                ReportPropertyChanged("ChannelContentDetails_RelatedPlaylistsData_WatchHistory");
-                OnChannelContentDetails_RelatedPlaylistsData_WatchHistoryChanged();
-            }
-        }
-        private global::System.String _ChannelContentDetails_RelatedPlaylistsData_WatchHistory;
-        partial void OnChannelContentDetails_RelatedPlaylistsData_WatchHistoryChanging(global::System.String value);
-        partial void OnChannelContentDetails_RelatedPlaylistsData_WatchHistoryChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ChannelContentDetails_RelatedPlaylistsData_WatchLater
-        {
-            get
-            {
-                return _ChannelContentDetails_RelatedPlaylistsData_WatchLater;
-            }
-            set
-            {
-                OnChannelContentDetails_RelatedPlaylistsData_WatchLaterChanging(value);
-                ReportPropertyChanging("ChannelContentDetails_RelatedPlaylistsData_WatchLater");
-                _ChannelContentDetails_RelatedPlaylistsData_WatchLater = StructuralObject.SetValidValue(value, true, "ChannelContentDetails_RelatedPlaylistsData_WatchLater");
-                ReportPropertyChanged("ChannelContentDetails_RelatedPlaylistsData_WatchLater");
-                OnChannelContentDetails_RelatedPlaylistsData_WatchLaterChanged();
-            }
-        }
-        private global::System.String _ChannelContentDetails_RelatedPlaylistsData_WatchLater;
-        partial void OnChannelContentDetails_RelatedPlaylistsData_WatchLaterChanging(global::System.String value);
-        partial void OnChannelContentDetails_RelatedPlaylistsData_WatchLaterChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public global::System.String ChannelTopicDetails_ETag
         {
             get
@@ -1768,16 +1937,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__3E52440B", "Youtube_ChannelAuditDetails")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__45F365D3", "Youtube_ChannelAuditDetails")]
         public Youtube_ChannelAuditDetails Youtube_ChannelAuditDetails
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelAuditDetails>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3E52440B", "Youtube_ChannelAuditDetails").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelAuditDetails>("YoutubeJournalistModel.FK__Youtube_C__Our_C__45F365D3", "Youtube_ChannelAuditDetails").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelAuditDetails>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3E52440B", "Youtube_ChannelAuditDetails").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelAuditDetails>("YoutubeJournalistModel.FK__Youtube_C__Our_C__45F365D3", "Youtube_ChannelAuditDetails").Value = value;
             }
         }
         /// <summary>
@@ -1789,13 +1958,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelAuditDetails>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3E52440B", "Youtube_ChannelAuditDetails");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelAuditDetails>("YoutubeJournalistModel.FK__Youtube_C__Our_C__45F365D3", "Youtube_ChannelAuditDetails");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ChannelAuditDetails>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3E52440B", "Youtube_ChannelAuditDetails", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ChannelAuditDetails>("YoutubeJournalistModel.FK__Youtube_C__Our_C__45F365D3", "Youtube_ChannelAuditDetails", value);
                 }
             }
         }
@@ -1806,16 +1975,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__3F466844", "Youtube_ChannelBrandingSettings")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__46E78A0C", "Youtube_ChannelBrandingSettings")]
         public Youtube_ChannelBrandingSettings Youtube_ChannelBrandingSettings
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3F466844", "Youtube_ChannelBrandingSettings").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__46E78A0C", "Youtube_ChannelBrandingSettings").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3F466844", "Youtube_ChannelBrandingSettings").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__46E78A0C", "Youtube_ChannelBrandingSettings").Value = value;
             }
         }
         /// <summary>
@@ -1827,13 +1996,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3F466844", "Youtube_ChannelBrandingSettings");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__46E78A0C", "Youtube_ChannelBrandingSettings");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3F466844", "Youtube_ChannelBrandingSettings", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__46E78A0C", "Youtube_ChannelBrandingSettings", value);
                 }
             }
         }
@@ -1844,18 +2013,18 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__4316F928", "Youtube_ChannelConversationPing")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__4AB81AF0", "Youtube_ChannelConversationPing")]
         public EntityCollection<Youtube_ChannelConversationPing> Youtube_ChannelConversationPing
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_ChannelConversationPing>("YoutubeJournalistModel.FK__Youtube_C__Our_C__4316F928", "Youtube_ChannelConversationPing");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_ChannelConversationPing>("YoutubeJournalistModel.FK__Youtube_C__Our_C__4AB81AF0", "Youtube_ChannelConversationPing");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_ChannelConversationPing>("YoutubeJournalistModel.FK__Youtube_C__Our_C__4316F928", "Youtube_ChannelConversationPing", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_ChannelConversationPing>("YoutubeJournalistModel.FK__Youtube_C__Our_C__4AB81AF0", "Youtube_ChannelConversationPing", value);
                 }
             }
         }
@@ -1866,16 +2035,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_S__403A8C7D", "Youtube_ChannelAuditDetails")]
-        public Youtube_ChannelAuditDetails Youtube_ChannelAuditDetails1
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_S__47DBAE45", "Youtube_ChannelSnippet")]
+        public Youtube_ChannelSnippet Youtube_ChannelSnippet
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelAuditDetails>("YoutubeJournalistModel.FK__Youtube_C__Our_S__403A8C7D", "Youtube_ChannelAuditDetails").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelSnippet>("YoutubeJournalistModel.FK__Youtube_C__Our_S__47DBAE45", "Youtube_ChannelSnippet").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelAuditDetails>("YoutubeJournalistModel.FK__Youtube_C__Our_S__403A8C7D", "Youtube_ChannelAuditDetails").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelSnippet>("YoutubeJournalistModel.FK__Youtube_C__Our_S__47DBAE45", "Youtube_ChannelSnippet").Value = value;
             }
         }
         /// <summary>
@@ -1883,61 +2052,17 @@ namespace YoutubeJournalist.Core
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Youtube_ChannelAuditDetails> Youtube_ChannelAuditDetails1Reference
+        public EntityReference<Youtube_ChannelSnippet> Youtube_ChannelSnippetReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelAuditDetails>("YoutubeJournalistModel.FK__Youtube_C__Our_S__403A8C7D", "Youtube_ChannelAuditDetails");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelSnippet>("YoutubeJournalistModel.FK__Youtube_C__Our_S__47DBAE45", "Youtube_ChannelSnippet");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ChannelAuditDetails>("YoutubeJournalistModel.FK__Youtube_C__Our_S__403A8C7D", "Youtube_ChannelAuditDetails", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_T__Chann__4BAC3F29", "Youtube_TopicCategory")]
-        public EntityCollection<Youtube_TopicCategory> Youtube_TopicCategory
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_TopicCategory>("YoutubeJournalistModel.FK__Youtube_T__Chann__4BAC3F29", "Youtube_TopicCategory");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_TopicCategory>("YoutubeJournalistModel.FK__Youtube_T__Chann__4BAC3F29", "Youtube_TopicCategory", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_T__Chann__4E88ABD4", "Youtube_TopicId")]
-        public EntityCollection<Youtube_TopicId> Youtube_TopicId
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_TopicId>("YoutubeJournalistModel.FK__Youtube_T__Chann__4E88ABD4", "Youtube_TopicId");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_TopicId>("YoutubeJournalistModel.FK__Youtube_T__Chann__4E88ABD4", "Youtube_TopicId", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ChannelSnippet>("YoutubeJournalistModel.FK__Youtube_C__Our_S__47DBAE45", "Youtube_ChannelSnippet", value);
                 }
             }
         }
@@ -2104,40 +2229,18 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__3E52440B", "Youtube_Channel")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__45F365D3", "Youtube_Channel")]
         public EntityCollection<Youtube_Channel> Youtube_Channel
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3E52440B", "Youtube_Channel");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__45F365D3", "Youtube_Channel");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3E52440B", "Youtube_Channel", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_S__403A8C7D", "Youtube_Channel")]
-        public EntityCollection<Youtube_Channel> Youtube_Channel1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_S__403A8C7D", "Youtube_Channel");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_S__403A8C7D", "Youtube_Channel", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__45F365D3", "Youtube_Channel", value);
                 }
             }
         }
@@ -2666,18 +2769,18 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__3F466844", "Youtube_Channel")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__46E78A0C", "Youtube_Channel")]
         public EntityCollection<Youtube_Channel> Youtube_Channel
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3F466844", "Youtube_Channel");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__46E78A0C", "Youtube_Channel");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3F466844", "Youtube_Channel", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__46E78A0C", "Youtube_Channel", value);
                 }
             }
         }
@@ -2688,16 +2791,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__3B75D760", "Youtube_ChannelSettings")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__403A8C7D", "Youtube_ChannelSettings")]
         public Youtube_ChannelSettings Youtube_ChannelSettings
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3B75D760", "Youtube_ChannelSettings").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__403A8C7D", "Youtube_ChannelSettings").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3B75D760", "Youtube_ChannelSettings").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__403A8C7D", "Youtube_ChannelSettings").Value = value;
             }
         }
         /// <summary>
@@ -2709,13 +2812,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3B75D760", "Youtube_ChannelSettings");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__403A8C7D", "Youtube_ChannelSettings");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ChannelSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3B75D760", "Youtube_ChannelSettings", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ChannelSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__403A8C7D", "Youtube_ChannelSettings", value);
                 }
             }
         }
@@ -2884,16 +2987,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__4316F928", "Youtube_Channel")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__4AB81AF0", "Youtube_Channel")]
         public Youtube_Channel Youtube_Channel
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__4316F928", "Youtube_Channel").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__4AB81AF0", "Youtube_Channel").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__4316F928", "Youtube_Channel").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__4AB81AF0", "Youtube_Channel").Value = value;
             }
         }
         /// <summary>
@@ -2905,13 +3008,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__4316F928", "Youtube_Channel");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__4AB81AF0", "Youtube_Channel");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__4316F928", "Youtube_Channel", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__4AB81AF0", "Youtube_Channel", value);
                 }
             }
         }
@@ -3342,18 +3445,452 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__3B75D760", "Youtube_ChannelBrandingSettings")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__403A8C7D", "Youtube_ChannelBrandingSettings")]
         public EntityCollection<Youtube_ChannelBrandingSettings> Youtube_ChannelBrandingSettings
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3B75D760", "Youtube_ChannelBrandingSettings");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__403A8C7D", "Youtube_ChannelBrandingSettings");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3B75D760", "Youtube_ChannelBrandingSettings", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__403A8C7D", "Youtube_ChannelBrandingSettings", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="YoutubeJournalistModel", Name="Youtube_ChannelSnippet")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Youtube_ChannelSnippet : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Youtube_ChannelSnippet object.
+        /// </summary>
+        /// <param name="our_Id">Initial value of the Our_Id property.</param>
+        /// <param name="thumbnailDetailsId">Initial value of the ThumbnailDetailsId property.</param>
+        public static Youtube_ChannelSnippet CreateYoutube_ChannelSnippet(global::System.Int32 our_Id, global::System.Int32 thumbnailDetailsId)
+        {
+            Youtube_ChannelSnippet youtube_ChannelSnippet = new Youtube_ChannelSnippet();
+            youtube_ChannelSnippet.Our_Id = our_Id;
+            youtube_ChannelSnippet.ThumbnailDetailsId = thumbnailDetailsId;
+            return youtube_ChannelSnippet;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Our_Id
+        {
+            get
+            {
+                return _Our_Id;
+            }
+            set
+            {
+                if (_Our_Id != value)
+                {
+                    OnOur_IdChanging(value);
+                    ReportPropertyChanging("Our_Id");
+                    _Our_Id = StructuralObject.SetValidValue(value, "Our_Id");
+                    ReportPropertyChanged("Our_Id");
+                    OnOur_IdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Our_Id;
+        partial void OnOur_IdChanging(global::System.Int32 value);
+        partial void OnOur_IdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Country
+        {
+            get
+            {
+                return _Country;
+            }
+            set
+            {
+                OnCountryChanging(value);
+                ReportPropertyChanging("Country");
+                _Country = StructuralObject.SetValidValue(value, true, "Country");
+                ReportPropertyChanged("Country");
+                OnCountryChanged();
+            }
+        }
+        private global::System.String _Country;
+        partial void OnCountryChanging(global::System.String value);
+        partial void OnCountryChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String CustomUrl
+        {
+            get
+            {
+                return _CustomUrl;
+            }
+            set
+            {
+                OnCustomUrlChanging(value);
+                ReportPropertyChanging("CustomUrl");
+                _CustomUrl = StructuralObject.SetValidValue(value, true, "CustomUrl");
+                ReportPropertyChanged("CustomUrl");
+                OnCustomUrlChanged();
+            }
+        }
+        private global::System.String _CustomUrl;
+        partial void OnCustomUrlChanging(global::System.String value);
+        partial void OnCustomUrlChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String DefaultLanguage
+        {
+            get
+            {
+                return _DefaultLanguage;
+            }
+            set
+            {
+                OnDefaultLanguageChanging(value);
+                ReportPropertyChanging("DefaultLanguage");
+                _DefaultLanguage = StructuralObject.SetValidValue(value, true, "DefaultLanguage");
+                ReportPropertyChanged("DefaultLanguage");
+                OnDefaultLanguageChanged();
+            }
+        }
+        private global::System.String _DefaultLanguage;
+        partial void OnDefaultLanguageChanging(global::System.String value);
+        partial void OnDefaultLanguageChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, true, "Description");
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
+            }
+        }
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ETag
+        {
+            get
+            {
+                return _ETag;
+            }
+            set
+            {
+                OnETagChanging(value);
+                ReportPropertyChanging("ETag");
+                _ETag = StructuralObject.SetValidValue(value, true, "ETag");
+                ReportPropertyChanged("ETag");
+                OnETagChanged();
+            }
+        }
+        private global::System.String _ETag;
+        partial void OnETagChanging(global::System.String value);
+        partial void OnETagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Localized_Description
+        {
+            get
+            {
+                return _Localized_Description;
+            }
+            set
+            {
+                OnLocalized_DescriptionChanging(value);
+                ReportPropertyChanging("Localized_Description");
+                _Localized_Description = StructuralObject.SetValidValue(value, true, "Localized_Description");
+                ReportPropertyChanged("Localized_Description");
+                OnLocalized_DescriptionChanged();
+            }
+        }
+        private global::System.String _Localized_Description;
+        partial void OnLocalized_DescriptionChanging(global::System.String value);
+        partial void OnLocalized_DescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Localized_ETag
+        {
+            get
+            {
+                return _Localized_ETag;
+            }
+            set
+            {
+                OnLocalized_ETagChanging(value);
+                ReportPropertyChanging("Localized_ETag");
+                _Localized_ETag = StructuralObject.SetValidValue(value, true, "Localized_ETag");
+                ReportPropertyChanged("Localized_ETag");
+                OnLocalized_ETagChanged();
+            }
+        }
+        private global::System.String _Localized_ETag;
+        partial void OnLocalized_ETagChanging(global::System.String value);
+        partial void OnLocalized_ETagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Localized_Title
+        {
+            get
+            {
+                return _Localized_Title;
+            }
+            set
+            {
+                OnLocalized_TitleChanging(value);
+                ReportPropertyChanging("Localized_Title");
+                _Localized_Title = StructuralObject.SetValidValue(value, true, "Localized_Title");
+                ReportPropertyChanged("Localized_Title");
+                OnLocalized_TitleChanged();
+            }
+        }
+        private global::System.String _Localized_Title;
+        partial void OnLocalized_TitleChanging(global::System.String value);
+        partial void OnLocalized_TitleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> PublishedAt
+        {
+            get
+            {
+                return _PublishedAt;
+            }
+            set
+            {
+                OnPublishedAtChanging(value);
+                ReportPropertyChanging("PublishedAt");
+                _PublishedAt = StructuralObject.SetValidValue(value, "PublishedAt");
+                ReportPropertyChanged("PublishedAt");
+                OnPublishedAtChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _PublishedAt;
+        partial void OnPublishedAtChanging(Nullable<global::System.DateTime> value);
+        partial void OnPublishedAtChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTimeOffset> PublishedAtDateTimeOffset
+        {
+            get
+            {
+                return _PublishedAtDateTimeOffset;
+            }
+            set
+            {
+                OnPublishedAtDateTimeOffsetChanging(value);
+                ReportPropertyChanging("PublishedAtDateTimeOffset");
+                _PublishedAtDateTimeOffset = StructuralObject.SetValidValue(value, "PublishedAtDateTimeOffset");
+                ReportPropertyChanged("PublishedAtDateTimeOffset");
+                OnPublishedAtDateTimeOffsetChanged();
+            }
+        }
+        private Nullable<global::System.DateTimeOffset> _PublishedAtDateTimeOffset;
+        partial void OnPublishedAtDateTimeOffsetChanging(Nullable<global::System.DateTimeOffset> value);
+        partial void OnPublishedAtDateTimeOffsetChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PublishedAtRaw
+        {
+            get
+            {
+                return _PublishedAtRaw;
+            }
+            set
+            {
+                OnPublishedAtRawChanging(value);
+                ReportPropertyChanging("PublishedAtRaw");
+                _PublishedAtRaw = StructuralObject.SetValidValue(value, true, "PublishedAtRaw");
+                ReportPropertyChanged("PublishedAtRaw");
+                OnPublishedAtRawChanged();
+            }
+        }
+        private global::System.String _PublishedAtRaw;
+        partial void OnPublishedAtRawChanging(global::System.String value);
+        partial void OnPublishedAtRawChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ThumbnailDetailsId
+        {
+            get
+            {
+                return _ThumbnailDetailsId;
+            }
+            set
+            {
+                OnThumbnailDetailsIdChanging(value);
+                ReportPropertyChanging("ThumbnailDetailsId");
+                _ThumbnailDetailsId = StructuralObject.SetValidValue(value, "ThumbnailDetailsId");
+                ReportPropertyChanged("ThumbnailDetailsId");
+                OnThumbnailDetailsIdChanged();
+            }
+        }
+        private global::System.Int32 _ThumbnailDetailsId;
+        partial void OnThumbnailDetailsIdChanging(global::System.Int32 value);
+        partial void OnThumbnailDetailsIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Title
+        {
+            get
+            {
+                return _Title;
+            }
+            set
+            {
+                OnTitleChanging(value);
+                ReportPropertyChanging("Title");
+                _Title = StructuralObject.SetValidValue(value, true, "Title");
+                ReportPropertyChanged("Title");
+                OnTitleChanged();
+            }
+        }
+        private global::System.String _Title;
+        partial void OnTitleChanging(global::System.String value);
+        partial void OnTitleChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_S__47DBAE45", "Youtube_Channel")]
+        public EntityCollection<Youtube_Channel> Youtube_Channel
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_S__47DBAE45", "Youtube_Channel");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_S__47DBAE45", "Youtube_Channel", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Thumb__4316F928", "Youtube_ThumbnailDetails")]
+        public Youtube_ThumbnailDetails Youtube_ThumbnailDetails
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_C__Thumb__4316F928", "Youtube_ThumbnailDetails").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_C__Thumb__4316F928", "Youtube_ThumbnailDetails").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Youtube_ThumbnailDetails> Youtube_ThumbnailDetailsReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_C__Thumb__4316F928", "Youtube_ThumbnailDetails");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_C__Thumb__4316F928", "Youtube_ThumbnailDetails", value);
                 }
             }
         }
@@ -3496,18 +4033,18 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__34C8D9D1", "Youtube_CommentList")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__398D8EEE", "Youtube_CommentList")]
         public EntityCollection<Youtube_CommentList> Youtube_CommentList
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_CommentList>("YoutubeJournalistModel.FK__Youtube_C__Comme__34C8D9D1", "Youtube_CommentList");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_CommentList>("YoutubeJournalistModel.FK__Youtube_C__Comme__398D8EEE", "Youtube_CommentList");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_CommentList>("YoutubeJournalistModel.FK__Youtube_C__Comme__34C8D9D1", "Youtube_CommentList", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_CommentList>("YoutubeJournalistModel.FK__Youtube_C__Comme__398D8EEE", "Youtube_CommentList", value);
                 }
             }
         }
@@ -3518,16 +4055,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Snipp__2E1BDC42", "Youtube_CommentSnippet")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Snipp__32E0915F", "Youtube_CommentSnippet")]
         public Youtube_CommentSnippet Youtube_CommentSnippet
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__2E1BDC42", "Youtube_CommentSnippet").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__32E0915F", "Youtube_CommentSnippet").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__2E1BDC42", "Youtube_CommentSnippet").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__32E0915F", "Youtube_CommentSnippet").Value = value;
             }
         }
         /// <summary>
@@ -3539,13 +4076,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__2E1BDC42", "Youtube_CommentSnippet");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__32E0915F", "Youtube_CommentSnippet");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__2E1BDC42", "Youtube_CommentSnippet", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__32E0915F", "Youtube_CommentSnippet", value);
                 }
             }
         }
@@ -3692,16 +4229,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__34C8D9D1", "Youtube_Comment")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__398D8EEE", "Youtube_Comment")]
         public Youtube_Comment Youtube_Comment
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Comme__34C8D9D1", "Youtube_Comment").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Comme__398D8EEE", "Youtube_Comment").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Comme__34C8D9D1", "Youtube_Comment").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Comme__398D8EEE", "Youtube_Comment").Value = value;
             }
         }
         /// <summary>
@@ -3713,13 +4250,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Comme__34C8D9D1", "Youtube_Comment");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Comme__398D8EEE", "Youtube_Comment");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Comme__34C8D9D1", "Youtube_Comment", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Comme__398D8EEE", "Youtube_Comment", value);
                 }
             }
         }
@@ -3730,16 +4267,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__33D4B598", "Youtube_CommentThread")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__38996AB5", "Youtube_CommentThread")]
         public Youtube_CommentThread Youtube_CommentThread
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Comme__33D4B598", "Youtube_CommentThread").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Comme__38996AB5", "Youtube_CommentThread").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Comme__33D4B598", "Youtube_CommentThread").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Comme__38996AB5", "Youtube_CommentThread").Value = value;
             }
         }
         /// <summary>
@@ -3751,13 +4288,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Comme__33D4B598", "Youtube_CommentThread");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Comme__38996AB5", "Youtube_CommentThread");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Comme__33D4B598", "Youtube_CommentThread", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Comme__38996AB5", "Youtube_CommentThread", value);
                 }
             }
         }
@@ -4308,18 +4845,18 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Snipp__2E1BDC42", "Youtube_Comment")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Snipp__32E0915F", "Youtube_Comment")]
         public EntityCollection<Youtube_Comment> Youtube_Comment
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Snipp__2E1BDC42", "Youtube_Comment");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Snipp__32E0915F", "Youtube_Comment");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Snipp__2E1BDC42", "Youtube_Comment", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Snipp__32E0915F", "Youtube_Comment", value);
                 }
             }
         }
@@ -4330,18 +4867,18 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Snipp__30F848ED", "Youtube_CommentThread")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Snipp__35BCFE0A", "Youtube_CommentThread")]
         public EntityCollection<Youtube_CommentThread> Youtube_CommentThread
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Snipp__30F848ED", "Youtube_CommentThread");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Snipp__35BCFE0A", "Youtube_CommentThread");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Snipp__30F848ED", "Youtube_CommentThread", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Snipp__35BCFE0A", "Youtube_CommentThread", value);
                 }
             }
         }
@@ -4512,18 +5049,18 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__33D4B598", "Youtube_CommentList")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__38996AB5", "Youtube_CommentList")]
         public EntityCollection<Youtube_CommentList> Youtube_CommentList
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_CommentList>("YoutubeJournalistModel.FK__Youtube_C__Comme__33D4B598", "Youtube_CommentList");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_CommentList>("YoutubeJournalistModel.FK__Youtube_C__Comme__38996AB5", "Youtube_CommentList");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_CommentList>("YoutubeJournalistModel.FK__Youtube_C__Comme__33D4B598", "Youtube_CommentList", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_CommentList>("YoutubeJournalistModel.FK__Youtube_C__Comme__38996AB5", "Youtube_CommentList", value);
                 }
             }
         }
@@ -4534,16 +5071,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Snipp__30F848ED", "Youtube_CommentSnippet")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Snipp__35BCFE0A", "Youtube_CommentSnippet")]
         public Youtube_CommentSnippet Youtube_CommentSnippet
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__30F848ED", "Youtube_CommentSnippet").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__35BCFE0A", "Youtube_CommentSnippet").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__30F848ED", "Youtube_CommentSnippet").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__35BCFE0A", "Youtube_CommentSnippet").Value = value;
             }
         }
         /// <summary>
@@ -4555,13 +5092,187 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__30F848ED", "Youtube_CommentSnippet");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__35BCFE0A", "Youtube_CommentSnippet");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__30F848ED", "Youtube_CommentSnippet", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__35BCFE0A", "Youtube_CommentSnippet", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="YoutubeJournalistModel", Name="Youtube_RegionRestriction")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Youtube_RegionRestriction : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Youtube_RegionRestriction object.
+        /// </summary>
+        /// <param name="our_Id">Initial value of the Our_Id property.</param>
+        /// <param name="videoId">Initial value of the VideoId property.</param>
+        /// <param name="blocked">Initial value of the Blocked property.</param>
+        public static Youtube_RegionRestriction CreateYoutube_RegionRestriction(global::System.Int32 our_Id, global::System.String videoId, global::System.Boolean blocked)
+        {
+            Youtube_RegionRestriction youtube_RegionRestriction = new Youtube_RegionRestriction();
+            youtube_RegionRestriction.Our_Id = our_Id;
+            youtube_RegionRestriction.VideoId = videoId;
+            youtube_RegionRestriction.Blocked = blocked;
+            return youtube_RegionRestriction;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Our_Id
+        {
+            get
+            {
+                return _Our_Id;
+            }
+            set
+            {
+                if (_Our_Id != value)
+                {
+                    OnOur_IdChanging(value);
+                    ReportPropertyChanging("Our_Id");
+                    _Our_Id = StructuralObject.SetValidValue(value, "Our_Id");
+                    ReportPropertyChanged("Our_Id");
+                    OnOur_IdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Our_Id;
+        partial void OnOur_IdChanging(global::System.Int32 value);
+        partial void OnOur_IdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String VideoId
+        {
+            get
+            {
+                return _VideoId;
+            }
+            set
+            {
+                OnVideoIdChanging(value);
+                ReportPropertyChanging("VideoId");
+                _VideoId = StructuralObject.SetValidValue(value, false, "VideoId");
+                ReportPropertyChanged("VideoId");
+                OnVideoIdChanged();
+            }
+        }
+        private global::System.String _VideoId;
+        partial void OnVideoIdChanging(global::System.String value);
+        partial void OnVideoIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Region
+        {
+            get
+            {
+                return _Region;
+            }
+            set
+            {
+                OnRegionChanging(value);
+                ReportPropertyChanging("Region");
+                _Region = StructuralObject.SetValidValue(value, true, "Region");
+                ReportPropertyChanged("Region");
+                OnRegionChanged();
+            }
+        }
+        private global::System.String _Region;
+        partial void OnRegionChanging(global::System.String value);
+        partial void OnRegionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Blocked
+        {
+            get
+            {
+                return _Blocked;
+            }
+            set
+            {
+                OnBlockedChanging(value);
+                ReportPropertyChanging("Blocked");
+                _Blocked = StructuralObject.SetValidValue(value, "Blocked");
+                ReportPropertyChanged("Blocked");
+                OnBlockedChanged();
+            }
+        }
+        private global::System.Boolean _Blocked;
+        partial void OnBlockedChanging(global::System.Boolean value);
+        partial void OnBlockedChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_R__Video__5CD6CB2B", "Youtube_Video")]
+        public Youtube_Video Youtube_Video
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_R__Video__5CD6CB2B", "Youtube_Video").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_R__Video__5CD6CB2B", "Youtube_Video").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Youtube_Video> Youtube_VideoReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_R__Video__5CD6CB2B", "Youtube_Video");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_R__Video__5CD6CB2B", "Youtube_Video", value);
                 }
             }
         }
@@ -4584,10 +5295,12 @@ namespace YoutubeJournalist.Core
         /// Create a new Youtube_SearchResult object.
         /// </summary>
         /// <param name="our_Id">Initial value of the Our_Id property.</param>
-        public static Youtube_SearchResult CreateYoutube_SearchResult(global::System.Int32 our_Id)
+        /// <param name="snippet_ThumbnailDetailsId">Initial value of the Snippet_ThumbnailDetailsId property.</param>
+        public static Youtube_SearchResult CreateYoutube_SearchResult(global::System.Int32 our_Id, global::System.Int32 snippet_ThumbnailDetailsId)
         {
             Youtube_SearchResult youtube_SearchResult = new Youtube_SearchResult();
             youtube_SearchResult.Our_Id = our_Id;
+            youtube_SearchResult.Snippet_ThumbnailDetailsId = snippet_ThumbnailDetailsId;
             return youtube_SearchResult;
         }
 
@@ -5009,122 +5722,26 @@ namespace YoutubeJournalist.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Snippet_ThumbnailDetails_Default__Url
+        public global::System.Int32 Snippet_ThumbnailDetailsId
         {
             get
             {
-                return _Snippet_ThumbnailDetails_Default__Url;
+                return _Snippet_ThumbnailDetailsId;
             }
             set
             {
-                OnSnippet_ThumbnailDetails_Default__UrlChanging(value);
-                ReportPropertyChanging("Snippet_ThumbnailDetails_Default__Url");
-                _Snippet_ThumbnailDetails_Default__Url = StructuralObject.SetValidValue(value, true, "Snippet_ThumbnailDetails_Default__Url");
-                ReportPropertyChanged("Snippet_ThumbnailDetails_Default__Url");
-                OnSnippet_ThumbnailDetails_Default__UrlChanged();
+                OnSnippet_ThumbnailDetailsIdChanging(value);
+                ReportPropertyChanging("Snippet_ThumbnailDetailsId");
+                _Snippet_ThumbnailDetailsId = StructuralObject.SetValidValue(value, "Snippet_ThumbnailDetailsId");
+                ReportPropertyChanged("Snippet_ThumbnailDetailsId");
+                OnSnippet_ThumbnailDetailsIdChanged();
             }
         }
-        private global::System.String _Snippet_ThumbnailDetails_Default__Url;
-        partial void OnSnippet_ThumbnailDetails_Default__UrlChanging(global::System.String value);
-        partial void OnSnippet_ThumbnailDetails_Default__UrlChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Snippet_ThumbnailDetails_High_Url
-        {
-            get
-            {
-                return _Snippet_ThumbnailDetails_High_Url;
-            }
-            set
-            {
-                OnSnippet_ThumbnailDetails_High_UrlChanging(value);
-                ReportPropertyChanging("Snippet_ThumbnailDetails_High_Url");
-                _Snippet_ThumbnailDetails_High_Url = StructuralObject.SetValidValue(value, true, "Snippet_ThumbnailDetails_High_Url");
-                ReportPropertyChanged("Snippet_ThumbnailDetails_High_Url");
-                OnSnippet_ThumbnailDetails_High_UrlChanged();
-            }
-        }
-        private global::System.String _Snippet_ThumbnailDetails_High_Url;
-        partial void OnSnippet_ThumbnailDetails_High_UrlChanging(global::System.String value);
-        partial void OnSnippet_ThumbnailDetails_High_UrlChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Snippet_ThumbnailDetails_Maxres_Url
-        {
-            get
-            {
-                return _Snippet_ThumbnailDetails_Maxres_Url;
-            }
-            set
-            {
-                OnSnippet_ThumbnailDetails_Maxres_UrlChanging(value);
-                ReportPropertyChanging("Snippet_ThumbnailDetails_Maxres_Url");
-                _Snippet_ThumbnailDetails_Maxres_Url = StructuralObject.SetValidValue(value, true, "Snippet_ThumbnailDetails_Maxres_Url");
-                ReportPropertyChanged("Snippet_ThumbnailDetails_Maxres_Url");
-                OnSnippet_ThumbnailDetails_Maxres_UrlChanged();
-            }
-        }
-        private global::System.String _Snippet_ThumbnailDetails_Maxres_Url;
-        partial void OnSnippet_ThumbnailDetails_Maxres_UrlChanging(global::System.String value);
-        partial void OnSnippet_ThumbnailDetails_Maxres_UrlChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Snippet_ThumbnailDetails_Medium_Url
-        {
-            get
-            {
-                return _Snippet_ThumbnailDetails_Medium_Url;
-            }
-            set
-            {
-                OnSnippet_ThumbnailDetails_Medium_UrlChanging(value);
-                ReportPropertyChanging("Snippet_ThumbnailDetails_Medium_Url");
-                _Snippet_ThumbnailDetails_Medium_Url = StructuralObject.SetValidValue(value, true, "Snippet_ThumbnailDetails_Medium_Url");
-                ReportPropertyChanged("Snippet_ThumbnailDetails_Medium_Url");
-                OnSnippet_ThumbnailDetails_Medium_UrlChanged();
-            }
-        }
-        private global::System.String _Snippet_ThumbnailDetails_Medium_Url;
-        partial void OnSnippet_ThumbnailDetails_Medium_UrlChanging(global::System.String value);
-        partial void OnSnippet_ThumbnailDetails_Medium_UrlChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Snippet_ThumbnailDetails_Standard_Url
-        {
-            get
-            {
-                return _Snippet_ThumbnailDetails_Standard_Url;
-            }
-            set
-            {
-                OnSnippet_ThumbnailDetails_Standard_UrlChanging(value);
-                ReportPropertyChanging("Snippet_ThumbnailDetails_Standard_Url");
-                _Snippet_ThumbnailDetails_Standard_Url = StructuralObject.SetValidValue(value, true, "Snippet_ThumbnailDetails_Standard_Url");
-                ReportPropertyChanged("Snippet_ThumbnailDetails_Standard_Url");
-                OnSnippet_ThumbnailDetails_Standard_UrlChanged();
-            }
-        }
-        private global::System.String _Snippet_ThumbnailDetails_Standard_Url;
-        partial void OnSnippet_ThumbnailDetails_Standard_UrlChanging(global::System.String value);
-        partial void OnSnippet_ThumbnailDetails_Standard_UrlChanged();
+        private global::System.Int32 _Snippet_ThumbnailDetailsId;
+        partial void OnSnippet_ThumbnailDetailsIdChanging(global::System.Int32 value);
+        partial void OnSnippet_ThumbnailDetailsIdChanged();
 
         #endregion
 
@@ -5136,16 +5753,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_S__Snipp__2E1BDC42", "Youtube_Thumbnail")]
-        public Youtube_Thumbnail Youtube_Thumbnail
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_S__Snipp__2E1BDC42", "Youtube_ThumbnailDetails")]
+        public Youtube_ThumbnailDetails Youtube_ThumbnailDetails
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Thumbnail>("YoutubeJournalistModel.FK__Youtube_S__Snipp__2E1BDC42", "Youtube_Thumbnail").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_S__Snipp__2E1BDC42", "Youtube_ThumbnailDetails").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Thumbnail>("YoutubeJournalistModel.FK__Youtube_S__Snipp__2E1BDC42", "Youtube_Thumbnail").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_S__Snipp__2E1BDC42", "Youtube_ThumbnailDetails").Value = value;
             }
         }
         /// <summary>
@@ -5153,169 +5770,17 @@ namespace YoutubeJournalist.Core
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Youtube_Thumbnail> Youtube_ThumbnailReference
+        public EntityReference<Youtube_ThumbnailDetails> Youtube_ThumbnailDetailsReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Thumbnail>("YoutubeJournalistModel.FK__Youtube_S__Snipp__2E1BDC42", "Youtube_Thumbnail");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_S__Snipp__2E1BDC42", "Youtube_ThumbnailDetails");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Thumbnail>("YoutubeJournalistModel.FK__Youtube_S__Snipp__2E1BDC42", "Youtube_Thumbnail", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_S__Snipp__2F10007B", "Youtube_Thumbnail")]
-        public Youtube_Thumbnail Youtube_Thumbnail1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Thumbnail>("YoutubeJournalistModel.FK__Youtube_S__Snipp__2F10007B", "Youtube_Thumbnail").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Thumbnail>("YoutubeJournalistModel.FK__Youtube_S__Snipp__2F10007B", "Youtube_Thumbnail").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Youtube_Thumbnail> Youtube_Thumbnail1Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Thumbnail>("YoutubeJournalistModel.FK__Youtube_S__Snipp__2F10007B", "Youtube_Thumbnail");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Thumbnail>("YoutubeJournalistModel.FK__Youtube_S__Snipp__2F10007B", "Youtube_Thumbnail", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_S__Snipp__300424B4", "Youtube_Thumbnail")]
-        public Youtube_Thumbnail Youtube_Thumbnail2
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Thumbnail>("YoutubeJournalistModel.FK__Youtube_S__Snipp__300424B4", "Youtube_Thumbnail").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Thumbnail>("YoutubeJournalistModel.FK__Youtube_S__Snipp__300424B4", "Youtube_Thumbnail").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Youtube_Thumbnail> Youtube_Thumbnail2Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Thumbnail>("YoutubeJournalistModel.FK__Youtube_S__Snipp__300424B4", "Youtube_Thumbnail");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Thumbnail>("YoutubeJournalistModel.FK__Youtube_S__Snipp__300424B4", "Youtube_Thumbnail", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_S__Snipp__30F848ED", "Youtube_Thumbnail")]
-        public Youtube_Thumbnail Youtube_Thumbnail3
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Thumbnail>("YoutubeJournalistModel.FK__Youtube_S__Snipp__30F848ED", "Youtube_Thumbnail").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Thumbnail>("YoutubeJournalistModel.FK__Youtube_S__Snipp__30F848ED", "Youtube_Thumbnail").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Youtube_Thumbnail> Youtube_Thumbnail3Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Thumbnail>("YoutubeJournalistModel.FK__Youtube_S__Snipp__30F848ED", "Youtube_Thumbnail");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Thumbnail>("YoutubeJournalistModel.FK__Youtube_S__Snipp__30F848ED", "Youtube_Thumbnail", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_S__Snipp__31EC6D26", "Youtube_Thumbnail")]
-        public Youtube_Thumbnail Youtube_Thumbnail4
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Thumbnail>("YoutubeJournalistModel.FK__Youtube_S__Snipp__31EC6D26", "Youtube_Thumbnail").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Thumbnail>("YoutubeJournalistModel.FK__Youtube_S__Snipp__31EC6D26", "Youtube_Thumbnail").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Youtube_Thumbnail> Youtube_Thumbnail4Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Thumbnail>("YoutubeJournalistModel.FK__Youtube_S__Snipp__31EC6D26", "Youtube_Thumbnail");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Thumbnail>("YoutubeJournalistModel.FK__Youtube_S__Snipp__31EC6D26", "Youtube_Thumbnail", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_S__Snipp__2E1BDC42", "Youtube_ThumbnailDetails", value);
                 }
             }
         }
@@ -5327,27 +5792,204 @@ namespace YoutubeJournalist.Core
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="YoutubeJournalistModel", Name="Youtube_Thumbnail")]
+    [EdmEntityTypeAttribute(NamespaceName="YoutubeJournalistModel", Name="Youtube_Tag")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Youtube_Thumbnail : EntityObject
+    public partial class Youtube_Tag : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Youtube_Thumbnail object.
+        /// Create a new Youtube_Tag object.
         /// </summary>
-        /// <param name="url">Initial value of the Url property.</param>
-        public static Youtube_Thumbnail CreateYoutube_Thumbnail(global::System.String url)
+        /// <param name="our_Id">Initial value of the Our_Id property.</param>
+        /// <param name="videoId">Initial value of the VideoId property.</param>
+        /// <param name="tag">Initial value of the Tag property.</param>
+        public static Youtube_Tag CreateYoutube_Tag(global::System.Int32 our_Id, global::System.String videoId, global::System.String tag)
         {
-            Youtube_Thumbnail youtube_Thumbnail = new Youtube_Thumbnail();
-            youtube_Thumbnail.Url = url;
-            return youtube_Thumbnail;
+            Youtube_Tag youtube_Tag = new Youtube_Tag();
+            youtube_Tag.Our_Id = our_Id;
+            youtube_Tag.VideoId = videoId;
+            youtube_Tag.Tag = tag;
+            return youtube_Tag;
         }
 
         #endregion
 
         #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Our_Id
+        {
+            get
+            {
+                return _Our_Id;
+            }
+            set
+            {
+                if (_Our_Id != value)
+                {
+                    OnOur_IdChanging(value);
+                    ReportPropertyChanging("Our_Id");
+                    _Our_Id = StructuralObject.SetValidValue(value, "Our_Id");
+                    ReportPropertyChanged("Our_Id");
+                    OnOur_IdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Our_Id;
+        partial void OnOur_IdChanging(global::System.Int32 value);
+        partial void OnOur_IdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String VideoId
+        {
+            get
+            {
+                return _VideoId;
+            }
+            set
+            {
+                OnVideoIdChanging(value);
+                ReportPropertyChanging("VideoId");
+                _VideoId = StructuralObject.SetValidValue(value, false, "VideoId");
+                ReportPropertyChanged("VideoId");
+                OnVideoIdChanged();
+            }
+        }
+        private global::System.String _VideoId;
+        partial void OnVideoIdChanging(global::System.String value);
+        partial void OnVideoIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Tag
+        {
+            get
+            {
+                return _Tag;
+            }
+            set
+            {
+                OnTagChanging(value);
+                ReportPropertyChanging("Tag");
+                _Tag = StructuralObject.SetValidValue(value, false, "Tag");
+                ReportPropertyChanged("Tag");
+                OnTagChanged();
+            }
+        }
+        private global::System.String _Tag;
+        partial void OnTagChanging(global::System.String value);
+        partial void OnTagChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_T__Video__5FB337D6", "Youtube_Video")]
+        public Youtube_Video Youtube_Video
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_T__Video__5FB337D6", "Youtube_Video").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_T__Video__5FB337D6", "Youtube_Video").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Youtube_Video> Youtube_VideoReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_T__Video__5FB337D6", "Youtube_Video");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_T__Video__5FB337D6", "Youtube_Video", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="YoutubeJournalistModel", Name="Youtube_ThumbnailDetails")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Youtube_ThumbnailDetails : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Youtube_ThumbnailDetails object.
+        /// </summary>
+        /// <param name="our_Id">Initial value of the Our_Id property.</param>
+        public static Youtube_ThumbnailDetails CreateYoutube_ThumbnailDetails(global::System.Int32 our_Id)
+        {
+            Youtube_ThumbnailDetails youtube_ThumbnailDetails = new Youtube_ThumbnailDetails();
+            youtube_ThumbnailDetails.Our_Id = our_Id;
+            return youtube_ThumbnailDetails;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Our_Id
+        {
+            get
+            {
+                return _Our_Id;
+            }
+            set
+            {
+                if (_Our_Id != value)
+                {
+                    OnOur_IdChanging(value);
+                    ReportPropertyChanging("Our_Id");
+                    _Our_Id = StructuralObject.SetValidValue(value, "Our_Id");
+                    ReportPropertyChanged("Our_Id");
+                    OnOur_IdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Our_Id;
+        partial void OnOur_IdChanging(global::System.Int32 value);
+        partial void OnOur_IdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -5378,79 +6020,506 @@ namespace YoutubeJournalist.Core
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int64> Height
+        public global::System.String Default__Url
         {
             get
             {
-                return _Height;
+                return _Default__Url;
             }
             set
             {
-                OnHeightChanging(value);
-                ReportPropertyChanging("Height");
-                _Height = StructuralObject.SetValidValue(value, "Height");
-                ReportPropertyChanged("Height");
-                OnHeightChanged();
+                OnDefault__UrlChanging(value);
+                ReportPropertyChanging("Default__Url");
+                _Default__Url = StructuralObject.SetValidValue(value, true, "Default__Url");
+                ReportPropertyChanged("Default__Url");
+                OnDefault__UrlChanged();
             }
         }
-        private Nullable<global::System.Int64> _Height;
-        partial void OnHeightChanging(Nullable<global::System.Int64> value);
-        partial void OnHeightChanged();
+        private global::System.String _Default__Url;
+        partial void OnDefault__UrlChanging(global::System.String value);
+        partial void OnDefault__UrlChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int64> Width
+        public global::System.String Default__ETag
         {
             get
             {
-                return _Width;
+                return _Default__ETag;
             }
             set
             {
-                OnWidthChanging(value);
-                ReportPropertyChanging("Width");
-                _Width = StructuralObject.SetValidValue(value, "Width");
-                ReportPropertyChanged("Width");
-                OnWidthChanged();
+                OnDefault__ETagChanging(value);
+                ReportPropertyChanging("Default__ETag");
+                _Default__ETag = StructuralObject.SetValidValue(value, true, "Default__ETag");
+                ReportPropertyChanged("Default__ETag");
+                OnDefault__ETagChanged();
             }
         }
-        private Nullable<global::System.Int64> _Width;
-        partial void OnWidthChanging(Nullable<global::System.Int64> value);
-        partial void OnWidthChanged();
+        private global::System.String _Default__ETag;
+        partial void OnDefault__ETagChanging(global::System.String value);
+        partial void OnDefault__ETagChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Url
+        public Nullable<global::System.Int64> Default__Height
         {
             get
             {
-                return _Url;
+                return _Default__Height;
             }
             set
             {
-                if (_Url != value)
-                {
-                    OnUrlChanging(value);
-                    ReportPropertyChanging("Url");
-                    _Url = StructuralObject.SetValidValue(value, false, "Url");
-                    ReportPropertyChanged("Url");
-                    OnUrlChanged();
-                }
+                OnDefault__HeightChanging(value);
+                ReportPropertyChanging("Default__Height");
+                _Default__Height = StructuralObject.SetValidValue(value, "Default__Height");
+                ReportPropertyChanged("Default__Height");
+                OnDefault__HeightChanged();
             }
         }
-        private global::System.String _Url;
-        partial void OnUrlChanging(global::System.String value);
-        partial void OnUrlChanged();
+        private Nullable<global::System.Int64> _Default__Height;
+        partial void OnDefault__HeightChanging(Nullable<global::System.Int64> value);
+        partial void OnDefault__HeightChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> Default__Width
+        {
+            get
+            {
+                return _Default__Width;
+            }
+            set
+            {
+                OnDefault__WidthChanging(value);
+                ReportPropertyChanging("Default__Width");
+                _Default__Width = StructuralObject.SetValidValue(value, "Default__Width");
+                ReportPropertyChanged("Default__Width");
+                OnDefault__WidthChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _Default__Width;
+        partial void OnDefault__WidthChanging(Nullable<global::System.Int64> value);
+        partial void OnDefault__WidthChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String High_Url
+        {
+            get
+            {
+                return _High_Url;
+            }
+            set
+            {
+                OnHigh_UrlChanging(value);
+                ReportPropertyChanging("High_Url");
+                _High_Url = StructuralObject.SetValidValue(value, true, "High_Url");
+                ReportPropertyChanged("High_Url");
+                OnHigh_UrlChanged();
+            }
+        }
+        private global::System.String _High_Url;
+        partial void OnHigh_UrlChanging(global::System.String value);
+        partial void OnHigh_UrlChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String High_ETag
+        {
+            get
+            {
+                return _High_ETag;
+            }
+            set
+            {
+                OnHigh_ETagChanging(value);
+                ReportPropertyChanging("High_ETag");
+                _High_ETag = StructuralObject.SetValidValue(value, true, "High_ETag");
+                ReportPropertyChanged("High_ETag");
+                OnHigh_ETagChanged();
+            }
+        }
+        private global::System.String _High_ETag;
+        partial void OnHigh_ETagChanging(global::System.String value);
+        partial void OnHigh_ETagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> High_Height
+        {
+            get
+            {
+                return _High_Height;
+            }
+            set
+            {
+                OnHigh_HeightChanging(value);
+                ReportPropertyChanging("High_Height");
+                _High_Height = StructuralObject.SetValidValue(value, "High_Height");
+                ReportPropertyChanged("High_Height");
+                OnHigh_HeightChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _High_Height;
+        partial void OnHigh_HeightChanging(Nullable<global::System.Int64> value);
+        partial void OnHigh_HeightChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> High_Width
+        {
+            get
+            {
+                return _High_Width;
+            }
+            set
+            {
+                OnHigh_WidthChanging(value);
+                ReportPropertyChanging("High_Width");
+                _High_Width = StructuralObject.SetValidValue(value, "High_Width");
+                ReportPropertyChanged("High_Width");
+                OnHigh_WidthChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _High_Width;
+        partial void OnHigh_WidthChanging(Nullable<global::System.Int64> value);
+        partial void OnHigh_WidthChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Maxres_Url
+        {
+            get
+            {
+                return _Maxres_Url;
+            }
+            set
+            {
+                OnMaxres_UrlChanging(value);
+                ReportPropertyChanging("Maxres_Url");
+                _Maxres_Url = StructuralObject.SetValidValue(value, true, "Maxres_Url");
+                ReportPropertyChanged("Maxres_Url");
+                OnMaxres_UrlChanged();
+            }
+        }
+        private global::System.String _Maxres_Url;
+        partial void OnMaxres_UrlChanging(global::System.String value);
+        partial void OnMaxres_UrlChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Maxres_ETag
+        {
+            get
+            {
+                return _Maxres_ETag;
+            }
+            set
+            {
+                OnMaxres_ETagChanging(value);
+                ReportPropertyChanging("Maxres_ETag");
+                _Maxres_ETag = StructuralObject.SetValidValue(value, true, "Maxres_ETag");
+                ReportPropertyChanged("Maxres_ETag");
+                OnMaxres_ETagChanged();
+            }
+        }
+        private global::System.String _Maxres_ETag;
+        partial void OnMaxres_ETagChanging(global::System.String value);
+        partial void OnMaxres_ETagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> Maxres_Height
+        {
+            get
+            {
+                return _Maxres_Height;
+            }
+            set
+            {
+                OnMaxres_HeightChanging(value);
+                ReportPropertyChanging("Maxres_Height");
+                _Maxres_Height = StructuralObject.SetValidValue(value, "Maxres_Height");
+                ReportPropertyChanged("Maxres_Height");
+                OnMaxres_HeightChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _Maxres_Height;
+        partial void OnMaxres_HeightChanging(Nullable<global::System.Int64> value);
+        partial void OnMaxres_HeightChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> Maxres_Width
+        {
+            get
+            {
+                return _Maxres_Width;
+            }
+            set
+            {
+                OnMaxres_WidthChanging(value);
+                ReportPropertyChanging("Maxres_Width");
+                _Maxres_Width = StructuralObject.SetValidValue(value, "Maxres_Width");
+                ReportPropertyChanged("Maxres_Width");
+                OnMaxres_WidthChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _Maxres_Width;
+        partial void OnMaxres_WidthChanging(Nullable<global::System.Int64> value);
+        partial void OnMaxres_WidthChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Medium_Url
+        {
+            get
+            {
+                return _Medium_Url;
+            }
+            set
+            {
+                OnMedium_UrlChanging(value);
+                ReportPropertyChanging("Medium_Url");
+                _Medium_Url = StructuralObject.SetValidValue(value, true, "Medium_Url");
+                ReportPropertyChanged("Medium_Url");
+                OnMedium_UrlChanged();
+            }
+        }
+        private global::System.String _Medium_Url;
+        partial void OnMedium_UrlChanging(global::System.String value);
+        partial void OnMedium_UrlChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Medium_ETag
+        {
+            get
+            {
+                return _Medium_ETag;
+            }
+            set
+            {
+                OnMedium_ETagChanging(value);
+                ReportPropertyChanging("Medium_ETag");
+                _Medium_ETag = StructuralObject.SetValidValue(value, true, "Medium_ETag");
+                ReportPropertyChanged("Medium_ETag");
+                OnMedium_ETagChanged();
+            }
+        }
+        private global::System.String _Medium_ETag;
+        partial void OnMedium_ETagChanging(global::System.String value);
+        partial void OnMedium_ETagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> Medium_Height
+        {
+            get
+            {
+                return _Medium_Height;
+            }
+            set
+            {
+                OnMedium_HeightChanging(value);
+                ReportPropertyChanging("Medium_Height");
+                _Medium_Height = StructuralObject.SetValidValue(value, "Medium_Height");
+                ReportPropertyChanged("Medium_Height");
+                OnMedium_HeightChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _Medium_Height;
+        partial void OnMedium_HeightChanging(Nullable<global::System.Int64> value);
+        partial void OnMedium_HeightChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> Medium_Width
+        {
+            get
+            {
+                return _Medium_Width;
+            }
+            set
+            {
+                OnMedium_WidthChanging(value);
+                ReportPropertyChanging("Medium_Width");
+                _Medium_Width = StructuralObject.SetValidValue(value, "Medium_Width");
+                ReportPropertyChanged("Medium_Width");
+                OnMedium_WidthChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _Medium_Width;
+        partial void OnMedium_WidthChanging(Nullable<global::System.Int64> value);
+        partial void OnMedium_WidthChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Standard_Url
+        {
+            get
+            {
+                return _Standard_Url;
+            }
+            set
+            {
+                OnStandard_UrlChanging(value);
+                ReportPropertyChanging("Standard_Url");
+                _Standard_Url = StructuralObject.SetValidValue(value, true, "Standard_Url");
+                ReportPropertyChanged("Standard_Url");
+                OnStandard_UrlChanged();
+            }
+        }
+        private global::System.String _Standard_Url;
+        partial void OnStandard_UrlChanging(global::System.String value);
+        partial void OnStandard_UrlChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Standard_ETag
+        {
+            get
+            {
+                return _Standard_ETag;
+            }
+            set
+            {
+                OnStandard_ETagChanging(value);
+                ReportPropertyChanging("Standard_ETag");
+                _Standard_ETag = StructuralObject.SetValidValue(value, true, "Standard_ETag");
+                ReportPropertyChanged("Standard_ETag");
+                OnStandard_ETagChanged();
+            }
+        }
+        private global::System.String _Standard_ETag;
+        partial void OnStandard_ETagChanging(global::System.String value);
+        partial void OnStandard_ETagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> Standard_Height
+        {
+            get
+            {
+                return _Standard_Height;
+            }
+            set
+            {
+                OnStandard_HeightChanging(value);
+                ReportPropertyChanging("Standard_Height");
+                _Standard_Height = StructuralObject.SetValidValue(value, "Standard_Height");
+                ReportPropertyChanged("Standard_Height");
+                OnStandard_HeightChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _Standard_Height;
+        partial void OnStandard_HeightChanging(Nullable<global::System.Int64> value);
+        partial void OnStandard_HeightChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> Standard_Width
+        {
+            get
+            {
+                return _Standard_Width;
+            }
+            set
+            {
+                OnStandard_WidthChanging(value);
+                ReportPropertyChanging("Standard_Width");
+                _Standard_Width = StructuralObject.SetValidValue(value, "Standard_Width");
+                ReportPropertyChanged("Standard_Width");
+                OnStandard_WidthChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _Standard_Width;
+        partial void OnStandard_WidthChanging(Nullable<global::System.Int64> value);
+        partial void OnStandard_WidthChanged();
 
         #endregion
 
         #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Thumb__4316F928", "Youtube_ChannelSnippet")]
+        public EntityCollection<Youtube_ChannelSnippet> Youtube_ChannelSnippet
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_ChannelSnippet>("YoutubeJournalistModel.FK__Youtube_C__Thumb__4316F928", "Youtube_ChannelSnippet");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_ChannelSnippet>("YoutubeJournalistModel.FK__Youtube_C__Thumb__4316F928", "Youtube_ChannelSnippet", value);
+                }
+            }
+        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -5480,84 +6549,18 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_S__Snipp__2F10007B", "Youtube_SearchResult")]
-        public EntityCollection<Youtube_SearchResult> Youtube_SearchResult1
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Thumb__5165187F", "Youtube_VideoSnippet")]
+        public EntityCollection<Youtube_VideoSnippet> Youtube_VideoSnippet
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_SearchResult>("YoutubeJournalistModel.FK__Youtube_S__Snipp__2F10007B", "Youtube_SearchResult");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_VideoSnippet>("YoutubeJournalistModel.FK__Youtube_V__Thumb__5165187F", "Youtube_VideoSnippet");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_SearchResult>("YoutubeJournalistModel.FK__Youtube_S__Snipp__2F10007B", "Youtube_SearchResult", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_S__Snipp__300424B4", "Youtube_SearchResult")]
-        public EntityCollection<Youtube_SearchResult> Youtube_SearchResult2
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_SearchResult>("YoutubeJournalistModel.FK__Youtube_S__Snipp__300424B4", "Youtube_SearchResult");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_SearchResult>("YoutubeJournalistModel.FK__Youtube_S__Snipp__300424B4", "Youtube_SearchResult", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_S__Snipp__30F848ED", "Youtube_SearchResult")]
-        public EntityCollection<Youtube_SearchResult> Youtube_SearchResult3
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_SearchResult>("YoutubeJournalistModel.FK__Youtube_S__Snipp__30F848ED", "Youtube_SearchResult");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_SearchResult>("YoutubeJournalistModel.FK__Youtube_S__Snipp__30F848ED", "Youtube_SearchResult", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_S__Snipp__31EC6D26", "Youtube_SearchResult")]
-        public EntityCollection<Youtube_SearchResult> Youtube_SearchResult4
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_SearchResult>("YoutubeJournalistModel.FK__Youtube_S__Snipp__31EC6D26", "Youtube_SearchResult");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_SearchResult>("YoutubeJournalistModel.FK__Youtube_S__Snipp__31EC6D26", "Youtube_SearchResult", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_VideoSnippet>("YoutubeJournalistModel.FK__Youtube_V__Thumb__5165187F", "Youtube_VideoSnippet", value);
                 }
             }
         }
@@ -5580,12 +6583,10 @@ namespace YoutubeJournalist.Core
         /// Create a new Youtube_TopicCategory object.
         /// </summary>
         /// <param name="url">Initial value of the Url property.</param>
-        /// <param name="channelId">Initial value of the ChannelId property.</param>
-        public static Youtube_TopicCategory CreateYoutube_TopicCategory(global::System.String url, global::System.String channelId)
+        public static Youtube_TopicCategory CreateYoutube_TopicCategory(global::System.String url)
         {
             Youtube_TopicCategory youtube_TopicCategory = new Youtube_TopicCategory();
             youtube_TopicCategory.Url = url;
-            youtube_TopicCategory.ChannelId = channelId;
             return youtube_TopicCategory;
         }
 
@@ -5623,7 +6624,7 @@ namespace YoutubeJournalist.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String ChannelId
         {
@@ -5635,7 +6636,7 @@ namespace YoutubeJournalist.Core
             {
                 OnChannelIdChanging(value);
                 ReportPropertyChanging("ChannelId");
-                _ChannelId = StructuralObject.SetValidValue(value, false, "ChannelId");
+                _ChannelId = StructuralObject.SetValidValue(value, true, "ChannelId");
                 ReportPropertyChanged("ChannelId");
                 OnChannelIdChanged();
             }
@@ -5643,48 +6644,30 @@ namespace YoutubeJournalist.Core
         private global::System.String _ChannelId;
         partial void OnChannelIdChanging(global::System.String value);
         partial void OnChannelIdChanged();
-
-        #endregion
-
-        #region Navigation Properties
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_T__Chann__4BAC3F29", "Youtube_Channel")]
-        public Youtube_Channel Youtube_Channel
+        public global::System.String VideoId
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_T__Chann__4BAC3F29", "Youtube_Channel").Value;
+                return _VideoId;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_T__Chann__4BAC3F29", "Youtube_Channel").Value = value;
+                OnVideoIdChanging(value);
+                ReportPropertyChanging("VideoId");
+                _VideoId = StructuralObject.SetValidValue(value, true, "VideoId");
+                ReportPropertyChanged("VideoId");
+                OnVideoIdChanged();
             }
         }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Youtube_Channel> Youtube_ChannelReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_T__Chann__4BAC3F29", "Youtube_Channel");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_T__Chann__4BAC3F29", "Youtube_Channel", value);
-                }
-            }
-        }
+        private global::System.String _VideoId;
+        partial void OnVideoIdChanging(global::System.String value);
+        partial void OnVideoIdChanged();
 
         #endregion
 
@@ -5704,12 +6687,12 @@ namespace YoutubeJournalist.Core
         /// Create a new Youtube_TopicId object.
         /// </summary>
         /// <param name="url">Initial value of the Url property.</param>
-        /// <param name="channelId">Initial value of the ChannelId property.</param>
-        public static Youtube_TopicId CreateYoutube_TopicId(global::System.String url, global::System.String channelId)
+        /// <param name="relevant">Initial value of the Relevant property.</param>
+        public static Youtube_TopicId CreateYoutube_TopicId(global::System.String url, global::System.Boolean relevant)
         {
             Youtube_TopicId youtube_TopicId = new Youtube_TopicId();
             youtube_TopicId.Url = url;
-            youtube_TopicId.ChannelId = channelId;
+            youtube_TopicId.Relevant = relevant;
             return youtube_TopicId;
         }
 
@@ -5747,7 +6730,7 @@ namespace YoutubeJournalist.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String ChannelId
         {
@@ -5759,7 +6742,7 @@ namespace YoutubeJournalist.Core
             {
                 OnChannelIdChanging(value);
                 ReportPropertyChanging("ChannelId");
-                _ChannelId = StructuralObject.SetValidValue(value, false, "ChannelId");
+                _ChannelId = StructuralObject.SetValidValue(value, true, "ChannelId");
                 ReportPropertyChanged("ChannelId");
                 OnChannelIdChanged();
             }
@@ -5767,6 +6750,596 @@ namespace YoutubeJournalist.Core
         private global::System.String _ChannelId;
         partial void OnChannelIdChanging(global::System.String value);
         partial void OnChannelIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String VideoId
+        {
+            get
+            {
+                return _VideoId;
+            }
+            set
+            {
+                OnVideoIdChanging(value);
+                ReportPropertyChanging("VideoId");
+                _VideoId = StructuralObject.SetValidValue(value, true, "VideoId");
+                ReportPropertyChanged("VideoId");
+                OnVideoIdChanged();
+            }
+        }
+        private global::System.String _VideoId;
+        partial void OnVideoIdChanging(global::System.String value);
+        partial void OnVideoIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Relevant
+        {
+            get
+            {
+                return _Relevant;
+            }
+            set
+            {
+                OnRelevantChanging(value);
+                ReportPropertyChanging("Relevant");
+                _Relevant = StructuralObject.SetValidValue(value, "Relevant");
+                ReportPropertyChanged("Relevant");
+                OnRelevantChanged();
+            }
+        }
+        private global::System.Boolean _Relevant;
+        partial void OnRelevantChanging(global::System.Boolean value);
+        partial void OnRelevantChanged();
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="YoutubeJournalistModel", Name="Youtube_Video")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Youtube_Video : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Youtube_Video object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="snippetId">Initial value of the SnippetId property.</param>
+        /// <param name="statisticsId">Initial value of the StatisticsId property.</param>
+        /// <param name="statusId">Initial value of the StatusId property.</param>
+        public static Youtube_Video CreateYoutube_Video(global::System.String id, global::System.Int32 snippetId, global::System.Int32 statisticsId, global::System.Int32 statusId)
+        {
+            Youtube_Video youtube_Video = new Youtube_Video();
+            youtube_Video.Id = id;
+            youtube_Video.SnippetId = snippetId;
+            youtube_Video.StatisticsId = statisticsId;
+            youtube_Video.StatusId = statusId;
+            return youtube_Video;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, false, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.String _Id;
+        partial void OnIdChanging(global::System.String value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Kind
+        {
+            get
+            {
+                return _Kind;
+            }
+            set
+            {
+                OnKindChanging(value);
+                ReportPropertyChanging("Kind");
+                _Kind = StructuralObject.SetValidValue(value, true, "Kind");
+                ReportPropertyChanged("Kind");
+                OnKindChanged();
+            }
+        }
+        private global::System.String _Kind;
+        partial void OnKindChanging(global::System.String value);
+        partial void OnKindChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ETag
+        {
+            get
+            {
+                return _ETag;
+            }
+            set
+            {
+                OnETagChanging(value);
+                ReportPropertyChanging("ETag");
+                _ETag = StructuralObject.SetValidValue(value, true, "ETag");
+                ReportPropertyChanged("ETag");
+                OnETagChanged();
+            }
+        }
+        private global::System.String _ETag;
+        partial void OnETagChanging(global::System.String value);
+        partial void OnETagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SnippetId
+        {
+            get
+            {
+                return _SnippetId;
+            }
+            set
+            {
+                OnSnippetIdChanging(value);
+                ReportPropertyChanging("SnippetId");
+                _SnippetId = StructuralObject.SetValidValue(value, "SnippetId");
+                ReportPropertyChanged("SnippetId");
+                OnSnippetIdChanged();
+            }
+        }
+        private global::System.Int32 _SnippetId;
+        partial void OnSnippetIdChanging(global::System.Int32 value);
+        partial void OnSnippetIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 StatisticsId
+        {
+            get
+            {
+                return _StatisticsId;
+            }
+            set
+            {
+                OnStatisticsIdChanging(value);
+                ReportPropertyChanging("StatisticsId");
+                _StatisticsId = StructuralObject.SetValidValue(value, "StatisticsId");
+                ReportPropertyChanged("StatisticsId");
+                OnStatisticsIdChanged();
+            }
+        }
+        private global::System.Int32 _StatisticsId;
+        partial void OnStatisticsIdChanging(global::System.Int32 value);
+        partial void OnStatisticsIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 StatusId
+        {
+            get
+            {
+                return _StatusId;
+            }
+            set
+            {
+                OnStatusIdChanging(value);
+                ReportPropertyChanging("StatusId");
+                _StatusId = StructuralObject.SetValidValue(value, "StatusId");
+                ReportPropertyChanged("StatusId");
+                OnStatusIdChanged();
+            }
+        }
+        private global::System.Int32 _StatusId;
+        partial void OnStatusIdChanging(global::System.Int32 value);
+        partial void OnStatusIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> AgeGating_AlcoholContent
+        {
+            get
+            {
+                return _AgeGating_AlcoholContent;
+            }
+            set
+            {
+                OnAgeGating_AlcoholContentChanging(value);
+                ReportPropertyChanging("AgeGating_AlcoholContent");
+                _AgeGating_AlcoholContent = StructuralObject.SetValidValue(value, "AgeGating_AlcoholContent");
+                ReportPropertyChanged("AgeGating_AlcoholContent");
+                OnAgeGating_AlcoholContentChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _AgeGating_AlcoholContent;
+        partial void OnAgeGating_AlcoholContentChanging(Nullable<global::System.Boolean> value);
+        partial void OnAgeGating_AlcoholContentChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String AgeGating_ETag
+        {
+            get
+            {
+                return _AgeGating_ETag;
+            }
+            set
+            {
+                OnAgeGating_ETagChanging(value);
+                ReportPropertyChanging("AgeGating_ETag");
+                _AgeGating_ETag = StructuralObject.SetValidValue(value, true, "AgeGating_ETag");
+                ReportPropertyChanged("AgeGating_ETag");
+                OnAgeGating_ETagChanged();
+            }
+        }
+        private global::System.String _AgeGating_ETag;
+        partial void OnAgeGating_ETagChanging(global::System.String value);
+        partial void OnAgeGating_ETagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> AgeGating_Restricted
+        {
+            get
+            {
+                return _AgeGating_Restricted;
+            }
+            set
+            {
+                OnAgeGating_RestrictedChanging(value);
+                ReportPropertyChanging("AgeGating_Restricted");
+                _AgeGating_Restricted = StructuralObject.SetValidValue(value, "AgeGating_Restricted");
+                ReportPropertyChanged("AgeGating_Restricted");
+                OnAgeGating_RestrictedChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _AgeGating_Restricted;
+        partial void OnAgeGating_RestrictedChanging(Nullable<global::System.Boolean> value);
+        partial void OnAgeGating_RestrictedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String AgeGating_VideoGameRating
+        {
+            get
+            {
+                return _AgeGating_VideoGameRating;
+            }
+            set
+            {
+                OnAgeGating_VideoGameRatingChanging(value);
+                ReportPropertyChanging("AgeGating_VideoGameRating");
+                _AgeGating_VideoGameRating = StructuralObject.SetValidValue(value, true, "AgeGating_VideoGameRating");
+                ReportPropertyChanged("AgeGating_VideoGameRating");
+                OnAgeGating_VideoGameRatingChanged();
+            }
+        }
+        private global::System.String _AgeGating_VideoGameRating;
+        partial void OnAgeGating_VideoGameRatingChanging(global::System.String value);
+        partial void OnAgeGating_VideoGameRatingChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ContentDetails_Caption
+        {
+            get
+            {
+                return _ContentDetails_Caption;
+            }
+            set
+            {
+                OnContentDetails_CaptionChanging(value);
+                ReportPropertyChanging("ContentDetails_Caption");
+                _ContentDetails_Caption = StructuralObject.SetValidValue(value, true, "ContentDetails_Caption");
+                ReportPropertyChanged("ContentDetails_Caption");
+                OnContentDetails_CaptionChanged();
+            }
+        }
+        private global::System.String _ContentDetails_Caption;
+        partial void OnContentDetails_CaptionChanging(global::System.String value);
+        partial void OnContentDetails_CaptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ContentDetails_Definition
+        {
+            get
+            {
+                return _ContentDetails_Definition;
+            }
+            set
+            {
+                OnContentDetails_DefinitionChanging(value);
+                ReportPropertyChanging("ContentDetails_Definition");
+                _ContentDetails_Definition = StructuralObject.SetValidValue(value, true, "ContentDetails_Definition");
+                ReportPropertyChanged("ContentDetails_Definition");
+                OnContentDetails_DefinitionChanged();
+            }
+        }
+        private global::System.String _ContentDetails_Definition;
+        partial void OnContentDetails_DefinitionChanging(global::System.String value);
+        partial void OnContentDetails_DefinitionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ContentDetails_Dimension
+        {
+            get
+            {
+                return _ContentDetails_Dimension;
+            }
+            set
+            {
+                OnContentDetails_DimensionChanging(value);
+                ReportPropertyChanging("ContentDetails_Dimension");
+                _ContentDetails_Dimension = StructuralObject.SetValidValue(value, true, "ContentDetails_Dimension");
+                ReportPropertyChanged("ContentDetails_Dimension");
+                OnContentDetails_DimensionChanged();
+            }
+        }
+        private global::System.String _ContentDetails_Dimension;
+        partial void OnContentDetails_DimensionChanging(global::System.String value);
+        partial void OnContentDetails_DimensionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ContentDetails_Duration
+        {
+            get
+            {
+                return _ContentDetails_Duration;
+            }
+            set
+            {
+                OnContentDetails_DurationChanging(value);
+                ReportPropertyChanging("ContentDetails_Duration");
+                _ContentDetails_Duration = StructuralObject.SetValidValue(value, true, "ContentDetails_Duration");
+                ReportPropertyChanged("ContentDetails_Duration");
+                OnContentDetails_DurationChanged();
+            }
+        }
+        private global::System.String _ContentDetails_Duration;
+        partial void OnContentDetails_DurationChanging(global::System.String value);
+        partial void OnContentDetails_DurationChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ContentDetails_ETag
+        {
+            get
+            {
+                return _ContentDetails_ETag;
+            }
+            set
+            {
+                OnContentDetails_ETagChanging(value);
+                ReportPropertyChanging("ContentDetails_ETag");
+                _ContentDetails_ETag = StructuralObject.SetValidValue(value, true, "ContentDetails_ETag");
+                ReportPropertyChanged("ContentDetails_ETag");
+                OnContentDetails_ETagChanged();
+            }
+        }
+        private global::System.String _ContentDetails_ETag;
+        partial void OnContentDetails_ETagChanging(global::System.String value);
+        partial void OnContentDetails_ETagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> ContentDetails_HasCustomThumbnail
+        {
+            get
+            {
+                return _ContentDetails_HasCustomThumbnail;
+            }
+            set
+            {
+                OnContentDetails_HasCustomThumbnailChanging(value);
+                ReportPropertyChanging("ContentDetails_HasCustomThumbnail");
+                _ContentDetails_HasCustomThumbnail = StructuralObject.SetValidValue(value, "ContentDetails_HasCustomThumbnail");
+                ReportPropertyChanged("ContentDetails_HasCustomThumbnail");
+                OnContentDetails_HasCustomThumbnailChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _ContentDetails_HasCustomThumbnail;
+        partial void OnContentDetails_HasCustomThumbnailChanging(Nullable<global::System.Boolean> value);
+        partial void OnContentDetails_HasCustomThumbnailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> ContentDetails_LicensedContent
+        {
+            get
+            {
+                return _ContentDetails_LicensedContent;
+            }
+            set
+            {
+                OnContentDetails_LicensedContentChanging(value);
+                ReportPropertyChanging("ContentDetails_LicensedContent");
+                _ContentDetails_LicensedContent = StructuralObject.SetValidValue(value, "ContentDetails_LicensedContent");
+                ReportPropertyChanged("ContentDetails_LicensedContent");
+                OnContentDetails_LicensedContentChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _ContentDetails_LicensedContent;
+        partial void OnContentDetails_LicensedContentChanging(Nullable<global::System.Boolean> value);
+        partial void OnContentDetails_LicensedContentChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ContentDetails_Projection
+        {
+            get
+            {
+                return _ContentDetails_Projection;
+            }
+            set
+            {
+                OnContentDetails_ProjectionChanging(value);
+                ReportPropertyChanging("ContentDetails_Projection");
+                _ContentDetails_Projection = StructuralObject.SetValidValue(value, true, "ContentDetails_Projection");
+                ReportPropertyChanged("ContentDetails_Projection");
+                OnContentDetails_ProjectionChanged();
+            }
+        }
+        private global::System.String _ContentDetails_Projection;
+        partial void OnContentDetails_ProjectionChanging(global::System.String value);
+        partial void OnContentDetails_ProjectionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ContentDetails_RegionRestriction_ETag
+        {
+            get
+            {
+                return _ContentDetails_RegionRestriction_ETag;
+            }
+            set
+            {
+                OnContentDetails_RegionRestriction_ETagChanging(value);
+                ReportPropertyChanging("ContentDetails_RegionRestriction_ETag");
+                _ContentDetails_RegionRestriction_ETag = StructuralObject.SetValidValue(value, true, "ContentDetails_RegionRestriction_ETag");
+                ReportPropertyChanged("ContentDetails_RegionRestriction_ETag");
+                OnContentDetails_RegionRestriction_ETagChanged();
+            }
+        }
+        private global::System.String _ContentDetails_RegionRestriction_ETag;
+        partial void OnContentDetails_RegionRestriction_ETagChanging(global::System.String value);
+        partial void OnContentDetails_RegionRestriction_ETagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> MonetizationDetails_AccessPolicy_Allowed
+        {
+            get
+            {
+                return _MonetizationDetails_AccessPolicy_Allowed;
+            }
+            set
+            {
+                OnMonetizationDetails_AccessPolicy_AllowedChanging(value);
+                ReportPropertyChanging("MonetizationDetails_AccessPolicy_Allowed");
+                _MonetizationDetails_AccessPolicy_Allowed = StructuralObject.SetValidValue(value, "MonetizationDetails_AccessPolicy_Allowed");
+                ReportPropertyChanged("MonetizationDetails_AccessPolicy_Allowed");
+                OnMonetizationDetails_AccessPolicy_AllowedChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _MonetizationDetails_AccessPolicy_Allowed;
+        partial void OnMonetizationDetails_AccessPolicy_AllowedChanging(Nullable<global::System.Boolean> value);
+        partial void OnMonetizationDetails_AccessPolicy_AllowedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String TopicDetails_ETag
+        {
+            get
+            {
+                return _TopicDetails_ETag;
+            }
+            set
+            {
+                OnTopicDetails_ETagChanging(value);
+                ReportPropertyChanging("TopicDetails_ETag");
+                _TopicDetails_ETag = StructuralObject.SetValidValue(value, true, "TopicDetails_ETag");
+                ReportPropertyChanged("TopicDetails_ETag");
+                OnTopicDetails_ETagChanged();
+            }
+        }
+        private global::System.String _TopicDetails_ETag;
+        partial void OnTopicDetails_ETagChanging(global::System.String value);
+        partial void OnTopicDetails_ETagChanged();
 
         #endregion
 
@@ -5778,16 +7351,60 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_T__Chann__4E88ABD4", "Youtube_Channel")]
-        public Youtube_Channel Youtube_Channel
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_R__Video__5CD6CB2B", "Youtube_RegionRestriction")]
+        public EntityCollection<Youtube_RegionRestriction> Youtube_RegionRestriction
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_T__Chann__4E88ABD4", "Youtube_Channel").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_RegionRestriction>("YoutubeJournalistModel.FK__Youtube_R__Video__5CD6CB2B", "Youtube_RegionRestriction");
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_T__Chann__4E88ABD4", "Youtube_Channel").Value = value;
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_RegionRestriction>("YoutubeJournalistModel.FK__Youtube_R__Video__5CD6CB2B", "Youtube_RegionRestriction", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_T__Video__5FB337D6", "Youtube_Tag")]
+        public EntityCollection<Youtube_Tag> Youtube_Tag
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Tag>("YoutubeJournalistModel.FK__Youtube_T__Video__5FB337D6", "Youtube_Tag");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Tag>("YoutubeJournalistModel.FK__Youtube_T__Video__5FB337D6", "Youtube_Tag", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Snipp__5441852A", "Youtube_VideoSnippet")]
+        public Youtube_VideoSnippet Youtube_VideoSnippet
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoSnippet>("YoutubeJournalistModel.FK__Youtube_V__Snipp__5441852A", "Youtube_VideoSnippet").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoSnippet>("YoutubeJournalistModel.FK__Youtube_V__Snipp__5441852A", "Youtube_VideoSnippet").Value = value;
             }
         }
         /// <summary>
@@ -5795,17 +7412,1249 @@ namespace YoutubeJournalist.Core
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Youtube_Channel> Youtube_ChannelReference
+        public EntityReference<Youtube_VideoSnippet> Youtube_VideoSnippetReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_T__Chann__4E88ABD4", "Youtube_Channel");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoSnippet>("YoutubeJournalistModel.FK__Youtube_V__Snipp__5441852A", "Youtube_VideoSnippet");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_T__Chann__4E88ABD4", "Youtube_Channel", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_VideoSnippet>("YoutubeJournalistModel.FK__Youtube_V__Snipp__5441852A", "Youtube_VideoSnippet", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Stati__5535A963", "Youtube_VideoStatistics")]
+        public Youtube_VideoStatistics Youtube_VideoStatistics
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoStatistics>("YoutubeJournalistModel.FK__Youtube_V__Stati__5535A963", "Youtube_VideoStatistics").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoStatistics>("YoutubeJournalistModel.FK__Youtube_V__Stati__5535A963", "Youtube_VideoStatistics").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Youtube_VideoStatistics> Youtube_VideoStatisticsReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoStatistics>("YoutubeJournalistModel.FK__Youtube_V__Stati__5535A963", "Youtube_VideoStatistics");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_VideoStatistics>("YoutubeJournalistModel.FK__Youtube_V__Stati__5535A963", "Youtube_VideoStatistics", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Statu__5629CD9C", "Youtube_VideoStatus")]
+        public Youtube_VideoStatus Youtube_VideoStatus
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoStatus>("YoutubeJournalistModel.FK__Youtube_V__Statu__5629CD9C", "Youtube_VideoStatus").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoStatus>("YoutubeJournalistModel.FK__Youtube_V__Statu__5629CD9C", "Youtube_VideoStatus").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Youtube_VideoStatus> Youtube_VideoStatusReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoStatus>("YoutubeJournalistModel.FK__Youtube_V__Statu__5629CD9C", "Youtube_VideoStatus");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_VideoStatus>("YoutubeJournalistModel.FK__Youtube_V__Statu__5629CD9C", "Youtube_VideoStatus", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="YoutubeJournalistModel", Name="Youtube_VideoSnippet")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Youtube_VideoSnippet : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Youtube_VideoSnippet object.
+        /// </summary>
+        /// <param name="our_Id">Initial value of the Our_Id property.</param>
+        /// <param name="thumbnailDetailsId">Initial value of the ThumbnailDetailsId property.</param>
+        public static Youtube_VideoSnippet CreateYoutube_VideoSnippet(global::System.Int32 our_Id, global::System.Int32 thumbnailDetailsId)
+        {
+            Youtube_VideoSnippet youtube_VideoSnippet = new Youtube_VideoSnippet();
+            youtube_VideoSnippet.Our_Id = our_Id;
+            youtube_VideoSnippet.ThumbnailDetailsId = thumbnailDetailsId;
+            return youtube_VideoSnippet;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Our_Id
+        {
+            get
+            {
+                return _Our_Id;
+            }
+            set
+            {
+                if (_Our_Id != value)
+                {
+                    OnOur_IdChanging(value);
+                    ReportPropertyChanging("Our_Id");
+                    _Our_Id = StructuralObject.SetValidValue(value, "Our_Id");
+                    ReportPropertyChanged("Our_Id");
+                    OnOur_IdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Our_Id;
+        partial void OnOur_IdChanging(global::System.Int32 value);
+        partial void OnOur_IdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String CategoryId
+        {
+            get
+            {
+                return _CategoryId;
+            }
+            set
+            {
+                OnCategoryIdChanging(value);
+                ReportPropertyChanging("CategoryId");
+                _CategoryId = StructuralObject.SetValidValue(value, true, "CategoryId");
+                ReportPropertyChanged("CategoryId");
+                OnCategoryIdChanged();
+            }
+        }
+        private global::System.String _CategoryId;
+        partial void OnCategoryIdChanging(global::System.String value);
+        partial void OnCategoryIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ChannelId
+        {
+            get
+            {
+                return _ChannelId;
+            }
+            set
+            {
+                OnChannelIdChanging(value);
+                ReportPropertyChanging("ChannelId");
+                _ChannelId = StructuralObject.SetValidValue(value, true, "ChannelId");
+                ReportPropertyChanged("ChannelId");
+                OnChannelIdChanged();
+            }
+        }
+        private global::System.String _ChannelId;
+        partial void OnChannelIdChanging(global::System.String value);
+        partial void OnChannelIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ChannelTitle
+        {
+            get
+            {
+                return _ChannelTitle;
+            }
+            set
+            {
+                OnChannelTitleChanging(value);
+                ReportPropertyChanging("ChannelTitle");
+                _ChannelTitle = StructuralObject.SetValidValue(value, true, "ChannelTitle");
+                ReportPropertyChanged("ChannelTitle");
+                OnChannelTitleChanged();
+            }
+        }
+        private global::System.String _ChannelTitle;
+        partial void OnChannelTitleChanging(global::System.String value);
+        partial void OnChannelTitleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String DefaultAudioLanguage
+        {
+            get
+            {
+                return _DefaultAudioLanguage;
+            }
+            set
+            {
+                OnDefaultAudioLanguageChanging(value);
+                ReportPropertyChanging("DefaultAudioLanguage");
+                _DefaultAudioLanguage = StructuralObject.SetValidValue(value, true, "DefaultAudioLanguage");
+                ReportPropertyChanged("DefaultAudioLanguage");
+                OnDefaultAudioLanguageChanged();
+            }
+        }
+        private global::System.String _DefaultAudioLanguage;
+        partial void OnDefaultAudioLanguageChanging(global::System.String value);
+        partial void OnDefaultAudioLanguageChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String DefaultLanguage
+        {
+            get
+            {
+                return _DefaultLanguage;
+            }
+            set
+            {
+                OnDefaultLanguageChanging(value);
+                ReportPropertyChanging("DefaultLanguage");
+                _DefaultLanguage = StructuralObject.SetValidValue(value, true, "DefaultLanguage");
+                ReportPropertyChanged("DefaultLanguage");
+                OnDefaultLanguageChanged();
+            }
+        }
+        private global::System.String _DefaultLanguage;
+        partial void OnDefaultLanguageChanging(global::System.String value);
+        partial void OnDefaultLanguageChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, true, "Description");
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
+            }
+        }
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ETag
+        {
+            get
+            {
+                return _ETag;
+            }
+            set
+            {
+                OnETagChanging(value);
+                ReportPropertyChanging("ETag");
+                _ETag = StructuralObject.SetValidValue(value, true, "ETag");
+                ReportPropertyChanged("ETag");
+                OnETagChanged();
+            }
+        }
+        private global::System.String _ETag;
+        partial void OnETagChanging(global::System.String value);
+        partial void OnETagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String LiveBroadcastContent
+        {
+            get
+            {
+                return _LiveBroadcastContent;
+            }
+            set
+            {
+                OnLiveBroadcastContentChanging(value);
+                ReportPropertyChanging("LiveBroadcastContent");
+                _LiveBroadcastContent = StructuralObject.SetValidValue(value, true, "LiveBroadcastContent");
+                ReportPropertyChanged("LiveBroadcastContent");
+                OnLiveBroadcastContentChanged();
+            }
+        }
+        private global::System.String _LiveBroadcastContent;
+        partial void OnLiveBroadcastContentChanging(global::System.String value);
+        partial void OnLiveBroadcastContentChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Localized_Description
+        {
+            get
+            {
+                return _Localized_Description;
+            }
+            set
+            {
+                OnLocalized_DescriptionChanging(value);
+                ReportPropertyChanging("Localized_Description");
+                _Localized_Description = StructuralObject.SetValidValue(value, true, "Localized_Description");
+                ReportPropertyChanged("Localized_Description");
+                OnLocalized_DescriptionChanged();
+            }
+        }
+        private global::System.String _Localized_Description;
+        partial void OnLocalized_DescriptionChanging(global::System.String value);
+        partial void OnLocalized_DescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Localized_ETag
+        {
+            get
+            {
+                return _Localized_ETag;
+            }
+            set
+            {
+                OnLocalized_ETagChanging(value);
+                ReportPropertyChanging("Localized_ETag");
+                _Localized_ETag = StructuralObject.SetValidValue(value, true, "Localized_ETag");
+                ReportPropertyChanged("Localized_ETag");
+                OnLocalized_ETagChanged();
+            }
+        }
+        private global::System.String _Localized_ETag;
+        partial void OnLocalized_ETagChanging(global::System.String value);
+        partial void OnLocalized_ETagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Localized_Title
+        {
+            get
+            {
+                return _Localized_Title;
+            }
+            set
+            {
+                OnLocalized_TitleChanging(value);
+                ReportPropertyChanging("Localized_Title");
+                _Localized_Title = StructuralObject.SetValidValue(value, true, "Localized_Title");
+                ReportPropertyChanged("Localized_Title");
+                OnLocalized_TitleChanged();
+            }
+        }
+        private global::System.String _Localized_Title;
+        partial void OnLocalized_TitleChanging(global::System.String value);
+        partial void OnLocalized_TitleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> PublishedAt
+        {
+            get
+            {
+                return _PublishedAt;
+            }
+            set
+            {
+                OnPublishedAtChanging(value);
+                ReportPropertyChanging("PublishedAt");
+                _PublishedAt = StructuralObject.SetValidValue(value, "PublishedAt");
+                ReportPropertyChanged("PublishedAt");
+                OnPublishedAtChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _PublishedAt;
+        partial void OnPublishedAtChanging(Nullable<global::System.DateTime> value);
+        partial void OnPublishedAtChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTimeOffset> PublishedAtDateTimeOffset
+        {
+            get
+            {
+                return _PublishedAtDateTimeOffset;
+            }
+            set
+            {
+                OnPublishedAtDateTimeOffsetChanging(value);
+                ReportPropertyChanging("PublishedAtDateTimeOffset");
+                _PublishedAtDateTimeOffset = StructuralObject.SetValidValue(value, "PublishedAtDateTimeOffset");
+                ReportPropertyChanged("PublishedAtDateTimeOffset");
+                OnPublishedAtDateTimeOffsetChanged();
+            }
+        }
+        private Nullable<global::System.DateTimeOffset> _PublishedAtDateTimeOffset;
+        partial void OnPublishedAtDateTimeOffsetChanging(Nullable<global::System.DateTimeOffset> value);
+        partial void OnPublishedAtDateTimeOffsetChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PublishedAtRaw
+        {
+            get
+            {
+                return _PublishedAtRaw;
+            }
+            set
+            {
+                OnPublishedAtRawChanging(value);
+                ReportPropertyChanging("PublishedAtRaw");
+                _PublishedAtRaw = StructuralObject.SetValidValue(value, true, "PublishedAtRaw");
+                ReportPropertyChanged("PublishedAtRaw");
+                OnPublishedAtRawChanged();
+            }
+        }
+        private global::System.String _PublishedAtRaw;
+        partial void OnPublishedAtRawChanging(global::System.String value);
+        partial void OnPublishedAtRawChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ThumbnailDetailsId
+        {
+            get
+            {
+                return _ThumbnailDetailsId;
+            }
+            set
+            {
+                OnThumbnailDetailsIdChanging(value);
+                ReportPropertyChanging("ThumbnailDetailsId");
+                _ThumbnailDetailsId = StructuralObject.SetValidValue(value, "ThumbnailDetailsId");
+                ReportPropertyChanged("ThumbnailDetailsId");
+                OnThumbnailDetailsIdChanged();
+            }
+        }
+        private global::System.Int32 _ThumbnailDetailsId;
+        partial void OnThumbnailDetailsIdChanging(global::System.Int32 value);
+        partial void OnThumbnailDetailsIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Title
+        {
+            get
+            {
+                return _Title;
+            }
+            set
+            {
+                OnTitleChanging(value);
+                ReportPropertyChanging("Title");
+                _Title = StructuralObject.SetValidValue(value, true, "Title");
+                ReportPropertyChanged("Title");
+                OnTitleChanged();
+            }
+        }
+        private global::System.String _Title;
+        partial void OnTitleChanging(global::System.String value);
+        partial void OnTitleChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Thumb__5165187F", "Youtube_ThumbnailDetails")]
+        public Youtube_ThumbnailDetails Youtube_ThumbnailDetails
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_V__Thumb__5165187F", "Youtube_ThumbnailDetails").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_V__Thumb__5165187F", "Youtube_ThumbnailDetails").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Youtube_ThumbnailDetails> Youtube_ThumbnailDetailsReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_V__Thumb__5165187F", "Youtube_ThumbnailDetails");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_V__Thumb__5165187F", "Youtube_ThumbnailDetails", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Snipp__5441852A", "Youtube_Video")]
+        public EntityCollection<Youtube_Video> Youtube_Video
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_V__Snipp__5441852A", "Youtube_Video");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_V__Snipp__5441852A", "Youtube_Video", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="YoutubeJournalistModel", Name="Youtube_VideoStatistics")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Youtube_VideoStatistics : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Youtube_VideoStatistics object.
+        /// </summary>
+        /// <param name="our_Id">Initial value of the Our_Id property.</param>
+        /// <param name="favoriteCount">Initial value of the FavoriteCount property.</param>
+        /// <param name="likeCount">Initial value of the LikeCount property.</param>
+        /// <param name="viewCount">Initial value of the ViewCount property.</param>
+        public static Youtube_VideoStatistics CreateYoutube_VideoStatistics(global::System.Int32 our_Id, global::System.Int64 favoriteCount, global::System.Int64 likeCount, global::System.Int64 viewCount)
+        {
+            Youtube_VideoStatistics youtube_VideoStatistics = new Youtube_VideoStatistics();
+            youtube_VideoStatistics.Our_Id = our_Id;
+            youtube_VideoStatistics.FavoriteCount = favoriteCount;
+            youtube_VideoStatistics.LikeCount = likeCount;
+            youtube_VideoStatistics.ViewCount = viewCount;
+            return youtube_VideoStatistics;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Our_Id
+        {
+            get
+            {
+                return _Our_Id;
+            }
+            set
+            {
+                if (_Our_Id != value)
+                {
+                    OnOur_IdChanging(value);
+                    ReportPropertyChanging("Our_Id");
+                    _Our_Id = StructuralObject.SetValidValue(value, "Our_Id");
+                    ReportPropertyChanged("Our_Id");
+                    OnOur_IdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Our_Id;
+        partial void OnOur_IdChanging(global::System.Int32 value);
+        partial void OnOur_IdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ETag
+        {
+            get
+            {
+                return _ETag;
+            }
+            set
+            {
+                OnETagChanging(value);
+                ReportPropertyChanging("ETag");
+                _ETag = StructuralObject.SetValidValue(value, true, "ETag");
+                ReportPropertyChanged("ETag");
+                OnETagChanged();
+            }
+        }
+        private global::System.String _ETag;
+        partial void OnETagChanging(global::System.String value);
+        partial void OnETagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> CommentCount
+        {
+            get
+            {
+                return _CommentCount;
+            }
+            set
+            {
+                OnCommentCountChanging(value);
+                ReportPropertyChanging("CommentCount");
+                _CommentCount = StructuralObject.SetValidValue(value, "CommentCount");
+                ReportPropertyChanged("CommentCount");
+                OnCommentCountChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _CommentCount;
+        partial void OnCommentCountChanging(Nullable<global::System.Int64> value);
+        partial void OnCommentCountChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> DislikeCount
+        {
+            get
+            {
+                return _DislikeCount;
+            }
+            set
+            {
+                OnDislikeCountChanging(value);
+                ReportPropertyChanging("DislikeCount");
+                _DislikeCount = StructuralObject.SetValidValue(value, "DislikeCount");
+                ReportPropertyChanged("DislikeCount");
+                OnDislikeCountChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _DislikeCount;
+        partial void OnDislikeCountChanging(Nullable<global::System.Int64> value);
+        partial void OnDislikeCountChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 FavoriteCount
+        {
+            get
+            {
+                return _FavoriteCount;
+            }
+            set
+            {
+                OnFavoriteCountChanging(value);
+                ReportPropertyChanging("FavoriteCount");
+                _FavoriteCount = StructuralObject.SetValidValue(value, "FavoriteCount");
+                ReportPropertyChanged("FavoriteCount");
+                OnFavoriteCountChanged();
+            }
+        }
+        private global::System.Int64 _FavoriteCount;
+        partial void OnFavoriteCountChanging(global::System.Int64 value);
+        partial void OnFavoriteCountChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 LikeCount
+        {
+            get
+            {
+                return _LikeCount;
+            }
+            set
+            {
+                OnLikeCountChanging(value);
+                ReportPropertyChanging("LikeCount");
+                _LikeCount = StructuralObject.SetValidValue(value, "LikeCount");
+                ReportPropertyChanged("LikeCount");
+                OnLikeCountChanged();
+            }
+        }
+        private global::System.Int64 _LikeCount;
+        partial void OnLikeCountChanging(global::System.Int64 value);
+        partial void OnLikeCountChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 ViewCount
+        {
+            get
+            {
+                return _ViewCount;
+            }
+            set
+            {
+                OnViewCountChanging(value);
+                ReportPropertyChanging("ViewCount");
+                _ViewCount = StructuralObject.SetValidValue(value, "ViewCount");
+                ReportPropertyChanged("ViewCount");
+                OnViewCountChanged();
+            }
+        }
+        private global::System.Int64 _ViewCount;
+        partial void OnViewCountChanging(global::System.Int64 value);
+        partial void OnViewCountChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Stati__5535A963", "Youtube_Video")]
+        public EntityCollection<Youtube_Video> Youtube_Video
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_V__Stati__5535A963", "Youtube_Video");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_V__Stati__5535A963", "Youtube_Video", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="YoutubeJournalistModel", Name="Youtube_VideoStatus")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Youtube_VideoStatus : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Youtube_VideoStatus object.
+        /// </summary>
+        /// <param name="our_Id">Initial value of the Our_Id property.</param>
+        public static Youtube_VideoStatus CreateYoutube_VideoStatus(global::System.Int32 our_Id)
+        {
+            Youtube_VideoStatus youtube_VideoStatus = new Youtube_VideoStatus();
+            youtube_VideoStatus.Our_Id = our_Id;
+            return youtube_VideoStatus;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Our_Id
+        {
+            get
+            {
+                return _Our_Id;
+            }
+            set
+            {
+                if (_Our_Id != value)
+                {
+                    OnOur_IdChanging(value);
+                    ReportPropertyChanging("Our_Id");
+                    _Our_Id = StructuralObject.SetValidValue(value, "Our_Id");
+                    ReportPropertyChanged("Our_Id");
+                    OnOur_IdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Our_Id;
+        partial void OnOur_IdChanging(global::System.Int32 value);
+        partial void OnOur_IdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ETag
+        {
+            get
+            {
+                return _ETag;
+            }
+            set
+            {
+                OnETagChanging(value);
+                ReportPropertyChanging("ETag");
+                _ETag = StructuralObject.SetValidValue(value, true, "ETag");
+                ReportPropertyChanged("ETag");
+                OnETagChanged();
+            }
+        }
+        private global::System.String _ETag;
+        partial void OnETagChanging(global::System.String value);
+        partial void OnETagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> Embeddable
+        {
+            get
+            {
+                return _Embeddable;
+            }
+            set
+            {
+                OnEmbeddableChanging(value);
+                ReportPropertyChanging("Embeddable");
+                _Embeddable = StructuralObject.SetValidValue(value, "Embeddable");
+                ReportPropertyChanged("Embeddable");
+                OnEmbeddableChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _Embeddable;
+        partial void OnEmbeddableChanging(Nullable<global::System.Boolean> value);
+        partial void OnEmbeddableChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String FailureReason
+        {
+            get
+            {
+                return _FailureReason;
+            }
+            set
+            {
+                OnFailureReasonChanging(value);
+                ReportPropertyChanging("FailureReason");
+                _FailureReason = StructuralObject.SetValidValue(value, true, "FailureReason");
+                ReportPropertyChanged("FailureReason");
+                OnFailureReasonChanged();
+            }
+        }
+        private global::System.String _FailureReason;
+        partial void OnFailureReasonChanging(global::System.String value);
+        partial void OnFailureReasonChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String License
+        {
+            get
+            {
+                return _License;
+            }
+            set
+            {
+                OnLicenseChanging(value);
+                ReportPropertyChanging("License");
+                _License = StructuralObject.SetValidValue(value, true, "License");
+                ReportPropertyChanged("License");
+                OnLicenseChanged();
+            }
+        }
+        private global::System.String _License;
+        partial void OnLicenseChanging(global::System.String value);
+        partial void OnLicenseChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> MadeForKids
+        {
+            get
+            {
+                return _MadeForKids;
+            }
+            set
+            {
+                OnMadeForKidsChanging(value);
+                ReportPropertyChanging("MadeForKids");
+                _MadeForKids = StructuralObject.SetValidValue(value, "MadeForKids");
+                ReportPropertyChanged("MadeForKids");
+                OnMadeForKidsChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _MadeForKids;
+        partial void OnMadeForKidsChanging(Nullable<global::System.Boolean> value);
+        partial void OnMadeForKidsChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PrivacyStatus
+        {
+            get
+            {
+                return _PrivacyStatus;
+            }
+            set
+            {
+                OnPrivacyStatusChanging(value);
+                ReportPropertyChanging("PrivacyStatus");
+                _PrivacyStatus = StructuralObject.SetValidValue(value, true, "PrivacyStatus");
+                ReportPropertyChanged("PrivacyStatus");
+                OnPrivacyStatusChanged();
+            }
+        }
+        private global::System.String _PrivacyStatus;
+        partial void OnPrivacyStatusChanging(global::System.String value);
+        partial void OnPrivacyStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> PublicStatsViewable
+        {
+            get
+            {
+                return _PublicStatsViewable;
+            }
+            set
+            {
+                OnPublicStatsViewableChanging(value);
+                ReportPropertyChanging("PublicStatsViewable");
+                _PublicStatsViewable = StructuralObject.SetValidValue(value, "PublicStatsViewable");
+                ReportPropertyChanged("PublicStatsViewable");
+                OnPublicStatsViewableChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _PublicStatsViewable;
+        partial void OnPublicStatsViewableChanging(Nullable<global::System.Boolean> value);
+        partial void OnPublicStatsViewableChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> PublishAt
+        {
+            get
+            {
+                return _PublishAt;
+            }
+            set
+            {
+                OnPublishAtChanging(value);
+                ReportPropertyChanging("PublishAt");
+                _PublishAt = StructuralObject.SetValidValue(value, "PublishAt");
+                ReportPropertyChanged("PublishAt");
+                OnPublishAtChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _PublishAt;
+        partial void OnPublishAtChanging(Nullable<global::System.DateTime> value);
+        partial void OnPublishAtChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTimeOffset> PublishAtDateTimeOffset
+        {
+            get
+            {
+                return _PublishAtDateTimeOffset;
+            }
+            set
+            {
+                OnPublishAtDateTimeOffsetChanging(value);
+                ReportPropertyChanging("PublishAtDateTimeOffset");
+                _PublishAtDateTimeOffset = StructuralObject.SetValidValue(value, "PublishAtDateTimeOffset");
+                ReportPropertyChanged("PublishAtDateTimeOffset");
+                OnPublishAtDateTimeOffsetChanged();
+            }
+        }
+        private Nullable<global::System.DateTimeOffset> _PublishAtDateTimeOffset;
+        partial void OnPublishAtDateTimeOffsetChanging(Nullable<global::System.DateTimeOffset> value);
+        partial void OnPublishAtDateTimeOffsetChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PublishAtRaw
+        {
+            get
+            {
+                return _PublishAtRaw;
+            }
+            set
+            {
+                OnPublishAtRawChanging(value);
+                ReportPropertyChanging("PublishAtRaw");
+                _PublishAtRaw = StructuralObject.SetValidValue(value, true, "PublishAtRaw");
+                ReportPropertyChanged("PublishAtRaw");
+                OnPublishAtRawChanged();
+            }
+        }
+        private global::System.String _PublishAtRaw;
+        partial void OnPublishAtRawChanging(global::System.String value);
+        partial void OnPublishAtRawChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String RejectionReason
+        {
+            get
+            {
+                return _RejectionReason;
+            }
+            set
+            {
+                OnRejectionReasonChanging(value);
+                ReportPropertyChanging("RejectionReason");
+                _RejectionReason = StructuralObject.SetValidValue(value, true, "RejectionReason");
+                ReportPropertyChanged("RejectionReason");
+                OnRejectionReasonChanged();
+            }
+        }
+        private global::System.String _RejectionReason;
+        partial void OnRejectionReasonChanging(global::System.String value);
+        partial void OnRejectionReasonChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> SelfDeclaredMadeForKids
+        {
+            get
+            {
+                return _SelfDeclaredMadeForKids;
+            }
+            set
+            {
+                OnSelfDeclaredMadeForKidsChanging(value);
+                ReportPropertyChanging("SelfDeclaredMadeForKids");
+                _SelfDeclaredMadeForKids = StructuralObject.SetValidValue(value, "SelfDeclaredMadeForKids");
+                ReportPropertyChanged("SelfDeclaredMadeForKids");
+                OnSelfDeclaredMadeForKidsChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _SelfDeclaredMadeForKids;
+        partial void OnSelfDeclaredMadeForKidsChanging(Nullable<global::System.Boolean> value);
+        partial void OnSelfDeclaredMadeForKidsChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String UploadStatus
+        {
+            get
+            {
+                return _UploadStatus;
+            }
+            set
+            {
+                OnUploadStatusChanging(value);
+                ReportPropertyChanging("UploadStatus");
+                _UploadStatus = StructuralObject.SetValidValue(value, true, "UploadStatus");
+                ReportPropertyChanged("UploadStatus");
+                OnUploadStatusChanged();
+            }
+        }
+        private global::System.String _UploadStatus;
+        partial void OnUploadStatusChanging(global::System.String value);
+        partial void OnUploadStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, true, "Description");
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
+            }
+        }
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Statu__5629CD9C", "Youtube_Video")]
+        public EntityCollection<Youtube_Video> Youtube_Video
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_V__Statu__5629CD9C", "Youtube_Video");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_V__Statu__5629CD9C", "Youtube_Video", value);
                 }
             }
         }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 using Google.Apis.Services;
 
@@ -34,11 +32,21 @@ namespace YoutubeJournalist.Core.WebAPI
         YoutubeServiceResponse<Youtube_SearchResult> SearchChannels(string searchString, string pageToken = null);
 
         /// <summary>
-        /// Searches for a user's channels - relies heavily on permissions for whoever is
-        /// logged in, what they can see from their permissions, and so on. Also, returns
-        /// user's channel as part of search results.
+        /// Searches for channels using resource list feature of youtube v3
         /// </summary>
         /// <exception cref="Exception">Service error</exception>
-        YoutubeServiceResponse<Youtube_Channel> SearchUserChannels(string userHandle, string pageToken = null);
+        YoutubeServiceResponse<Youtube_Video, Youtube_TopicId, Youtube_TopicCategory> SearchWithFilterVideos(string categoryId, string pageToken = null);
+
+        ///// <summary>
+        ///// Searches for channels using resource list feature of youtube v3
+        ///// </summary>
+        ///// <exception cref="Exception">Service error</exception>
+        //YoutubeServiceResponse<Youtube_Channel> SearchWithFilterPlaylists(string categoryId, string pageToken = null);
+
+        /// <summary>
+        /// Searches for channels using resource list feature of youtube v3
+        /// </summary>
+        /// <exception cref="Exception">Service error</exception>
+        YoutubeServiceResponse<Youtube_Channel, Youtube_TopicId, Youtube_TopicCategory> SearchWithFilterChannels(string categoryId, string pageToken = null);
     }
 }
