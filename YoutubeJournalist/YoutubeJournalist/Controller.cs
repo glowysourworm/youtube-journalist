@@ -74,6 +74,31 @@ namespace YoutubeJournalist
         }
 
         /// <summary>
+        /// Returns local database search results, from past searches.
+        /// </summary>
+        public IEnumerable<SearchResultViewModel> GetSearchResults(YoutubeServiceRequest request)
+        {
+            try
+            {
+                // Query Youtube
+                var viewModels = _dbContext.Youtube_SearchResult
+                                           .Actualize()             // Loading entire set at once!
+                                           .Select(result =>
+                {
+                    // Create new view model
+                    return CreateSearchViewModel(result);
+
+                }).Actualize();
+
+                return viewModels;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
         /// Get will apply service request to look for specific channel, video, or playlist entities,
         /// pulling over extended detail about the entity.
         /// </summary>

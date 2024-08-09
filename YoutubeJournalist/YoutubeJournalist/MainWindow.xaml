@@ -6,9 +6,14 @@
         xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:dock="http://schemas.xceed.com/wpf/xaml/avalondock"
         xmlns:local="clr-namespace:YoutubeJournalist"
+        xmlns:converter="clr-namespace:YoutubeJournalist.Converter"
         xmlns:view="clr-namespace:YoutubeJournalist.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Youtube Journalist" Height="450" Width="800">
+    <Window.Resources>
+        <converter:BoolVisibilityCollapseConverter x:Key="BoolVisibilityCollapseConverter" />
+        <converter:BoolVisibilityCollapseInverseConverter x:Key="BoolVisibilityCollapseInverseConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -73,14 +78,25 @@
                                 <view:SearchResultView SearchResultDoubleClick="OnSearchResultDoubleClick" />
                                 
                                 <!-- Search Buttons -->
-                                <Button x:Name="SearchButton" 
-                                        Click="SearchButton_Click" 
-                                        Content="Search" 
-                                        Padding="10" 
-                                        Margin="5" 
-                                        FontSize="14" 
-                                        Grid.Row="1" 
-                                        HorizontalAlignment="Right" />
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1">
+                                    
+                                    <Button x:Name="SearchButton" 
+                                            Visibility="{Binding SearchParameters.YoutubeAPIEnable, Converter={StaticResource BoolVisibilityCollapseConverter}}"
+                                            Click="SearchButton_Click" 
+                                            Content="Search" 
+                                            Padding="10" 
+                                            Margin="5" 
+                                            FontSize="14" />
+                                    
+                                    <Button x:Name="GetButton" 
+                                            Visibility="{Binding SearchParameters.YoutubeAPIEnable, Converter={StaticResource BoolVisibilityCollapseInverseConverter}}"
+                                            Click="GetButton_Click" 
+                                            Content="Search (Local)" 
+                                            Padding="10" 
+                                            Margin="5" 
+                                            FontSize="14" /> 
+                                    
+                                </StackPanel>
                             </Grid>
                         </dock:LayoutAnchorable>
                         

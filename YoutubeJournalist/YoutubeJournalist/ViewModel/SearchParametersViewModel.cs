@@ -23,7 +23,7 @@ namespace YoutubeJournalist.ViewModel
         private OrderEnum? _filterSortOrder;
 
 		[Category("Youtube API")]
-        [DisplayName("Enable")]
+        [DisplayName("Youtube Enable (Uses Quota!)")]
         [Description("This will enable the Youtube API V3, making draws from your account.")]
 		public bool YoutubeAPIEnable
 		{
@@ -88,7 +88,7 @@ namespace YoutubeJournalist.ViewModel
 
 		public SearchParametersViewModel()
         {
-			this.YoutubeAPIEnable = true;
+			this.YoutubeAPIEnable = false;
 			this.YoutubeBasicSearch = true;
 			this.FilterSearchType = SearchType.Video;
         }

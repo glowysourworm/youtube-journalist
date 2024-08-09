@@ -38,6 +38,17 @@ namespace YoutubeJournalist.ViewModel
             this.SearchParameters = searchParameters;
             this.SearchResults = new ObservableCollection<SearchResultViewModel>();
             this.OutputLog = new ObservableCollection<LogViewModel>();
+
+            this.SearchParameters.PropertyChanged += SearchParameters_PropertyChanged;
+        }
+
+        private void SearchParameters_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            // Clear out search results when we switch between youtube / local
+            if (e.PropertyName == nameof(this.SearchParameters.YoutubeAPIEnable))
+            {
+                this.SearchResults.Clear();
+            }
         }
     }
 }

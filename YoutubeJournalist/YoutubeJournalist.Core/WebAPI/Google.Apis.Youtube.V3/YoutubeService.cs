@@ -24,8 +24,7 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
         /// Video part names:  id, kind, etag, ageGating, contentDetails, monetizationDetails, topicDetails,
         ///                    snippet, statistics, status
         /// </summary>
-        protected const string VideoParts = @"id, kind, etag, ageGating, contentDetails, monetizationDetails, topicDetails,
-                                              snippet, statistics, status";
+        protected const string VideoParts = @"id, ageGating, contentDetails, monetizationDetails, topicDetails,snippet, statistics, status";
 
         /// <summary>
         /// Channel part names:  auditDetails, brandingSettings, contentDetails, contentOwnerDetails,
@@ -61,9 +60,7 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
             },
             new string[]
             {
-                YouTubeService.ScopeConstants.Youtube,
-                YouTubeService.ScopeConstants.YoutubeReadonly,
-                YouTubeService.ScopeConstants.YoutubeForceSsl
+                YouTubeService.ScopeConstants.YoutubeReadonly
             },
             "rdolan.music.2@gmail.com",
             CancellationToken.None);
@@ -72,7 +69,7 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
             {
                 HttpClientInitializer = credentials.Result,                
                 ApiKey = apiKey,
-                ApplicationName = "Channels"                
+                ApplicationName = "YoutubeJournalist"
             });
         }
 
