@@ -14,3 +14,5 @@ Youtube management application with features for journalists
     4) Provide API adapters for other media outlets:  Rumble, Truth Social, Facebook, Twitter, Substack,
 
         Reddit, and others using a Plugin mechanism.
+        
+![image](https://github.com/user-attachments/assets/08b73c21-e1df-40e7-a67c-3e7d0f6f9a94)
