@@ -76,7 +76,7 @@ namespace YoutubeJournalist
         /// <summary>
         /// Returns local database search results, from past searches.
         /// </summary>
-        public IEnumerable<SearchResultViewModel> GetSearchResults(YoutubeServiceRequest request)
+        public IEnumerable<SearchResultViewModel> GetLocalSearchResults()
         {
             try
             {
@@ -178,7 +178,7 @@ namespace YoutubeJournalist
                 Updated = entity.Snippet_PublishedAt ?? DateTime.MinValue,
                 Description = entity.Snippet_Description,
                 ETag = entity.Snippet_ETag ?? "NULL ETag",
-                Id = entity.Id_ChannelId ?? "NULL ID",
+                Id = entity.Id_ChannelId ?? entity.Id_VideoId ?? null,
                 Thumbnail = entity.Youtube_ThumbnailDetails.Default__Url,
                 Title = entity.Snippet_Title ?? "No Title",
                 IsChannel = entity.Id_ChannelId != null

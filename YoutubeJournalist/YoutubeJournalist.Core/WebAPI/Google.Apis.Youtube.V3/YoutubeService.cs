@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using Google.Apis.YouTube.v3.Data;
 using Google.Apis.Util;
 using System.Linq;
+using System.Windows;
 
 namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
 {
@@ -21,10 +22,13 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
         public IClientService ServiceBase { get; private set; }
 
         /// <summary>
-        /// Video part names:  id, kind, etag, ageGating, contentDetails, monetizationDetails, topicDetails,
-        ///                    snippet, statistics, status
+        /// Video part names:  contentDetails,fileDetails*,id,liveStreamingDetails,localizations,player,processingDetails*,recordingDetails,snippet,
+        ///                    statistics,status,suggestions*,topicDetails
+        ///                    
+        ///                    *NOTE: These fields require enhanced permissions
         /// </summary>
-        protected const string VideoParts = @"id, ageGating, contentDetails, monetizationDetails, topicDetails,snippet, statistics, status";
+        protected const string VideoParts = @"contentDetails,id,liveStreamingDetails,localizations,player,
+                                              recordingDetails,snippet,statistics,status,topicDetails";
 
         /// <summary>
         /// Channel part names:  auditDetails*, brandingSettings, contentDetails, contentOwnerDetails,
@@ -274,12 +278,12 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
             channelEntity.ContentOwnerDetails_TimeLinkedRaw = channel.ContentOwnerDetails?.TimeLinkedRaw;
 
             // Statistics
-            channelEntity.Statistics_CommentCount = (long)(channel.Statistics?.CommentCount ?? 0);
+            channelEntity.Statistics_CommentCount = (long?)(channel.Statistics?.CommentCount ?? 0);
             channelEntity.Statistics_ETag = channel.Statistics?.ETag;
             channelEntity.Statistics_HiddenSubscriberCount = channel.Statistics?.HiddenSubscriberCount;
-            channelEntity.Statistics_SubscriberCount = (long)(channel.Statistics?.SubscriberCount ?? 0);
-            channelEntity.Statistics_VideoCount = (long)(channel.Statistics?.VideoCount ?? 0);
-            channelEntity.Statistics_ViewCount = (long)(channel.Statistics?.ViewCount ?? 0);
+            channelEntity.Statistics_SubscriberCount = (long?)(channel.Statistics?.SubscriberCount ?? 0);
+            channelEntity.Statistics_VideoCount = (long?)(channel.Statistics?.VideoCount ?? 0);
+            channelEntity.Statistics_ViewCount = (long?)(channel.Statistics?.ViewCount ?? 0);
 
             // Status
             channelEntity.Status_ETag = channel.Status?.ETag;
@@ -376,10 +380,10 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
         {
             var entity = new Youtube_Video();
 
-            entity.AgeGating_AlcoholContent = video.AgeGating.AlcoholContent;
-            entity.AgeGating_ETag = video.AgeGating.ETag;
-            entity.AgeGating_Restricted = video.AgeGating.Restricted;
-            entity.AgeGating_VideoGameRating = video.AgeGating.VideoGameRating;
+            entity.AgeGating_AlcoholContent = video.AgeGating?.AlcoholContent;
+            entity.AgeGating_ETag = video.AgeGating?.ETag;
+            entity.AgeGating_Restricted = video.AgeGating?.Restricted;
+            entity.AgeGating_VideoGameRating = video.AgeGating?.VideoGameRating;
             entity.ContentDetails_Caption = video.ContentDetails.Caption;
             entity.ContentDetails_Definition = video.ContentDetails.Definition;
             entity.ContentDetails_Dimension = video.ContentDetails.Dimension;
@@ -388,22 +392,22 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
             entity.ContentDetails_HasCustomThumbnail = video.ContentDetails.HasCustomThumbnail;
             entity.ContentDetails_LicensedContent = video.ContentDetails.LicensedContent;
             entity.ContentDetails_Projection = video.ContentDetails.Projection;
-            entity.ContentDetails_RegionRestriction_ETag = video.ContentDetails.RegionRestriction.ETag;
+            entity.ContentDetails_RegionRestriction_ETag = video.ContentDetails.RegionRestriction?.ETag;
             entity.ETag = video.ETag;
             entity.Id = video.Id;
             entity.Kind = video.Kind;
-            entity.MonetizationDetails_AccessPolicy_Allowed = video.MonetizationDetails.Access?.Allowed;
+            entity.MonetizationDetails_AccessPolicy_Allowed = video.MonetizationDetails?.Access?.Allowed;
             entity.TopicDetails_ETag = video.TopicDetails.ETag;
 
             // Foreign Key Relationships
             entity.Youtube_VideoSnippet = CreateYoutube_VideoSnippet(video.Snippet);
 
             var statistic = new Youtube_VideoStatistics();
-            statistic.CommentCount = (long)video.Statistics.CommentCount;
-            statistic.DislikeCount = (long)video.Statistics.DislikeCount;
-            statistic.FavoriteCount = (long)video.Statistics.FavoriteCount;
-            statistic.LikeCount = (long)video.Statistics.LikeCount;
-            statistic.ViewCount = (long)video.Statistics.ViewCount;
+            statistic.CommentCount = (long?)video.Statistics.CommentCount;
+            statistic.DislikeCount = (long?)video.Statistics.DislikeCount;
+            statistic.FavoriteCount = (long)(video.Statistics.FavoriteCount ?? 0);
+            statistic.LikeCount = (long)(video.Statistics.LikeCount ?? 0);
+            statistic.ViewCount = (long)(video.Statistics.ViewCount ?? 0);
             statistic.ETag = video.ETag;
             
             entity.Youtube_VideoStatistics = statistic;
@@ -433,11 +437,12 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
                 {
                     var entityTopicId = new Youtube_TopicId();
 
-                    entityTopicId.Url = topicId;            // Primary Key
-                    entityTopicId.ChannelId = video.Id;     // Loose Foreign Key                    
-                    entityTopicId.VideoId = null;           // Loose Foreign Key
+                    entityTopicId.Url = topicId;                           // Primary Key
+                    entityTopicId.ChannelId = video.Snippet.ChannelId;     // Loose Foreign Key                    
+                    entityTopicId.VideoId = video.Id;                      // Loose Foreign Key
 
-                    entityTopicId.Relevant = false;         // Not used for Channel
+                    if (video.TopicDetails.RelevantTopicIds != null)
+                        entityTopicId.Relevant = video.TopicDetails.RelevantTopicIds.Contains(topicId);                        
 
                     topicIds.Add(entityTopicId);
                 }
@@ -449,9 +454,9 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
                 {
                     var entityTopicCategory = new Youtube_TopicCategory();
 
-                    entityTopicCategory.Url = topicCategory;            // Primary Key
-                    entityTopicCategory.ChannelId = video.Id;           // Loose Foreign Key                    
-                    entityTopicCategory.VideoId = null;                 // Loose Foreign Key
+                    entityTopicCategory.Url = topicCategory;                           // Primary Key
+                    entityTopicCategory.ChannelId = video.Snippet.ChannelId;           // Loose Foreign Key                    
+                    entityTopicCategory.VideoId = video.Id;                            // Loose Foreign Key
 
                     topicCategories.Add(entityTopicCategory);
                 }

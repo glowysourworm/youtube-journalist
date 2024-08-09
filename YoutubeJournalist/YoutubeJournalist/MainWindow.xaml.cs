@@ -80,14 +80,9 @@ namespace YoutubeJournalist
         }
         private void ExecuteLocalSearch()
         {
-            var result = _controller.GetSearchResults(new YoutubeServiceRequest()
-            {
-                WildCard = _viewModel.SearchParameters.FilterString,
-                Search = _viewModel.SearchParameters.FilterSearchType,
-                Filter = YoutubeServiceRequest.FilterType.WildCard,
-                SortOrder = Google.Apis.YouTube.v3.SearchResource.ListRequest.OrderEnum.Title
-            });
+            var result = _controller.GetLocalSearchResults();
 
+            _viewModel.SearchResults.Clear();
             _viewModel.SearchResults.AddRange(result);
         }
         private void ExecuteBasicSearch()
