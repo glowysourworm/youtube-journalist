@@ -27,13 +27,12 @@ namespace YoutubeJournalist
 
         bool _disposed;
 
-        public Controller(Configuration configuration)
+        public Controller(ConfigurationViewModel configuration)
         {
             // Service connection
             _youtubeService = new YoutubeService(configuration.ApiKey, 
                                                  configuration.ClientID, 
-                                                 configuration.ClientSecret, 
-                                                 configuration.MaxSearchResults);
+                                                 configuration.ClientSecret);
 
             // EF Database Connection - FIX DEFAULT CONNECTION
             _dbContext = new YoutubeJournalistEntities(GetConnectionString());
@@ -47,12 +46,16 @@ namespace YoutubeJournalist
             return "metadata = res://*/YoutubeJournalistEntityModel.csdl|res://*/YoutubeJournalistEntityModel.ssdl|res://*/YoutubeJournalistEntityModel.msl;provider=System.Data.SqlClient;provider connection string='data source=LAPTOP-JG4V86VG\\LOCALDB;initial catalog=YoutubeJournalist;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework'";
         }
 
-        public IEnumerable<SearchResultViewModel> GetChannels(string searchString)
+        /// <summary>
+        /// Search will return search result "snippet(s)"; and apply the available search filters for the
+        /// specified entity type.
+        /// </summary>
+        public IEnumerable<SearchResultViewModel> Search(YoutubeServiceRequest request)
         {
             try
             {
                 // Query Youtube
-                var viewModels = _youtubeService.SearchChannels(searchString).Collection.Select(result =>
+                var viewModels = _youtubeService.Search(request).Collection.Select(result =>
                 {
                     // Add / Update -> SaveChanges()
                     AddUpdateSearchResult(result);
@@ -69,56 +72,17 @@ namespace YoutubeJournalist
                 throw ex;
             }
         }
-        public IEnumerable<SearchResultViewModel> GetPlaylists(string searchString)
+
+        /// <summary>
+        /// Get will apply service request to look for specific channel, video, or playlist entities,
+        /// pulling over extended detail about the entity.
+        /// </summary>
+        public IEnumerable<SearchResultViewModel> GetVideos(YoutubeServiceRequest request)
         {
             try
             {
                 // Query Youtube
-                var viewModels = _youtubeService.SearchPlaylists(searchString).Collection.Select(result =>
-                {
-                    // Add / Update -> SaveChanges()
-                    AddUpdateSearchResult(result);
-
-                    // Create new view model
-                    return CreateSearchViewModel(result);
-
-                }).Actualize();
-
-                return viewModels;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        public IEnumerable<SearchResultViewModel> GetVideos(string searchString)
-        {
-            try
-            {
-                // Query Youtube
-                var viewModels = _youtubeService.SearchVideos(searchString).Collection.Select(result =>
-                {
-                    // Add / Update -> SaveChanges()
-                    AddUpdateSearchResult(result);
-
-                    // Create new view model
-                    return CreateSearchViewModel(result);
-
-                }).Actualize();
-
-                return viewModels;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        public IEnumerable<SearchResultViewModel> GetVideosByCategory(string categoryId)
-        {
-            try
-            {
-                // Query Youtube
-                var queryResult = _youtubeService.SearchWithFilterVideos(categoryId);
+                var queryResult = _youtubeService.GetVideos(request);
 
                 var viewModels = queryResult.Collection.Select(result =>
                 {
@@ -146,12 +110,12 @@ namespace YoutubeJournalist
                 throw ex;
             }
         }
-        public IEnumerable<SearchResultViewModel> GetChannelsByCategory(string categoryId)
+        public IEnumerable<SearchResultViewModel> GetChannels(YoutubeServiceRequest request)
         {
             try
             {
                 // Query Youtube
-                var queryResult = _youtubeService.SearchWithFilterChannels(categoryId);
+                var queryResult = _youtubeService.GetChannels(request);
 
                 var viewModels = queryResult.Collection.Select(result =>
                 {
@@ -191,7 +155,8 @@ namespace YoutubeJournalist
                 ETag = entity.Snippet_ETag ?? "NULL ETag",
                 Id = entity.Id_ChannelId ?? "NULL ID",
                 Thumbnail = entity.Youtube_ThumbnailDetails.Default__Url,
-                Title = entity.Snippet_Title ?? "No Title"
+                Title = entity.Snippet_Title ?? "No Title",
+                IsChannel = entity.Id_ChannelId != null
             };
         }
         private SearchResultViewModel CreateSearchViewModel(Youtube_Video entity)
@@ -205,7 +170,8 @@ namespace YoutubeJournalist
                 ETag = entity.ETag ?? "NULL ETag",
                 Id = entity.Id ?? "NULL ID",
                 Thumbnail = entity.Youtube_VideoSnippet.Youtube_ThumbnailDetails.Default__Url,
-                Title = entity.Youtube_VideoSnippet.Title ?? "No Title"
+                Title = entity.Youtube_VideoSnippet.Title ?? "No Title",
+                IsChannel = false
             };
         }
         private SearchResultViewModel CreateSearchViewModel(Youtube_Channel entity)
@@ -219,7 +185,8 @@ namespace YoutubeJournalist
                 ETag = entity.ETag ?? "NULL ETag",
                 Id = entity.Id ?? "NULL ID",
                 Thumbnail = entity.Youtube_ChannelSnippet.Youtube_ThumbnailDetails.Default__Url,
-                Title = entity.Youtube_ChannelSnippet.Title ?? "No Title"
+                Title = entity.Youtube_ChannelSnippet.Title ?? "No Title",
+                IsChannel = false
             };
         }
 

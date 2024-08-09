@@ -4,8 +4,12 @@ using System.Configuration;
 using System.Linq;
 using System.Windows;
 
+using WpfCustomUtilities.Extensions.ObservableCollection;
+
 using YoutubeJournalist.Core;
 using YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3;
+using YoutubeJournalist.Event;
+using YoutubeJournalist.ViewModel;
 
 namespace YoutubeJournalist
 {
@@ -14,106 +18,77 @@ namespace YoutubeJournalist
     /// </summary>
     public partial class MainWindow : Window
     {
-        Controller _controller;
+        readonly Controller _controller;
+        readonly YoutubeJournalistViewModel _viewModel;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            var configuration = new Configuration();
+            var configuration = new ConfigurationViewModel();
 
             _controller = new Controller(configuration);
+            _viewModel = new YoutubeJournalistViewModel(configuration, new SearchParametersViewModel());
 
-            this.DataContext = configuration;
+            this.DataContext = _viewModel;
         }
-        protected override void OnClosed(EventArgs e)
+
+        private void OnException(Exception ex)
         {
+            MessageBox.Show(ex.Message);
+
+            if (!string.IsNullOrEmpty(ex.InnerException?.Message))
+                MessageBox.Show(ex.InnerException?.Message);
+
+            // Close DB connection
             _controller.Dispose();
 
-            base.OnClosed(e);
+            // Shuts down -> OnClosed()
+            App.Current.Shutdown();
         }
 
-        private void SearchChannelsButton_Click(object sender, RoutedEventArgs e)
+        private void ExecuteBasicSearch()
+        {
+            var result = _controller.Search(new YoutubeServiceRequest()
+            {
+                WildCard = _viewModel.SearchParameters.FilterString,
+                Search = _viewModel.SearchParameters.FilterSearchType,
+                Filter = YoutubeServiceRequest.FilterType.WildCard,
+                SortOrder = Google.Apis.YouTube.v3.SearchResource.ListRequest.OrderEnum.Title
+            });
+
+            _viewModel.SearchResults.AddRange(result);
+        }
+        private void ExecuteGetChannel(string channelId)
+        {
+            var result = _controller.GetChannels(new YoutubeServiceRequest()
+            {
+                ChannelId = channelId,
+                Search = YoutubeServiceRequest.SearchType.Video,
+                Filter = YoutubeServiceRequest.FilterType.Id
+            });
+
+            _viewModel.SearchResults.AddRange(result);
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                this.OutputLB.ItemsSource = _controller.GetChannels(this.SearchTB.Text ?? "");
+                ExecuteBasicSearch();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
-
-                // Shuts down -> OnClosed()
-                App.Current.Shutdown();
+                OnException(ex);
             }
         }
 
-        private void SearchVideosButton_Click(object sender, RoutedEventArgs e)
+        private void OnSearchResultDoubleClick(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                this.OutputLB.ItemsSource = _controller.GetVideos(this.SearchTB.Text ?? "");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+            // TODO: Use typed routed event
+            var viewModel = (e as CustomRoutedEventArgs<SearchResultViewModel>).Data;
 
-                // Shuts down -> OnClosed()
-                App.Current.Shutdown();
-            }
-        }
-
-        private void SearchPlaylistsButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                this.OutputLB.ItemsSource = _controller.GetPlaylists(this.SearchTB.Text ?? "");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-
-                // Shuts down -> OnClosed()
-                App.Current.Shutdown();
-            }
-        }
-
-        private void FilterChannelsButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (!string.IsNullOrWhiteSpace(this.SearchTB.Text))
-                    this.OutputLB.ItemsSource = _controller.GetChannelsByCategory(this.SearchTB.Text ?? "");
-
-                else
-                    MessageBox.Show("Must enter CategoryId for the search / filter");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-
-                // Shuts down -> OnClosed()
-                App.Current.Shutdown();
-            }
-        }
-
-        private void FilterVideosButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (!string.IsNullOrWhiteSpace(this.SearchTB.Text))
-                    this.OutputLB.ItemsSource = _controller.GetVideosByCategory(this.SearchTB.Text ?? "");
-
-                else
-                    MessageBox.Show("Must enter CategoryId for the search / filter");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-
-                // Shuts down -> OnClosed()
-                App.Current.Shutdown();
-            }
+            ExecuteGetChannel(viewModel.Id);
         }
     }
 }

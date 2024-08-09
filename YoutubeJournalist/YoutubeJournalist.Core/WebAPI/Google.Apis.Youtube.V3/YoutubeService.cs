@@ -11,6 +11,8 @@ using Google.Apis.YouTube.v3;
 using System.IO;
 using System.Collections.Generic;
 using Google.Apis.YouTube.v3.Data;
+using Google.Apis.Util;
+using System.Linq;
 
 namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
 {
@@ -18,10 +20,26 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
     {
         public IClientService ServiceBase { get; private set; }
 
-        readonly int _maxResults;
-        readonly string _apiKey;
-        readonly string _clientId;
-        readonly string _clientSecret;
+        /// <summary>
+        /// Video part names:  id, kind, etag, ageGating, contentDetails, monetizationDetails, topicDetails,
+        ///                    snippet, statistics, status
+        /// </summary>
+        protected const string VideoParts = @"id, kind, etag, ageGating, contentDetails, monetizationDetails, topicDetails,
+                                              snippet, statistics, status";
+
+        /// <summary>
+        /// Channel part names:  auditDetails, brandingSettings, contentDetails, contentOwnerDetails,
+        ///                      conversionPings, etag, id, kind, localizations, snippet, statistics,
+        ///                      status, topicDetails
+        /// </summary>
+        protected const string ChannelParts = @"auditDetails,brandingSettings,contentDetails,id,localizations,snippet,statistics,status,topicDetails";
+
+        /// <summary>
+        /// Search part names:  etag, id, kind, snippet
+        /// </summary>
+        protected const string SearchParts = "id, snippet";
+
+        protected readonly char[] YoutubeRepeatableSeparators = new char[] { ',' };
 
         protected const string SearchTypeChannel = "channel";
         protected const string SearchTypePlaylist = "playlist";
@@ -31,73 +49,141 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
         protected const string ResponseKindPlaylist = "youtube#playlist";
         protected const string ResponseKindVideo = "youtube#video";
 
-        public YoutubeService(string apiKey, string clientId, string clientSecret, int maxResults)
+        public YoutubeService(string apiKey, string clientId, string clientSecret)
         {
-            _maxResults = maxResults;
-            _apiKey = apiKey;
-            _clientId = clientId;
-            _clientSecret = clientSecret;
-
             var credentials = GoogleWebAuthorizationBroker.AuthorizeAsync(new GoogleAuthorizationCodeFlow.Initializer()
             {
                 ClientSecrets = new ClientSecrets()
                 {
-                    ClientId = _clientId,
-                    ClientSecret = _clientSecret,
-                },
-                Prompt = "none"
+                    ClientId = clientId,
+                    ClientSecret = clientSecret,
+                }
             },
             new string[]
             {
-                    YouTubeService.ScopeConstants.YoutubeReadonly
+                YouTubeService.ScopeConstants.Youtube,
+                YouTubeService.ScopeConstants.YoutubeReadonly,
+                YouTubeService.ScopeConstants.YoutubeForceSsl
             },
             "rdolan.music.2@gmail.com",
             CancellationToken.None);
 
             this.ServiceBase = new YouTubeService(new BaseClientService.Initializer()
             {
-                HttpClientInitializer = credentials.Result,
-                ApiKey = _apiKey,
-                ApplicationName = "Channels"
+                HttpClientInitializer = credentials.Result,                
+                ApiKey = apiKey,
+                ApplicationName = "Channels"                
             });
         }
 
-        public YoutubeServiceResponse<Youtube_SearchResult> SearchVideos(string searchString, string pageToken = null)
+        #region IWebAPI
+        public YoutubeServiceResponse<Youtube_SearchResult> Search(YoutubeServiceRequest serviceRequest)
         {
-            return SearchImpl(searchString, SearchTypeVideo, pageToken);
-        }
-        public YoutubeServiceResponse<Youtube_SearchResult> SearchPlaylists(string searchString, string pageToken = null)
-        {
-            return SearchImpl(searchString, SearchTypePlaylist, pageToken);
-        }
-        public YoutubeServiceResponse<Youtube_SearchResult> SearchChannels(string searchString, string pageToken = null)
-        {
-            return SearchImpl(searchString, SearchTypeChannel, pageToken);
+            // SearchListRequest
+            var request = (this.ServiceBase as YouTubeService).Search.List(CreateRepeatable(SearchParts, YoutubeRepeatableSeparators));
+            request.MaxResults = YoutubeServiceRequest.PageSize;
+            request.Type = serviceRequest.GetSearchTypes();
+            request.PageToken = serviceRequest.UsePageToken ? serviceRequest.PageToken : null;
+            request.Order = serviceRequest.SortOrder;
+
+            if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.Id))
+                request.ChannelId = serviceRequest.ChannelId;
+
+            if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.CategoryId))
+                request.VideoCategoryId = serviceRequest.CategoryId;
+
+            if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.ForHandle))
+                throw new Exception("Youtube search request does not support a ForHandle filter");
+
+            if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.ForUser))
+                throw new Exception("Youtube search request does not support a ForUser filter");
+
+            if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.WildCard))
+                request.Q = serviceRequest.WildCard;
+
+            if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.Date))
+            {
+                if (serviceRequest.PublishedAfter >= serviceRequest.PublishedBefore)
+                    throw new Exception("Youtube search request has improper published date 'window'");
+
+                request.PublishedBeforeDateTimeOffset = serviceRequest.PublishedBefore;
+                request.PublishedAfterDateTimeOffset = serviceRequest.PublishedAfter;
+            }
+
+            if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.Duration))
+                request.VideoDuration = serviceRequest.Duration;
+
+            return SearchImpl(request);
         }
 
-        public YoutubeServiceResponse<Youtube_Video, Youtube_TopicId, Youtube_TopicCategory> SearchWithFilterVideos(string categoryId, string pageToken = null)
+        public YoutubeServiceResponse<Youtube_Video, Youtube_TopicId, Youtube_TopicCategory> GetVideos(YoutubeServiceRequest serviceRequest)
         {
-            return SearchWithFilterVideoImpl(categoryId, pageToken);
-        }
-        public YoutubeServiceResponse<Youtube_Channel, Youtube_TopicId, Youtube_TopicCategory> SearchWithFilterChannels(string categoryId, string pageToken = null)
-        {
-            return SearchWithFilterChannelImpl(categoryId, pageToken);
-        }
-
-        private YoutubeServiceResponse<Youtube_Video, Youtube_TopicId, Youtube_TopicCategory> SearchWithFilterVideoImpl(string categoryId, string pageToken = null)
-        {
-            // Search for list of channels (search string "repeatable", by tokens)
-            //
-            // Channel part names:  auditDetails, brandingSettings, contentDetails, contentOwnerDetails,
-            //                      conversionPings, etag, id, kind, localizations, snippet, statistics,
-            //                      status, topicDetails
-            var request = (this.ServiceBase as YouTubeService).Videos.List("id,snippet");
+            // Create Youtube video list request
+            var request = (this.ServiceBase as YouTubeService).Videos.List(CreateRepeatable(VideoParts, YoutubeRepeatableSeparators));
 
             // Search configuration
-            request.PageToken = pageToken ?? null;
-            request.MaxResults = _maxResults;
-            request.VideoCategoryId = categoryId;
+            request.PageToken = serviceRequest.UsePageToken ? serviceRequest.PageToken : null;
+            request.MaxResults = YoutubeServiceRequest.PageSize;
 
+            if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.Id))
+                request.Id = serviceRequest.VideoId;
+
+            if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.CategoryId))
+                request.VideoCategoryId = serviceRequest.CategoryId;
+
+            if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.ForHandle))
+                throw new Exception("Youtube video request does not support a ForHandle filter");
+
+            if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.ForUser))
+                throw new Exception("Youtube video request does not support a ForUser filter");
+
+            if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.WildCard))
+                throw new Exception("Youtube video request does not support a WildCard filter");
+
+            if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.Date))
+                throw new Exception("Youtube video request does not support a Date filter");
+
+            if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.Duration))
+                throw new Exception("Youtube video request does not support a Duration filter");
+
+            return SearchWithFilterVideoImpl(request);
+        }
+        public YoutubeServiceResponse<Youtube_Channel, Youtube_TopicId, Youtube_TopicCategory> GetChannels(YoutubeServiceRequest serviceRequest)
+        {
+            // Create Youtube channel list request
+            var request = (this.ServiceBase as YouTubeService).Channels.List(CreateRepeatable(ChannelParts, YoutubeRepeatableSeparators));
+
+            // Search configuration
+            request.PageToken = serviceRequest.UsePageToken ? serviceRequest.PageToken : null;
+            request.MaxResults = YoutubeServiceRequest.PageSize;
+
+            if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.Id))
+                request.Id = serviceRequest.ChannelId;
+
+            if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.CategoryId))
+                request.CategoryId = serviceRequest.CategoryId;
+
+            if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.ForHandle))
+                request.ForHandle = serviceRequest.Handle;
+
+            if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.ForUser))
+                request.ForUsername = serviceRequest.Username;
+
+            if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.WildCard))
+                throw new Exception("Youtube channel request does not support a WildCard filter");
+
+            if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.Date))
+                throw new Exception("Youtube video request does not support a Date filter");
+
+            if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.Duration))
+                throw new Exception("Youtube video request does not support a Duration filter");
+
+            return SearchWithFilterChannelImpl(request);
+        }
+        #endregion
+
+        private YoutubeServiceResponse<Youtube_Video, Youtube_TopicId, Youtube_TopicCategory> SearchWithFilterVideoImpl(VideosResource.ListRequest request)
+        {
             // Call the search.list method to retrieve results matching the specified query term.
             var response = request.Execute();
 
@@ -121,20 +207,8 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
 
             return result;
         }
-        private YoutubeServiceResponse<Youtube_Channel, Youtube_TopicId, Youtube_TopicCategory> SearchWithFilterChannelImpl(string categoryId, string pageToken = null)
+        private YoutubeServiceResponse<Youtube_Channel, Youtube_TopicId, Youtube_TopicCategory> SearchWithFilterChannelImpl(ChannelsResource.ListRequest request)
         {
-            // Search for list of channels (search string "repeatable", by tokens)
-            //
-            // Channel part names:  auditDetails, brandingSettings, contentDetails, contentOwnerDetails,
-            //                      conversionPings, etag, id, kind, localizations, snippet, statistics,
-            //                      status, topicDetails
-            var request = (this.ServiceBase as YouTubeService).Channels.List("id,snippet");
-
-            // Search configuration
-            request.PageToken = pageToken ?? null;
-            request.MaxResults = _maxResults;
-            request.CategoryId = categoryId;
-
             // Call the search.list method to retrieve results matching the specified query term.
             var response = request.Execute();
 
@@ -158,15 +232,9 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
 
             return result;
         }
-        private YoutubeServiceResponse<Youtube_SearchResult> SearchImpl(string searchString, string searchType, string pageToken = null)
-        {
-            // SearchListRequest
-            var request = (this.ServiceBase as YouTubeService).Search.List("snippet");
-            request.Q = searchString;
-            request.MaxResults = _maxResults;
-            request.Type = searchType;
-            request.PageToken = pageToken ?? null;
 
+        private YoutubeServiceResponse<Youtube_SearchResult> SearchImpl(SearchResource.ListRequest request)
+        {
             // Call the search.list method to retrieve results matching the specified query term.
             var response = request.Execute();
 
@@ -180,28 +248,10 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
             // Add each result to the appropriate list, and then display the lists of
             // matching videos, channels, and playlists.
             foreach (var item in response.Items)
-            {
-                if (item.Id.Kind != ResponseKindChannel)
-                    throw new Exception(String.Format("Unexpected search result type {0} != {1}", item.Id.Kind, searchType));
-
-                switch (searchType)
-                {
-                    case SearchTypeChannel:
-                    case SearchTypePlaylist:
-                    case SearchTypeVideo:
-                        break;
-
-                    default:
-                        throw new Exception(String.Format("Unexpected search result type {0} != {1}", item.Id.Kind, searchType));
-                }
-
                 resultCollection.Add(CreateYoutube_SearchResult(item));
-            }
 
             return result;
         }
-
-        //private YoutubeServiceResponse<Youtube_Video>
 
         private Youtube_Channel CreateYoutube_Channel(Channel channel, ref List<Youtube_TopicId> topicIds, ref List<Youtube_TopicCategory> topicCategories)
         {
@@ -501,6 +551,11 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
             entity.Standard_Width = thumbnailDetails.Standard?.Width;
 
             return entity;
+        }
+
+        private Repeatable<string> CreateRepeatable(string theString, char[] separators)
+        {
+            return new Repeatable<string>(theString.Split(separators).Select(x => x.Trim()));
         }
 
         public void Dispose()

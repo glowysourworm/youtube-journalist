@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="YoutubeJournalist.View.SearchResultView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:YoutubeJournalist.View"
+             xmlns:converter="clr-namespace:YoutubeJournalist.Converter" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converter:BoolVisibilityCollapseConverter x:Key="BoolVisibilityCollapseConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <ListBox x:Name="SearchResultsLB" ItemsSource="{Binding SearchResults}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <EventSetter Event="MouseDoubleClick" Handler="OnItemMouseDoubleClick" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" ToolTip="{Binding Description}">
+                        <Image Source="{Binding Thumbnail}" Height="40" Width="40" />
+                        <TextBlock Padding="10" FontSize="14" VerticalAlignment="Center" Text="(Channel)" Foreground="CornflowerBlue" Visibility="{Binding IsChannel, Converter={StaticResource BoolVisibilityCollapseConverter}}" />
+                        <TextBlock Padding="10" FontSize="14" VerticalAlignment="Center" Text="{Binding Title}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

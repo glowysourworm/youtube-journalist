@@ -88,14 +88,14 @@ Create Table Youtube_SearchResult(
 	Id_VideoId varchar(50),
 	Id_PlaylistId varchar(50),
 	Snippet_ChannelId varchar(50),
-	Snippet_ChannelTitle varchar(100),
+	Snippet_ChannelTitle varchar(max),
 	Snippet_Description varchar(max),
 	Snippet_ETag varchar(50),
 	Snippet_LiveBroadcastContent varchar(max),
 	Snippet_PublishedAt datetime null,
 	Snippet_PublishedAtDateTimeOffset datetimeoffset null,
 	Snippet_PublishedAtRaw varchar(50),
-	Snippet_Title varchar(100),
+	Snippet_Title varchar(max),
 	Snippet_ThumbnailDetailsId int not null,
 	
 	Primary Key(Our_Id),
@@ -188,14 +188,14 @@ Create Table Youtube_ChannelSettings(
 	DefaultTab varchar(50),
 	"Description" varchar(max),
 	ETag varchar(50),
-	FeaturedChannelsTitle varchar(50),
+	FeaturedChannelsTitle varchar(max),
 	FeaturedChannelsUrls varchar(max),  -- Repeated string (using comma separator)
 	Keywords varchar(8000),	        -- Repeated string (using comma separator)
 	ModerateComments bit null,
 	ProfileColor varchar(50),
 	ShowBrowseView bit null,
 	ShowRelatedChannels bit null,
-	Title varchar(1000),
+	Title varchar(max),
 	TrackingAnalyticsAccountId varchar(50),
 	UnsubscribedTrailer varchar(500),
 
@@ -285,13 +285,13 @@ Create Table Youtube_ChannelSnippet(
 	ETag varchar(50),
 	Localized_Description varchar(max),		-- NOTE: Different entity than other snippets "ChannelLocalization"
 	Localized_ETag varchar(50),				-- NOTE: Different entity than other snippets "ChannelLocalization"
-	Localized_Title varchar(500),			-- NOTE: Different entity than other snippets "ChannelLocalization"
+	Localized_Title varchar(max),			-- NOTE: Different entity than other snippets "ChannelLocalization"
 	PublishedAt datetime null,
 	PublishedAtDateTimeOffset datetimeoffset null,
 	PublishedAtRaw varchar(50),
 	-- Tags (skipped) Should be part of call for video list detail
 	ThumbnailDetailsId int not null, 
-	Title varchar(500),
+	Title varchar(max),
 
 	Primary Key(Our_Id),
 	Foreign Key(ThumbnailDetailsId) References Youtube_ThumbnailDetails(Our_Id)
@@ -406,7 +406,7 @@ Create Table Youtube_VideoSnippet(
 	Our_Id int not null IDENTITY(1,1),
 	CategoryId varchar(50),
 	ChannelId varchar(50),
-	ChannelTitle varchar(500),
+	ChannelTitle varchar(max),
 	DefaultAudioLanguage varchar(50),
 	DefaultLanguage varchar(50),
 	"Description" varchar(max),
@@ -414,13 +414,13 @@ Create Table Youtube_VideoSnippet(
 	LiveBroadcastContent varchar(50),
 	Localized_Description varchar(max),
 	Localized_ETag varchar(50),
-	Localized_Title varchar(500),
+	Localized_Title varchar(max),
 	PublishedAt datetime null,
 	PublishedAtDateTimeOffset datetimeoffset null,
 	PublishedAtRaw varchar(50),
 	-- Tags (skipped) Should be part of call for video list detail
 	ThumbnailDetailsId int not null,
-	Title varchar(500),
+	Title varchar(max),
 
 	Primary Key(Our_Id),
 	Foreign Key(ThumbnailDetailsId) References Youtube_ThumbnailDetails(Our_Id)

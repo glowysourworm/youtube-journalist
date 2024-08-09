@@ -2,6 +2,8 @@
 
 using WpfCustomUtilities.Extensions;
 
+using static YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3.YoutubeServiceRequest;
+
 namespace YoutubeJournalist.ViewModel
 {
     public class SearchResultViewModel : ViewModelBase
@@ -13,6 +15,7 @@ namespace YoutubeJournalist.ViewModel
         string _description;
         DateTime _created;
         DateTime _updated;
+        bool _isChannel;
 
         public string Thumbnail
         {
@@ -49,6 +52,11 @@ namespace YoutubeJournalist.ViewModel
             get { return _updated; }
             set { RaiseAndSetIfChanged(ref _updated, value); }
         }
+        public bool IsChannel
+        {
+            get { return _isChannel; }
+            set { RaiseAndSetIfChanged(ref _isChannel, value); }
+        }
 
         public SearchResultViewModel()
         {
@@ -59,6 +67,7 @@ namespace YoutubeJournalist.ViewModel
             this.Description = "";
             this.Created = DateTime.Now;
             this.Updated = DateTime.Now;
+            this.IsChannel = false;
         }
     }
 }
