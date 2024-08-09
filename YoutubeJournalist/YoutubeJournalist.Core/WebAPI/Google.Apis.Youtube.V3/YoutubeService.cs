@@ -27,11 +27,13 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
         protected const string VideoParts = @"id, ageGating, contentDetails, monetizationDetails, topicDetails,snippet, statistics, status";
 
         /// <summary>
-        /// Channel part names:  auditDetails, brandingSettings, contentDetails, contentOwnerDetails,
-        ///                      conversionPings, etag, id, kind, localizations, snippet, statistics,
+        /// Channel part names:  auditDetails*, brandingSettings, contentDetails, contentOwnerDetails,
+        ///                      id, localizations, snippet, statistics,
         ///                      status, topicDetails
+        ///                      
+        ///                      *NOTE: Some of these fields require enhanced scope permissions
         /// </summary>
-        protected const string ChannelParts = @"auditDetails,brandingSettings,contentDetails,id,localizations,snippet,statistics,status,topicDetails";
+        protected const string ChannelParts = @"brandingSettings,contentDetails,contentOwnerDetails,id,localizations,snippet,statistics,status,topicDetails";
 
         /// <summary>
         /// Search part names:  etag, id, kind, snippet
@@ -69,7 +71,7 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
             {
                 HttpClientInitializer = credentials.Result,                
                 ApiKey = apiKey,
-                ApplicationName = "YoutubeJournalist"
+                ApplicationName = "channels"                
             });
         }
 
@@ -155,7 +157,7 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
             request.MaxResults = YoutubeServiceRequest.PageSize;
 
             if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.Id))
-                request.Id = serviceRequest.ChannelId;
+                request.Id = CreateRepeatable(serviceRequest.ChannelId, YoutubeRepeatableSeparators);
 
             if (serviceRequest.Filter.HasFlag(YoutubeServiceRequest.FilterType.CategoryId))
                 request.CategoryId = serviceRequest.CategoryId;
@@ -261,6 +263,9 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
             channelEntity.Id = channel.Id;
             channelEntity.Kind = channel.Kind;
 
+            // Channel Snippet
+            channelEntity.Youtube_ChannelSnippet = CreateYoutube_ChannelSnippet(channel.Snippet);
+
             // Content Owner Details
             channelEntity.ContentOwnerDetails_ContentOwner = channel.ContentOwnerDetails?.ContentOwner;
             channelEntity.ContentOwnerDetails_ETag = channel.ContentOwnerDetails?.ETag;
@@ -312,6 +317,10 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
             brandingSettings.TrackingImageUrl = channel.BrandingSettings?.Image?.TrackingImageUrl;
             brandingSettings.WatchIconImageUrl = channel.BrandingSettings?.Image?.WatchIconImageUrl;
 
+            // Branding Settings -> Channel Settings
+            brandingSettings.Youtube_ChannelSettings = CreateYoutube_ChannelSettings(channel.BrandingSettings.Channel);
+
+            // Channel -> Branding Settings
             channelEntity.Youtube_ChannelBrandingSettings = brandingSettings;
 
             // Conversation Pings
@@ -468,6 +477,28 @@ namespace YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3
             entity.Title = snippet.Title;
 
             entity.Youtube_ThumbnailDetails = CreateYoutube_ThumbnailDetails(snippet.Thumbnails);
+
+            return entity;
+        }
+        private Youtube_ChannelSettings CreateYoutube_ChannelSettings(ChannelSettings settings)
+        {
+            var entity = new Youtube_ChannelSettings();
+
+            entity.Country = settings.Country;
+            entity.DefaultLanguage = settings.DefaultLanguage;
+            entity.DefaultTab = settings.DefaultTab;
+            entity.Description = settings.Description;
+            entity.ETag=settings.ETag;
+            entity.FeaturedChannelsTitle = settings.FeaturedChannelsTitle;
+            entity.FeaturedChannelsUrls = settings.FeaturedChannelsUrls != null ? String.Join("\n", settings.FeaturedChannelsUrls) : "";
+            entity.Keywords = settings.Keywords;
+            entity.ModerateComments = settings.ModerateComments;
+            entity.ProfileColor = settings.ProfileColor;
+            entity.ShowBrowseView = settings.ShowBrowseView;
+            entity.ShowRelatedChannels = settings.ShowRelatedChannels;
+            entity.Title = settings.Title;
+            entity.TrackingAnalyticsAccountId = settings.TrackingAnalyticsAccountId;
+            entity.UnsubscribedTrailer = settings.UnsubscribedTrailer;
 
             return entity;
         }

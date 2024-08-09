@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 
+using WpfCustomUtilities.Extensions.Collection;
 using WpfCustomUtilities.Extensions.ObservableCollection;
 
 using YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3;
@@ -57,6 +58,19 @@ namespace YoutubeJournalist
 
             if (!string.IsNullOrEmpty(ex.InnerException?.Message))
                 MessageBox.Show(ex.InnerException?.Message);
+
+            //if (!string.IsNullOrEmpty(ex.StackTrace))
+            //    MessageBox.Show(ex.StackTrace);
+
+            //if (!string.IsNullOrEmpty(ex.Source))
+            //    MessageBox.Show(ex.Source);
+
+            //if (ex.Data != null)
+            //{
+            //    foreach (var data in ex.Data.Values)
+            //        MessageBox.Show(data?.ToString() ?? "(no value)");
+            //}
+
 
             // Close DB connection
             _controller.Dispose();

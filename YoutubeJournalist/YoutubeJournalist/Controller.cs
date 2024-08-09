@@ -265,6 +265,10 @@ namespace YoutubeJournalist
             if (entity.Youtube_ChannelAuditDetails != null)
                 _dbContext.Youtube_ChannelAuditDetails.AddObject(entity.Youtube_ChannelAuditDetails);
 
+            // ChannelSettings
+            if (entity.Youtube_ChannelBrandingSettings.Youtube_ChannelSettings != null)
+                _dbContext.Youtube_ChannelSettings.AddObject(entity.Youtube_ChannelBrandingSettings.Youtube_ChannelSettings);
+
             // ChannelBrandingSettings
             if (entity.Youtube_ChannelBrandingSettings != null)
                 _dbContext.Youtube_ChannelBrandingSettings.AddObject(entity.Youtube_ChannelBrandingSettings);
