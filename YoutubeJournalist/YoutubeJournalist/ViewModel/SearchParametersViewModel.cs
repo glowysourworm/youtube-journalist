@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 using WpfCustomUtilities.Extensions;
 
+using YoutubeJournalist.Core.Service.Model;
+
 using static Google.Apis.YouTube.v3.SubscriptionsResource.ListRequest;
-using static YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3.YoutubeServiceRequest;
 
 namespace YoutubeJournalist.ViewModel
 {
@@ -16,7 +17,7 @@ namespace YoutubeJournalist.ViewModel
     {
         private bool _youtubeAPIEnable;
         private bool _youtubeBasicSearch;
-        private SearchType _filterSearchType;
+        private BasicSearchType _filterSearchType;
         private string _filterString;
         private DateTimeOffset? _filterPublishedBefore;
         private DateTimeOffset? _filterPublishedAfter;
@@ -43,7 +44,7 @@ namespace YoutubeJournalist.ViewModel
 		[Category("Filter")]
 		[DisplayName("Search Type")]
 		[Description("Specifies basic OR filtered search type")]
-		public SearchType FilterSearchType
+		public BasicSearchType FilterSearchType
 		{
 			get { return _filterSearchType; }
 			set { this.RaiseAndSetIfChanged(ref _filterSearchType, value); }
@@ -90,7 +91,7 @@ namespace YoutubeJournalist.ViewModel
         {
 			this.YoutubeAPIEnable = false;
 			this.YoutubeBasicSearch = true;
-			this.FilterSearchType = SearchType.Video;
+			this.FilterSearchType = BasicSearchType.Video;
         }
 	}
 }

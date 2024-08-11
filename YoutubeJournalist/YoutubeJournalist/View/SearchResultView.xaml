@@ -11,7 +11,7 @@
         <converter:BoolVisibilityCollapseConverter x:Key="BoolVisibilityCollapseConverter" />
     </UserControl.Resources>
     <Grid>
-        <ListBox x:Name="SearchResultsLB" ItemsSource="{Binding SearchResults}">
+        <ListBox x:Name="SearchResultsLB" ItemsSource="{Binding}">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <EventSetter Event="MouseDoubleClick" Handler="OnItemMouseDoubleClick" />
@@ -20,6 +20,13 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" ToolTip="{Binding Description}">
+                        <!-- Functions for getting video details, or comments -->
+                        <StackPanel.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Get Video Details" Command="{Binding GetVideoDetailsCommand}" />
+                                <MenuItem Header="Get Video Comments" Command="{Binding GetVideoCommentsCommand}" />
+                            </ContextMenu>
+                        </StackPanel.ContextMenu>
                         <Image Source="{Binding Thumbnail}" Height="40" Width="40" />
                         <TextBlock Padding="10" FontSize="14" VerticalAlignment="Center" Text="(Channel)" Foreground="CornflowerBlue" Visibility="{Binding IsChannel, Converter={StaticResource BoolVisibilityCollapseConverter}}" />
                         <TextBlock Padding="10" FontSize="14" VerticalAlignment="Center" Text="{Binding Title}" />

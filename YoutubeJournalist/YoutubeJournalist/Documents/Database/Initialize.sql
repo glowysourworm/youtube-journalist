@@ -1,9 +1,8 @@
--- Create Database [YoutubeJournalist]
 
 USE master;
+GO
 
-
-DROP DATABASE YoutubeJournalist
+DROP DATABASE IF EXISTS YoutubeJournalist
 GO
 
 CREATE DATABASE YoutubeJournalist
@@ -100,73 +99,6 @@ Create Table Youtube_SearchResult(
 	
 	Primary Key(Our_Id),
 	Foreign Key(Snippet_ThumbnailDetailsId) References Youtube_ThumbnailDetails(Our_Id)
-);
-GO
-
-Create Table Youtube_CommentSnippet(
-	AuthorChannelId_Value varchar(50),
-	AuthorChannelId_ETag varchar(50),
-	AuthorChannelUrl varchar(8000),
-	AuthorDisplayName varchar(100),
-	AuthorProfileImageUrl varchar(8000),
-	CanRate bit null,
-	ChannelId varchar(50),
-	ETag varchar(50),
-	LikeCount bigint null,
-	ModerationStatus varchar(50),
-	ParentId varchar(50) NOT NULL,
-	PublishedAt DateTime,
-	PublishedAtDateTimeOffset DateTimeOffset,
-	PublishedAtRaw varchar(50),
-	TextDisplay varchar(max),
-	TextOriginal varchar(max),
-	UpdatedAt DateTime,
-	UpdatedAtDateTimeOffset DateTimeOffset,
-	UpdatedAtRaw varchar(50),
-	VideoId varchar(50),
-	ViewerRating varchar(50),
-
-	Primary Key(ParentId)
-);
-GO
-
-Create Table Youtube_Comment(
-	Id varchar(50) NOT NULL,
-	ETag varchar(50),
-	Kind varchar(50),
-	SnippetId varchar(50),
-
-	Primary Key(Id),
-	Foreign Key(SnippetId) References Youtube_CommentSnippet(ParentId)
-);
-GO
-
-Create Table Youtube_CommentThread(
-	Id varchar(50) NOT NULL,
-	ETag varchar(50),
-	Kind varchar(50),
-	SnippetId varchar(50) NOT NULL,
-
-	-- Google Youtube V3 API:  CommentThreadReplies --
-	-- 
-	-- Our SQL database will have an M:N mapper table for this. The following ID is the return value
-	-- from Youtube, matched via the Youtube_CommentList table, to gather all the Comment entities.
-	CommentListId int NOT NULL,
-
-	Primary Key(Id),
-	Foreign Key(SnippetId) References Youtube_CommentSnippet(ParentId)
-);
-GO
-
-Create Table Youtube_CommentList(
-	Our_Id int NOT NULL IDENTITY(1,1),
-	CommentThreadId varchar(50) NOT NULL,
-	CommentId varchar(50) NOT NULL,
-	ETag varchar(50),
-
-	Primary Key(Our_Id),
-	Foreign Key(CommentThreadId) References Youtube_CommentThread(Id),
-	Foreign Key(CommentId) References Youtube_Comment(Id)
 );
 GO
 
@@ -476,6 +408,85 @@ Create Table Youtube_Video(
 	Foreign Key(SnippetId) References Youtube_VideoSnippet(Our_Id),
 	Foreign Key(StatisticsId) References Youtube_VideoStatistics(Our_Id),
 	Foreign Key(StatusId) References Youtube_VideoStatus(Our_Id),
+);
+GO
+
+Create Table Youtube_CommentSnippet(
+
+	AuthorChannelId_Value varchar(50),
+	AuthorChannelId_ETag varchar(50),
+	AuthorChannelUrl varchar(8000),
+	AuthorDisplayName varchar(100),
+	AuthorProfileImageUrl varchar(8000),
+	CanRate bit null,
+	ChannelId varchar(50),
+	ETag varchar(50),
+	LikeCount bigint null,
+	ModerationStatus varchar(50),
+	ParentId varchar(50) NOT NULL,
+	PublishedAt DateTime,
+	PublishedAtDateTimeOffset DateTimeOffset,
+	PublishedAtRaw varchar(50),
+	TextDisplay varchar(max),
+	TextOriginal varchar(max),
+	UpdatedAt DateTime,
+	UpdatedAtDateTimeOffset DateTimeOffset,
+	UpdatedAtRaw varchar(50),
+	VideoId varchar(50),
+	ViewerRating varchar(50),
+
+	Primary Key(ParentId)
+);
+GO
+
+Create Table Youtube_Comment(
+	Id varchar(50) NOT NULL,
+	ETag varchar(50),
+	Kind varchar(50)
+
+	Primary Key(Id)
+	Foreign Key(Id) References Youtube_CommentSnippet(ParentId)
+);
+GO
+
+Create Table Youtube_CommentThreadSnippet(
+
+	Our_Id int not null IDENTITY(1,1),
+	ChannelId varchar(50) not null,
+	TopLevelCommentId varchar(50) not null,
+	VideoId varchar(50) not null,
+	ETag varchar(50),
+	IsPublic bit null,
+	TotalReplyCount bigint null,
+	
+	Primary Key(Our_Id),
+	Foreign Key(ChannelId) References Youtube_Channel(Id),
+	Foreign Key(VideoId) References Youtube_Video(Id),
+	Foreign Key(TopLevelCommentId) References Youtube_Comment(Id)
+	
+);
+GO
+
+Create Table Youtube_CommentThread(
+	Id varchar(50) NOT NULL,
+	ETag varchar(50),
+	Kind varchar(50),
+	ThreadSnippetId int NOT NULL,
+
+	Primary Key(Id),
+	Foreign Key(ThreadSnippetId) References Youtube_CommentThreadSnippet(Our_Id)
+);
+GO
+
+Create Table Youtube_CommentListMap(
+	Our_Id int NOT NULL IDENTITY(1,1),
+	CommentThreadId varchar(50) NOT NULL,
+	CommentId varchar(50) NOT NULL,
+	-- ETag varchar(50), Skipping because of mapping table. There should probably be a slight change for YT's ETag junk.
+
+	Primary Key(Our_Id),
+	Foreign Key(CommentThreadId) References Youtube_CommentThread(Id),
+	Foreign Key(CommentId) References Youtube_Comment(Id)
 );
 GO
 

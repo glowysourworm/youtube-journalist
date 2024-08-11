@@ -21,23 +21,26 @@ using System.Xml.Serialization;
 
 [assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__SocialMed__UserI__267ABA7A", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.User), "SocialMediaLink", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.SocialMediaLink), true)]
 [assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__UserEmail__UserI__29572725", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.User), "UserEmail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.UserEmail), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__45F365D3", "Youtube_ChannelAuditDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ChannelAuditDetails), "Youtube_Channel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Channel), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__46E78A0C", "Youtube_ChannelBrandingSettings", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ChannelBrandingSettings), "Youtube_Channel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Channel), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__4AB81AF0", "Youtube_Channel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_Channel), "Youtube_ChannelConversationPing", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_ChannelConversationPing), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_S__47DBAE45", "Youtube_ChannelSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ChannelSnippet), "Youtube_Channel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Channel), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__403A8C7D", "Youtube_ChannelSettings", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ChannelSettings), "Youtube_ChannelBrandingSettings", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_ChannelBrandingSettings), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Thumb__4316F928", "Youtube_ThumbnailDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ThumbnailDetails), "Youtube_ChannelSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_ChannelSnippet), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__398D8EEE", "Youtube_Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_Comment), "Youtube_CommentList", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_CommentList), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Snipp__32E0915F", "Youtube_CommentSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(YoutubeJournalist.Core.Youtube_CommentSnippet), "Youtube_Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Comment), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__38996AB5", "Youtube_CommentThread", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_CommentThread), "Youtube_CommentList", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_CommentList), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Snipp__35BCFE0A", "Youtube_CommentSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_CommentSnippet), "Youtube_CommentThread", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_CommentThread), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_R__Video__5CD6CB2B", "Youtube_Video", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_Video), "Youtube_RegionRestriction", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_RegionRestriction), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Chann__52593CB8", "Youtube_Channel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_Channel), "Youtube_CommentThreadSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_CommentThreadSnippet), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__3A81B327", "Youtube_ChannelAuditDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ChannelAuditDetails), "Youtube_Channel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Channel), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__3B75D760", "Youtube_ChannelBrandingSettings", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ChannelBrandingSettings), "Youtube_Channel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Channel), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__3F466844", "Youtube_Channel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_Channel), "Youtube_ChannelConversationPing", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_ChannelConversationPing), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_S__3C69FB99", "Youtube_ChannelSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ChannelSnippet), "Youtube_Channel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Channel), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__34C8D9D1", "Youtube_ChannelSettings", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ChannelSettings), "Youtube_ChannelBrandingSettings", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_ChannelBrandingSettings), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Thumb__37A5467C", "Youtube_ThumbnailDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ThumbnailDetails), "Youtube_ChannelSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_ChannelSnippet), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__5AEE82B9", "Youtube_Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_Comment), "Youtube_CommentListMap", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_CommentListMap), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__TopLe__5441852A", "Youtube_Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_Comment), "Youtube_CommentThreadSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_CommentThreadSnippet), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_Co__Kind__4F7CD00D", "Youtube_CommentSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_CommentSnippet), "Youtube_Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(YoutubeJournalist.Core.Youtube_Comment), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__59FA5E80", "Youtube_CommentThread", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_CommentThread), "Youtube_CommentListMap", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_CommentListMap), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Threa__571DF1D5", "Youtube_CommentThreadSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_CommentThreadSnippet), "Youtube_CommentThread", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_CommentThread), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_C__Video__534D60F1", "Youtube_Video", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_Video), "Youtube_CommentThreadSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_CommentThreadSnippet), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_R__Video__619B8048", "Youtube_Video", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_Video), "Youtube_RegionRestriction", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_RegionRestriction), true)]
 [assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_S__Snipp__2E1BDC42", "Youtube_ThumbnailDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ThumbnailDetails), "Youtube_SearchResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_SearchResult), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_T__Video__5FB337D6", "Youtube_Video", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_Video), "Youtube_Tag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Tag), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_V__Thumb__5165187F", "Youtube_ThumbnailDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ThumbnailDetails), "Youtube_VideoSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_VideoSnippet), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_V__Snipp__5441852A", "Youtube_VideoSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_VideoSnippet), "Youtube_Video", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Video), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_V__Stati__5535A963", "Youtube_VideoStatistics", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_VideoStatistics), "Youtube_Video", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Video), true)]
-[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_V__Statu__5629CD9C", "Youtube_VideoStatus", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_VideoStatus), "Youtube_Video", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Video), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_T__Video__6477ECF3", "Youtube_Video", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_Video), "Youtube_Tag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Tag), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_V__Thumb__45F365D3", "Youtube_ThumbnailDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_ThumbnailDetails), "Youtube_VideoSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_VideoSnippet), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_V__Snipp__48CFD27E", "Youtube_VideoSnippet", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_VideoSnippet), "Youtube_Video", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Video), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_V__Stati__49C3F6B7", "Youtube_VideoStatistics", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_VideoStatistics), "Youtube_Video", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Video), true)]
+[assembly: EdmRelationshipAttribute("YoutubeJournalistModel", "FK__Youtube_V__Statu__4AB81AF0", "Youtube_VideoStatus", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(YoutubeJournalist.Core.Youtube_VideoStatus), "Youtube_Video", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(YoutubeJournalist.Core.Youtube_Video), true)]
 
 #endregion
 
@@ -252,18 +255,18 @@ namespace YoutubeJournalist.Core
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Youtube_CommentList> Youtube_CommentList
+        public ObjectSet<Youtube_CommentListMap> Youtube_CommentListMap
         {
             get
             {
-                if ((_Youtube_CommentList == null))
+                if ((_Youtube_CommentListMap == null))
                 {
-                    _Youtube_CommentList = base.CreateObjectSet<Youtube_CommentList>("Youtube_CommentList");
+                    _Youtube_CommentListMap = base.CreateObjectSet<Youtube_CommentListMap>("Youtube_CommentListMap");
                 }
-                return _Youtube_CommentList;
+                return _Youtube_CommentListMap;
             }
         }
-        private ObjectSet<Youtube_CommentList> _Youtube_CommentList;
+        private ObjectSet<Youtube_CommentListMap> _Youtube_CommentListMap;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -296,6 +299,22 @@ namespace YoutubeJournalist.Core
             }
         }
         private ObjectSet<Youtube_CommentThread> _Youtube_CommentThread;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Youtube_CommentThreadSnippet> Youtube_CommentThreadSnippet
+        {
+            get
+            {
+                if ((_Youtube_CommentThreadSnippet == null))
+                {
+                    _Youtube_CommentThreadSnippet = base.CreateObjectSet<Youtube_CommentThreadSnippet>("Youtube_CommentThreadSnippet");
+                }
+                return _Youtube_CommentThreadSnippet;
+            }
+        }
+        private ObjectSet<Youtube_CommentThreadSnippet> _Youtube_CommentThreadSnippet;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -542,11 +561,11 @@ namespace YoutubeJournalist.Core
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Youtube_CommentList EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Youtube_CommentListMap EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToYoutube_CommentList(Youtube_CommentList youtube_CommentList)
+        public void AddToYoutube_CommentListMap(Youtube_CommentListMap youtube_CommentListMap)
         {
-            base.AddObject("Youtube_CommentList", youtube_CommentList);
+            base.AddObject("Youtube_CommentListMap", youtube_CommentListMap);
         }
     
         /// <summary>
@@ -563,6 +582,14 @@ namespace YoutubeJournalist.Core
         public void AddToYoutube_CommentThread(Youtube_CommentThread youtube_CommentThread)
         {
             base.AddObject("Youtube_CommentThread", youtube_CommentThread);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Youtube_CommentThreadSnippet EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToYoutube_CommentThreadSnippet(Youtube_CommentThreadSnippet youtube_CommentThreadSnippet)
+        {
+            base.AddObject("Youtube_CommentThreadSnippet", youtube_CommentThreadSnippet);
         }
     
         /// <summary>
@@ -1937,16 +1964,38 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__45F365D3", "Youtube_ChannelAuditDetails")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Chann__52593CB8", "Youtube_CommentThreadSnippet")]
+        public EntityCollection<Youtube_CommentThreadSnippet> Youtube_CommentThreadSnippet
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_CommentThreadSnippet>("YoutubeJournalistModel.FK__Youtube_C__Chann__52593CB8", "Youtube_CommentThreadSnippet");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_CommentThreadSnippet>("YoutubeJournalistModel.FK__Youtube_C__Chann__52593CB8", "Youtube_CommentThreadSnippet", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__3A81B327", "Youtube_ChannelAuditDetails")]
         public Youtube_ChannelAuditDetails Youtube_ChannelAuditDetails
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelAuditDetails>("YoutubeJournalistModel.FK__Youtube_C__Our_C__45F365D3", "Youtube_ChannelAuditDetails").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelAuditDetails>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3A81B327", "Youtube_ChannelAuditDetails").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelAuditDetails>("YoutubeJournalistModel.FK__Youtube_C__Our_C__45F365D3", "Youtube_ChannelAuditDetails").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelAuditDetails>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3A81B327", "Youtube_ChannelAuditDetails").Value = value;
             }
         }
         /// <summary>
@@ -1958,13 +2007,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelAuditDetails>("YoutubeJournalistModel.FK__Youtube_C__Our_C__45F365D3", "Youtube_ChannelAuditDetails");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelAuditDetails>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3A81B327", "Youtube_ChannelAuditDetails");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ChannelAuditDetails>("YoutubeJournalistModel.FK__Youtube_C__Our_C__45F365D3", "Youtube_ChannelAuditDetails", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ChannelAuditDetails>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3A81B327", "Youtube_ChannelAuditDetails", value);
                 }
             }
         }
@@ -1975,16 +2024,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__46E78A0C", "Youtube_ChannelBrandingSettings")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__3B75D760", "Youtube_ChannelBrandingSettings")]
         public Youtube_ChannelBrandingSettings Youtube_ChannelBrandingSettings
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__46E78A0C", "Youtube_ChannelBrandingSettings").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3B75D760", "Youtube_ChannelBrandingSettings").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__46E78A0C", "Youtube_ChannelBrandingSettings").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3B75D760", "Youtube_ChannelBrandingSettings").Value = value;
             }
         }
         /// <summary>
@@ -1996,13 +2045,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__46E78A0C", "Youtube_ChannelBrandingSettings");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3B75D760", "Youtube_ChannelBrandingSettings");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__46E78A0C", "Youtube_ChannelBrandingSettings", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3B75D760", "Youtube_ChannelBrandingSettings", value);
                 }
             }
         }
@@ -2013,18 +2062,18 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__4AB81AF0", "Youtube_ChannelConversationPing")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__3F466844", "Youtube_ChannelConversationPing")]
         public EntityCollection<Youtube_ChannelConversationPing> Youtube_ChannelConversationPing
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_ChannelConversationPing>("YoutubeJournalistModel.FK__Youtube_C__Our_C__4AB81AF0", "Youtube_ChannelConversationPing");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_ChannelConversationPing>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3F466844", "Youtube_ChannelConversationPing");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_ChannelConversationPing>("YoutubeJournalistModel.FK__Youtube_C__Our_C__4AB81AF0", "Youtube_ChannelConversationPing", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_ChannelConversationPing>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3F466844", "Youtube_ChannelConversationPing", value);
                 }
             }
         }
@@ -2035,16 +2084,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_S__47DBAE45", "Youtube_ChannelSnippet")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_S__3C69FB99", "Youtube_ChannelSnippet")]
         public Youtube_ChannelSnippet Youtube_ChannelSnippet
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelSnippet>("YoutubeJournalistModel.FK__Youtube_C__Our_S__47DBAE45", "Youtube_ChannelSnippet").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelSnippet>("YoutubeJournalistModel.FK__Youtube_C__Our_S__3C69FB99", "Youtube_ChannelSnippet").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelSnippet>("YoutubeJournalistModel.FK__Youtube_C__Our_S__47DBAE45", "Youtube_ChannelSnippet").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelSnippet>("YoutubeJournalistModel.FK__Youtube_C__Our_S__3C69FB99", "Youtube_ChannelSnippet").Value = value;
             }
         }
         /// <summary>
@@ -2056,13 +2105,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelSnippet>("YoutubeJournalistModel.FK__Youtube_C__Our_S__47DBAE45", "Youtube_ChannelSnippet");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelSnippet>("YoutubeJournalistModel.FK__Youtube_C__Our_S__3C69FB99", "Youtube_ChannelSnippet");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ChannelSnippet>("YoutubeJournalistModel.FK__Youtube_C__Our_S__47DBAE45", "Youtube_ChannelSnippet", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ChannelSnippet>("YoutubeJournalistModel.FK__Youtube_C__Our_S__3C69FB99", "Youtube_ChannelSnippet", value);
                 }
             }
         }
@@ -2229,18 +2278,18 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__45F365D3", "Youtube_Channel")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__3A81B327", "Youtube_Channel")]
         public EntityCollection<Youtube_Channel> Youtube_Channel
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__45F365D3", "Youtube_Channel");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3A81B327", "Youtube_Channel");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__45F365D3", "Youtube_Channel", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3A81B327", "Youtube_Channel", value);
                 }
             }
         }
@@ -2769,18 +2818,18 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__46E78A0C", "Youtube_Channel")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__3B75D760", "Youtube_Channel")]
         public EntityCollection<Youtube_Channel> Youtube_Channel
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__46E78A0C", "Youtube_Channel");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3B75D760", "Youtube_Channel");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__46E78A0C", "Youtube_Channel", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3B75D760", "Youtube_Channel", value);
                 }
             }
         }
@@ -2791,16 +2840,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__403A8C7D", "Youtube_ChannelSettings")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__34C8D9D1", "Youtube_ChannelSettings")]
         public Youtube_ChannelSettings Youtube_ChannelSettings
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__403A8C7D", "Youtube_ChannelSettings").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__34C8D9D1", "Youtube_ChannelSettings").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__403A8C7D", "Youtube_ChannelSettings").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__34C8D9D1", "Youtube_ChannelSettings").Value = value;
             }
         }
         /// <summary>
@@ -2812,13 +2861,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__403A8C7D", "Youtube_ChannelSettings");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ChannelSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__34C8D9D1", "Youtube_ChannelSettings");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ChannelSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__403A8C7D", "Youtube_ChannelSettings", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ChannelSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__34C8D9D1", "Youtube_ChannelSettings", value);
                 }
             }
         }
@@ -2987,16 +3036,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__4AB81AF0", "Youtube_Channel")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__3F466844", "Youtube_Channel")]
         public Youtube_Channel Youtube_Channel
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__4AB81AF0", "Youtube_Channel").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3F466844", "Youtube_Channel").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__4AB81AF0", "Youtube_Channel").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3F466844", "Youtube_Channel").Value = value;
             }
         }
         /// <summary>
@@ -3008,13 +3057,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__4AB81AF0", "Youtube_Channel");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3F466844", "Youtube_Channel");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__4AB81AF0", "Youtube_Channel", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_C__3F466844", "Youtube_Channel", value);
                 }
             }
         }
@@ -3445,18 +3494,18 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__403A8C7D", "Youtube_ChannelBrandingSettings")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_C__34C8D9D1", "Youtube_ChannelBrandingSettings")]
         public EntityCollection<Youtube_ChannelBrandingSettings> Youtube_ChannelBrandingSettings
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__403A8C7D", "Youtube_ChannelBrandingSettings");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__34C8D9D1", "Youtube_ChannelBrandingSettings");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__403A8C7D", "Youtube_ChannelBrandingSettings", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_ChannelBrandingSettings>("YoutubeJournalistModel.FK__Youtube_C__Our_C__34C8D9D1", "Youtube_ChannelBrandingSettings", value);
                 }
             }
         }
@@ -3841,18 +3890,18 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_S__47DBAE45", "Youtube_Channel")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Our_S__3C69FB99", "Youtube_Channel")]
         public EntityCollection<Youtube_Channel> Youtube_Channel
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_S__47DBAE45", "Youtube_Channel");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_S__3C69FB99", "Youtube_Channel");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_S__47DBAE45", "Youtube_Channel", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Our_S__3C69FB99", "Youtube_Channel", value);
                 }
             }
         }
@@ -3863,16 +3912,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Thumb__4316F928", "Youtube_ThumbnailDetails")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Thumb__37A5467C", "Youtube_ThumbnailDetails")]
         public Youtube_ThumbnailDetails Youtube_ThumbnailDetails
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_C__Thumb__4316F928", "Youtube_ThumbnailDetails").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_C__Thumb__37A5467C", "Youtube_ThumbnailDetails").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_C__Thumb__4316F928", "Youtube_ThumbnailDetails").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_C__Thumb__37A5467C", "Youtube_ThumbnailDetails").Value = value;
             }
         }
         /// <summary>
@@ -3884,13 +3933,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_C__Thumb__4316F928", "Youtube_ThumbnailDetails");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_C__Thumb__37A5467C", "Youtube_ThumbnailDetails");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_C__Thumb__4316F928", "Youtube_ThumbnailDetails", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_C__Thumb__37A5467C", "Youtube_ThumbnailDetails", value);
                 }
             }
         }
@@ -3998,30 +4047,6 @@ namespace YoutubeJournalist.Core
         private global::System.String _Kind;
         partial void OnKindChanging(global::System.String value);
         partial void OnKindChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String SnippetId
-        {
-            get
-            {
-                return _SnippetId;
-            }
-            set
-            {
-                OnSnippetIdChanging(value);
-                ReportPropertyChanging("SnippetId");
-                _SnippetId = StructuralObject.SetValidValue(value, true, "SnippetId");
-                ReportPropertyChanged("SnippetId");
-                OnSnippetIdChanged();
-            }
-        }
-        private global::System.String _SnippetId;
-        partial void OnSnippetIdChanging(global::System.String value);
-        partial void OnSnippetIdChanged();
 
         #endregion
 
@@ -4033,18 +4058,18 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__398D8EEE", "Youtube_CommentList")]
-        public EntityCollection<Youtube_CommentList> Youtube_CommentList
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__5AEE82B9", "Youtube_CommentListMap")]
+        public EntityCollection<Youtube_CommentListMap> Youtube_CommentListMap
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_CommentList>("YoutubeJournalistModel.FK__Youtube_C__Comme__398D8EEE", "Youtube_CommentList");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_CommentListMap>("YoutubeJournalistModel.FK__Youtube_C__Comme__5AEE82B9", "Youtube_CommentListMap");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_CommentList>("YoutubeJournalistModel.FK__Youtube_C__Comme__398D8EEE", "Youtube_CommentList", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_CommentListMap>("YoutubeJournalistModel.FK__Youtube_C__Comme__5AEE82B9", "Youtube_CommentListMap", value);
                 }
             }
         }
@@ -4055,16 +4080,38 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Snipp__32E0915F", "Youtube_CommentSnippet")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__TopLe__5441852A", "Youtube_CommentThreadSnippet")]
+        public EntityCollection<Youtube_CommentThreadSnippet> Youtube_CommentThreadSnippet
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_CommentThreadSnippet>("YoutubeJournalistModel.FK__Youtube_C__TopLe__5441852A", "Youtube_CommentThreadSnippet");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_CommentThreadSnippet>("YoutubeJournalistModel.FK__Youtube_C__TopLe__5441852A", "Youtube_CommentThreadSnippet", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_Co__Kind__4F7CD00D", "Youtube_CommentSnippet")]
         public Youtube_CommentSnippet Youtube_CommentSnippet
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__32E0915F", "Youtube_CommentSnippet").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_Co__Kind__4F7CD00D", "Youtube_CommentSnippet").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__32E0915F", "Youtube_CommentSnippet").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_Co__Kind__4F7CD00D", "Youtube_CommentSnippet").Value = value;
             }
         }
         /// <summary>
@@ -4076,13 +4123,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__32E0915F", "Youtube_CommentSnippet");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_Co__Kind__4F7CD00D", "Youtube_CommentSnippet");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__32E0915F", "Youtube_CommentSnippet", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_Co__Kind__4F7CD00D", "Youtube_CommentSnippet", value);
                 }
             }
         }
@@ -4094,26 +4141,26 @@ namespace YoutubeJournalist.Core
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="YoutubeJournalistModel", Name="Youtube_CommentList")]
+    [EdmEntityTypeAttribute(NamespaceName="YoutubeJournalistModel", Name="Youtube_CommentListMap")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Youtube_CommentList : EntityObject
+    public partial class Youtube_CommentListMap : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Youtube_CommentList object.
+        /// Create a new Youtube_CommentListMap object.
         /// </summary>
         /// <param name="our_Id">Initial value of the Our_Id property.</param>
         /// <param name="commentThreadId">Initial value of the CommentThreadId property.</param>
         /// <param name="commentId">Initial value of the CommentId property.</param>
-        public static Youtube_CommentList CreateYoutube_CommentList(global::System.Int32 our_Id, global::System.String commentThreadId, global::System.String commentId)
+        public static Youtube_CommentListMap CreateYoutube_CommentListMap(global::System.Int32 our_Id, global::System.String commentThreadId, global::System.String commentId)
         {
-            Youtube_CommentList youtube_CommentList = new Youtube_CommentList();
-            youtube_CommentList.Our_Id = our_Id;
-            youtube_CommentList.CommentThreadId = commentThreadId;
-            youtube_CommentList.CommentId = commentId;
-            return youtube_CommentList;
+            Youtube_CommentListMap youtube_CommentListMap = new Youtube_CommentListMap();
+            youtube_CommentListMap.Our_Id = our_Id;
+            youtube_CommentListMap.CommentThreadId = commentThreadId;
+            youtube_CommentListMap.CommentId = commentId;
+            return youtube_CommentListMap;
         }
 
         #endregion
@@ -4194,30 +4241,6 @@ namespace YoutubeJournalist.Core
         private global::System.String _CommentId;
         partial void OnCommentIdChanging(global::System.String value);
         partial void OnCommentIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ETag
-        {
-            get
-            {
-                return _ETag;
-            }
-            set
-            {
-                OnETagChanging(value);
-                ReportPropertyChanging("ETag");
-                _ETag = StructuralObject.SetValidValue(value, true, "ETag");
-                ReportPropertyChanged("ETag");
-                OnETagChanged();
-            }
-        }
-        private global::System.String _ETag;
-        partial void OnETagChanging(global::System.String value);
-        partial void OnETagChanged();
 
         #endregion
 
@@ -4229,16 +4252,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__398D8EEE", "Youtube_Comment")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__5AEE82B9", "Youtube_Comment")]
         public Youtube_Comment Youtube_Comment
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Comme__398D8EEE", "Youtube_Comment").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Comme__5AEE82B9", "Youtube_Comment").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Comme__398D8EEE", "Youtube_Comment").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Comme__5AEE82B9", "Youtube_Comment").Value = value;
             }
         }
         /// <summary>
@@ -4250,13 +4273,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Comme__398D8EEE", "Youtube_Comment");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Comme__5AEE82B9", "Youtube_Comment");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Comme__398D8EEE", "Youtube_Comment", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Comme__5AEE82B9", "Youtube_Comment", value);
                 }
             }
         }
@@ -4267,16 +4290,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__38996AB5", "Youtube_CommentThread")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__59FA5E80", "Youtube_CommentThread")]
         public Youtube_CommentThread Youtube_CommentThread
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Comme__38996AB5", "Youtube_CommentThread").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Comme__59FA5E80", "Youtube_CommentThread").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Comme__38996AB5", "Youtube_CommentThread").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Comme__59FA5E80", "Youtube_CommentThread").Value = value;
             }
         }
         /// <summary>
@@ -4288,13 +4311,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Comme__38996AB5", "Youtube_CommentThread");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Comme__59FA5E80", "Youtube_CommentThread");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Comme__38996AB5", "Youtube_CommentThread", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Comme__59FA5E80", "Youtube_CommentThread", value);
                 }
             }
         }
@@ -4845,40 +4868,34 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Snipp__32E0915F", "Youtube_Comment")]
-        public EntityCollection<Youtube_Comment> Youtube_Comment
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_Co__Kind__4F7CD00D", "Youtube_Comment")]
+        public Youtube_Comment Youtube_Comment
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Snipp__32E0915F", "Youtube_Comment");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_Co__Kind__4F7CD00D", "Youtube_Comment").Value;
             }
             set
             {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__Snipp__32E0915F", "Youtube_Comment", value);
-                }
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_Co__Kind__4F7CD00D", "Youtube_Comment").Value = value;
             }
         }
-    
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
+        [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Snipp__35BCFE0A", "Youtube_CommentThread")]
-        public EntityCollection<Youtube_CommentThread> Youtube_CommentThread
+        public EntityReference<Youtube_Comment> Youtube_CommentReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Snipp__35BCFE0A", "Youtube_CommentThread");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_Co__Kind__4F7CD00D", "Youtube_Comment");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Snipp__35BCFE0A", "Youtube_CommentThread", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_Co__Kind__4F7CD00D", "Youtube_Comment", value);
                 }
             }
         }
@@ -4901,14 +4918,12 @@ namespace YoutubeJournalist.Core
         /// Create a new Youtube_CommentThread object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="snippetId">Initial value of the SnippetId property.</param>
-        /// <param name="commentListId">Initial value of the CommentListId property.</param>
-        public static Youtube_CommentThread CreateYoutube_CommentThread(global::System.String id, global::System.String snippetId, global::System.Int32 commentListId)
+        /// <param name="threadSnippetId">Initial value of the ThreadSnippetId property.</param>
+        public static Youtube_CommentThread CreateYoutube_CommentThread(global::System.String id, global::System.Int32 threadSnippetId)
         {
             Youtube_CommentThread youtube_CommentThread = new Youtube_CommentThread();
             youtube_CommentThread.Id = id;
-            youtube_CommentThread.SnippetId = snippetId;
-            youtube_CommentThread.CommentListId = commentListId;
+            youtube_CommentThread.ThreadSnippetId = threadSnippetId;
             return youtube_CommentThread;
         }
 
@@ -4996,48 +5011,24 @@ namespace YoutubeJournalist.Core
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String SnippetId
+        public global::System.Int32 ThreadSnippetId
         {
             get
             {
-                return _SnippetId;
+                return _ThreadSnippetId;
             }
             set
             {
-                OnSnippetIdChanging(value);
-                ReportPropertyChanging("SnippetId");
-                _SnippetId = StructuralObject.SetValidValue(value, false, "SnippetId");
-                ReportPropertyChanged("SnippetId");
-                OnSnippetIdChanged();
+                OnThreadSnippetIdChanging(value);
+                ReportPropertyChanging("ThreadSnippetId");
+                _ThreadSnippetId = StructuralObject.SetValidValue(value, "ThreadSnippetId");
+                ReportPropertyChanged("ThreadSnippetId");
+                OnThreadSnippetIdChanged();
             }
         }
-        private global::System.String _SnippetId;
-        partial void OnSnippetIdChanging(global::System.String value);
-        partial void OnSnippetIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 CommentListId
-        {
-            get
-            {
-                return _CommentListId;
-            }
-            set
-            {
-                OnCommentListIdChanging(value);
-                ReportPropertyChanging("CommentListId");
-                _CommentListId = StructuralObject.SetValidValue(value, "CommentListId");
-                ReportPropertyChanged("CommentListId");
-                OnCommentListIdChanged();
-            }
-        }
-        private global::System.Int32 _CommentListId;
-        partial void OnCommentListIdChanging(global::System.Int32 value);
-        partial void OnCommentListIdChanged();
+        private global::System.Int32 _ThreadSnippetId;
+        partial void OnThreadSnippetIdChanging(global::System.Int32 value);
+        partial void OnThreadSnippetIdChanged();
 
         #endregion
 
@@ -5049,18 +5040,18 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__38996AB5", "Youtube_CommentList")]
-        public EntityCollection<Youtube_CommentList> Youtube_CommentList
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Comme__59FA5E80", "Youtube_CommentListMap")]
+        public EntityCollection<Youtube_CommentListMap> Youtube_CommentListMap
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_CommentList>("YoutubeJournalistModel.FK__Youtube_C__Comme__38996AB5", "Youtube_CommentList");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_CommentListMap>("YoutubeJournalistModel.FK__Youtube_C__Comme__59FA5E80", "Youtube_CommentListMap");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_CommentList>("YoutubeJournalistModel.FK__Youtube_C__Comme__38996AB5", "Youtube_CommentList", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_CommentListMap>("YoutubeJournalistModel.FK__Youtube_C__Comme__59FA5E80", "Youtube_CommentListMap", value);
                 }
             }
         }
@@ -5071,16 +5062,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Snipp__35BCFE0A", "Youtube_CommentSnippet")]
-        public Youtube_CommentSnippet Youtube_CommentSnippet
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Threa__571DF1D5", "Youtube_CommentThreadSnippet")]
+        public Youtube_CommentThreadSnippet Youtube_CommentThreadSnippet
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__35BCFE0A", "Youtube_CommentSnippet").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentThreadSnippet>("YoutubeJournalistModel.FK__Youtube_C__Threa__571DF1D5", "Youtube_CommentThreadSnippet").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__35BCFE0A", "Youtube_CommentSnippet").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentThreadSnippet>("YoutubeJournalistModel.FK__Youtube_C__Threa__571DF1D5", "Youtube_CommentThreadSnippet").Value = value;
             }
         }
         /// <summary>
@@ -5088,17 +5079,363 @@ namespace YoutubeJournalist.Core
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Youtube_CommentSnippet> Youtube_CommentSnippetReference
+        public EntityReference<Youtube_CommentThreadSnippet> Youtube_CommentThreadSnippetReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__35BCFE0A", "Youtube_CommentSnippet");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_CommentThreadSnippet>("YoutubeJournalistModel.FK__Youtube_C__Threa__571DF1D5", "Youtube_CommentThreadSnippet");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_CommentSnippet>("YoutubeJournalistModel.FK__Youtube_C__Snipp__35BCFE0A", "Youtube_CommentSnippet", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_CommentThreadSnippet>("YoutubeJournalistModel.FK__Youtube_C__Threa__571DF1D5", "Youtube_CommentThreadSnippet", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="YoutubeJournalistModel", Name="Youtube_CommentThreadSnippet")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Youtube_CommentThreadSnippet : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Youtube_CommentThreadSnippet object.
+        /// </summary>
+        /// <param name="our_Id">Initial value of the Our_Id property.</param>
+        /// <param name="channelId">Initial value of the ChannelId property.</param>
+        /// <param name="topLevelCommentId">Initial value of the TopLevelCommentId property.</param>
+        /// <param name="videoId">Initial value of the VideoId property.</param>
+        public static Youtube_CommentThreadSnippet CreateYoutube_CommentThreadSnippet(global::System.Int32 our_Id, global::System.String channelId, global::System.String topLevelCommentId, global::System.String videoId)
+        {
+            Youtube_CommentThreadSnippet youtube_CommentThreadSnippet = new Youtube_CommentThreadSnippet();
+            youtube_CommentThreadSnippet.Our_Id = our_Id;
+            youtube_CommentThreadSnippet.ChannelId = channelId;
+            youtube_CommentThreadSnippet.TopLevelCommentId = topLevelCommentId;
+            youtube_CommentThreadSnippet.VideoId = videoId;
+            return youtube_CommentThreadSnippet;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Our_Id
+        {
+            get
+            {
+                return _Our_Id;
+            }
+            set
+            {
+                if (_Our_Id != value)
+                {
+                    OnOur_IdChanging(value);
+                    ReportPropertyChanging("Our_Id");
+                    _Our_Id = StructuralObject.SetValidValue(value, "Our_Id");
+                    ReportPropertyChanged("Our_Id");
+                    OnOur_IdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Our_Id;
+        partial void OnOur_IdChanging(global::System.Int32 value);
+        partial void OnOur_IdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ChannelId
+        {
+            get
+            {
+                return _ChannelId;
+            }
+            set
+            {
+                OnChannelIdChanging(value);
+                ReportPropertyChanging("ChannelId");
+                _ChannelId = StructuralObject.SetValidValue(value, false, "ChannelId");
+                ReportPropertyChanged("ChannelId");
+                OnChannelIdChanged();
+            }
+        }
+        private global::System.String _ChannelId;
+        partial void OnChannelIdChanging(global::System.String value);
+        partial void OnChannelIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String TopLevelCommentId
+        {
+            get
+            {
+                return _TopLevelCommentId;
+            }
+            set
+            {
+                OnTopLevelCommentIdChanging(value);
+                ReportPropertyChanging("TopLevelCommentId");
+                _TopLevelCommentId = StructuralObject.SetValidValue(value, false, "TopLevelCommentId");
+                ReportPropertyChanged("TopLevelCommentId");
+                OnTopLevelCommentIdChanged();
+            }
+        }
+        private global::System.String _TopLevelCommentId;
+        partial void OnTopLevelCommentIdChanging(global::System.String value);
+        partial void OnTopLevelCommentIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String VideoId
+        {
+            get
+            {
+                return _VideoId;
+            }
+            set
+            {
+                OnVideoIdChanging(value);
+                ReportPropertyChanging("VideoId");
+                _VideoId = StructuralObject.SetValidValue(value, false, "VideoId");
+                ReportPropertyChanged("VideoId");
+                OnVideoIdChanged();
+            }
+        }
+        private global::System.String _VideoId;
+        partial void OnVideoIdChanging(global::System.String value);
+        partial void OnVideoIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ETag
+        {
+            get
+            {
+                return _ETag;
+            }
+            set
+            {
+                OnETagChanging(value);
+                ReportPropertyChanging("ETag");
+                _ETag = StructuralObject.SetValidValue(value, true, "ETag");
+                ReportPropertyChanged("ETag");
+                OnETagChanged();
+            }
+        }
+        private global::System.String _ETag;
+        partial void OnETagChanging(global::System.String value);
+        partial void OnETagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> IsPublic
+        {
+            get
+            {
+                return _IsPublic;
+            }
+            set
+            {
+                OnIsPublicChanging(value);
+                ReportPropertyChanging("IsPublic");
+                _IsPublic = StructuralObject.SetValidValue(value, "IsPublic");
+                ReportPropertyChanged("IsPublic");
+                OnIsPublicChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _IsPublic;
+        partial void OnIsPublicChanging(Nullable<global::System.Boolean> value);
+        partial void OnIsPublicChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> TotalReplyCount
+        {
+            get
+            {
+                return _TotalReplyCount;
+            }
+            set
+            {
+                OnTotalReplyCountChanging(value);
+                ReportPropertyChanging("TotalReplyCount");
+                _TotalReplyCount = StructuralObject.SetValidValue(value, "TotalReplyCount");
+                ReportPropertyChanged("TotalReplyCount");
+                OnTotalReplyCountChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _TotalReplyCount;
+        partial void OnTotalReplyCountChanging(Nullable<global::System.Int64> value);
+        partial void OnTotalReplyCountChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Chann__52593CB8", "Youtube_Channel")]
+        public Youtube_Channel Youtube_Channel
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Chann__52593CB8", "Youtube_Channel").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Chann__52593CB8", "Youtube_Channel").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Youtube_Channel> Youtube_ChannelReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Chann__52593CB8", "Youtube_Channel");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Channel>("YoutubeJournalistModel.FK__Youtube_C__Chann__52593CB8", "Youtube_Channel", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__TopLe__5441852A", "Youtube_Comment")]
+        public Youtube_Comment Youtube_Comment
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__TopLe__5441852A", "Youtube_Comment").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__TopLe__5441852A", "Youtube_Comment").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Youtube_Comment> Youtube_CommentReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__TopLe__5441852A", "Youtube_Comment");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Comment>("YoutubeJournalistModel.FK__Youtube_C__TopLe__5441852A", "Youtube_Comment", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Threa__571DF1D5", "Youtube_CommentThread")]
+        public EntityCollection<Youtube_CommentThread> Youtube_CommentThread
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Threa__571DF1D5", "Youtube_CommentThread");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_CommentThread>("YoutubeJournalistModel.FK__Youtube_C__Threa__571DF1D5", "Youtube_CommentThread", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Video__534D60F1", "Youtube_Video")]
+        public Youtube_Video Youtube_Video
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_C__Video__534D60F1", "Youtube_Video").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_C__Video__534D60F1", "Youtube_Video").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Youtube_Video> Youtube_VideoReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_C__Video__534D60F1", "Youtube_Video");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_C__Video__534D60F1", "Youtube_Video", value);
                 }
             }
         }
@@ -5245,16 +5582,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_R__Video__5CD6CB2B", "Youtube_Video")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_R__Video__619B8048", "Youtube_Video")]
         public Youtube_Video Youtube_Video
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_R__Video__5CD6CB2B", "Youtube_Video").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_R__Video__619B8048", "Youtube_Video").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_R__Video__5CD6CB2B", "Youtube_Video").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_R__Video__619B8048", "Youtube_Video").Value = value;
             }
         }
         /// <summary>
@@ -5266,13 +5603,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_R__Video__5CD6CB2B", "Youtube_Video");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_R__Video__619B8048", "Youtube_Video");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_R__Video__5CD6CB2B", "Youtube_Video", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_R__Video__619B8048", "Youtube_Video", value);
                 }
             }
         }
@@ -5903,16 +6240,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_T__Video__5FB337D6", "Youtube_Video")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_T__Video__6477ECF3", "Youtube_Video")]
         public Youtube_Video Youtube_Video
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_T__Video__5FB337D6", "Youtube_Video").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_T__Video__6477ECF3", "Youtube_Video").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_T__Video__5FB337D6", "Youtube_Video").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_T__Video__6477ECF3", "Youtube_Video").Value = value;
             }
         }
         /// <summary>
@@ -5924,13 +6261,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_T__Video__5FB337D6", "Youtube_Video");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_T__Video__6477ECF3", "Youtube_Video");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_T__Video__5FB337D6", "Youtube_Video", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_T__Video__6477ECF3", "Youtube_Video", value);
                 }
             }
         }
@@ -6505,18 +6842,18 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Thumb__4316F928", "Youtube_ChannelSnippet")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Thumb__37A5467C", "Youtube_ChannelSnippet")]
         public EntityCollection<Youtube_ChannelSnippet> Youtube_ChannelSnippet
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_ChannelSnippet>("YoutubeJournalistModel.FK__Youtube_C__Thumb__4316F928", "Youtube_ChannelSnippet");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_ChannelSnippet>("YoutubeJournalistModel.FK__Youtube_C__Thumb__37A5467C", "Youtube_ChannelSnippet");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_ChannelSnippet>("YoutubeJournalistModel.FK__Youtube_C__Thumb__4316F928", "Youtube_ChannelSnippet", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_ChannelSnippet>("YoutubeJournalistModel.FK__Youtube_C__Thumb__37A5467C", "Youtube_ChannelSnippet", value);
                 }
             }
         }
@@ -6549,18 +6886,18 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Thumb__5165187F", "Youtube_VideoSnippet")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Thumb__45F365D3", "Youtube_VideoSnippet")]
         public EntityCollection<Youtube_VideoSnippet> Youtube_VideoSnippet
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_VideoSnippet>("YoutubeJournalistModel.FK__Youtube_V__Thumb__5165187F", "Youtube_VideoSnippet");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_VideoSnippet>("YoutubeJournalistModel.FK__Youtube_V__Thumb__45F365D3", "Youtube_VideoSnippet");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_VideoSnippet>("YoutubeJournalistModel.FK__Youtube_V__Thumb__5165187F", "Youtube_VideoSnippet", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_VideoSnippet>("YoutubeJournalistModel.FK__Youtube_V__Thumb__45F365D3", "Youtube_VideoSnippet", value);
                 }
             }
         }
@@ -7351,18 +7688,40 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_R__Video__5CD6CB2B", "Youtube_RegionRestriction")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_C__Video__534D60F1", "Youtube_CommentThreadSnippet")]
+        public EntityCollection<Youtube_CommentThreadSnippet> Youtube_CommentThreadSnippet
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_CommentThreadSnippet>("YoutubeJournalistModel.FK__Youtube_C__Video__534D60F1", "Youtube_CommentThreadSnippet");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_CommentThreadSnippet>("YoutubeJournalistModel.FK__Youtube_C__Video__534D60F1", "Youtube_CommentThreadSnippet", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_R__Video__619B8048", "Youtube_RegionRestriction")]
         public EntityCollection<Youtube_RegionRestriction> Youtube_RegionRestriction
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_RegionRestriction>("YoutubeJournalistModel.FK__Youtube_R__Video__5CD6CB2B", "Youtube_RegionRestriction");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_RegionRestriction>("YoutubeJournalistModel.FK__Youtube_R__Video__619B8048", "Youtube_RegionRestriction");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_RegionRestriction>("YoutubeJournalistModel.FK__Youtube_R__Video__5CD6CB2B", "Youtube_RegionRestriction", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_RegionRestriction>("YoutubeJournalistModel.FK__Youtube_R__Video__619B8048", "Youtube_RegionRestriction", value);
                 }
             }
         }
@@ -7373,18 +7732,18 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_T__Video__5FB337D6", "Youtube_Tag")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_T__Video__6477ECF3", "Youtube_Tag")]
         public EntityCollection<Youtube_Tag> Youtube_Tag
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Tag>("YoutubeJournalistModel.FK__Youtube_T__Video__5FB337D6", "Youtube_Tag");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Tag>("YoutubeJournalistModel.FK__Youtube_T__Video__6477ECF3", "Youtube_Tag");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Tag>("YoutubeJournalistModel.FK__Youtube_T__Video__5FB337D6", "Youtube_Tag", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Tag>("YoutubeJournalistModel.FK__Youtube_T__Video__6477ECF3", "Youtube_Tag", value);
                 }
             }
         }
@@ -7395,16 +7754,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Snipp__5441852A", "Youtube_VideoSnippet")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Snipp__48CFD27E", "Youtube_VideoSnippet")]
         public Youtube_VideoSnippet Youtube_VideoSnippet
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoSnippet>("YoutubeJournalistModel.FK__Youtube_V__Snipp__5441852A", "Youtube_VideoSnippet").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoSnippet>("YoutubeJournalistModel.FK__Youtube_V__Snipp__48CFD27E", "Youtube_VideoSnippet").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoSnippet>("YoutubeJournalistModel.FK__Youtube_V__Snipp__5441852A", "Youtube_VideoSnippet").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoSnippet>("YoutubeJournalistModel.FK__Youtube_V__Snipp__48CFD27E", "Youtube_VideoSnippet").Value = value;
             }
         }
         /// <summary>
@@ -7416,13 +7775,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoSnippet>("YoutubeJournalistModel.FK__Youtube_V__Snipp__5441852A", "Youtube_VideoSnippet");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoSnippet>("YoutubeJournalistModel.FK__Youtube_V__Snipp__48CFD27E", "Youtube_VideoSnippet");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_VideoSnippet>("YoutubeJournalistModel.FK__Youtube_V__Snipp__5441852A", "Youtube_VideoSnippet", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_VideoSnippet>("YoutubeJournalistModel.FK__Youtube_V__Snipp__48CFD27E", "Youtube_VideoSnippet", value);
                 }
             }
         }
@@ -7433,16 +7792,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Stati__5535A963", "Youtube_VideoStatistics")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Stati__49C3F6B7", "Youtube_VideoStatistics")]
         public Youtube_VideoStatistics Youtube_VideoStatistics
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoStatistics>("YoutubeJournalistModel.FK__Youtube_V__Stati__5535A963", "Youtube_VideoStatistics").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoStatistics>("YoutubeJournalistModel.FK__Youtube_V__Stati__49C3F6B7", "Youtube_VideoStatistics").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoStatistics>("YoutubeJournalistModel.FK__Youtube_V__Stati__5535A963", "Youtube_VideoStatistics").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoStatistics>("YoutubeJournalistModel.FK__Youtube_V__Stati__49C3F6B7", "Youtube_VideoStatistics").Value = value;
             }
         }
         /// <summary>
@@ -7454,13 +7813,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoStatistics>("YoutubeJournalistModel.FK__Youtube_V__Stati__5535A963", "Youtube_VideoStatistics");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoStatistics>("YoutubeJournalistModel.FK__Youtube_V__Stati__49C3F6B7", "Youtube_VideoStatistics");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_VideoStatistics>("YoutubeJournalistModel.FK__Youtube_V__Stati__5535A963", "Youtube_VideoStatistics", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_VideoStatistics>("YoutubeJournalistModel.FK__Youtube_V__Stati__49C3F6B7", "Youtube_VideoStatistics", value);
                 }
             }
         }
@@ -7471,16 +7830,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Statu__5629CD9C", "Youtube_VideoStatus")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Statu__4AB81AF0", "Youtube_VideoStatus")]
         public Youtube_VideoStatus Youtube_VideoStatus
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoStatus>("YoutubeJournalistModel.FK__Youtube_V__Statu__5629CD9C", "Youtube_VideoStatus").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoStatus>("YoutubeJournalistModel.FK__Youtube_V__Statu__4AB81AF0", "Youtube_VideoStatus").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoStatus>("YoutubeJournalistModel.FK__Youtube_V__Statu__5629CD9C", "Youtube_VideoStatus").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoStatus>("YoutubeJournalistModel.FK__Youtube_V__Statu__4AB81AF0", "Youtube_VideoStatus").Value = value;
             }
         }
         /// <summary>
@@ -7492,13 +7851,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoStatus>("YoutubeJournalistModel.FK__Youtube_V__Statu__5629CD9C", "Youtube_VideoStatus");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_VideoStatus>("YoutubeJournalistModel.FK__Youtube_V__Statu__4AB81AF0", "Youtube_VideoStatus");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_VideoStatus>("YoutubeJournalistModel.FK__Youtube_V__Statu__5629CD9C", "Youtube_VideoStatus", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_VideoStatus>("YoutubeJournalistModel.FK__Youtube_V__Statu__4AB81AF0", "Youtube_VideoStatus", value);
                 }
             }
         }
@@ -7955,16 +8314,16 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Thumb__5165187F", "Youtube_ThumbnailDetails")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Thumb__45F365D3", "Youtube_ThumbnailDetails")]
         public Youtube_ThumbnailDetails Youtube_ThumbnailDetails
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_V__Thumb__5165187F", "Youtube_ThumbnailDetails").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_V__Thumb__45F365D3", "Youtube_ThumbnailDetails").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_V__Thumb__5165187F", "Youtube_ThumbnailDetails").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_V__Thumb__45F365D3", "Youtube_ThumbnailDetails").Value = value;
             }
         }
         /// <summary>
@@ -7976,13 +8335,13 @@ namespace YoutubeJournalist.Core
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_V__Thumb__5165187F", "Youtube_ThumbnailDetails");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_V__Thumb__45F365D3", "Youtube_ThumbnailDetails");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_V__Thumb__5165187F", "Youtube_ThumbnailDetails", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Youtube_ThumbnailDetails>("YoutubeJournalistModel.FK__Youtube_V__Thumb__45F365D3", "Youtube_ThumbnailDetails", value);
                 }
             }
         }
@@ -7993,18 +8352,18 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Snipp__5441852A", "Youtube_Video")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Snipp__48CFD27E", "Youtube_Video")]
         public EntityCollection<Youtube_Video> Youtube_Video
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_V__Snipp__5441852A", "Youtube_Video");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_V__Snipp__48CFD27E", "Youtube_Video");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_V__Snipp__5441852A", "Youtube_Video", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_V__Snipp__48CFD27E", "Youtube_Video", value);
                 }
             }
         }
@@ -8225,18 +8584,18 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Stati__5535A963", "Youtube_Video")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Stati__49C3F6B7", "Youtube_Video")]
         public EntityCollection<Youtube_Video> Youtube_Video
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_V__Stati__5535A963", "Youtube_Video");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_V__Stati__49C3F6B7", "Youtube_Video");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_V__Stati__5535A963", "Youtube_Video", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_V__Stati__49C3F6B7", "Youtube_Video", value);
                 }
             }
         }
@@ -8643,18 +9002,18 @@ namespace YoutubeJournalist.Core
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Statu__5629CD9C", "Youtube_Video")]
+        [EdmRelationshipNavigationPropertyAttribute("YoutubeJournalistModel", "FK__Youtube_V__Statu__4AB81AF0", "Youtube_Video")]
         public EntityCollection<Youtube_Video> Youtube_Video
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_V__Statu__5629CD9C", "Youtube_Video");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_V__Statu__4AB81AF0", "Youtube_Video");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_V__Statu__5629CD9C", "Youtube_Video", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Youtube_Video>("YoutubeJournalistModel.FK__Youtube_V__Statu__4AB81AF0", "Youtube_Video", value);
                 }
             }
         }

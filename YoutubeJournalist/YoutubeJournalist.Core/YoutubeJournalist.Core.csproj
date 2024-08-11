@@ -22,6 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\wpf-custom-utilities\src\WpfCustomUtilities\WpfCustomUtilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
 	<Reference Include="System.Configuration" />
 	<Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />

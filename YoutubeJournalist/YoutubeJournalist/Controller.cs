@@ -1,71 +1,53 @@
 ﻿using System;
-using System.Linq;
-using System.Configuration;
-using System.Data.Entity;
-using System.Data.SqlClient;
-using System.Threading.Tasks;
-
-using Microsoft.SqlServer;
-
-using YoutubeJournalist.Core.WebAPI;
-using YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3;
-using YoutubeJournalist.ViewModel;
 using System.Collections.Generic;
-using YoutubeJournalist.Core;
+using System.Collections.ObjectModel;
+using System.Linq;
+
 using WpfCustomUtilities.Extensions.Collection;
-using Google.Apis.YouTube.v3.Data;
+
+using YoutubeJournalist.Core;
+using YoutubeJournalist.Core.Service;
+using YoutubeJournalist.Core.Service.Interface;
+using YoutubeJournalist.Core.Service.Model;
+using YoutubeJournalist.ViewModel;
 
 namespace YoutubeJournalist
 {
     /// <summary>
     /// Primary component for querying and storing data from social media web services
     /// </summary>
-    public class Controller : IDisposable
+    public class Controller
     {
-        readonly YoutubeService _youtubeService;
-        readonly YoutubeJournalistEntities _dbContext;
-
-        bool _disposed;
+        readonly string _apiKey;
+        readonly string _clientId;
+        readonly string _clientSecret;
+        readonly string _localDatabaseConnectionString;
 
         public Controller(ConfigurationViewModel configuration)
         {
-            // Service connection
-            _youtubeService = new YoutubeService(configuration.ApiKey, 
-                                                 configuration.ClientID, 
-                                                 configuration.ClientSecret);
-
-            // EF Database Connection - FIX DEFAULT CONNECTION
-            _dbContext = new YoutubeJournalistEntities(GetConnectionString());
-
-            _disposed = false;
+            // Youtube service connection
+            _apiKey = configuration.ApiKey;
+            _clientId = configuration.ClientID;
+            _clientSecret = configuration.ClientSecret;
+            _localDatabaseConnectionString = configuration.LocalDatabaseConnectionString;
         }
 
-        private string GetConnectionString()
+        private IUnitOfWork CreateConnection()
         {
-            // FIX!! MS HAD TO BE A PROBLEM:  App.config file being used for EF6 inside YoutubeJournalist.Core project
-            return "metadata = res://*/YoutubeJournalistEntityModel.csdl|res://*/YoutubeJournalistEntityModel.ssdl|res://*/YoutubeJournalistEntityModel.msl;provider=System.Data.SqlClient;provider connection string='data source=LAPTOP-JG4V86VG\\LOCALDB;initial catalog=YoutubeJournalist;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework'";
+            return new UnitOfWork(_apiKey, _clientId, _clientSecret, _localDatabaseConnectionString);
         }
 
         /// <summary>
-        /// Search will return search result "snippet(s)"; and apply the available search filters for the
-        /// specified entity type.
+        /// Returns entire collection of search results from local database
         /// </summary>
-        public IEnumerable<SearchResultViewModel> Search(YoutubeServiceRequest request)
+        public IEnumerable<SearchResultViewModel> GetSearchResults()
         {
             try
             {
-                // Query Youtube
-                var viewModels = _youtubeService.Search(request).Collection.Select(result =>
+                using (var unitOfWork = CreateConnection())
                 {
-                    // Add / Update -> SaveChanges()
-                    AddUpdateSearchResult(result);
-
-                    // Create new view model
-                    return CreateSearchViewModel(result);
-
-                }).Actualize();
-
-                return viewModels;
+                    return unitOfWork.GetSearchResults().Select(result => CreateSearchViewModel(result, true)).Actualize();
+                }
             }
             catch (Exception ex)
             {
@@ -74,23 +56,156 @@ namespace YoutubeJournalist
         }
 
         /// <summary>
-        /// Returns local database search results, from past searches.
+        /// Returns entire set of channel entities from local database
         /// </summary>
-        public IEnumerable<SearchResultViewModel> GetLocalSearchResults()
+        public IEnumerable<ChannelViewModel> GetChannels()
         {
             try
             {
-                // Query Youtube
-                var viewModels = _dbContext.Youtube_SearchResult
-                                           .Actualize()             // Loading entire set at once!
-                                           .Select(result =>
+                using (var unitOfWork = CreateConnection())
                 {
-                    // Create new view model
-                    return CreateSearchViewModel(result);
+                    var videos = unitOfWork.GetVideos();
+                    var commentThreads = videos.SelectMany(video => unitOfWork.GetCommentThreads(video.Id))
+                                               .Actualize();
 
-                }).Actualize();
 
-                return viewModels;
+                    return unitOfWork.GetChannels().Select(result =>
+                    {
+                        var channelVideos = videos.Where(video => video.Youtube_VideoSnippet.ChannelId == result.Id).Actualize();
+
+                        return CreateChannelViewModel(result, channelVideos, commentThreads);
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Returns channel from local database
+        /// </summary>
+        public ChannelViewModel GetChannel(string channelId)
+        {
+            try
+            {
+                using (var unitOfWork = CreateConnection())
+                {
+                    var channel = unitOfWork.GetChannel(channelId);
+                    var videos = unitOfWork.GetVideos(channelId);
+                    var commentThreads = videos.SelectMany(video => unitOfWork.GetCommentThreads(video.Id))
+                                               .Actualize();
+
+                    return CreateChannelViewModel(channel, videos, commentThreads);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Returns entire set of video entities from local database
+        /// </summary>
+        public IEnumerable<VideoViewModel> GetVideos()
+        {
+            try
+            {
+                using (var unitOfWork = CreateConnection())
+                {
+                    var videos = unitOfWork.GetVideos();
+                    var commentThreads = videos.SelectMany(video => unitOfWork.GetCommentThreads(video.Id))
+                                               .Actualize();
+
+                    return unitOfWork.GetVideos()
+                                     .Select(result => 
+                                        CreateVideoViewModel(result, 
+                                            commentThreads.Where(thread => 
+                                                thread.Youtube_CommentThreadSnippet.VideoId == result.Id))).Actualize();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// Returns video details from local database
+        /// </summary>
+        public VideoViewModel GetVideo(string videoId)
+        {
+            try
+            {
+                using (var unitOfWork = CreateConnection())
+                {
+                    var video = unitOfWork.GetVideo(videoId);
+                    var commentThreads = unitOfWork.GetCommentThreads(videoId);
+
+                    return CreateVideoViewModel(video, commentThreads);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public IEnumerable<CommentThreadViewModel> GetCommentThreads(string videoId)
+        {
+            try
+            {
+                using (var unitOfWork = CreateConnection())
+                {
+                    return unitOfWork.GetCommentThreads(videoId).Select(result => CreateCommentThreadViewModel(result));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        /// <summary>
+        /// Executes basic search as a user on the Youtube platform, and stores the results in the local database
+        /// </summary>
+        public IEnumerable<SearchResultViewModel> BasicSearch(YoutubeBasicSearchRequest request)
+        {
+            try
+            {
+                using (var unitOfWork = CreateConnection())
+                {
+                    return unitOfWork.BasicSearch(request).Select(result => CreateSearchViewModel(result, false)).Actualize();
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        /// <summary>
+        /// Executes search for channel details, and updates local database
+        /// </summary>
+        public ChannelViewModel SearchUpdateChannelDetails(YoutubeChannelDetailsRequest request)
+        {
+            try
+            {
+                using (var unitOfWork = CreateConnection())
+                {
+                    // Channel search from Youtube
+                    var channel = unitOfWork.SearchUpdateChannelDetails(request);
+
+                    // Query videos
+                    var videos = unitOfWork.GetVideos(channel.Id);
+
+                    // Query comment threads for all videos
+                    var commentThreads = videos.SelectMany(x => unitOfWork.GetCommentThreads(x.Id));
+
+                    return CreateChannelViewModel(channel, videos, commentThreads);
+                }
             }
             catch (Exception ex)
             {
@@ -102,66 +217,23 @@ namespace YoutubeJournalist
         /// Get will apply service request to look for specific channel, video, or playlist entities,
         /// pulling over extended detail about the entity.
         /// </summary>
-        public IEnumerable<SearchResultViewModel> GetVideos(YoutubeServiceRequest request)
+        public IEnumerable<VideoViewModel> SearchUpdateVideoDetails(YoutubeVideoDetailsRequest request)
         {
             try
             {
-                // Query Youtube
-                var queryResult = _youtubeService.GetVideos(request);
-
-                var viewModels = queryResult.Collection.Select(result =>
+                using (var unitOfWork = CreateConnection())
                 {
-                    // Add / Update -> SaveChanges()
-                    AddUpdateVideo(result);
+                    // Channel search from Youtube
+                    var videos = unitOfWork.SearchUpdateVideoDetails(request);
 
-                    // Create new view model
-                    return CreateSearchViewModel(result);
+                    // Query comment threads for all videos
+                    var commentThreads = videos.SelectMany(x => unitOfWork.GetCommentThreads(x.Id));
 
-                }).Actualize();
-
-                // Loose Collections
-                foreach (var topicId in queryResult.LooseCollection1)
-                    _dbContext.Youtube_TopicId.AddObject(topicId);
-
-                foreach (var category in queryResult.LooseCollection2)
-                    _dbContext.Youtube_TopicCategory.AddObject(category);
-
-                _dbContext.SaveChanges();
-
-                return viewModels;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        public IEnumerable<SearchResultViewModel> GetChannels(YoutubeServiceRequest request)
-        {
-            try
-            {
-                // Query Youtube
-                var queryResult = _youtubeService.GetChannels(request);
-
-                var viewModels = queryResult.Collection.Select(result =>
-                {
-                    // Add / Update -> SaveChanges()
-                    AddUpdateChannel(result);
-
-                    // Create new view model
-                    return CreateSearchViewModel(result);
-
-                }).Actualize();
-
-                // Loose Collections
-                foreach (var topicId in queryResult.LooseCollection1)
-                    _dbContext.Youtube_TopicId.AddObject(topicId);
-
-                foreach (var category in queryResult.LooseCollection2)
-                    _dbContext.Youtube_TopicCategory.AddObject(category);
-
-                _dbContext.SaveChanges();
-
-                return viewModels;
+                    return videos.Select(video => 
+                            CreateVideoViewModel(video, 
+                                commentThreads.Where(x => 
+                                    x.Youtube_CommentThreadSnippet.VideoId == video.Id).Actualize())).Actualize();
+                }
             }
             catch (Exception ex)
             {
@@ -169,138 +241,143 @@ namespace YoutubeJournalist
             }
         }
 
-        private SearchResultViewModel CreateSearchViewModel(Youtube_SearchResult entity)
+        /// <summary>
+        /// Search that retrieves comment threads for:  1) An entire channel, or 2) A set of video (ids)
+        /// </summary>
+        public IEnumerable<CommentThreadViewModel> SearchCommentThreads(YoutubeCommentThreadRequest request)
         {
-            // Return view model for query results
-            return new SearchResultViewModel()
+            try
             {
-                Created = entity.Snippet_PublishedAt ?? DateTime.MinValue,
-                Updated = entity.Snippet_PublishedAt ?? DateTime.MinValue,
-                Description = entity.Snippet_Description,
-                ETag = entity.Snippet_ETag ?? "NULL ETag",
-                Id = entity.Id_ChannelId ?? entity.Id_VideoId ?? null,
-                Thumbnail = entity.Youtube_ThumbnailDetails.Default__Url,
-                Title = entity.Snippet_Title ?? "No Title",
-                IsChannel = entity.Id_ChannelId != null
-            };
-        }
-        private SearchResultViewModel CreateSearchViewModel(Youtube_Video entity)
-        {
-            // Return view model for query results
-            return new SearchResultViewModel()
-            {
-                Created = entity.Youtube_VideoStatus.PublishAt ?? DateTime.MinValue,
-                Updated = entity.Youtube_VideoSnippet.PublishedAt ?? DateTime.MinValue,
-                Description = entity.Youtube_VideoSnippet.Description ?? "No Descr.",
-                ETag = entity.ETag ?? "NULL ETag",
-                Id = entity.Id ?? "NULL ID",
-                Thumbnail = entity.Youtube_VideoSnippet.Youtube_ThumbnailDetails.Default__Url,
-                Title = entity.Youtube_VideoSnippet.Title ?? "No Title",
-                IsChannel = false
-            };
-        }
-        private SearchResultViewModel CreateSearchViewModel(Youtube_Channel entity)
-        {
-            // Return view model for query results
-            return new SearchResultViewModel()
-            {
-                Created = entity.ContentOwnerDetails_TimeLinked ?? DateTime.MinValue,
-                //Updated = entity.ContentOwnerDetails_TimeLinkedDateTimeOffset.DateTime ?? DateTime.MinValue,
-                //Description = entity.Description ?? "No Descr.",
-                ETag = entity.ETag ?? "NULL ETag",
-                Id = entity.Id ?? "NULL ID",
-                Thumbnail = entity.Youtube_ChannelSnippet.Youtube_ThumbnailDetails.Default__Url,
-                Title = entity.Youtube_ChannelSnippet.Title ?? "No Title",
-                IsChannel = false
-            };
-        }
+                using (var unitOfWork = CreateConnection())
+                {
+                    // Search for comment threads
+                    var commentThreads = unitOfWork.SearchCommentThreads(request);
 
-        private void AddUpdateVideo(Youtube_Video entity)
-        {
-            // Storey query results into local database
-            // TODO: Check for Add-Or-Update
-            _dbContext.Youtube_Video.AddObject(entity);
-
-            // Foreign Key Relationships
-            //
-            // ThumbnailDetails
-            if (entity.Youtube_VideoSnippet?.Youtube_ThumbnailDetails != null)
-                _dbContext.Youtube_ThumbnailDetails.AddObject(entity.Youtube_VideoSnippet?.Youtube_ThumbnailDetails);
-
-            // VideoSnippet
-            if (entity.Youtube_VideoSnippet != null)
-                _dbContext.Youtube_VideoSnippet.AddObject(entity.Youtube_VideoSnippet);
-
-            // VideoStatus
-            if (entity.Youtube_VideoStatus != null)
-                _dbContext.Youtube_VideoStatus.AddObject(entity.Youtube_VideoStatus);
-
-            // VideoStatistics
-            if (entity.Youtube_VideoStatistics != null)
-                _dbContext.Youtube_VideoStatistics.AddObject(entity.Youtube_VideoStatistics);
-
-            // Commit changes
-            _dbContext.SaveChanges();
-        }
-        private void AddUpdateChannel(Youtube_Channel entity)
-        {
-            // Storey query results into local database
-            // TODO: Check for Add-Or-Update
-            _dbContext.Youtube_Channel.AddObject(entity);
-
-            // Foreign Key Relationships
-            //
-
-            // ChannelSnippet
-            if (entity.Youtube_ChannelSnippet != null)
-            {
-                _dbContext.Youtube_ChannelSnippet.AddObject(entity.Youtube_ChannelSnippet);
-
-                // ThumbnailDetails
-                if (entity.Youtube_ChannelSnippet?.Youtube_ThumbnailDetails != null)
-                    _dbContext.Youtube_ThumbnailDetails.AddObject(entity.Youtube_ChannelSnippet.Youtube_ThumbnailDetails);
+                    return commentThreads.Select(thread => CreateCommentThreadViewModel(thread))
+                                         .Actualize();
+                }
             }
-
-            // ChannelAuditDetails
-            if (entity.Youtube_ChannelAuditDetails != null)
-                _dbContext.Youtube_ChannelAuditDetails.AddObject(entity.Youtube_ChannelAuditDetails);
-
-            // ChannelSettings
-            if (entity.Youtube_ChannelBrandingSettings.Youtube_ChannelSettings != null)
-                _dbContext.Youtube_ChannelSettings.AddObject(entity.Youtube_ChannelBrandingSettings.Youtube_ChannelSettings);
-
-            // ChannelBrandingSettings
-            if (entity.Youtube_ChannelBrandingSettings != null)
-                _dbContext.Youtube_ChannelBrandingSettings.AddObject(entity.Youtube_ChannelBrandingSettings);
-
-            //// ChannelStatistics
-            //if (entity.channel != null)
-            //    _dbContext.Youtube_VideoStatistics.AddObject(entity.Youtube_VideoStatistics);
-
-            // Commit changes
-            _dbContext.SaveChanges();
-        }
-        private void AddUpdateSearchResult(Youtube_SearchResult entity)
-        {
-            // Storey query results into local database
-            // TODO: Check for Add-Or-Update
-            _dbContext.Youtube_ThumbnailDetails.AddObject(entity.Youtube_ThumbnailDetails);
-
-            _dbContext.Youtube_SearchResult.AddObject(entity);
-
-            // Commit changes
-            _dbContext.SaveChanges();
-        }
-
-        public void Dispose()
-        {
-            if (!_disposed)
+            catch (Exception ex)
             {
-                _youtubeService.Dispose();
-                _dbContext.Dispose();
-
-                _disposed = true;
+                throw ex;
             }
+        }
+
+        private SearchResultViewModel CreateSearchViewModel(Youtube_SearchResult result, bool isLocal)
+        {
+            return new SearchResultViewModel()
+            {
+                IsLocal = isLocal,
+                Created = result.Snippet_PublishedAtDateTimeOffset.HasValue ? 
+                          result.Snippet_PublishedAtDateTimeOffset.Value.UtcDateTime : DateTime.MinValue,
+                Description = result.Snippet_Description,
+                Id = result.Id_Kind != YoutubeConstants.ResponseKindVideo ?
+                     result.Id_Kind != YoutubeConstants.ResponseKindChannel ?
+                     null : result.Id_ChannelId : result.Id_VideoId,
+                Thumbnail = result.Youtube_ThumbnailDetails.Default__Url,
+                Title = result.Snippet_Title,
+                Type = result.Id_Kind != YoutubeConstants.ResponseKindVideo ?
+                       result.Id_Kind != YoutubeConstants.ResponseKindChannel ?
+                       BasicSearchType.Playlist : BasicSearchType.Channel : BasicSearchType.Video
+            };
+        }
+        private ChannelViewModel CreateChannelViewModel(Youtube_Channel result, 
+                                                        IEnumerable<Youtube_Video> videos,
+                                                        IEnumerable<Youtube_CommentThread> commentThreads)
+        {
+            return new ChannelViewModel()
+            {
+                Id = result.Id,
+                BannerUrl = result.Youtube_ChannelBrandingSettings.BannerImageUrl,
+                IconUrl = result.Youtube_ChannelBrandingSettings.WatchIconImageUrl,
+                MadeForKids = result.Status_MadeForKids ?? false,
+                Owner = result.ContentOwnerDetails_ContentOwner,
+                PrivacyStatus = result.Status_PrivacyStatus,
+                SelfDeclaredMadeForKids = result.Status_SelfDeclaredMadeForKids ?? false,
+                SubscriberCount = result.Statistics_SubscriberCount ?? 0,
+                VideoCount = result.Statistics_VideoCount ?? 0,
+                ViewCount = result.Statistics_ViewCount ?? 0,
+                Description = result.Youtube_ChannelSnippet.Description,
+                Title = result.Youtube_ChannelSnippet.Title,                
+                Videos = new ObservableCollection<VideoViewModel>(
+                    videos.Select(video =>
+                    {
+                        return CreateVideoViewModel(video,
+                            commentThreads.Where(thread =>
+                                thread.Youtube_CommentThreadSnippet.VideoId == video.Id).Actualize());
+                    }))
+                    
+            };
+        }
+        private VideoViewModel CreateVideoViewModel(Youtube_Video result, IEnumerable<Youtube_CommentThread> commentThreads)
+        {
+            return new VideoViewModel()
+            {
+                Id = result.Id,
+                CategoryId = result.Youtube_VideoSnippet.CategoryId,
+                CommentCount = result.Youtube_VideoStatistics.CommentCount ?? 0,
+                Description = result.Youtube_VideoSnippet.Description,
+                DislikeCount = result.Youtube_VideoStatistics.DislikeCount ?? 0,
+                LikeCount = result.Youtube_VideoStatistics.LikeCount,
+                ViewCount = result.Youtube_VideoStatistics.ViewCount,
+                FavoriteCount = result.Youtube_VideoStatistics.FavoriteCount,
+                IsMonetized = result.MonetizationDetails_AccessPolicy_Allowed ?? false,
+                MadeForKids = result.Youtube_VideoStatus.MadeForKids ?? false,
+                Published = result.Youtube_VideoStatus.PublishAtDateTimeOffset.HasValue ? 
+                            result.Youtube_VideoStatus.PublishAtDateTimeOffset.Value.UtcDateTime : DateTime.MinValue,
+                RejectionReason = result.Youtube_VideoStatus.RejectionReason,
+                SelfDeclaredMadeForKids = result.Youtube_VideoStatus.SelfDeclaredMadeForKids ?? false,
+                ThumbnailUrl = result.Youtube_VideoSnippet.Youtube_ThumbnailDetails.Default__Url,
+                Title = result.Youtube_VideoSnippet.Title,
+                UploadStatus = result.Youtube_VideoStatus.UploadStatus,
+                CommentThreads = new ObservableCollection<CommentThreadViewModel>(commentThreads.Select(thread => CreateCommentThreadViewModel(thread)).Actualize())
+            };
+        }
+        private CommentThreadViewModel CreateCommentThreadViewModel(Youtube_CommentThread result)
+        {
+            // Comment Thread -> Thread Snippet -> (Top Level) Comment -> Comment Snippet
+            var threadSnippet = result.Youtube_CommentThreadSnippet.Youtube_Comment.Youtube_CommentSnippet;
+
+            // Select thread replies (Comment entities)
+            var threadReplies = result.Youtube_CommentListMap.Select(map => map.Youtube_Comment);
+
+            return new CommentThreadViewModel()
+            {
+                Comment = new CommentViewModel()
+                {
+                    AuthorChannelId = threadSnippet.AuthorChannelId_Value,
+                    AuthorDisplayName = threadSnippet.AuthorDisplayName,
+                    AuthorImageUrl = threadSnippet.AuthorProfileImageUrl,
+                    AuthorUrl = threadSnippet.AuthorChannelUrl,
+                    Display = threadSnippet.TextDisplay,
+                    DisplayOriginal = threadSnippet.TextOriginal,
+                    LikeCount = threadSnippet.LikeCount ?? 0,
+                    ModerationStatus = threadSnippet.ModerationStatus,
+                    PublishedDate = threadSnippet.PublishedAtDateTimeOffset.HasValue ? threadSnippet.PublishedAtDateTimeOffset.Value.UtcDateTime : DateTime.MinValue,
+                    UpdatedAtDate = threadSnippet.UpdatedAtDateTimeOffset.HasValue ? threadSnippet.UpdatedAtDateTimeOffset.Value.UtcDateTime : DateTime.MinValue,
+                    ViewerRating = threadSnippet.ViewerRating
+                },
+                IsPublic = result.Youtube_CommentThreadSnippet.IsPublic ?? false,
+                TotalReplyCount = (int)(result.Youtube_CommentThreadSnippet.TotalReplyCount ?? 0),
+                Replies = new ObservableCollection<CommentViewModel>(threadReplies.Select(reply => CreateCommentViewModel(reply)).Actualize())                
+            };
+        }
+        private CommentViewModel CreateCommentViewModel(Youtube_Comment entity)
+        {
+            return new CommentViewModel()
+            {
+                AuthorChannelId = entity.Youtube_CommentSnippet.AuthorChannelId_Value,
+                AuthorDisplayName = entity.Youtube_CommentSnippet.AuthorDisplayName,
+                AuthorImageUrl = entity.Youtube_CommentSnippet.AuthorProfileImageUrl,
+                AuthorUrl = entity.Youtube_CommentSnippet.AuthorChannelUrl,
+                Display = entity.Youtube_CommentSnippet.TextDisplay,
+                DisplayOriginal = entity.Youtube_CommentSnippet.TextOriginal,
+                LikeCount = (int)(entity.Youtube_CommentSnippet.LikeCount ?? 0),
+                ModerationStatus = entity.Youtube_CommentSnippet.ModerationStatus,
+                PublishedDate = (DateTime)(entity.Youtube_CommentSnippet.PublishedAtDateTimeOffset?.UtcDateTime ?? DateTime.MinValue),
+                UpdatedAtDate = (DateTime)(entity.Youtube_CommentSnippet.UpdatedAtDateTimeOffset?.UtcDateTime ?? DateTime.MinValue),
+                ViewerRating = entity.Youtube_CommentSnippet.ViewerRating
+            };
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 
-using WpfCustomUtilities.Extensions.Collection;
+using WpfCustomUtilities.Extensions;
 using WpfCustomUtilities.Extensions.ObservableCollection;
 
-using YoutubeJournalist.Core.WebAPI.Google.Apis.Youtube.V3;
-using YoutubeJournalist.Event;
+using YoutubeJournalist.Core.Extension;
+using YoutubeJournalist.Core.Service.Model;
 using YoutubeJournalist.ViewModel;
 
 namespace YoutubeJournalist
@@ -27,6 +28,9 @@ namespace YoutubeJournalist
             _controller = new Controller(configuration);
             _viewModel = new YoutubeJournalistViewModel(configuration, new SearchParametersViewModel());
 
+            _viewModel.GetVideoDetailsEvent += OnGetVideoDetails;
+            _viewModel.GetChannelDetailsEvent += OnGetChannelDetails;
+
             this.DataContext = _viewModel;
 
             this.Loaded += OnLoaded;
@@ -36,7 +40,7 @@ namespace YoutubeJournalist
         protected override void OnClosed(EventArgs e)
         {
             // Local DB, Youtube Service DeAuth
-            _controller.Dispose();
+            //_controller.Dispose();
 
             base.OnClosed(e);
         }
@@ -44,7 +48,7 @@ namespace YoutubeJournalist
         {
             try
             {
-                ExecuteLocalSearch();
+                RefreshLocal();
             }
             catch (Exception ex)
             {
@@ -54,114 +58,158 @@ namespace YoutubeJournalist
 
         private void OnException(Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.ToString());
 
             if (!string.IsNullOrEmpty(ex.InnerException?.Message))
                 MessageBox.Show(ex.InnerException?.Message);
-
-            //if (!string.IsNullOrEmpty(ex.StackTrace))
-            //    MessageBox.Show(ex.StackTrace);
-
-            //if (!string.IsNullOrEmpty(ex.Source))
-            //    MessageBox.Show(ex.Source);
-
-            //if (ex.Data != null)
-            //{
-            //    foreach (var data in ex.Data.Values)
-            //        MessageBox.Show(data?.ToString() ?? "(no value)");
-            //}
-
-
-            // Close DB connection
-            _controller.Dispose();
-
-            // Shuts down -> OnClosed()
-            App.Current.Shutdown();
-        }
-        private void ExecuteLocalSearch()
-        {
-            var result = _controller.GetLocalSearchResults();
-
-            _viewModel.SearchResults.Clear();
-            _viewModel.SearchResults.AddRange(result);
-        }
-        private void ExecuteBasicSearch()
-        {
-            var result = _controller.Search(new YoutubeServiceRequest()
-            {
-                WildCard = _viewModel.SearchParameters.FilterString,
-                Search = _viewModel.SearchParameters.FilterSearchType,
-                Filter = YoutubeServiceRequest.FilterType.WildCard,
-                SortOrder = Google.Apis.YouTube.v3.SearchResource.ListRequest.OrderEnum.Title
-            });
-
-            _viewModel.SearchResults.AddRange(result);
-        }
-        private void ExecuteGetChannel(string channelId)
-        {
-            var result = _controller.GetChannels(new YoutubeServiceRequest()
-            {
-                ChannelId = channelId,
-                Search = YoutubeServiceRequest.SearchType.Video,
-                Filter = YoutubeServiceRequest.FilterType.Id
-            });
-
-            _viewModel.SearchResults.AddRange(result);
-        }
-        private void ExecuteGetVideo(string videoId)
-        {
-            var result = _controller.GetVideos(new YoutubeServiceRequest()
-            {
-                VideoId = videoId,
-                Search = YoutubeServiceRequest.SearchType.Video,
-                Filter = YoutubeServiceRequest.FilterType.Id
-            });
-
-            _viewModel.SearchResults.AddRange(result);
         }
 
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        private void RefreshLocal()
         {
             try
             {
-                ExecuteBasicSearch();
+                _viewModel.LocalResults.Clear();
+                _viewModel.Channels.Clear();
+                _viewModel.LooseVideos.Clear();
+
+                _viewModel.SelectedChannel = null;
+                _viewModel.SelectedVideo = null;
+
+                _viewModel.LocalResults.AddRange(_controller.GetSearchResults());
+
+                if (_viewModel.LocalResults.Count > 0)
+                    this.LocalSearchTab.IsSelected = true;
             }
             catch (Exception ex)
             {
                 OnException(ex);
             }
+        }
+
+        private void OnGetChannelDetails(string channelId, bool isLocal)
+        {
+            try
+            {
+                if (isLocal)
+                {
+                    _viewModel.SelectedChannel = _viewModel.Channels.First(x => x.Id == channelId);
+                }
+                else
+                {
+                    var channel = _controller.SearchUpdateChannelDetails(new YoutubeChannelDetailsRequest()
+                    {
+                        ChannelId = channelId
+                    });
+
+                    // Local view model, or add view model
+                    var existingChannel = _viewModel.Channels.FirstOrDefault(x => x.Id == channelId);
+                    if (existingChannel != null)
+                        _viewModel.SelectedChannel = existingChannel;
+
+                    else
+                    {
+                        _viewModel.Channels.Add(channel);
+                        _viewModel.SelectedChannel = channel;
+                    }
+                }
+
+                // Select Local Channel Tab
+                this.ChannelTab.IsSelected = true;
+            }
+            catch (Exception ex)
+            {
+                OnException(ex);
+            }
+        }
+
+        private void OnGetVideoDetails(string videoId, bool isLocal)
+        {
+            try
+            {
+                if (isLocal)
+                {
+                    _viewModel.SelectedVideo = _viewModel.LooseVideos.First(x => x.Id == videoId);
+                }
+                else
+                {
+                    var video = _controller.SearchUpdateVideoDetails(new YoutubeVideoDetailsRequest()
+                    {
+                        VideoIds = videoId.ToRepeatable()
+
+                    }).First();
+
+                    // Local view model, or add view model
+                    var existingVideo = _viewModel.LooseVideos.FirstOrDefault(x => x.Id == videoId);
+                    if (existingVideo != null)
+                        _viewModel.SelectedVideo = existingVideo;
+
+                    else
+                    {
+                        _viewModel.LooseVideos.Add(video);
+                        _viewModel.SelectedVideo = video;
+                    }
+                }
+
+                // Select Local Channel Tab
+                this.LooseVideosTab.IsSelected = true;
+            }
+            catch (Exception ex)
+            {
+                OnException(ex);
+            }
+        }
+
+        private void BasicSearchControl_SearchEvent(object sender, string e)
+        {
+            try
+            {
+                // Local
+                if (!_viewModel.SearchParameters.YoutubeAPIEnable)
+                {
+                    var result = _controller.GetSearchResults();
+
+                    _viewModel.LocalResults.Clear();
+                    _viewModel.LocalResults.AddRange(result);
+                }
+
+                // Youtube
+                else
+                {
+                    var result = _controller.BasicSearch(new YoutubeBasicSearchRequest()
+                    {
+                        WildCard = _viewModel.SearchParameters.FilterString,
+                        SortOrder = Google.Apis.YouTube.v3.SearchResource.ListRequest.OrderEnum.Title
+                    });
+
+                    _viewModel.SearchResults.AddRange(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                OnException(ex);
+            }
+        }
+
+        private void BasicSearchControl_PlatformTypeChanged(object sender, PlatformType e)
+        {
+            _viewModel.SearchParameters.YoutubeAPIEnable = (e == PlatformType.Youtube);
         }
 
         private void OnSearchResultDoubleClick(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                // TODO: Use typed routed event
-                var viewModel = (e as CustomRoutedEventArgs<SearchResultViewModel>).Data;
+            var viewModel = sender as SearchResultViewModel;
 
-                _viewModel.SearchResults.Clear();
-
-                if (viewModel.IsChannel)
-                    ExecuteGetChannel(viewModel.Id);
-
-                else
-                    ExecuteGetVideo(viewModel.Id);
-            }
-            catch (Exception ex)
+            switch (viewModel.Type)
             {
-                OnException(ex);
-            }
-        }
-
-        private void GetButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                ExecuteLocalSearch();
-            }
-            catch (Exception ex)
-            {
-                OnException(ex);
+                case BasicSearchType.Channel:
+                    OnGetChannelDetails(viewModel.Id, viewModel.IsLocal);
+                    break;
+                case BasicSearchType.Video:
+                    OnGetVideoDetails(viewModel.Id, viewModel.IsLocal);
+                    break;
+                case BasicSearchType.Playlist:
+                default:
+                    throw new FormattedException("Unhandled Search Result Type {0}", viewModel.Type);
             }
         }
     }

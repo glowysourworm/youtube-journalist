@@ -4,49 +4,53 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6c77607728cd4f678f261190d8ab53ac" Name="Diagram1" ZoomLevel="106">
-        <EntityTypeShape EntityType="YoutubeJournalistModel.SocialMediaLink" Width="1.5" PointX="12" PointY="12.75" />
-        <EntityTypeShape EntityType="YoutubeJournalistModel.User" Width="1.5" PointX="9.75" PointY="11.25" />
-        <EntityTypeShape EntityType="YoutubeJournalistModel.UserEmail" Width="1.5" PointX="12" PointY="10" />
-        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_Channel" Width="1.5" PointX="5.25" PointY="15.25" />
-        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_ChannelAuditDetails" Width="1.5" PointX="3" PointY="31.875" />
-        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_ChannelBrandingSettings" Width="1.5" PointX="3" PointY="25.875" />
-        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_ChannelConversationPing" Width="1.5" PointX="7.5" PointY="17.875" />
-        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_ChannelSettings" Width="1.5" PointX="0.75" PointY="26.375" />
-        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_ChannelSnippet" Width="1.5" PointX="3" PointY="17" />
-        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_Comment" Width="1.5" PointX="12" PointY="6.25" />
-        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_CommentList" Width="1.5" PointX="14.25" PointY="4.625" />
-        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_CommentSnippet" Width="1.5" PointX="9.75" PointY="3" />
-        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_CommentThread" Width="1.5" PointX="12" PointY="3.125" />
-        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_RegionRestriction" Width="1.5" PointX="7.5" PointY="8.75" />
-        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_SearchResult" Width="1.5" PointX="3" PointY="11.5" />
-        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_Tag" Width="1.5" PointX="7.5" PointY="6.25" />
-        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_ThumbnailDetails" Width="1.5" PointX="0.75" PointY="10.625" />
-        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_TopicCategory" Width="1.5" PointX="5.75" PointY="2.625" />
-        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_TopicId" Width="1.5" PointX="5.75" PointY="12.625" />
-        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_Video" Width="1.5" PointX="5.25" PointY="5.5" />
-        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_VideoSnippet" Width="1.5" PointX="3" PointY="6.125" />
-        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_VideoStatistics" Width="1.5" PointX="3" PointY="22.625" />
+      <Diagram DiagramId="6c77607728cd4f678f261190d8ab53ac" Name="Diagram1" ZoomLevel="16">
+        <EntityTypeShape EntityType="YoutubeJournalistModel.SocialMediaLink" Width="1.5" PointX="8" PointY="5" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.User" Width="1.5" PointX="5.75" PointY="3.625" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.UserEmail" Width="1.5" PointX="8" PointY="2.375" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_Channel" Width="1.5" PointX="5.25" PointY="17.75" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_ChannelAuditDetails" Width="1.5" PointX="3" PointY="31.5" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_ChannelBrandingSettings" Width="1.5" PointX="3" PointY="25.5" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_ChannelConversationPing" Width="1.5" PointX="7.5" PointY="24.375" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_ChannelSettings" Width="1.5" PointX="0.75" PointY="26" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_ChannelSnippet" Width="1.5" PointX="3" PointY="16.5" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_Comment" Width="1.5" PointX="5.25" PointY="36.875" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_CommentListMap" Width="1.5" PointX="12" PointY="17.875" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_CommentSnippet" Width="1.5" PointX="3" PointY="35.25" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_CommentThread" Width="1.5" PointX="9.75" PointY="17.875" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_CommentThreadSnippet" Width="1.5" PointX="7.5" PointY="17.375" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_RegionRestriction" Width="1.5" PointX="7.5" PointY="11.25" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_SearchResult" Width="1.5" PointX="3" PointY="5.75" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_Tag" Width="1.5" PointX="7.5" PointY="13.875" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_ThumbnailDetails" Width="1.5" PointX="0.75" PointY="10.25" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_TopicCategory" Width="1.5" PointX="7.75" PointY="8" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_TopicId" Width="1.5" PointX="9.75" PointY="8" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_Video" Width="1.5" PointX="5.25" PointY="10.375" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_VideoSnippet" Width="1.5" PointX="3" PointY="11.125" />
+        <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_VideoStatistics" Width="1.5" PointX="3" PointY="21.625" />
         <EntityTypeShape EntityType="YoutubeJournalistModel.Youtube_VideoStatus" Width="1.5" PointX="3" PointY="0.75" />
         <AssociationConnector Association="YoutubeJournalistModel.FK__SocialMed__UserI__267ABA7A" />
         <AssociationConnector Association="YoutubeJournalistModel.FK__UserEmail__UserI__29572725" />
-        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__Our_C__45F365D3" />
-        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__Our_C__46E78A0C" />
-        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__Our_C__4AB81AF0" />
-        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__Our_S__47DBAE45" />
-        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__Our_C__403A8C7D" />
-        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__Thumb__4316F928" />
-        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__Comme__398D8EEE" />
-        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__Snipp__32E0915F" />
-        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__Comme__38996AB5" />
-        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__Snipp__35BCFE0A" />
-        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_R__Video__5CD6CB2B" />
+        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__Chann__52593CB8" />
+        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__Our_C__3A81B327" />
+        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__Our_C__3B75D760" />
+        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__Our_C__3F466844" />
+        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__Our_S__3C69FB99" />
+        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__Our_C__34C8D9D1" />
+        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__Thumb__37A5467C" />
+        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__Comme__5AEE82B9" />
+        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__TopLe__5441852A" />
+        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_Co__Kind__4F7CD00D" />
+        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__Comme__59FA5E80" />
+        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__Threa__571DF1D5" />
+        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_C__Video__534D60F1" />
+        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_R__Video__619B8048" />
         <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_S__Snipp__2E1BDC42" />
-        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_T__Video__5FB337D6" />
-        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_V__Thumb__5165187F" />
-        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_V__Snipp__5441852A" />
-        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_V__Stati__5535A963" />
-        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_V__Statu__5629CD9C" />
+        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_T__Video__6477ECF3" />
+        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_V__Thumb__45F365D3" />
+        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_V__Snipp__48CFD27E" />
+        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_V__Stati__49C3F6B7" />
+        <AssociationConnector Association="YoutubeJournalistModel.FK__Youtube_V__Statu__4AB81AF0" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

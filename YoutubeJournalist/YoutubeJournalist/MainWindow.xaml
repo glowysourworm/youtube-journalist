@@ -3,24 +3,35 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
-        xmlns:dock="http://schemas.xceed.com/wpf/xaml/avalondock"
-        xmlns:local="clr-namespace:YoutubeJournalist"
         xmlns:converter="clr-namespace:YoutubeJournalist.Converter"
+        xmlns:wpfConverter="clr-namespace:WpfCustomUtilities.UI.Converter;assembly=WpfCustomUtilities"
         xmlns:view="clr-namespace:YoutubeJournalist.View"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        WindowState="Maximized"
         mc:Ignorable="d"
         Title="Youtube Journalist" Height="450" Width="800">
     <Window.Resources>
         <converter:BoolVisibilityCollapseConverter x:Key="BoolVisibilityCollapseConverter" />
         <converter:BoolVisibilityCollapseInverseConverter x:Key="BoolVisibilityCollapseInverseConverter" />
+        <wpfConverter:ParameterEqualityInverseBoolConverter x:Key="ParameterEqualityInverseBoolConverter" />
+        <wpfConverter:NonNullBoolConverter x:Key="NonNullBoolConverter" />
     </Window.Resources>
     <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Menu>
+        <!-- Main Menu -->
+        <Menu Grid.ColumnSpan="2">
             <MenuItem Header="_File">
                 <MenuItem Header="_Open" />
             </MenuItem>
@@ -32,105 +43,113 @@
             </MenuItem>            
         </Menu>
 
-        <dock:DockingManager Grid.Row="1">
+        <!-- Configuration Side Panel -->
+        <TabControl Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="1" Width="400">
+            <TabItem Header="Configuration">
+                <view:ConfigurationView DataContext="{Binding Configuration}" />
+            </TabItem>
+            <TabItem Header="Youtube Search" IsSelected="True">
+                <view:SearchParametersView DataContext="{Binding SearchParameters}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            </TabItem>
+        </TabControl>
+        
+        <!-- Youtube Basic Search -->
+        <view:BasicSearchView x:Name="BasicSearchControl" Grid.Row="1" Grid.Column="1" 
+                              SearchEvent="BasicSearchControl_SearchEvent" 
+                              PlatformTypeChanged="BasicSearchControl_PlatformTypeChanged" />
 
-            <dock:LayoutRoot>
+        <!-- Primary Results -->
+        <TabControl Grid.Column="1" Grid.Row="2" Grid.RowSpan="1">
 
-                <!-- Left Panel (Hide / Auto-Hide) -->
-                <dock:LayoutRoot.LeftSide>
-                    <dock:LayoutAnchorSide>
-                        <dock:LayoutAnchorGroup>
+            <TabItem Header="Youtube Search">
+                <view:SearchResultView SearchResultDoubleClick="OnSearchResultDoubleClick" DataContext="{Binding SearchResults}" />
+            </TabItem>
+            
+            <TabItem x:Name="LocalSearchTab">
 
-                            <!-- API Parameters -->
-                            <dock:LayoutAnchorable Title="Configuration" 
-                                                   IsSelected="True" 
-                                                   CanClose="False" 
-                                                   AutoHideWidth="400"
-                                                   CanDockAsTabbedDocument="True">
-                                <view:ConfigurationView DataContext="{Binding Configuration}" />
-                            </dock:LayoutAnchorable>
+                <TabItem.Header>
+                    <TextBlock>
+                        <Run Text="Search (Local)(" />
+                        <Run Text="{Binding LocalResults.Count, Mode=OneWay}" />
+                        <Run Text=")" />
+                    </TextBlock>
+                </TabItem.Header>
 
-                            <!-- Search Parameters -->
-                            <dock:LayoutAnchorable Title="Search Parameters" 
-                                                   CanClose="False" 
-                                                   AutoHideWidth="400"
-                                                   CanDockAsTabbedDocument="True">
-                                <view:SearchParametersView DataContext="{Binding SearchParameters}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-                            </dock:LayoutAnchorable>
+                <TabItem.IsEnabled>
+                    <Binding Path="LocalResults.Count">
+                        <Binding.Converter>
+                            <wpfConverter:ParameterEqualityInverseBoolConverter />
+                        </Binding.Converter>
+                        <Binding.ConverterParameter>
+                            <sys:Int32>0</sys:Int32>
+                        </Binding.ConverterParameter>
+                    </Binding>
+                </TabItem.IsEnabled>
 
-                        </dock:LayoutAnchorGroup>
-                    </dock:LayoutAnchorSide>
-                </dock:LayoutRoot.LeftSide>
+                <view:SearchResultView SearchResultDoubleClick="OnSearchResultDoubleClick" DataContext="{Binding LocalResults}" />
+            </TabItem>
 
-                <!-- Top Right (Primary Search Results) -->
-                <dock:LayoutPanel>
-                    <dock:LayoutDocumentPane CanRepositionItems="False" IsMaximized="True">
-                        
-                        <!-- Search Results -->
-                        <dock:LayoutAnchorable Title="Search Results" CanClose="False">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                
-                                <!-- Search Results View -->
-                                <view:SearchResultView SearchResultDoubleClick="OnSearchResultDoubleClick" />
-                                
-                                <!-- Search Buttons -->
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1">
-                                    
-                                    <Button x:Name="SearchButton" 
-                                            Visibility="{Binding SearchParameters.YoutubeAPIEnable, Converter={StaticResource BoolVisibilityCollapseConverter}}"
-                                            Click="SearchButton_Click" 
-                                            Content="Search" 
-                                            Padding="10" 
-                                            Margin="5" 
-                                            FontSize="14" />
-                                    
-                                    <Button x:Name="GetButton" 
-                                            Visibility="{Binding SearchParameters.YoutubeAPIEnable, Converter={StaticResource BoolVisibilityCollapseInverseConverter}}"
-                                            Click="GetButton_Click" 
-                                            Content="Search (Local)" 
-                                            Padding="10" 
-                                            Margin="5" 
-                                            FontSize="14" /> 
-                                    
-                                </StackPanel>
-                            </Grid>
-                        </dock:LayoutAnchorable>
-                        
-                    </dock:LayoutDocumentPane>
-                </dock:LayoutPanel>
+            <TabItem x:Name="ChannelTab">
+                <TabItem.IsEnabled>
+                    <Binding Path="Channels.Count">
+                        <Binding.Converter>
+                            <wpfConverter:ParameterEqualityInverseBoolConverter />
+                        </Binding.Converter>
+                        <Binding.ConverterParameter>
+                            <sys:Int32>0</sys:Int32>
+                        </Binding.ConverterParameter>
+                    </Binding>
+                </TabItem.IsEnabled>
 
-                <!-- Bottom Panel -->
-                <dock:LayoutRoot.BottomSide>
-                    <dock:LayoutAnchorSide>
-                        <dock:LayoutAnchorGroup>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Channels (Local)" />
+                        <Image Source="{Binding SelectedChannel.ThumbnailUrl}" />
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            
+            <TabItem x:Name="LooseVideosTab">
+                <TabItem.IsEnabled>
+                    <Binding Path="LooseVideos.Count">
+                        <Binding.Converter>
+                            <wpfConverter:ParameterEqualityInverseBoolConverter />
+                        </Binding.Converter>
+                        <Binding.ConverterParameter>
+                            <sys:Int32>0</sys:Int32>
+                        </Binding.ConverterParameter>
+                    </Binding>
+                </TabItem.IsEnabled>
 
-                            <!-- Log -->
-                            <dock:LayoutAnchorable Title="Output Log" 
-                                                   IsSelected="True" 
-                                                   CanDockAsTabbedDocument="True"                                                     
-                                                   AutoHideMinHeight="250" 
-                                                   CanAutoHide="False" 
-                                                   CanHide="False" 
-                                                   CanClose="False">
-                                <ListBox x:Name="LogLB" ItemsSource="{Binding OutputLog}">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Log}" Padding="3" FontSize="12" />
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </dock:LayoutAnchorable>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Videos (Local)" />
+                        <Image Source="{Binding SelectedVideo.ThumbnailUrl}" />
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            
+            <TabItem x:Name="CommentsTab"
+                     IsEnabled="{Binding SelectedVideo, Converter={StaticResource NonNullBoolConverter}}">                     
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Comments (Local)" />
+                        <Image Source="{Binding SelectedVideo.ThumbnailUrl}" />
+                    </StackPanel>
+                </TabItem.Header>                
+                <view:VideoCommentView DataContext="{Binding VideoComments}" />
+            </TabItem>
+            
+        </TabControl>
 
-                        </dock:LayoutAnchorGroup>
-                    </dock:LayoutAnchorSide>
-                </dock:LayoutRoot.BottomSide>
-
-            </dock:LayoutRoot>
-        </dock:DockingManager>
+        <!-- Log -->
+        <ListBox x:Name="LogLB" ItemsSource="{Binding OutputLog}" Grid.Row="3" Grid.ColumnSpan="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Log}" Padding="3" FontSize="12" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
     </Grid>
 </Window>

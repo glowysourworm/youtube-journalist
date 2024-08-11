@@ -8,6 +8,7 @@ namespace YoutubeJournalist.ViewModel
         private string _apiKey;
         private string _clientID;// OAuth 2.0 (Google)
         private string _clientSecret;// OAuth 2.0 (Google)
+        private string _localDatabaseConnectionString;
 
         public string ApiKey
         {
@@ -24,12 +25,20 @@ namespace YoutubeJournalist.ViewModel
             get { return _clientSecret; }
             set { this.RaiseAndSetIfChanged(ref _clientSecret, value); }
         }
+        public string LocalDatabaseConnectionString
+        {
+            get { return _localDatabaseConnectionString; }
+            set { this.RaiseAndSetIfChanged(ref _localDatabaseConnectionString, value); }
+        }
 
         public ConfigurationViewModel()
         {
             this.ApiKey = "AIzaSyANk6jYB8BkD0idtuMVShGfeUeIjhJ2xJs";
             this.ClientID = "88533911009-eonq4qpolnrnrjfbfptmipjn0mb4d0jp.apps.googleusercontent.com";
             this.ClientSecret = "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";
+
+            // TODO: Fix this
+            this.LocalDatabaseConnectionString = "metadata = res://*/YoutubeJournalistEntityModel.csdl|res://*/YoutubeJournalistEntityModel.ssdl|res://*/YoutubeJournalistEntityModel.msl;provider=System.Data.SqlClient;provider connection string='data source=LAPTOP-JG4V86VG\\LOCALDB;initial catalog=YoutubeJournalist;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework'";
         }
     }
 }
