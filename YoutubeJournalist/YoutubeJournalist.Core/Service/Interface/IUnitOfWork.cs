@@ -45,6 +45,16 @@ namespace YoutubeJournalist.Core.Service.Interface
         Youtube_Video GetVideo(string videoId);
 
         /// <summary>
+        /// Returns true if local database has channel
+        /// </summary>
+        bool HasChannel(string channelId);
+
+        /// <summary>
+        /// Returns true if local database has channel
+        /// </summary>
+        bool HasVideo(string videoId);
+
+        /// <summary>
         /// Returns entire set of comment threads for a video from local database
         /// </summary>
         IEnumerable<Youtube_CommentThread> GetCommentThreads(string videoId);
@@ -54,6 +64,16 @@ namespace YoutubeJournalist.Core.Service.Interface
         /// Executes basic search as a user on the Youtube platform
         /// </summary>
         IEnumerable<Youtube_SearchResult> BasicSearch(YoutubeBasicSearchRequest request);
+
+        /// <summary>
+        /// Executes search for playlists for a specified channel, and updates the local database
+        /// </summary>
+        IEnumerable<Youtube_Playlist> SearchUpdatePlaylistDetails(YoutubePlaylistRequest request);
+
+        /// <summary>
+        /// Executes search for playlist items for specific playlist, and updates the local database
+        /// </summary>
+        IEnumerable<Youtube_PlaylistItem> SearchUpdatePlaylistItemDetails(YoutubePlaylistItemRequest request);
 
         /// <summary>
         /// Executes search for channel details, and updates local database

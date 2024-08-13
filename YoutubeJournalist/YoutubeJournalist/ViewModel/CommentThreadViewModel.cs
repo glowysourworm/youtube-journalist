@@ -10,6 +10,8 @@ namespace YoutubeJournalist.ViewModel
         private ObservableCollection<CommentViewModel> _replies;
         private bool _isPublic;
         private int _totalReplyCount;
+        private string _videoId;
+        private string _channelId;
 
         public CommentViewModel Comment
         {
@@ -20,6 +22,16 @@ namespace YoutubeJournalist.ViewModel
         {
             get { return _replies; }
             set { this.RaiseAndSetIfChanged(ref _replies, value); }
+        }
+        public string VideoId
+        {
+            get { return _videoId; }
+            set { this.RaiseAndSetIfChanged(ref _videoId, value); }
+        }
+        public string ChannelId
+        {
+            get { return _channelId; }
+            set { this.RaiseAndSetIfChanged(ref _channelId, value); }
         }
         public bool IsPublic
         {

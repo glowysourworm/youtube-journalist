@@ -12,7 +12,9 @@ namespace YoutubeJournalist.ViewModel
     {
         bool _isLocal;
         string _thumbnail;
-        string _id;
+        string _videoId;
+        string _channelId;
+        string _playlistId;
         string _title;
         string _description;
         DateTime _created;
@@ -44,10 +46,20 @@ namespace YoutubeJournalist.ViewModel
             get { return _thumbnail; }
             set { this.RaiseAndSetIfChanged(ref _thumbnail, value); }
         }
-        public string Id
+        public string ChannelId
         {
-            get { return _id; }
-            set { this.RaiseAndSetIfChanged(ref _id, value); }
+            get { return _channelId; }
+            set { this.RaiseAndSetIfChanged(ref _channelId, value); }
+        }
+        public string VideoId
+        {
+            get { return _videoId; }
+            set { this.RaiseAndSetIfChanged(ref _videoId, value); }
+        }
+        public string PlaylistId
+        {
+            get { return _playlistId; }
+            set { this.RaiseAndSetIfChanged(ref _playlistId, value); }
         }
         public string Title
         {
@@ -73,7 +85,9 @@ namespace YoutubeJournalist.ViewModel
         public SearchResultViewModel()
         {
             this.Thumbnail = "";
-            this.Id = "";
+            this.ChannelId = "";
+            this.VideoId = "";
+            this.PlaylistId = "";
             this.Title = "";
             this.Description = "";
             this.Created = DateTime.Now;

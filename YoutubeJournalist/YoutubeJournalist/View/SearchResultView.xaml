@@ -3,12 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:YoutubeJournalist.View"
-             xmlns:converter="clr-namespace:YoutubeJournalist.Converter" 
+             xmlns:converter="clr-namespace:YoutubeJournalist.Converter"
+             xmlns:wpfConverter="clr-namespace:WpfCustomUtilities.UI.Converter;assembly=WpfCustomUtilities"
+             xmlns:coreConstant="clr-namespace:YoutubeJournalist.Core.Service.Model;assembly=YoutubeJournalist.Core"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <converter:BoolVisibilityCollapseConverter x:Key="BoolVisibilityCollapseConverter" />
+        <wpfConverter:ParameterVisibilityCollapsedInverseConverter x:Key="ParameterVisibilityCollapsedInverseConverter" />
     </UserControl.Resources>
     <Grid>
         <ListBox x:Name="SearchResultsLB" ItemsSource="{Binding}">
@@ -27,8 +29,39 @@
                                 <MenuItem Header="Get Video Comments" Command="{Binding GetVideoCommentsCommand}" />
                             </ContextMenu>
                         </StackPanel.ContextMenu>
-                        <Image Source="{Binding Thumbnail}" Height="40" Width="40" />
-                        <TextBlock Padding="10" FontSize="14" VerticalAlignment="Center" Text="(Channel)" Foreground="CornflowerBlue" Visibility="{Binding IsChannel, Converter={StaticResource BoolVisibilityCollapseConverter}}" />
+                        
+                        <!-- Channel -->
+                        <Border x:Name="ChannelBorder" Width="40" Height="40">
+                            <Border.Visibility>
+                                <Binding Path="Type" ConverterParameter="{x:Static coreConstant:BasicSearchType.Channel}">
+                                    <Binding.Converter>
+                                        <wpfConverter:ParameterVisibilityCollapsedConverter />
+                                    </Binding.Converter>
+                                </Binding>
+                            </Border.Visibility>
+                            <Grid>
+                                <Ellipse x:Name="opacityMask" Height="40" Width="40" Fill="White" />
+                                <Image Source="{Binding Thumbnail}" Height="40" Width="40">
+                                    <Image.OpacityMask>
+                                        <VisualBrush Visual="{Binding ElementName=opacityMask}" />
+                                    </Image.OpacityMask>
+                                </Image>
+                            </Grid>
+                        </Border>
+                        
+                        <!-- Video -->
+                        <Border x:Name="VideoBorder" Width="40" Height="22.5">
+                            <Border.Visibility>
+                                <Binding Path="Type" ConverterParameter="{x:Static coreConstant:BasicSearchType.Video}">
+                                    <Binding.Converter>
+                                        <wpfConverter:ParameterVisibilityCollapsedConverter />
+                                    </Binding.Converter>
+                                </Binding>
+                            </Border.Visibility>
+                            <Image Source="{Binding Thumbnail}" Height="22.5" Width="40" />
+                        </Border>                        
+                        
+                        <TextBlock Padding="10" FontSize="14" VerticalAlignment="Center" Text="{Binding Type}" Foreground="CornflowerBlue" />
                         <TextBlock Padding="10" FontSize="14" VerticalAlignment="Center" Text="{Binding Title}" />
                     </StackPanel>
                 </DataTemplate>

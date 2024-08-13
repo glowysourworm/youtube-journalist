@@ -7,6 +7,7 @@ namespace YoutubeJournalist.ViewModel
     public class ChannelViewModel : ViewModelBase
     {
         ObservableCollection<VideoViewModel> _videos;
+        ObservableCollection<PlaylistViewModel> _playlists;
 
         string _id;
         string _owner;
@@ -14,6 +15,7 @@ namespace YoutubeJournalist.ViewModel
         string _description;
         string _bannerUrl;
         string _iconUrl;
+        string _primaryPlaylistId;
         long _subscriberCount;
         long _videoCount;
         long _viewCount;
@@ -25,6 +27,11 @@ namespace YoutubeJournalist.ViewModel
         {
             get { return _id; }
             set { this.RaiseAndSetIfChanged(ref _id, value); }
+        }
+        public string PrimaryPlaylistId
+        {
+            get { return _primaryPlaylistId; }
+            set { this.RaiseAndSetIfChanged(ref _primaryPlaylistId, value); }
         }
         public string Owner
         {
@@ -87,10 +94,16 @@ namespace YoutubeJournalist.ViewModel
             get { return _videos; }
             set { this.RaiseAndSetIfChanged(ref _videos, value); }
         }
+        public ObservableCollection<PlaylistViewModel> Playlists
+        {
+            get { return _playlists; }
+            set { this.RaiseAndSetIfChanged(ref _playlists, value); }
+        }
 
         public ChannelViewModel()
         {
             this.Videos = new ObservableCollection<VideoViewModel>();
+            this.Playlists = new ObservableCollection<PlaylistViewModel>();
         }
     }
 }

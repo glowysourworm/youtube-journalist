@@ -491,21 +491,23 @@ Create Table Youtube_CommentListMap(
 GO
 
 Create Table Youtube_TopicCategory(
+	Our_Id int not null IDENTITY(1,1),
 	"Url" varchar(900) not null,
 	ChannelId varchar(50) null, -- Treated as a loose foreign key to Youtube_Channel.Id
 	VideoId varchar(50) null,   -- Treated as a loose foreign key to Youtube_Video.Id
 
-	Primary Key("Url")
+	Primary Key(Our_Id)
 );
 GO
 
 Create Table Youtube_TopicId(
+	Our_Id int not null IDENTITY(1,1),
 	"Url" varchar(900) not null,
 	ChannelId varchar(50) null, -- Treated as a loose foreign key to Youtube_Channel.Id
 	VideoId varchar(50) null,   -- Treated as a loose foreign key to Youtube_Video.Id
 	Relevant bit not null,		-- Youtube_Video field, used to mark relevant topics for the video entity 
 
-	Primary Key("Url")
+	Primary Key(Our_Id)
 );
 GO
 
@@ -527,5 +529,59 @@ Create Table Youtube_Tag(
 
 	Primary Key(Our_Id),
 	Foreign Key(VideoId) References Youtube_Video(Id)
+);
+GO
+
+Create Table Youtube_Playlist(
+
+	Id varchar(50) not null,
+	Kind varchar(50),
+	ETag varchar(50),
+	
+	PlaylistSnippet_ChannelId varchar(50) not null,
+	PlaylistSnippet_ChannelTitle varchar(max),
+	PlaylistSnippet_ChannelDescription varchar(max),
+	PlaylistSnippet_PublishedAtDateTimeOffset datetimeoffset null,
+	PlaylistSnippet_Title varchar(max),
+	PlaylistSnippet_ThumnailDetails_Id int not null,
+	
+	Primary Key(Id),
+	Foreign Key(PlaylistSnippet_ChannelId) References Youtube_Channel(Id),
+	Foreign Key(PlaylistSnippet_ThumnailDetails_Id) References Youtube_ThumbnailDetails(Our_Id),
+);
+GO
+
+Create Table Youtube_PlaylistItem(
+	
+	Id varchar(50) not null,
+	ETag varchar(50),
+	Kind varchar(50),
+	
+	PlaylistContentDetails_ETag varchar(50),
+	PlaylistContentDetails_Note varchar(max),
+	PlaylistContentDetails_VideoId varchar(50) null, -- Nullable because it won't yet be part of the Video data (youtube service issue)
+	PlaylistContentDetails_VideoPublishedAtDateTimeOffset datetimeoffset null,
+	
+	PlaylistItemSnippet_ChannelId varchar(50),
+	PlaylistItemSnippet_ETag varchar(50),
+	PlaylistItemSnippet_ChannelTitle varchar(max),
+	PlaylistItemSnippet_Description varchar(max),
+	PlaylistItemSnippet_PlaylistId varchar(50) not null,
+	PlaylistItemSnippet_Position bigint null,
+	PlaylistItemSnippet_PublishedAtDateTimeOffset datetimeoffset null,
+	PlaylistItemSnippet_ThumbnailDetails_Id int not null,
+	PlaylistItemSnippet_Title varchar(max),
+	PlaylistItemSnippet_VideoOwnerChannelId varchar(50),
+	PlaylistItemSnippet_VideoOwnerChannelTitle varchar(max),
+	
+	PlaylistItemStatus_PrivacyStatus varchar(50),
+	
+	Primary Key(Id),
+	-- Foreign Key(PlaylistContentDetails_VideoId) References Youtube_Video(Id),
+	Foreign Key(PlaylistItemSnippet_ChannelId) References Youtube_Channel(Id),
+	Foreign Key(PlaylistItemSnippet_PlaylistId) References Youtube_Playlist(Id),
+	Foreign Key(PlaylistItemSnippet_ThumbnailDetails_Id) References Youtube_ThumbnailDetails(Our_Id),
+	Foreign Key(PlaylistItemSnippet_VideoOwnerChannelId) References Youtube_Channel(Id)
+	
 );
 GO

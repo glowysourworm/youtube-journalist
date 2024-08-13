@@ -99,20 +99,6 @@ namespace YoutubeJournalist.Core.Service
                 throw ex;
             }
         }
-        public IEnumerable<Youtube_CommentThread> GetCommentThreads(string videoId)
-        {
-            try
-            {
-                return _dbContext.Youtube_CommentThread
-                                 .Where(x => x.Youtube_CommentThreadSnippet.VideoId == videoId)
-                                 .Actualize();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
         public Youtube_Channel GetChannel(string channelId)
         {
             try
@@ -126,7 +112,43 @@ namespace YoutubeJournalist.Core.Service
                 throw ex;
             }
         }
-
+        public IEnumerable<Youtube_CommentThread> GetCommentThreads(string videoId)
+        {
+            try
+            {
+                return _dbContext.Youtube_CommentThread
+                                 .Where(x => x.Youtube_CommentThreadSnippet.VideoId == videoId)
+                                 .Actualize();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public bool HasChannel(string channelId)
+        {
+            try
+            {
+                return _dbContext.Youtube_Channel
+                                 .Any(x => x.Id == channelId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public bool HasVideo(string videoId)
+        {
+            try
+            {
+                return _dbContext.Youtube_Video
+                                 .Any(video => video.Id == videoId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
 
         #region IYoutubeService Methods
@@ -188,6 +210,13 @@ namespace YoutubeJournalist.Core.Service
                 if (channel == null)
                     return null;
 
+                // Prune response (topic ids, topic categories)
+                if (channel.TopicDetails != null && channel.TopicDetails.TopicIds != null)
+                    channel.TopicDetails.TopicIds.Remove(x => string.IsNullOrEmpty(x));
+
+                if (channel.TopicDetails != null && channel.TopicDetails.TopicCategories != null)
+                    channel.TopicDetails.TopicCategories.Remove(x => string.IsNullOrEmpty(x));
+
                 // Check DB for existing entry
                 var entity = _dbContext.Youtube_Channel.FirstOrDefault(channelEntity => channelEntity.Id == channel.Id);
 
@@ -204,7 +233,6 @@ namespace YoutubeJournalist.Core.Service
                 if (entity == null)
                 {
                     entity = _dbContext.Youtube_Channel.CreateObject();
-
                     auditDetails = _dbContext.Youtube_ChannelAuditDetails.CreateObject();
                     brandingSettings = _dbContext.Youtube_ChannelBrandingSettings.CreateObject();
                     channelSettings = _dbContext.Youtube_ChannelSettings.CreateObject();
@@ -216,15 +244,40 @@ namespace YoutubeJournalist.Core.Service
                     //                           .Select(ping => _dbContext.Youtube_ChannelConversationPing.CreateObject())
                     //                           .ToList();
 
+                    // Youtube's API produces null references for missing data!
                     topicIds = channel.TopicDetails
-                                      .TopicIds
-                                      .Select(ping => _dbContext.Youtube_TopicId.CreateObject())
-                                      .ToList();
+                                      .TopicIds?
+                                      .Select(x => _dbContext.Youtube_TopicId.CreateObject())?
+                                      .ToList() ?? new List<Youtube_TopicId>();
 
+                    // Youtube's API produces null references for missing data!
                     topicCategories = channel.TopicDetails
-                                                 .TopicCategories
-                                                 .Select(ping => _dbContext.Youtube_TopicCategory.CreateObject())
-                                                 .ToList();
+                                             .TopicCategories?
+                                             .Select(x => _dbContext.Youtube_TopicCategory.CreateObject())?
+                                             .ToList() ?? new List<Youtube_TopicCategory>();
+
+                    // Add / Update
+                    Map_Youtube_Channel(channel, entity, snippet, auditDetails, brandingSettings, channelSettings, thumbnailDetails);
+
+                    // New (topic ids, topic categories)
+                    for (int index = 0; index < channel.TopicDetails.TopicIds?.Count; index++)
+                    {
+                        var topicId = topicIds[index];
+
+                        topicId.ChannelId = channel.Id;
+                        topicId.Url = channel.TopicDetails.TopicIds[index];
+                        topicId.Relevant = false;
+                        topicId.VideoId = topicId.VideoId ?? null;
+                    }
+
+                    for (int index = 0; index < channel.TopicDetails.TopicCategories?.Count; index++)
+                    {
+                        var topicCategory = topicCategories[index];
+
+                        topicCategory.ChannelId = channel.Id;
+                        topicCategory.Url = channel.TopicDetails.TopicCategories[index];
+                        topicCategory.VideoId = topicCategory.VideoId ?? null;
+                    }
 
                     _dbContext.Youtube_Channel.AddObject(entity);
                     _dbContext.Youtube_ChannelSnippet.AddObject(snippet);
@@ -234,10 +287,16 @@ namespace YoutubeJournalist.Core.Service
                     _dbContext.Youtube_ThumbnailDetails.AddObject(thumbnailDetails);
 
                     foreach (var topicId in topicIds)
-                        _dbContext.Youtube_TopicId.AddObject(topicId);
+                    {
+                        if (!_dbContext.Youtube_TopicId.Any(x => x.Url == topicId.Url))
+                            _dbContext.Youtube_TopicId.AddObject(topicId);
+                    }
 
                     foreach (var topicCategory in topicCategories)
-                        _dbContext.Youtube_TopicCategory.AddObject(topicCategory);
+                    {
+                        if (!_dbContext.Youtube_TopicCategory.Any(x => x.Url == topicCategory.Url))
+                            _dbContext.Youtube_TopicCategory.AddObject(topicCategory);
+                    }
                 }
                 else
                 {
@@ -258,23 +317,48 @@ namespace YoutubeJournalist.Core.Service
                     foreach (var topicCategory in topicCategories)
                         _dbContext.Youtube_TopicCategory.DeleteObject(topicCategory);
 
-                    // Synchronize collections (copy only, no DbContext)
-                    SynchronizeCollection(channel.TopicDetails.TopicIds, topicIds, x => x, x => x.Url, () => new Youtube_TopicId(), (source, dest) => { return; });
-                    SynchronizeCollection(channel.TopicDetails.TopicCategories, topicCategories, x => x, x => x.Url, () => new Youtube_TopicCategory(), (source, dest) => { return; });
+                    // Add / Update
+                    Map_Youtube_Channel(channel, entity, snippet, auditDetails, brandingSettings, channelSettings, thumbnailDetails);
+
+                    // Commit changes
+                    _dbContext.SaveChanges();
+
+                    if (channel.TopicDetails?.TopicIds != null)
+                    {
+                        foreach (var topicId in channel.TopicDetails?.TopicIds)
+                            topicIds.Add(_dbContext.Youtube_TopicId.CreateObject());
+                    }
+
+                    if (channel.TopicDetails?.TopicCategories != null)
+                    {
+                        foreach (var topicCategory in channel.TopicDetails?.TopicCategories)
+                            topicCategories.Add(_dbContext.Youtube_TopicCategory.CreateObject());
+                    }
 
                     // Re-Add
-                    foreach (var topicId in topicIds)
+                    for (int index = 0;index < channel.TopicDetails.TopicIds?.Count; index++)
+                    {
+                        var topicId = topicIds[index];
+
+                        topicId.ChannelId = topicId.ChannelId ?? channel.Id;
+                        topicId.Relevant = false;
+                        topicId.Url = channel.TopicDetails.TopicIds[index];
+                        topicId.VideoId = topicId.VideoId ?? null;
+
                         _dbContext.Youtube_TopicId.AddObject(topicId);
+                    }
 
-                    foreach (var topicCategory in topicCategories)
+                    for (int index = 0; index < channel.TopicDetails.TopicCategories?.Count; index++)
+                    {
+                        var topicCategory = topicCategories[index];
+
+                        topicCategory.ChannelId = topicCategory.ChannelId ?? channel.Id;
+                        topicCategory.Url = channel.TopicDetails.TopicCategories[index];
+                        topicCategory.VideoId = topicCategory.VideoId ?? null;
+
                         _dbContext.Youtube_TopicCategory.AddObject(topicCategory);
+                    }
                 }
-
-                // Add / Update
-                Map_Youtube_Channel(channel, entity, snippet, auditDetails, brandingSettings, channelSettings, thumbnailDetails, topicIds, topicCategories);
-
-                // Add Entity to DB context
-                _dbContext.Youtube_Channel.AddObject(entity);
 
                 // Commit changes
                 _dbContext.SaveChanges();
@@ -311,6 +395,13 @@ namespace YoutubeJournalist.Core.Service
                 // Youtube Videos from service
                 foreach (var video in response.Collection)
                 {
+                    // Prune response (topic ids, topic categories)
+                    if (video.TopicDetails != null && video.TopicDetails.TopicIds != null)
+                        video.TopicDetails.TopicIds.Remove(x => string.IsNullOrEmpty(x));
+
+                    if (video.TopicDetails != null && video.TopicDetails.TopicCategories != null)
+                        video.TopicDetails.TopicCategories.Remove(x => string.IsNullOrEmpty(x));
+
                     videoEntity = _dbContext.Youtube_Video.FirstOrDefault(x => x.Id == video.Id);
 
                     // New
@@ -322,15 +413,39 @@ namespace YoutubeJournalist.Core.Service
                         status = _dbContext.Youtube_VideoStatus.CreateObject();
                         thumbnailDetails = _dbContext.Youtube_ThumbnailDetails.CreateObject();
 
+                        // Youtube's API produces null references for missing data!
                         topicIds = video.TopicDetails
-                                        .TopicIds
-                                        .Select(x => _dbContext.Youtube_TopicId.CreateObject())
-                                        .ToList();
+                                          .TopicIds?
+                                          .Select(x => _dbContext.Youtube_TopicId.CreateObject())?
+                                          .ToList() ?? new List<Youtube_TopicId>();
 
+                        // Youtube's API produces null references for missing data!
                         topicCategories = video.TopicDetails
-                                               .TopicCategories
-                                               .Select(x => _dbContext.Youtube_TopicCategory.CreateObject())
-                                               .ToList();
+                                                 .TopicCategories?
+                                                 .Select(x => _dbContext.Youtube_TopicCategory.CreateObject())?
+                                                 .ToList() ?? new List<Youtube_TopicCategory>();
+
+                        Map_Youtube_Video(video, videoEntity, snippet, statistics, status, thumbnailDetails);
+
+                        // New (topic ids, topic categories)
+                        for (int index = 0; index < video.TopicDetails.TopicIds?.Count; index++)
+                        {
+                            var topicId = topicIds[index];
+
+                            topicId.ChannelId = topicId.ChannelId ?? video.Snippet.ChannelId;
+                            topicId.Url = video.TopicDetails.TopicIds[index];
+                            topicId.Relevant = video.TopicDetails.RelevantTopicIds?.Contains(topicId.Url) ?? false;
+                            topicId.VideoId = topicId.VideoId ?? null;
+                        }
+
+                        for (int index = 0; index < video.TopicDetails.TopicCategories?.Count; index++)
+                        {
+                            var topicCategory = topicCategories[index];
+
+                            topicCategory.ChannelId = topicCategory.ChannelId ?? video.Id;
+                            topicCategory.Url = video.TopicDetails.TopicCategories[index];
+                            topicCategory.VideoId = topicCategory.VideoId ?? null;
+                        }
 
                         _dbContext.Youtube_Video.AddObject(videoEntity);
                         _dbContext.Youtube_VideoSnippet.AddObject(snippet);
@@ -363,19 +478,50 @@ namespace YoutubeJournalist.Core.Service
                         foreach (var topicCategory in topicCategories)
                             _dbContext.Youtube_TopicCategory.DeleteObject(topicCategory);
 
-                        // Synchronize collections (copy only, no DbContext)
-                        SynchronizeCollection(video.TopicDetails.TopicIds, topicIds, x => x, x => x.Url, () => new Youtube_TopicId(), (source, dest) => { return; });
-                        SynchronizeCollection(video.TopicDetails.TopicCategories, topicCategories, x => x, x => x.Url, () => new Youtube_TopicCategory(), (source, dest) => { return; });
+                        Map_Youtube_Video(video, videoEntity, snippet, statistics, status, thumbnailDetails);
+
+                        // Commit changes (deletions)
+                        _dbContext.SaveChanges();
+
+                        topicIds.Clear();
+                        topicCategories.Clear();
+
+                        if (video.TopicDetails?.TopicIds != null)
+                        {
+                            foreach (var topicId in video.TopicDetails?.TopicIds)
+                                topicIds.Add(_dbContext.Youtube_TopicId.CreateObject());
+                        }
+
+                        if (video.TopicDetails?.TopicCategories != null)
+                        {
+                            foreach (var topicCategory in video.TopicDetails?.TopicCategories)
+                                topicCategories.Add(_dbContext.Youtube_TopicCategory.CreateObject());
+                        }
 
                         // Re-Add
-                        foreach (var topicId in topicIds)
+                        for (int index = 0; index < video.TopicDetails.TopicIds?.Count; index++)
+                        {
+                            var topicId = topicIds[index];
+
+                            topicId.ChannelId = topicId.ChannelId ?? video.Snippet.ChannelId;
+                            topicId.Url = video.TopicDetails.TopicIds[index];
+                            topicId.Relevant = video.TopicDetails.RelevantTopicIds?.Contains(topicId.Url) ?? false;
+                            topicId.VideoId = topicId.VideoId ?? null;
+
                             _dbContext.Youtube_TopicId.AddObject(topicId);
+                        }
 
-                        foreach (var topicCategory in topicCategories)
+                        for (int index = 0; index < video.TopicDetails.TopicCategories?.Count; index++)
+                        {
+                            var topicCategory = topicCategories[index];
+
+                            topicCategory.ChannelId = topicCategory.ChannelId ?? video.Id;
+                            topicCategory.Url = video.TopicDetails.TopicCategories[index];
+                            topicCategory.VideoId = topicCategory.VideoId ?? null;
+
                             _dbContext.Youtube_TopicCategory.AddObject(topicCategory);
+                        }
                     }
-
-                    Map_Youtube_Video(video, videoEntity, snippet, statistics, status, thumbnailDetails, topicIds, topicCategories);
 
                     // Result collection
                     result.Add(videoEntity);
@@ -385,6 +531,135 @@ namespace YoutubeJournalist.Core.Service
                 _dbContext.SaveChanges();
 
                 return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IEnumerable<Youtube_Playlist> SearchUpdatePlaylistDetails(YoutubePlaylistRequest request)
+        {
+            try
+            {
+                // Playlist
+                var response = _youtubeService.GetPlaylists(request);
+
+                var result = new List<Youtube_Playlist>();
+
+                Youtube_Playlist entity;
+                Youtube_Channel channel;
+                Youtube_ThumbnailDetails thumbnailDetails;
+
+                foreach (var playlist in response.Collection)
+                {
+                    entity = _dbContext.Youtube_Playlist.FirstOrDefault(x => x.Id == playlist.Id);
+                    channel = _dbContext.Youtube_Channel.FirstOrDefault(x => x.Id == playlist.Snippet.ChannelId);
+
+                    // Channel must be available
+                    if (channel == null)
+                        throw new FormattedException("No local channel for playlist/channel query:  {0} / {1}", playlist.Id, playlist.Snippet.ChannelId);
+
+                    // New
+                    if (entity == null)
+                    {
+                        entity = _dbContext.Youtube_Playlist.CreateObject();
+                        thumbnailDetails = _dbContext.Youtube_ThumbnailDetails.CreateObject();
+
+                        Map_Youtube_Playlist(playlist, entity, channel, thumbnailDetails);
+
+                        _dbContext.Youtube_Playlist.AddObject(entity);
+                        _dbContext.Youtube_ThumbnailDetails.AddObject(thumbnailDetails);
+                    }
+
+                    // Existing
+                    else
+                    {
+                        thumbnailDetails = _dbContext.Youtube_ThumbnailDetails
+                                                     .First(x => x.Our_Id == entity.PlaylistSnippet_ThumnailDetails_Id);
+
+                        Map_Youtube_Playlist(playlist, entity, channel, thumbnailDetails);
+                    }
+
+                    result.Add(entity);
+                }
+
+                // Commit changes
+                _dbContext.SaveChanges();
+
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IEnumerable<Youtube_PlaylistItem> SearchUpdatePlaylistItemDetails(YoutubePlaylistItemRequest request)
+        {
+            try
+            {
+                // Query for existing playlist
+                var playlistEntity = _dbContext.Youtube_Playlist.FirstOrDefault(x => x.Id == request.PlaylistId);
+
+                if (playlistEntity == null)
+                    throw new FormattedException("No playlist found for playlist items request:  {0}", request.PlaylistId);
+
+                // Youtube Playlist Items Query
+                var response = _youtubeService.GetPlaylistItems(request);
+
+                var result = new List<Youtube_PlaylistItem>();
+
+                Youtube_PlaylistItem entity;
+                Youtube_Channel channel;
+                Youtube_Channel ownerChannel;
+                Youtube_ThumbnailDetails thumbnailDetails;
+
+                foreach (var playlistItem in response.Collection)
+                {
+                    entity = _dbContext.Youtube_PlaylistItem.FirstOrDefault(x => x.Id == playlistItem.Id);
+                    channel = _dbContext.Youtube_Channel.FirstOrDefault(x => x.Id == playlistItem.Snippet.ChannelId);
+                    ownerChannel = _dbContext.Youtube_Channel.FirstOrDefault(x => x.Id == playlistItem.Snippet.VideoOwnerChannelId);
+
+                    // Channel / Owner Channel must be available
+                    if (ownerChannel == null)
+                        throw new FormattedException("No local owner channel for playlist item/channel query:  {0} / {1}",
+                                                      playlistItem.Id, playlistItem.Snippet.VideoOwnerChannelId);
+
+                    if (channel == null)
+                        throw new FormattedException("No local channel for playlist item/channel query:  {0} / {1}",
+                                                      playlistItem.Id, playlistItem.Snippet.ChannelId);
+
+                    // New
+                    if (entity == null)
+                    {
+                        entity = _dbContext.Youtube_PlaylistItem.CreateObject();
+                        thumbnailDetails = _dbContext.Youtube_ThumbnailDetails.CreateObject();
+
+                        Map_Youtube_PlaylistItem(playlistItem, entity, playlistEntity, channel, ownerChannel, thumbnailDetails);
+
+                        _dbContext.Youtube_PlaylistItem.AddObject(entity);
+                        _dbContext.Youtube_ThumbnailDetails.AddObject(thumbnailDetails);
+                    }
+
+                    // Existing
+                    else
+                    {
+                        thumbnailDetails = _dbContext.Youtube_ThumbnailDetails
+                                                     .First(x => x.Our_Id == entity.PlaylistItemSnippet_ThumbnailDetails_Id);
+
+                        Map_Youtube_PlaylistItem(playlistItem, entity, playlistEntity, channel, ownerChannel, thumbnailDetails);
+                    }
+
+                    result.Add(entity);
+                }
+
+                // Commit changes
+                _dbContext.SaveChanges();
+
+                return result;
+
             }
             catch (Exception ex)
             {
@@ -427,7 +702,9 @@ namespace YoutubeJournalist.Core.Service
                 Youtube_CommentListMap replyMap;
 
                 // Comment Replies (from all threads)
-                foreach (var threadReply in response.Collection.SelectMany(x => x.Replies.Comments))
+                foreach (var threadReply in response.Collection
+                                                    .Where(x => x.Replies != null)
+                                                    .SelectMany(x => x.Replies.Comments))
                 {
                     reply = _dbContext.Youtube_Comment.FirstOrDefault(x => x.Id == threadReply.Id);
 
@@ -484,8 +761,11 @@ namespace YoutubeJournalist.Core.Service
                     Map_Youtube_CommentThread(commentThread, channel, video, entity, snippet, comment, commentSnippet);
                 }
 
+                // Commit all changes!
+                _dbContext.SaveChanges();
+
                 // Comment Maps
-                foreach (var thread in response.Collection)
+                foreach (var thread in response.Collection.Where(x => x.Replies != null && x.Replies.Comments != null))
                 {
                     foreach (var userReply in thread.Replies.Comments)
                     {
@@ -516,22 +796,17 @@ namespace YoutubeJournalist.Core.Service
                     }
                 }
 
+                // Commit all changes!
+                _dbContext.SaveChanges();
+
                 // Delete unused maps
                 IEnumerable<Youtube_CommentListMap> potentialUnusedMaps;
 
-                // Channel Search (Should return all comments for all videos!)
-                if (request.ChannelId != null)
-                {
-                    potentialUnusedMaps = _dbContext.Youtube_CommentListMap
-                                                    .Where(x => x.Youtube_CommentThread.Youtube_CommentThreadSnippet.ChannelId == request.ChannelId)
-                                                    .Actualize();
-                }
-
                 // Video Search (Could be across multiple channels)
-                else if (request.VideoIds.Any())
+                if (!string.IsNullOrWhiteSpace(request.VideoId))
                 {
                     potentialUnusedMaps = _dbContext.Youtube_CommentListMap
-                                                    .Where(x => request.VideoIds.Contains(x.Youtube_CommentThread.Youtube_CommentThreadSnippet.VideoId))
+                                                    .Where(x => request.VideoId == x.Youtube_CommentThread.Youtube_CommentThreadSnippet.VideoId)
                                                     .Actualize();
                 }
 
@@ -568,8 +843,11 @@ namespace YoutubeJournalist.Core.Service
                 // Commit all changes!
                 _dbContext.SaveChanges();
 
+                // Take simple string collection for EF serializer to handle
+                var commentThreadIds = response.Collection.Select(x => x.Id).ToList();
+
                 return _dbContext.Youtube_CommentThread
-                                 .Where(x => response.Collection.Any(y => y.Id == x.Id))
+                                 .Where(x => commentThreadIds.Contains(x.Id))
                                  .Actualize();
             }
             catch (Exception ex)
@@ -587,20 +865,8 @@ namespace YoutubeJournalist.Core.Service
                                         Youtube_ChannelAuditDetails auditDetails,
                                         Youtube_ChannelBrandingSettings brandingSettings,
                                         Youtube_ChannelSettings settings,
-                                        Youtube_ThumbnailDetails thumbnailDetails,
-                                        IList<Youtube_TopicId> topicIds,
-                                        IList<Youtube_TopicCategory> topicCategories)
+                                        Youtube_ThumbnailDetails thumbnailDetails)
         {
-            // Validate parameters
-            if (channel.TopicDetails != null)
-            {
-                if (channel.TopicDetails.TopicIds.Count != topicIds.Count())
-                    throw new ArgumentException("Topic Ids not properly initialized for AddUpdateYoutube_Channel");
-
-                if (channel.TopicDetails.TopicCategories.Count != topicCategories.Count())
-                    throw new ArgumentException("Topic Categories not properly initialized for AddUpdateYoutube_Channel");
-            }
-
             // Primary fields
             entity.ETag = channel.ETag;
             entity.Id = channel.Id;
@@ -608,6 +874,13 @@ namespace YoutubeJournalist.Core.Service
 
             // Channel Snippet, Thumbnail Details
             Map_Youtube_ChannelSnippet(channel.Snippet, snippet, thumbnailDetails);
+
+            // Content Details
+            entity.ChannelContentDetails_RelatedPlaylistsData_Favorites = channel.ContentDetails.RelatedPlaylists.Favorites;
+            entity.ChannelContentDetails_RelatedPlaylistsData_Likes = channel.ContentDetails.RelatedPlaylists.Likes;
+            entity.ChannelContentDetails_RelatedPlaylistsData_Uploads = channel.ContentDetails.RelatedPlaylists.Uploads;
+            entity.ChannelContentDetails_RelatedPlaylistsData_WatchHistory = channel.ContentDetails.RelatedPlaylists.WatchHistory;
+            entity.ChannelContentDetails_RelatedPlaylistsData_WatchLater = channel.ContentDetails.RelatedPlaylists.WatchLater;
 
             // Content Owner Details
             entity.ContentOwnerDetails_ContentOwner = channel.ContentOwnerDetails?.ContentOwner;
@@ -668,37 +941,6 @@ namespace YoutubeJournalist.Core.Service
             entity.Youtube_ChannelAuditDetails = auditDetails;
             entity.Youtube_ChannelBrandingSettings = brandingSettings;
             entity.Youtube_ChannelSnippet = snippet;
-
-            // Topic Details (loose entities)
-            if (channel.TopicDetails != null && channel.TopicDetails.TopicIds != null)
-            {
-                for (int index = 0; index < channel.TopicDetails.TopicIds.Count; index++)
-                {
-                    var entityTopicId = topicIds[index];
-
-                    entityTopicId.Url = channel.TopicDetails.TopicIds[index];   // Primary Key
-                    entityTopicId.ChannelId = channel.Id;                       // Loose Foreign Key                    
-                    entityTopicId.VideoId = null;                               // Loose Foreign Key
-
-                    entityTopicId.Relevant = false;                             // Not used for Channel
-
-                    topicIds.Add(entityTopicId);
-                }
-            }
-
-            if (channel.TopicDetails != null && channel.TopicDetails.TopicCategories != null)
-            {
-                for (int index = 0; index < channel.TopicDetails.TopicCategories.Count; index++)
-                {
-                    var entityTopicCategory = topicCategories[index];
-
-                    entityTopicCategory.Url = channel.TopicDetails.TopicCategories[index];  // Primary Key
-                    entityTopicCategory.ChannelId = channel.Id;                             // Loose Foreign Key                    
-                    entityTopicCategory.VideoId = null;                                     // Loose Foreign Key
-
-                    topicCategories.Add(entityTopicCategory);
-                }
-            }
         }
 
         private void Map_Youtube_Video(Video video, 
@@ -706,20 +948,8 @@ namespace YoutubeJournalist.Core.Service
                                       Youtube_VideoSnippet snippet,
                                       Youtube_VideoStatistics statistics,
                                       Youtube_VideoStatus status,
-                                      Youtube_ThumbnailDetails thumbnailDetails,
-                                      IList<Youtube_TopicId> topicIds, 
-                                      IList<Youtube_TopicCategory> topicCategories)
+                                      Youtube_ThumbnailDetails thumbnailDetails)
         {
-            // Validate parameters
-            if (video.TopicDetails != null)
-            {
-                if (video.TopicDetails.TopicIds.Count != topicIds.Count())
-                    throw new ArgumentException("Topic Ids not properly initialized for AddUpdateYoutube_Channel");
-
-                if (video.TopicDetails.TopicCategories.Count != topicCategories.Count())
-                    throw new ArgumentException("Topic Categories not properly initialized for AddUpdateYoutube_Channel");
-            }
-
             entity.AgeGating_AlcoholContent = video.AgeGating?.AlcoholContent;
             entity.AgeGating_ETag = video.AgeGating?.ETag;
             entity.AgeGating_Restricted = video.AgeGating?.Restricted;
@@ -768,33 +998,6 @@ namespace YoutubeJournalist.Core.Service
             entity.Youtube_VideoStatus = status;
             entity.Youtube_VideoStatistics = statistics;
             entity.Youtube_VideoSnippet = snippet;
-
-            // Topic Details (loose entities)
-            if (video.TopicDetails != null && video.TopicDetails.TopicIds != null)
-            {
-                for (int index = 0; index < video.TopicDetails.TopicIds.Count; index++)
-                {
-                    var entityTopicId = topicIds[index];
-                    entityTopicId.Url = video.TopicDetails.TopicIds[index];   // Primary Key
-                    entityTopicId.ChannelId = video.Id;                       // Loose Foreign Key                    
-                    entityTopicId.VideoId = null;                             // Loose Foreign Key
-
-                    if (video.TopicDetails.RelevantTopicIds != null)
-                        entityTopicId.Relevant = video.TopicDetails.RelevantTopicIds.Contains(entityTopicId.Url);
-                }
-            }
-
-            if (video.TopicDetails != null && video.TopicDetails.TopicCategories != null)
-            {
-                for (int index = 0; index < video.TopicDetails.TopicCategories.Count; index++)
-                {
-                    var entityTopicCategory = topicCategories[index];
-
-                    entityTopicCategory.Url = video.TopicDetails.TopicCategories[index];  // Primary Key
-                    entityTopicCategory.ChannelId = video.Id;                             // Loose Foreign Key                    
-                    entityTopicCategory.VideoId = null;                                   // Loose Foreign Key
-                }
-            }
         }
 
         private void Map_Youtube_ChannelSnippet(ChannelSnippet snippet, Youtube_ChannelSnippet entity, Youtube_ThumbnailDetails thumbnailDetails)
@@ -876,7 +1079,56 @@ namespace YoutubeJournalist.Core.Service
             
             Map_Youtube_ThumbnailDetails(searchResult.Snippet.Thumbnails, thumbnailDetails);
         }
+        private void Map_Youtube_Playlist(Playlist playlist, Youtube_Playlist entity, Youtube_Channel channel, Youtube_ThumbnailDetails thumbnailDetails)
+        {
+            // NOTE:  Not mapping channel values here. The foreign key is for reference
 
+            entity.ETag = playlist.ETag;
+            entity.Id = playlist.Id;
+            entity.Kind = playlist.Kind;
+            entity.PlaylistSnippet_ChannelDescription = playlist.Snippet.Description;
+            entity.PlaylistSnippet_ChannelTitle = playlist.Snippet.ChannelTitle;
+            entity.PlaylistSnippet_PublishedAtDateTimeOffset = playlist.Snippet.PublishedAtDateTimeOffset;
+            entity.PlaylistSnippet_Title = playlist.Snippet.Title;
+
+            // Foreign Keys
+            entity.Youtube_Channel = channel;
+            entity.Youtube_ThumbnailDetails = thumbnailDetails;
+            
+            Map_Youtube_ThumbnailDetails(playlist.Snippet.Thumbnails, thumbnailDetails);
+        }
+        private void Map_Youtube_PlaylistItem(PlaylistItem playlistItem, 
+                                              Youtube_PlaylistItem entity, 
+                                              Youtube_Playlist playlistEntity, 
+                                              Youtube_Channel channel, 
+                                              Youtube_Channel ownerChannel, 
+                                              Youtube_ThumbnailDetails thumbnailDetails)
+        {
+            entity.ETag = playlistItem.ETag;
+            entity.Id = playlistItem.Id;
+            entity.Kind= playlistItem.Kind;
+            entity.PlaylistContentDetails_ETag = playlistItem.ContentDetails.ETag;
+            entity.PlaylistContentDetails_Note = playlistItem.ContentDetails.Note;
+            entity.PlaylistContentDetails_VideoId = playlistItem.ContentDetails.VideoId; // Nullable (Not required)
+            entity.PlaylistContentDetails_VideoPublishedAtDateTimeOffset = playlistItem.ContentDetails.VideoPublishedAtDateTimeOffset;
+            entity.PlaylistItemSnippet_ChannelId = playlistItem.Snippet.ChannelId;
+            entity.PlaylistItemSnippet_ChannelTitle = playlistItem.Snippet.Title;
+            entity.PlaylistItemSnippet_Description = playlistItem.Snippet.Description;
+            entity.PlaylistItemSnippet_ETag = playlistItem.Snippet.ETag;
+            entity.PlaylistItemSnippet_Position = playlistItem.Snippet.Position;
+            entity.PlaylistItemSnippet_PublishedAtDateTimeOffset = playlistItem.Snippet.PublishedAtDateTimeOffset;
+            entity.PlaylistItemSnippet_Title = playlistItem.Snippet.Title;
+            entity.PlaylistItemSnippet_VideoOwnerChannelTitle = playlistItem.Snippet.Title;
+            entity.PlaylistItemStatus_PrivacyStatus = playlistItem.Status.PrivacyStatus;
+
+            Map_Youtube_ThumbnailDetails(playlistItem.Snippet.Thumbnails, thumbnailDetails);
+
+            // Foreign Keys
+            entity.Youtube_Playlist = playlistEntity;
+            entity.Youtube_ThumbnailDetails = thumbnailDetails;
+            entity.Youtube_Channel = channel;
+            entity.Youtube_Channel1 = ownerChannel;
+        }
         private void Map_Youtube_CommentThread(CommentThread commentThread, 
                                                Youtube_Channel channel,                  // Comment Thread
                                                Youtube_Video video,                      // Comment Thread
@@ -892,6 +1144,31 @@ namespace YoutubeJournalist.Core.Service
             snippet.ETag = commentThread.Snippet.ETag;
             snippet.IsPublic = commentThread.Snippet.IsPublic;
             snippet.TotalReplyCount = commentThread.Snippet.TotalReplyCount;
+
+            // Top level comment -> snippet
+            commentSnippet.AuthorChannelId_ETag = commentThread.Snippet.TopLevelComment.Snippet.AuthorChannelId.ETag;
+            commentSnippet.AuthorChannelId_Value = commentThread.Snippet.TopLevelComment.Snippet.AuthorChannelId.Value;            
+            commentSnippet.AuthorChannelUrl = commentThread.Snippet.TopLevelComment.Snippet.AuthorChannelUrl;
+            commentSnippet.AuthorDisplayName = commentThread.Snippet.TopLevelComment.Snippet.AuthorDisplayName;
+            commentSnippet.AuthorProfileImageUrl = commentThread.Snippet.TopLevelComment.Snippet.AuthorProfileImageUrl;
+            commentSnippet.CanRate = commentThread.Snippet.TopLevelComment.Snippet.CanRate;
+            commentSnippet.ChannelId = commentThread.Snippet.TopLevelComment.Snippet.ChannelId;
+            commentSnippet.LikeCount = commentThread.Snippet.TopLevelComment.Snippet.LikeCount;
+            commentSnippet.ModerationStatus = commentThread.Snippet.TopLevelComment.Snippet.ModerationStatus;
+            commentSnippet.ParentId = commentThread.Snippet.TopLevelComment.Id;     // ParentId field wasn't set
+            commentSnippet.PublishedAt = commentThread.Snippet.TopLevelComment.Snippet.PublishedAt;
+            commentSnippet.PublishedAtDateTimeOffset = commentThread.Snippet.TopLevelComment.Snippet.PublishedAtDateTimeOffset;
+            commentSnippet.PublishedAtRaw = commentThread.Snippet.TopLevelComment.Snippet.PublishedAtRaw;
+            commentSnippet.TextDisplay = commentThread.Snippet.TopLevelComment.Snippet.TextDisplay;
+            commentSnippet.TextOriginal = commentThread.Snippet.TopLevelComment.Snippet.TextOriginal;
+            commentSnippet.UpdatedAt = commentThread.Snippet.TopLevelComment.Snippet.UpdatedAt;
+            commentSnippet.UpdatedAtDateTimeOffset = commentThread.Snippet.TopLevelComment.Snippet.UpdatedAtDateTimeOffset;
+            commentSnippet.UpdatedAtRaw = commentThread.Snippet.TopLevelComment.Snippet.UpdatedAtRaw;
+            commentSnippet.VideoId = commentThread.Snippet.TopLevelComment.Snippet.VideoId;
+            commentSnippet.ViewerRating = commentThread.Snippet.TopLevelComment.Snippet.ViewerRating;
+
+            comment.Youtube_CommentSnippet = commentSnippet;
+            comment.Youtube_CommentSnippet.ParentId = commentThread.Snippet.TopLevelComment.Id;
 
             snippet.Youtube_Channel = channel;
             snippet.Youtube_Video = video;
@@ -921,6 +1198,7 @@ namespace YoutubeJournalist.Core.Service
             snippet.ETag = comment.Snippet.ETag;
             snippet.LikeCount = comment.Snippet.LikeCount;
             snippet.ModerationStatus = comment.Snippet.ModerationStatus;
+            snippet.ParentId = comment.Id;          // ParentId field isn't set
             //entitySnippet.ParentId = comment.Snippet.ParentId;                // Set via entity reference
             snippet.PublishedAt = comment.Snippet.PublishedAt;
             snippet.PublishedAtDateTimeOffset = comment.Snippet.PublishedAtDateTimeOffset;

@@ -5,8 +5,11 @@ using Google.Apis.Auth.OAuth2;
 using Google.Apis.Auth.OAuth2.Flows;
 using Google.Apis.Services;
 using Google.Apis.Util;
+using Google.Apis.Util.Store;
 using Google.Apis.YouTube.v3;
 using Google.Apis.YouTube.v3.Data;
+
+using WpfCustomUtilities.Extensions;
 
 using YoutubeJournalist.Core.Extension;
 using YoutubeJournalist.Core.Service.Interface;
@@ -25,21 +28,24 @@ namespace YoutubeJournalist.Core.Service
                 ClientSecrets = new ClientSecrets()
                 {
                     ClientId = clientId,
-                    ClientSecret = clientSecret,
+                    ClientSecret = clientSecret                    
                 }
             },
             new string[]
             {
+                YouTubeService.ScopeConstants.Youtube,
+                YouTubeService.ScopeConstants.YoutubeForceSsl,
                 YouTubeService.ScopeConstants.YoutubeReadonly
             },
             "rdolan.music.2@gmail.com",
-            CancellationToken.None);
+            CancellationToken.None,
+            new FileDataStore(".\\"));                          // Must have file data store for Google to cache data (bearer tokens! required!)
 
             this.ServiceBase = new YouTubeService(new BaseClientService.Initializer()
             {
                 HttpClientInitializer = credentials.Result,
                 ApiKey = apiKey,
-                ApplicationName = "channels"
+                ApplicationName = "youtube#commentThreadList"
             });
         }
 
@@ -77,7 +83,7 @@ namespace YoutubeJournalist.Core.Service
             return new YoutubeServiceResponse<SearchResult>()
             {
                 PageInfo = result.PageInfo,
-                Collection = result.Items
+                Collection = result.Items ?? Array.Empty<SearchResult>()    // Youtube's API can produce null references
             };
         }
         public YoutubeServiceResponse<SearchResult> SearchUser(YoutubeUserSearchRequest serviceRequest)
@@ -106,7 +112,7 @@ namespace YoutubeJournalist.Core.Service
 
             return new YoutubeServiceResponse<SearchResult>()
             {
-                Collection = response.Items,
+                Collection = response.Items ?? Array.Empty<SearchResult>(),    // Youtube's API can produce null references
                 PageInfo = response.PageInfo
             };
         }
@@ -114,6 +120,9 @@ namespace YoutubeJournalist.Core.Service
         {
             // Create Youtube video list request
             var request = (this.ServiceBase as YouTubeService).Videos.List(YoutubeConstants.VideoParts.ToRepeatable());
+
+            if (string.IsNullOrEmpty(serviceRequest.VideoIds.ToString()))
+                throw new Exception("Must set the VideoIds field for YoutubeVideoDetailsRequest");
 
             // Set Channel Id for the search
             request.Id = serviceRequest.VideoIds;
@@ -123,7 +132,7 @@ namespace YoutubeJournalist.Core.Service
 
             return new YoutubeServiceResponse<Video>()
             {
-                Collection = response.Items,
+                Collection = response.Items ?? Array.Empty<Video>(),    // Youtube's API can produce null references
                 PageInfo = response.PageInfo
             };
         }
@@ -131,6 +140,9 @@ namespace YoutubeJournalist.Core.Service
         {
             // Create Youtube channel list request
             var request = (this.ServiceBase as YouTubeService).Channels.List(YoutubeConstants.ChannelParts.ToRepeatable());
+
+            // Try and get all public channels for a user
+            // request.ForUsername
 
             // Set Channel Id for the search
             request.Id = serviceRequest.ChannelId;
@@ -140,7 +152,47 @@ namespace YoutubeJournalist.Core.Service
 
             return new YoutubeServiceResponse<Channel>()
             {
-                Collection = response.Items,
+                Collection = response.Items ?? Array.Empty<Channel>(),    // Youtube's API can produce null references
+                PageInfo = response.PageInfo
+            };
+        }
+
+        public YoutubeServiceResponse<Playlist> GetPlaylists(YoutubePlaylistRequest serviceRequest)
+        {
+            // Create Youtube channel list request
+            var request = (this.ServiceBase as YouTubeService).Playlists.List(YoutubeConstants.PlaylistParts.ToRepeatable());
+
+            // Set (Playlist) Id. Channel id searches have permissions issues with Youtube
+            if (!String.IsNullOrWhiteSpace(serviceRequest.PlaylistId))
+                request.Id = serviceRequest.PlaylistId.ToRepeatable();
+
+            else
+                throw new Exception("Must specify either PlaylistId for YoutubePlaylistRequest");
+
+            // Call the search.list method to retrieve results matching the specified query term.
+            var response = request.Execute();
+
+            return new YoutubeServiceResponse<Playlist>()
+            {
+                Collection = response.Items ?? Array.Empty<Playlist>(),    // Youtube's API can produce null references
+                PageInfo = response.PageInfo
+            };
+        }
+
+        public YoutubeServiceResponse<PlaylistItem> GetPlaylistItems(YoutubePlaylistItemRequest serviceRequest)
+        {
+            // Create Youtube channel list request
+            var request = (this.ServiceBase as YouTubeService).PlaylistItems.List(YoutubeConstants.PlaylistItemParts.ToRepeatable());
+
+            // Set Channel Id for the search
+            request.PlaylistId = serviceRequest.PlaylistId;
+
+            // Call the search.list method to retrieve results matching the specified query term.
+            var response = request.Execute();
+
+            return new YoutubeServiceResponse<PlaylistItem>()
+            {
+                Collection = response.Items ?? Array.Empty<PlaylistItem>(),    // Youtube's API can produce null references
                 PageInfo = response.PageInfo
             };
         }
@@ -154,22 +206,17 @@ namespace YoutubeJournalist.Core.Service
             // Search configuration
             request.PageToken = serviceRequest.UsePageToken ? serviceRequest.PageToken : null;
 
-            if (string.IsNullOrEmpty(serviceRequest.ChannelId) &&
-                string.IsNullOrEmpty(serviceRequest.VideoIds.ToString()))
-                throw new Exception("Youtube commentThread request must specify either channel or video ids");
+            if (string.IsNullOrEmpty(serviceRequest.VideoId))
+                throw new Exception("Youtube commentThread request must specify either video ids");
 
-            if (!string.IsNullOrEmpty(serviceRequest.ChannelId))
-                request.AllThreadsRelatedToChannelId = serviceRequest.ChannelId;
-
-            else
-                request.Id = serviceRequest.VideoIds;
+            request.VideoId = serviceRequest.VideoId;
 
             // Call the commehtThreadsResource.listRequest method to retrieve results matching the specified query term.
             var response = request.Execute();
 
             return new YoutubeServiceResponse<CommentThread>()
             {
-                Collection = response.Items,
+                Collection = response.Items ?? Array.Empty<CommentThread>(),    // Youtube's API can produce null references
                 PageInfo = response.PageInfo
             };
         }

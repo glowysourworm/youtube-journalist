@@ -4,10 +4,13 @@ using System.Windows;
 
 using WpfCustomUtilities.Extensions;
 using WpfCustomUtilities.Extensions.ObservableCollection;
+using WpfCustomUtilities.Extensions.Collection;
 
 using YoutubeJournalist.Core.Extension;
 using YoutubeJournalist.Core.Service.Model;
+using YoutubeJournalist.Event;
 using YoutubeJournalist.ViewModel;
+using Google.Apis.Util;
 
 namespace YoutubeJournalist
 {
@@ -86,6 +89,67 @@ namespace YoutubeJournalist
             }
         }
 
+        private void ExecuteGetChannelDetails(string channelId)
+        {
+            // Procedure
+            // 
+            // 1) Get complete channel details
+            // 2) Get complete playlist details for the channel
+            // 3) Get complete set of videos for the channel from playlist video ids
+            // 4) Get complete set of comment threads for the channel (Youtube function provided)
+            //
+
+            // TODO: IMPLEMENT PAGING!
+
+            try
+            {
+                var channel = _controller.SearchUpdateChannelDetails(new YoutubeChannelDetailsRequest()
+                {
+                    ChannelId = channelId
+                });
+
+                // TODO: LOG
+                if (channel == null)
+                    return;
+
+                var playlists = _controller.SearchUpdatePlaylistDetails(new YoutubePlaylistRequest()
+                {
+                    //ChannelId = channelId,
+                    PlaylistId = channel.PrimaryPlaylistId
+                });
+
+                var videos = _controller.SearchUpdateVideoDetails(new YoutubeVideoDetailsRequest()
+                { 
+                    VideoIds = new Repeatable<string>(playlists.SelectMany(x => x.PlaylistItems.Select(z => z.VideoId)).Actualize())
+                });
+
+                foreach (var video in videos)
+                {
+                    var commentThreads = _controller.SearchCommentThreads(new YoutubeCommentThreadRequest()
+                    {
+                        VideoId = video.Id
+                    });
+
+                    video.CommentThreads.AddRange(commentThreads);
+                }
+
+
+                // Wire it all up!
+                channel.Playlists.AddRange(playlists);
+                channel.Videos.AddRange(videos);
+
+                _viewModel.Channels.Remove(x => x.Id == channel.Id);
+                _viewModel.LooseVideos.Remove(x => videos.Any(y => y.Id == x.Id));
+
+                _viewModel.Channels.Add(channel);
+                _viewModel.LooseVideos.AddRange(videos);
+            }
+            catch (Exception ex)
+            {
+                OnException(ex);
+            }
+        }
+
         private void OnGetChannelDetails(string channelId, bool isLocal)
         {
             try
@@ -96,21 +160,7 @@ namespace YoutubeJournalist
                 }
                 else
                 {
-                    var channel = _controller.SearchUpdateChannelDetails(new YoutubeChannelDetailsRequest()
-                    {
-                        ChannelId = channelId
-                    });
-
-                    // Local view model, or add view model
-                    var existingChannel = _viewModel.Channels.FirstOrDefault(x => x.Id == channelId);
-                    if (existingChannel != null)
-                        _viewModel.SelectedChannel = existingChannel;
-
-                    else
-                    {
-                        _viewModel.Channels.Add(channel);
-                        _viewModel.SelectedChannel = channel;
-                    }
+                    ExecuteGetChannelDetails(channelId);
                 }
 
                 // Select Local Channel Tab
@@ -132,22 +182,9 @@ namespace YoutubeJournalist
                 }
                 else
                 {
-                    var video = _controller.SearchUpdateVideoDetails(new YoutubeVideoDetailsRequest()
-                    {
-                        VideoIds = videoId.ToRepeatable()
+                    var channelId = _viewModel.SearchResults.First(x => x.VideoId == videoId).ChannelId;
 
-                    }).First();
-
-                    // Local view model, or add view model
-                    var existingVideo = _viewModel.LooseVideos.FirstOrDefault(x => x.Id == videoId);
-                    if (existingVideo != null)
-                        _viewModel.SelectedVideo = existingVideo;
-
-                    else
-                    {
-                        _viewModel.LooseVideos.Add(video);
-                        _viewModel.SelectedVideo = video;
-                    }
+                    ExecuteGetChannelDetails(channelId);
                 }
 
                 // Select Local Channel Tab
@@ -159,17 +196,14 @@ namespace YoutubeJournalist
             }
         }
 
-        private void BasicSearchControl_SearchEvent(object sender, string e)
+        private void BasicSearchControl_SearchEvent(object sender, string searchText)
         {
             try
             {
                 // Local
                 if (!_viewModel.SearchParameters.YoutubeAPIEnable)
                 {
-                    var result = _controller.GetSearchResults();
-
-                    _viewModel.LocalResults.Clear();
-                    _viewModel.LocalResults.AddRange(result);
+                    RefreshLocal();
                 }
 
                 // Youtube
@@ -177,11 +211,15 @@ namespace YoutubeJournalist
                 {
                     var result = _controller.BasicSearch(new YoutubeBasicSearchRequest()
                     {
-                        WildCard = _viewModel.SearchParameters.FilterString,
+                        WildCard = searchText,
+                        SearchType = _viewModel.SearchParameters.FilterSearchType,
+                        FilterType = BasicFilterType.WildCard,
                         SortOrder = Google.Apis.YouTube.v3.SearchResource.ListRequest.OrderEnum.Title
                     });
 
                     _viewModel.SearchResults.AddRange(result);
+
+                    RefreshLocal();
                 }
             }
             catch (Exception ex)
@@ -197,15 +235,15 @@ namespace YoutubeJournalist
 
         private void OnSearchResultDoubleClick(object sender, RoutedEventArgs e)
         {
-            var viewModel = sender as SearchResultViewModel;
+            var viewModel = (e as CustomRoutedEventArgs<SearchResultViewModel>).Data;
 
             switch (viewModel.Type)
             {
                 case BasicSearchType.Channel:
-                    OnGetChannelDetails(viewModel.Id, viewModel.IsLocal);
+                    OnGetChannelDetails(viewModel.ChannelId, viewModel.IsLocal);
                     break;
                 case BasicSearchType.Video:
-                    OnGetVideoDetails(viewModel.Id, viewModel.IsLocal);
+                    OnGetVideoDetails(viewModel.VideoId, viewModel.IsLocal);
                     break;
                 case BasicSearchType.Playlist:
                 default:

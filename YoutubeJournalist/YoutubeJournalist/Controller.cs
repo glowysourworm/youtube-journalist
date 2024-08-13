@@ -46,7 +46,15 @@ namespace YoutubeJournalist
             {
                 using (var unitOfWork = CreateConnection())
                 {
-                    return unitOfWork.GetSearchResults().Select(result => CreateSearchViewModel(result, true)).Actualize();
+                    return unitOfWork.GetSearchResults()
+                                     .Select(result => 
+                                     {
+                                         var isLocal = unitOfWork.HasVideo(result.Id_VideoId) &&
+                                                       unitOfWork.HasChannel(result.Id_ChannelId);
+
+                                         return CreateSearchViewModel(result, isLocal);
+                                     })
+                                     .Actualize();
                 }
             }
             catch (Exception ex)
@@ -131,6 +139,7 @@ namespace YoutubeJournalist
                 throw ex;
             }
         }
+
         /// <summary>
         /// Returns video details from local database
         /// </summary>
@@ -151,6 +160,7 @@ namespace YoutubeJournalist
                 throw ex;
             }
         }
+
         public IEnumerable<CommentThreadViewModel> GetCommentThreads(string videoId)
         {
             try
@@ -166,7 +176,6 @@ namespace YoutubeJournalist
             }
         }
 
-
         /// <summary>
         /// Executes basic search as a user on the Youtube platform, and stores the results in the local database
         /// </summary>
@@ -176,14 +185,21 @@ namespace YoutubeJournalist
             {
                 using (var unitOfWork = CreateConnection())
                 {
-                    return unitOfWork.BasicSearch(request).Select(result => CreateSearchViewModel(result, false)).Actualize();
+                    return unitOfWork.BasicSearch(request)
+                                     .Select(result =>
+                                     {
+                                         var isLocal = unitOfWork.HasVideo(result.Id_VideoId) &&
+                                                       unitOfWork.HasChannel(result.Id_ChannelId);
+
+                                         return CreateSearchViewModel(result, isLocal);
+
+                                     }).Actualize();
                 }
             }
             catch(Exception ex)
             {
                 throw ex;
             }
-
         }
 
         /// <summary>
@@ -242,6 +258,44 @@ namespace YoutubeJournalist
         }
 
         /// <summary>
+        /// Gets playlist details from Youtube service for the specified channel
+        /// </summary>
+        public IEnumerable<PlaylistViewModel> SearchUpdatePlaylistDetails(YoutubePlaylistRequest request)
+        {
+            try
+            {
+                using (var unitOfWork = CreateConnection())
+                {
+                    // Channel search from Youtube
+                    var playlists = unitOfWork.SearchUpdatePlaylistDetails(request);
+
+                    var result = new List<PlaylistViewModel>();
+
+                    // Search for playlist items for each channel from Youtube
+                    foreach (var playlist in playlists)
+                    {
+                        // Query -> Commit to local database
+                        var playlistItems = unitOfWork.SearchUpdatePlaylistItemDetails(new YoutubePlaylistItemRequest()
+                        {
+                            PlaylistId = playlist.Id
+                        });
+
+                        // Create playlist result
+                        var viewModel = CreatePlaylistViewModel(playlist, playlistItems);
+
+                        result.Add(viewModel);
+                    }
+
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
         /// Search that retrieves comment threads for:  1) An entire channel, or 2) A set of video (ids)
         /// </summary>
         public IEnumerable<CommentThreadViewModel> SearchCommentThreads(YoutubeCommentThreadRequest request)
@@ -271,9 +325,9 @@ namespace YoutubeJournalist
                 Created = result.Snippet_PublishedAtDateTimeOffset.HasValue ? 
                           result.Snippet_PublishedAtDateTimeOffset.Value.UtcDateTime : DateTime.MinValue,
                 Description = result.Snippet_Description,
-                Id = result.Id_Kind != YoutubeConstants.ResponseKindVideo ?
-                     result.Id_Kind != YoutubeConstants.ResponseKindChannel ?
-                     null : result.Id_ChannelId : result.Id_VideoId,
+                ChannelId = result.Id_ChannelId,
+                PlaylistId = result.Id_PlaylistId,
+                VideoId = result.Id_VideoId,
                 Thumbnail = result.Youtube_ThumbnailDetails.Default__Url,
                 Title = result.Snippet_Title,
                 Type = result.Id_Kind != YoutubeConstants.ResponseKindVideo ?
@@ -288,6 +342,7 @@ namespace YoutubeJournalist
             return new ChannelViewModel()
             {
                 Id = result.Id,
+                PrimaryPlaylistId = result.ChannelContentDetails_RelatedPlaylistsData_Uploads,
                 BannerUrl = result.Youtube_ChannelBrandingSettings.BannerImageUrl,
                 IconUrl = result.Youtube_ChannelBrandingSettings.WatchIconImageUrl,
                 MadeForKids = result.Status_MadeForKids ?? false,
@@ -307,6 +362,35 @@ namespace YoutubeJournalist
                                 thread.Youtube_CommentThreadSnippet.VideoId == video.Id).Actualize());
                     }))
                     
+            };
+        }
+        private PlaylistViewModel CreatePlaylistViewModel(Youtube_Playlist result, IEnumerable<Youtube_PlaylistItem> playlistItems)
+        {
+            return new PlaylistViewModel()
+            {
+                ChannelId = result.PlaylistSnippet_ChannelId,
+                Description = "",
+                Id = result.Id,
+                PlaylistItems = new ObservableCollection<PlaylistItemViewModel>(playlistItems.Select(item => CreatePlaylistItemViewModel(item, result)).Actualize()),
+                ThumbnailUrl = result.Youtube_ThumbnailDetails.Default__Url,
+                Title = result.PlaylistSnippet_Title
+            };
+        }
+        private PlaylistItemViewModel CreatePlaylistItemViewModel(Youtube_PlaylistItem result, Youtube_Playlist playlist)
+        {
+            return new PlaylistItemViewModel()
+            {
+                ChannelId = result.PlaylistItemSnippet_ChannelId,
+                Description = result.PlaylistItemSnippet_Description,
+                Id = result.Id,
+                Note = result.PlaylistContentDetails_Note,
+                OwnerChannelId = result.PlaylistItemSnippet_VideoOwnerChannelId,
+                PlaylistId = playlist.Id,
+                Position = result.PlaylistItemSnippet_Position ?? 0,
+                PrivacyStatus = result.PlaylistItemStatus_PrivacyStatus,
+                ThumbnailUrl = result.Youtube_ThumbnailDetails.Default__Url,
+                Title = result.PlaylistItemSnippet_Title,
+                VideoId = result.PlaylistContentDetails_VideoId
             };
         }
         private VideoViewModel CreateVideoViewModel(Youtube_Video result, IEnumerable<Youtube_CommentThread> commentThreads)
