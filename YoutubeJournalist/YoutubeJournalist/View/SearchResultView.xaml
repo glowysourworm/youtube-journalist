@@ -31,7 +31,7 @@
                         </StackPanel.ContextMenu>
                         
                         <!-- Channel -->
-                        <Border x:Name="ChannelBorder" Width="40" Height="40">
+                        <Border x:Name="ChannelBorder" Width="40" Height="40" Padding="5">
                             <Border.Visibility>
                                 <Binding Path="Type" ConverterParameter="{x:Static coreConstant:BasicSearchType.Channel}">
                                     <Binding.Converter>
@@ -50,7 +50,7 @@
                         </Border>
                         
                         <!-- Video -->
-                        <Border x:Name="VideoBorder" Width="40" Height="22.5">
+                        <Border x:Name="VideoBorder" Width="40" Height="22.5" Padding="5">
                             <Border.Visibility>
                                 <Binding Path="Type" ConverterParameter="{x:Static coreConstant:BasicSearchType.Video}">
                                     <Binding.Converter>

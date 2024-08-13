@@ -31,7 +31,6 @@ namespace YoutubeJournalist
             _controller = new Controller(configuration);
             _viewModel = new YoutubeJournalistViewModel(configuration, new SearchParametersViewModel());
 
-            _viewModel.GetVideoDetailsEvent += OnGetVideoDetails;
             _viewModel.GetChannelDetailsEvent += OnGetChannelDetails;
 
             this.DataContext = _viewModel;
@@ -71,17 +70,17 @@ namespace YoutubeJournalist
         {
             try
             {
-                _viewModel.LocalResults.Clear();
                 _viewModel.Channels.Clear();
-                _viewModel.LooseVideos.Clear();
+                _viewModel.LocalSearchResults.Clear();
 
                 _viewModel.SelectedChannel = null;
-                _viewModel.SelectedVideo = null;
+                _viewModel.SelectedCommentThread = null;
 
-                _viewModel.LocalResults.AddRange(_controller.GetSearchResults());
+                _viewModel.Channels.AddRange(_controller.GetChannels());
+                _viewModel.LocalSearchResults.AddRange(_controller.GetSearchResults());
 
-                if (_viewModel.LocalResults.Count > 0)
-                    this.LocalSearchTab.IsSelected = true;
+                if (_viewModel.Channels.Count > 0)
+                    this.ChannelTab.IsSelected = true;
             }
             catch (Exception ex)
             {
@@ -108,9 +107,10 @@ namespace YoutubeJournalist
                     ChannelId = channelId
                 });
 
-                // TODO: LOG
                 if (channel == null)
-                    return;
+                {
+                    OnLog(string.Format("Youtube channel not found:  {0}", channelId), true);
+                }
 
                 var playlists = _controller.SearchUpdatePlaylistDetails(new YoutubePlaylistRequest()
                 {
@@ -139,10 +139,7 @@ namespace YoutubeJournalist
                 channel.Videos.AddRange(videos);
 
                 _viewModel.Channels.Remove(x => x.Id == channel.Id);
-                _viewModel.LooseVideos.Remove(x => videos.Any(y => y.Id == x.Id));
-
                 _viewModel.Channels.Add(channel);
-                _viewModel.LooseVideos.AddRange(videos);
             }
             catch (Exception ex)
             {
@@ -150,11 +147,11 @@ namespace YoutubeJournalist
             }
         }
 
-        private void OnGetChannelDetails(string channelId, bool isLocal)
+        private void OnGetChannelDetails(string channelId)
         {
             try
             {
-                if (isLocal)
+                if (_controller.HasChannel(channelId))
                 {
                     _viewModel.SelectedChannel = _viewModel.Channels.First(x => x.Id == channelId);
                 }
@@ -176,19 +173,19 @@ namespace YoutubeJournalist
         {
             try
             {
-                if (isLocal)
-                {
-                    _viewModel.SelectedVideo = _viewModel.LooseVideos.First(x => x.Id == videoId);
-                }
-                else
-                {
-                    var channelId = _viewModel.SearchResults.First(x => x.VideoId == videoId).ChannelId;
+                //if (isLocal)
+                //{
+                //    _viewModel.SelectedVideo = _viewModel.Search.First(x => x.Id == videoId);
+                //}
+                //else
+                //{
+                //    var channelId = _viewModel.SearchResults.First(x => x.VideoId == videoId).ChannelId;
 
-                    ExecuteGetChannelDetails(channelId);
-                }
+                //    ExecuteGetChannelDetails(channelId);
+                //}
 
-                // Select Local Channel Tab
-                this.LooseVideosTab.IsSelected = true;
+                //// Select Local Channel Tab
+                //this.LooseVideosTab.IsSelected = true;
             }
             catch (Exception ex)
             {
@@ -240,15 +237,22 @@ namespace YoutubeJournalist
             switch (viewModel.Type)
             {
                 case BasicSearchType.Channel:
-                    OnGetChannelDetails(viewModel.ChannelId, viewModel.IsLocal);
+                    OnGetChannelDetails(viewModel.ChannelId);
                     break;
                 case BasicSearchType.Video:
-                    OnGetVideoDetails(viewModel.VideoId, viewModel.IsLocal);
-                    break;
                 case BasicSearchType.Playlist:
                 default:
                     throw new FormattedException("Unhandled Search Result Type {0}", viewModel.Type);
             }
+        }
+
+        private void OnLog(string message, bool isError)
+        {
+            _viewModel.OutputLog.Add(new LogViewModel()
+            {
+                IsError = isError,
+                Log = message
+            });
         }
     }
 }

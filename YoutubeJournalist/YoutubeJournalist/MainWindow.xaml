@@ -71,34 +71,32 @@
                     </TextBlock>
                 </TabItem.Header>
 
-                <view:SearchResultView SearchResultDoubleClick="OnSearchResultDoubleClick" DataContext="{Binding SearchResults}" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <!-- Youtube Search -->
+                    <view:SearchResultView SearchResultDoubleClick="OnSearchResultDoubleClick" DataContext="{Binding SearchResults}" />
+                    
+                    <!-- Local Search -->
+                    <view:SearchResultView Grid.Row="1" SearchResultDoubleClick="OnSearchResultDoubleClick" DataContext="{Binding LocalSearchResults}" />
+                    
+                </Grid>
+
             </TabItem>
-            
-            <TabItem x:Name="LocalSearchTab">
+
+            <TabItem x:Name="ChannelTab">
 
                 <TabItem.Header>
                     <TextBlock>
-                        <Run Text="Search (Local) (" />
-                        <Run Text="{Binding LocalResults.Count, Mode=OneWay}" />
+                        <Run Text="Channels (Local) (" />
+                        <Run Text="{Binding Channels.Count, Mode=OneWay}" />
                         <Run Text=")" />
                     </TextBlock>
                 </TabItem.Header>
 
-                <TabItem.IsEnabled>
-                    <Binding Path="LocalResults.Count">
-                        <Binding.Converter>
-                            <wpfConverter:ParameterEqualityInverseBoolConverter />
-                        </Binding.Converter>
-                        <Binding.ConverterParameter>
-                            <sys:Int32>0</sys:Int32>
-                        </Binding.ConverterParameter>
-                    </Binding>
-                </TabItem.IsEnabled>
-
-                <view:SearchResultView SearchResultDoubleClick="OnSearchResultDoubleClick" DataContext="{Binding LocalResults}" />
-            </TabItem>
-
-            <TabItem x:Name="ChannelTab">
                 <TabItem.IsEnabled>
                     <Binding Path="Channels.Count">
                         <Binding.Converter>
@@ -110,43 +108,52 @@
                     </Binding>
                 </TabItem.IsEnabled>
 
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Channels (Local)" />
-                        <Image Source="{Binding SelectedChannel.ThumbnailUrl}" />
-                    </StackPanel>
-                </TabItem.Header>
-            </TabItem>
-            
-            <TabItem x:Name="LooseVideosTab">
-                <TabItem.IsEnabled>
-                    <Binding Path="LooseVideos.Count">
-                        <Binding.Converter>
-                            <wpfConverter:ParameterEqualityInverseBoolConverter />
-                        </Binding.Converter>
-                        <Binding.ConverterParameter>
-                            <sys:Int32>0</sys:Int32>
-                        </Binding.ConverterParameter>
-                    </Binding>
-                </TabItem.IsEnabled>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Videos (Local)" />
-                        <Image Source="{Binding SelectedVideo.ThumbnailUrl}" />
-                    </StackPanel>
-                </TabItem.Header>
+                    <ListBox ItemsSource="{Binding Channels}" SelectedItem="{Binding SelectedChannel}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" ToolTip="{Binding Description}">
+
+                                    <!-- Channel -->
+                                    <Border x:Name="ChannelBorder" Width="40" Height="40" Padding="3">
+                                        <Grid>
+                                            <Ellipse x:Name="opacityMask" Height="40" Width="40" Fill="White" />
+                                            <Image Source="{Binding IconUrl}" Height="40" Width="40">
+                                                <Image.OpacityMask>
+                                                    <VisualBrush Visual="{Binding ElementName=opacityMask}" />
+                                                </Image.OpacityMask>
+                                            </Image>
+                                        </Grid>
+                                    </Border>
+
+                                    <TextBlock Padding="10" FontSize="16" VerticalAlignment="Center" Text="{Binding Title}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <view:ChannelView DataContext="{Binding SelectedChannel}" Grid.Column="1" />
+                </Grid>
+
             </TabItem>
-            
+
             <TabItem x:Name="CommentsTab"
-                     IsEnabled="{Binding SelectedVideo, Converter={StaticResource NonNullBoolConverter}}">                     
+                     IsEnabled="{Binding SelectedCommentThread, Converter={StaticResource NonNullBoolConverter}}">                     
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Comments (Local)" />
-                        <Image Source="{Binding SelectedVideo.ThumbnailUrl}" />
+                        <TextBlock>
+                            <Run Text="Comment Thread (" />
+                            <Run Text="{Binding SelectedCommentThrad.Comment.AuthorDisplayName}" />
+                            <Run Text=")" />
+                        </TextBlock> 
                     </StackPanel>
                 </TabItem.Header>                
-                <view:VideoCommentView DataContext="{Binding VideoComments}" />
+                <view:VideoCommentView DataContext="{Binding SelectedCommentThread}" />
             </TabItem>
             
         </TabControl>

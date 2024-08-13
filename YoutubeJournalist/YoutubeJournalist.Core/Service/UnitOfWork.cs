@@ -245,13 +245,13 @@ namespace YoutubeJournalist.Core.Service
                     //                           .ToList();
 
                     // Youtube's API produces null references for missing data!
-                    topicIds = channel.TopicDetails
+                    topicIds = channel.TopicDetails?
                                       .TopicIds?
                                       .Select(x => _dbContext.Youtube_TopicId.CreateObject())?
                                       .ToList() ?? new List<Youtube_TopicId>();
 
                     // Youtube's API produces null references for missing data!
-                    topicCategories = channel.TopicDetails
+                    topicCategories = channel.TopicDetails?
                                              .TopicCategories?
                                              .Select(x => _dbContext.Youtube_TopicCategory.CreateObject())?
                                              .ToList() ?? new List<Youtube_TopicCategory>();
@@ -260,7 +260,7 @@ namespace YoutubeJournalist.Core.Service
                     Map_Youtube_Channel(channel, entity, snippet, auditDetails, brandingSettings, channelSettings, thumbnailDetails);
 
                     // New (topic ids, topic categories)
-                    for (int index = 0; index < channel.TopicDetails.TopicIds?.Count; index++)
+                    for (int index = 0; index < (channel.TopicDetails?.TopicIds?.Count ?? 0); index++)
                     {
                         var topicId = topicIds[index];
 
@@ -270,7 +270,7 @@ namespace YoutubeJournalist.Core.Service
                         topicId.VideoId = topicId.VideoId ?? null;
                     }
 
-                    for (int index = 0; index < channel.TopicDetails.TopicCategories?.Count; index++)
+                    for (int index = 0; index < (channel.TopicDetails?.TopicCategories?.Count ?? 0); index++)
                     {
                         var topicCategory = topicCategories[index];
 
@@ -336,7 +336,7 @@ namespace YoutubeJournalist.Core.Service
                     }
 
                     // Re-Add
-                    for (int index = 0;index < channel.TopicDetails.TopicIds?.Count; index++)
+                    for (int index = 0;index < channel.TopicDetails?.TopicIds?.Count; index++)
                     {
                         var topicId = topicIds[index];
 
@@ -348,7 +348,7 @@ namespace YoutubeJournalist.Core.Service
                         _dbContext.Youtube_TopicId.AddObject(topicId);
                     }
 
-                    for (int index = 0; index < channel.TopicDetails.TopicCategories?.Count; index++)
+                    for (int index = 0; index < channel.TopicDetails?.TopicCategories?.Count; index++)
                     {
                         var topicCategory = topicCategories[index];
 
@@ -414,13 +414,13 @@ namespace YoutubeJournalist.Core.Service
                         thumbnailDetails = _dbContext.Youtube_ThumbnailDetails.CreateObject();
 
                         // Youtube's API produces null references for missing data!
-                        topicIds = video.TopicDetails
+                        topicIds = video.TopicDetails?
                                           .TopicIds?
                                           .Select(x => _dbContext.Youtube_TopicId.CreateObject())?
                                           .ToList() ?? new List<Youtube_TopicId>();
 
                         // Youtube's API produces null references for missing data!
-                        topicCategories = video.TopicDetails
+                        topicCategories = video.TopicDetails?
                                                  .TopicCategories?
                                                  .Select(x => _dbContext.Youtube_TopicCategory.CreateObject())?
                                                  .ToList() ?? new List<Youtube_TopicCategory>();
@@ -967,7 +967,7 @@ namespace YoutubeJournalist.Core.Service
             entity.Id = video.Id;
             entity.Kind = video.Kind;
             entity.MonetizationDetails_AccessPolicy_Allowed = video.MonetizationDetails?.Access?.Allowed;
-            entity.TopicDetails_ETag = video.TopicDetails.ETag;
+            entity.TopicDetails_ETag = video.TopicDetails?.ETag;
 
             // Foreign Key Relationships
             Map_Youtube_VideoSnippet(video.Snippet, snippet, thumbnailDetails);
@@ -1016,6 +1016,8 @@ namespace YoutubeJournalist.Core.Service
             entity.Title = snippet.Title;
 
             entity.Youtube_ThumbnailDetails = thumbnailDetails;
+
+            Map_Youtube_ThumbnailDetails(snippet.Thumbnails, thumbnailDetails);
         }
         private void Map_Youtube_ChannelSettings(ChannelSettings settings, Youtube_ChannelSettings entity)
         {

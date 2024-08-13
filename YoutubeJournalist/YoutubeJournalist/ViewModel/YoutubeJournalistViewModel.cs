@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 
@@ -14,16 +13,14 @@ namespace YoutubeJournalist.ViewModel
         SearchParametersViewModel _searchParameters;
 
         ChannelViewModel _selectedChannel;
-        VideoViewModel _selectedVideo;
+        CommentThreadViewModel _selectedCommentThread;
 
         ObservableCollection<ChannelViewModel> _channels;
-        ObservableCollection<VideoViewModel> _looseVideos;
         ObservableCollection<SearchResultViewModel> _searchResults;
-        ObservableCollection<SearchResultViewModel> _localResults;
+        ObservableCollection<SearchResultViewModel> _localSearchResults;
         ObservableCollection<LogViewModel> _outputLog;
 
-        public SimpleEventHandler<string, bool> GetVideoDetailsEvent;
-        public SimpleEventHandler<string, bool> GetChannelDetailsEvent;
+        public SimpleEventHandler<string> GetChannelDetailsEvent;
 
         public ConfigurationViewModel Configuration
         {
@@ -40,30 +37,25 @@ namespace YoutubeJournalist.ViewModel
             get { return _selectedChannel; }
             set { this.RaiseAndSetIfChanged(ref _selectedChannel, value); }
         }
-        public VideoViewModel SelectedVideo
+        public CommentThreadViewModel SelectedCommentThread
         {
-            get { return _selectedVideo; }
-            set { this.RaiseAndSetIfChanged(ref _selectedVideo, value); }
+            get { return _selectedCommentThread; }
+            set { this.RaiseAndSetIfChanged(ref _selectedCommentThread, value); }
         }
         public ObservableCollection<ChannelViewModel> Channels
         {
             get { return _channels; }
             set { this.RaiseAndSetIfChanged(ref _channels, value); }
         }
-        public ObservableCollection<VideoViewModel> LooseVideos
-        {
-            get { return _looseVideos; }
-            set { this.RaiseAndSetIfChanged(ref _looseVideos, value); }
-        }
         public ObservableCollection<SearchResultViewModel> SearchResults
         {
             get { return _searchResults; }
             set { this.RaiseAndSetIfChanged(ref _searchResults, value); }
         }
-        public ObservableCollection<SearchResultViewModel> LocalResults
+        public ObservableCollection<SearchResultViewModel> LocalSearchResults
         {
-            get { return _localResults; }
-            set { this.RaiseAndSetIfChanged(ref _localResults, value); }
+            get { return _localSearchResults; }
+            set { this.RaiseAndSetIfChanged(ref _localSearchResults, value); }
         }
         public ObservableCollection<LogViewModel> OutputLog
         {
@@ -76,13 +68,11 @@ namespace YoutubeJournalist.ViewModel
             this.Configuration = configuration;
             this.SearchParameters = searchParameters;
             this.SearchResults = new ObservableCollection<SearchResultViewModel>();
-            this.LocalResults = new ObservableCollection<SearchResultViewModel>();
+            this.LocalSearchResults = new ObservableCollection<SearchResultViewModel>();
             this.OutputLog = new ObservableCollection<LogViewModel>();
             this.Channels = new ObservableCollection<ChannelViewModel>();
-            this.LooseVideos = new ObservableCollection<VideoViewModel>();
 
             this.SearchResults.CollectionChanged += OnSearchCollectionChanged;
-            this.LocalResults.CollectionChanged += OnSearchCollectionChanged;
         }
 
         private void OnSearchCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -92,7 +82,6 @@ namespace YoutubeJournalist.ViewModel
             {
                 foreach (var item in e.OldItems.Cast<SearchResultViewModel>())
                 {
-                    item.GetVideoDetailsEvent -= OnGetVideoDetails;
                     item.GetChannelDetailsEvent -= OnGetChannelDetails;
                 }
             }
@@ -101,21 +90,14 @@ namespace YoutubeJournalist.ViewModel
             {
                 foreach (var item in e.NewItems.Cast<SearchResultViewModel>())
                 {
-                    item.GetVideoDetailsEvent += OnGetVideoDetails;
                     item.GetChannelDetailsEvent += OnGetChannelDetails;
                 }
             }
         }
-
-        private void OnGetVideoDetails(string videoId, bool isLocal)
-        {
-            if (this.GetVideoDetailsEvent != null)
-                this.GetVideoDetailsEvent(videoId, isLocal);
-        }
-        private void OnGetChannelDetails(string channelId, bool isLocal)
+        private void OnGetChannelDetails(string channelId)
         {
             if (this.GetChannelDetailsEvent != null)
-                this.GetChannelDetailsEvent(channelId, isLocal);
+                this.GetChannelDetailsEvent(channelId);
         }
 
         private void SearchParameters_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

@@ -48,7 +48,7 @@ namespace YoutubeJournalist.Core.Service.Model
 
         public YoutubeBasicSearchRequest()
         {
-            this.SearchType = BasicSearchType.Channel | BasicSearchType.Video;
+            this.SearchType = BasicSearchType.Channel;
             this.FilterType = BasicFilterType.WildCard;
         }
     }

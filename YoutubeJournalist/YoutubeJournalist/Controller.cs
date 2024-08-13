@@ -49,10 +49,7 @@ namespace YoutubeJournalist
                     return unitOfWork.GetSearchResults()
                                      .Select(result => 
                                      {
-                                         var isLocal = unitOfWork.HasVideo(result.Id_VideoId) &&
-                                                       unitOfWork.HasChannel(result.Id_ChannelId);
-
-                                         return CreateSearchViewModel(result, isLocal);
+                                         return CreateSearchViewModel(result);
                                      })
                                      .Actualize();
                 }
@@ -82,7 +79,7 @@ namespace YoutubeJournalist
                         var channelVideos = videos.Where(video => video.Youtube_VideoSnippet.ChannelId == result.Id).Actualize();
 
                         return CreateChannelViewModel(result, channelVideos, commentThreads);
-                    });
+                    }).Actualize();
                 }
             }
             catch (Exception ex)
@@ -106,6 +103,24 @@ namespace YoutubeJournalist
                                                .Actualize();
 
                     return CreateChannelViewModel(channel, videos, commentThreads);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Returns true if channel is in local database
+        /// </summary>
+        public bool HasChannel(string channelId)
+        {
+            try
+            {
+                using (var unitOfWork = CreateConnection())
+                {
+                    return unitOfWork.HasChannel(channelId);
                 }
             }
             catch (Exception ex)
@@ -188,10 +203,7 @@ namespace YoutubeJournalist
                     return unitOfWork.BasicSearch(request)
                                      .Select(result =>
                                      {
-                                         var isLocal = unitOfWork.HasVideo(result.Id_VideoId) &&
-                                                       unitOfWork.HasChannel(result.Id_ChannelId);
-
-                                         return CreateSearchViewModel(result, isLocal);
+                                         return CreateSearchViewModel(result);
 
                                      }).Actualize();
                 }
@@ -317,17 +329,14 @@ namespace YoutubeJournalist
             }
         }
 
-        private SearchResultViewModel CreateSearchViewModel(Youtube_SearchResult result, bool isLocal)
+        private SearchResultViewModel CreateSearchViewModel(Youtube_SearchResult result)
         {
             return new SearchResultViewModel()
             {
-                IsLocal = isLocal,
                 Created = result.Snippet_PublishedAtDateTimeOffset.HasValue ? 
                           result.Snippet_PublishedAtDateTimeOffset.Value.UtcDateTime : DateTime.MinValue,
                 Description = result.Snippet_Description,
                 ChannelId = result.Id_ChannelId,
-                PlaylistId = result.Id_PlaylistId,
-                VideoId = result.Id_VideoId,
                 Thumbnail = result.Youtube_ThumbnailDetails.Default__Url,
                 Title = result.Snippet_Title,
                 Type = result.Id_Kind != YoutubeConstants.ResponseKindVideo ?
@@ -343,8 +352,8 @@ namespace YoutubeJournalist
             {
                 Id = result.Id,
                 PrimaryPlaylistId = result.ChannelContentDetails_RelatedPlaylistsData_Uploads,
-                BannerUrl = result.Youtube_ChannelBrandingSettings.BannerImageUrl,
-                IconUrl = result.Youtube_ChannelBrandingSettings.WatchIconImageUrl,
+                BannerUrl = result.Youtube_ChannelBrandingSettings.BannerExternalUrl,
+                IconUrl = result.Youtube_ChannelSnippet.Youtube_ThumbnailDetails.Default__Url,
                 MadeForKids = result.Status_MadeForKids ?? false,
                 Owner = result.ContentOwnerDetails_ContentOwner,
                 PrivacyStatus = result.Status_PrivacyStatus,
