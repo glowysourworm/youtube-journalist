@@ -206,10 +206,14 @@ namespace YoutubeJournalist.Core.Service
             // Search configuration
             request.PageToken = serviceRequest.UsePageToken ? serviceRequest.PageToken : null;
 
-            if (string.IsNullOrEmpty(serviceRequest.VideoId))
-                throw new Exception("Youtube commentThread request must specify either video ids");
+            if (!string.IsNullOrEmpty(serviceRequest.ChannelId))
+                request.AllThreadsRelatedToChannelId = serviceRequest.ChannelId;
 
-            request.VideoId = serviceRequest.VideoId;
+            else if (!string.IsNullOrEmpty(serviceRequest.VideoId))
+                request.VideoId = serviceRequest.VideoId;
+
+            else
+                throw new Exception("Youtube commentThread request must specify either video id or channel id");
 
             // Call the commehtThreadsResource.listRequest method to retrieve results matching the specified query term.
             var response = request.Execute();

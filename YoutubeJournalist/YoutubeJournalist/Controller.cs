@@ -176,7 +176,22 @@ namespace YoutubeJournalist
             }
         }
 
-        public IEnumerable<CommentThreadViewModel> GetCommentThreads(string videoId)
+        public IEnumerable<CommentThreadViewModel> GetVideoCommentThreads(string videoId)
+        {
+            try
+            {
+                using (var unitOfWork = CreateConnection())
+                {
+                    return unitOfWork.GetCommentThreads(videoId).Select(result => CreateCommentThreadViewModel(result));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IEnumerable<CommentThreadViewModel> GetChannelCommentThreads(string videoId)
         {
             try
             {

@@ -123,14 +123,29 @@ namespace YoutubeJournalist
                     VideoIds = new Repeatable<string>(playlists.SelectMany(x => x.PlaylistItems.Select(z => z.VideoId)).Actualize())
                 });
 
-                foreach (var video in videos)
-                {
-                    var commentThreads = _controller.SearchCommentThreads(new YoutubeCommentThreadRequest()
-                    {
-                        VideoId = video.Id
-                    });
+                //foreach (var video in videos)
+                //{
+                //    var commentThreads = _controller.SearchCommentThreads(new YoutubeCommentThreadRequest()
+                //    {
+                //        VideoId = video.Id
+                //    });
 
-                    video.CommentThreads.AddRange(commentThreads);
+                //    video.CommentThreads.AddRange(commentThreads);
+                //}
+
+                var commentThreads = _controller.SearchCommentThreads(new YoutubeCommentThreadRequest()
+                {
+                    ChannelId = channel.Id
+                });
+
+                foreach (var commentThread in commentThreads)
+                {
+                    var video = videos.FirstOrDefault(x => x.Id == commentThread.VideoId);
+
+                    if (video == null)
+                        OnLog(string.Format("Missing video for comment thread:  {0}", commentThread.Comment.Display), true);
+
+                    video.CommentThreads.Add(commentThread);
                 }
 
 

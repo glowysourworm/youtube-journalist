@@ -16,6 +16,8 @@
             <Setter Property="TextWrapping" Value="NoWrap" />
             <Setter Property="TextTrimming" Value="CharacterEllipsis" />
             <Setter Property="MaxHeight" Value="32" />
+            <Setter Property="MaxWidth" Value="200" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
         </Style>
         <Style x:Key="ChannelValueLabelStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="Padding" Value="3" />
@@ -25,6 +27,8 @@
             <Setter Property="TextWrapping" Value="NoWrap" />
             <Setter Property="TextTrimming" Value="CharacterEllipsis" />
             <Setter Property="MaxHeight" Value="32" />
+            <Setter Property="MaxWidth" Value="200" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
         </Style>
     </UserControl.Resources>
     <Grid>

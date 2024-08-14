@@ -7,10 +7,12 @@
     public class YoutubeCommentThreadRequest : YoutubeServiceRequestBase
     {
         public string VideoId { get; set; }
+        public string ChannelId { get; set; }
 
         public YoutubeCommentThreadRequest()
         {
             this.VideoId = "";
+            this.ChannelId = "";
         }
     }
 }

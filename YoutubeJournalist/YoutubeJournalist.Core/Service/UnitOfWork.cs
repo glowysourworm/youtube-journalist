@@ -667,9 +667,6 @@ namespace YoutubeJournalist.Core.Service
             }
         }
 
-        /// <summary>
-        /// Gets comment threads for:  1) An entire channel, or 2) A set of video (ids)
-        /// </summary>
         public IEnumerable<Youtube_CommentThread> SearchCommentThreads(YoutubeCommentThreadRequest request)
         {
             try
