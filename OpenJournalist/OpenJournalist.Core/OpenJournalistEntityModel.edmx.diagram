@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="87d65d3cb6cf46fe84132c04994d8720" Name="Diagram1" ZoomLevel="21">
+        <EntityTypeShape EntityType="OpenJournalistModel.SocialMediaLink" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="OpenJournalistModel.User" Width="1.5" PointX="5.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OpenJournalistModel.UserEmail" Width="1.5" PointX="8" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OpenJournalistModel.Youtube_Channel" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OpenJournalistModel.Youtube_ChannelSettings" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="OpenJournalistModel.Youtube_ChannelSnippet" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OpenJournalistModel.Youtube_Comment" Width="1.5" PointX="7.5" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OpenJournalistModel.Youtube_CommentThread" Width="1.5" PointX="5.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OpenJournalistModel.Youtube_Playlist" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OpenJournalistModel.Youtube_PlaylistItem" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OpenJournalistModel.Youtube_RegionRestriction" Width="1.5" PointX="5.25" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="OpenJournalistModel.Youtube_SearchResult" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OpenJournalistModel.Youtube_Video" Width="1.5" PointX="3" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OpenJournalistModel.Youtube_VideoStatistics" Width="1.5" PointX="5.25" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OpenJournalistModel.Youtube_VideoStatus" Width="1.5" PointX="5.25" PointY="23.875" IsExpanded="true" />
+        <AssociationConnector Association="OpenJournalistModel.FK__SocialMed__UserI__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="OpenJournalistModel.FK__UserEmail__UserI__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="OpenJournalistModel.FK__Youtube_C__Chann__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="OpenJournalistModel.FK__Youtube_C__Chann__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="OpenJournalistModel.FK__Youtube_P__Playl__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="OpenJournalistModel.FK__Youtube_V__Video__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="OpenJournalistModel.FK__Youtube_C__Comme__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="OpenJournalistModel.FK__Youtube_C__Video__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="OpenJournalistModel.FK__Youtube_P__Playl__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="OpenJournalistModel.FK__Youtube_R__Video__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="OpenJournalistModel.FK__Youtube_V__Video__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="OpenJournalistModel.FK__Youtube_V__Video__3B75D760" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

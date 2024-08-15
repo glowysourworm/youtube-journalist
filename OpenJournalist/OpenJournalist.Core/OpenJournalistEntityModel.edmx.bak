@@ -1,0 +1,1092 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OpenJournalistModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SocialMediaLink">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Handle" Type="varchar" MaxLength="50" />
+          <Property Name="SocialMediaName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Handle" Type="varchar" MaxLength="50" />
+          <Property Name="Subsystem" Type="varchar" MaxLength="50" />
+          <Property Name="Comment" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="UserEmail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Comment" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Youtube_Channel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CommunityGuidelinesGoodStanding" Type="bit" />
+          <Property Name="ContentIdClaimsGoodStanding" Type="bit" />
+          <Property Name="CopyrightStrikesGoodStanding" Type="bit" />
+          <Property Name="BannerExternalUrl" Type="varchar(max)" />
+          <Property Name="BannerImageUrl" Type="varchar(max)" />
+          <Property Name="ChannelContentDetails_RelatedPlaylistsData_Favorites" Type="varchar" MaxLength="500" />
+          <Property Name="ChannelContentDetails_RelatedPlaylistsData_Likes" Type="varchar" MaxLength="500" />
+          <Property Name="ChannelContentDetails_RelatedPlaylistsData_Uploads" Type="varchar" MaxLength="500" />
+          <Property Name="ChannelContentDetails_RelatedPlaylistsData_WatchHistory" Type="varchar" MaxLength="500" />
+          <Property Name="ChannelContentDetails_RelatedPlaylistsData_WatchLater" Type="varchar" MaxLength="500" />
+          <Property Name="ContentOwnerDetails_ContentOwner" Type="varchar" MaxLength="50" />
+          <Property Name="ContentOwnerDetails_TimeLinkedDateTimeOffset" Type="datetimeoffset" Precision="7" />
+          <Property Name="Statistics_CommentCount" Type="bigint" />
+          <Property Name="Statistics_HiddenSubscriberCount" Type="bit" />
+          <Property Name="Statistics_SubscriberCount" Type="bigint" />
+          <Property Name="Statistics_VideoCount" Type="bigint" />
+          <Property Name="Statistics_ViewCount" Type="bigint" />
+          <Property Name="Status_MadeForKids" Type="bit" />
+          <Property Name="Status_PrivacyStatus" Type="varchar" MaxLength="50" />
+          <Property Name="Status_SelfDeclaredMadeForKids" Type="bit" />
+        </EntityType>
+        <EntityType Name="Youtube_ChannelSettings">
+          <Key>
+            <PropertyRef Name="ChannelId" />
+          </Key>
+          <Property Name="ChannelId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="50" />
+          <Property Name="DefaultLanguage" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="ProfileColor" Type="varchar" MaxLength="50" />
+          <Property Name="TrackingAnalyticsAccountId" Type="varchar" MaxLength="50" />
+          <Property Name="Title" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Youtube_ChannelSnippet">
+          <Key>
+            <PropertyRef Name="ChannelId" />
+          </Key>
+          <Property Name="ChannelId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="50" />
+          <Property Name="CustomUrl" Type="varchar(max)" />
+          <Property Name="DefaultLanguage" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Localized_Description" Type="varchar(max)" />
+          <Property Name="Localized_Title" Type="varchar(max)" />
+          <Property Name="PublishedAtDateTimeOffset" Type="datetimeoffset" Precision="7" />
+          <Property Name="ThumbnailDetails_Default__Url" Type="varchar" MaxLength="50" />
+          <Property Name="Title" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Youtube_Comment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CommentThreadId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AuthorChannelId_Value" Type="varchar" MaxLength="50" />
+          <Property Name="AuthorChannelUrl" Type="varchar" MaxLength="8000" />
+          <Property Name="AuthorDisplayName" Type="varchar" MaxLength="100" />
+          <Property Name="AuthorProfileImageUrl" Type="varchar" MaxLength="8000" />
+          <Property Name="IsTopLevelComment" Type="bit" Nullable="false" />
+          <Property Name="LikeCount" Type="bigint" />
+          <Property Name="ModerationStatus" Type="varchar" MaxLength="50" />
+          <Property Name="PublishedAtDateTimeOffset" Type="datetimeoffset" Precision="7" />
+          <Property Name="TextDisplay" Type="varchar(max)" />
+          <Property Name="TextOriginal" Type="varchar(max)" />
+          <Property Name="UpdatedAtDateTimeOffset" Type="datetimeoffset" Precision="7" />
+        </EntityType>
+        <EntityType Name="Youtube_CommentThread">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VideoId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsPublic" Type="bit" />
+          <Property Name="TotalReplyCount" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Youtube_Playlist">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PlaylistSnippet_ChannelId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PlaylistSnippet_PublishedAtDateTimeOffset" Type="datetimeoffset" Precision="7" />
+          <Property Name="PlaylistSnippet_Title" Type="varchar(max)" />
+          <Property Name="PlaylistSnippet_ThumnailDetails_Default__Url" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Youtube_PlaylistItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PlaylistContentDetails_Note" Type="varchar(max)" />
+          <Property Name="PlaylistContentDetails_VideoId" Type="varchar" MaxLength="50" />
+          <Property Name="PlaylistContentDetails_VideoPublishedAtDateTimeOffset" Type="datetimeoffset" Precision="7" />
+          <Property Name="PlaylistItemSnippet_PlaylistId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PlaylistItemSnippet_Position" Type="bigint" />
+          <Property Name="PlaylistItemSnippet_PublishedAtDateTimeOffset" Type="datetimeoffset" Precision="7" />
+          <Property Name="PlaylistItemSnippet_ThumbnailDetails_Default_Url" Type="varchar" MaxLength="50" />
+          <Property Name="PlaylistItemSnippet_Title" Type="varchar(max)" />
+          <Property Name="PlaylistItemSnippet_VideoOwnerChannelId" Type="varchar" MaxLength="50" />
+          <Property Name="PlaylistItemSnippet_VideoOwnerChannelTitle" Type="varchar(max)" />
+          <Property Name="PlaylistItemStatus_PrivacyStatus" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Youtube_RegionRestriction">
+          <Key>
+            <PropertyRef Name="Our_Id" />
+          </Key>
+          <Property Name="Our_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VideoId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Region" Type="varchar" MaxLength="50" />
+          <Property Name="Blocked" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Youtube_SearchResult">
+          <Key>
+            <PropertyRef Name="Our_Id" />
+          </Key>
+          <Property Name="Our_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_ChannelId" Type="varchar" MaxLength="50" />
+          <Property Name="Id_VideoId" Type="varchar" MaxLength="50" />
+          <Property Name="Id_PlaylistId" Type="varchar" MaxLength="50" />
+          <Property Name="Snippet_ChannelId" Type="varchar" MaxLength="50" />
+          <Property Name="Snippet_ChannelTitle" Type="varchar(max)" />
+          <Property Name="Snippet_Description" Type="varchar(max)" />
+          <Property Name="Snippet_PublishedAtDateTimeOffset" Type="datetimeoffset" Precision="7" />
+          <Property Name="Snippet_Title" Type="varchar(max)" />
+          <Property Name="Snippet_ThumbnailDetails_Default__Url" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Youtube_Video">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VideoSnippet_CategoryId" Type="varchar" MaxLength="50" />
+          <Property Name="VideoSnippet_ChannelId" Type="varchar" MaxLength="50" />
+          <Property Name="VideoSnippet_DefaultLanguage" Type="varchar" MaxLength="50" />
+          <Property Name="VideoSnippet_Localized_Description" Type="varchar(max)" />
+          <Property Name="VideoSnippet_Localized_Title" Type="varchar(max)" />
+          <Property Name="VideoSnippet_PublishedAtDateTimeOffset" Type="datetimeoffset" Precision="7" />
+          <Property Name="VideoSnippet_ThumbnailDetails_Default_Url" Type="varchar" MaxLength="50" />
+          <Property Name="VideoSnippet_ContentDetails_Caption" Type="varchar(max)" />
+          <Property Name="MonetizationDetails_AccessPolicy_Allowed" Type="bit" />
+        </EntityType>
+        <EntityType Name="Youtube_VideoStatistics">
+          <Key>
+            <PropertyRef Name="VideoId" />
+          </Key>
+          <Property Name="VideoId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CommentCount" Type="bigint" />
+          <Property Name="DislikeCount" Type="bigint" />
+          <Property Name="FavoriteCount" Type="bigint" Nullable="false" />
+          <Property Name="LikeCount" Type="bigint" Nullable="false" />
+          <Property Name="ViewCount" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Youtube_VideoStatus">
+          <Key>
+            <PropertyRef Name="VideoId" />
+          </Key>
+          <Property Name="VideoId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="License" Type="varchar(max)" />
+          <Property Name="MadeForKids" Type="bit" />
+          <Property Name="PrivacyStatus" Type="varchar" MaxLength="100" />
+          <Property Name="PublishAtDateTimeOffset" Type="datetimeoffset" Precision="7" />
+          <Property Name="RejectionReason" Type="varchar(max)" />
+          <Property Name="SelfDeclaredMadeForKids" Type="bit" />
+          <Property Name="UploadStatus" Type="varchar" MaxLength="100" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK__SocialMed__UserI__267ABA7A">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="SocialMediaLink" Type="Self.SocialMediaLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SocialMediaLink">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserEmail__UserI__29572725">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserEmail" Type="Self.UserEmail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserEmail">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Youtube_C__Chann__300424B4">
+          <End Role="Youtube_Channel" Type="Self.Youtube_Channel" Multiplicity="1" />
+          <End Role="Youtube_ChannelSettings" Type="Self.Youtube_ChannelSettings" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Youtube_Channel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Youtube_ChannelSettings">
+              <PropertyRef Name="ChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Youtube_C__Chann__32E0915F">
+          <End Role="Youtube_Channel" Type="Self.Youtube_Channel" Multiplicity="1" />
+          <End Role="Youtube_ChannelSnippet" Type="Self.Youtube_ChannelSnippet" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Youtube_Channel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Youtube_ChannelSnippet">
+              <PropertyRef Name="ChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Youtube_C__Comme__412EB0B6">
+          <End Role="Youtube_CommentThread" Type="Self.Youtube_CommentThread" Multiplicity="1" />
+          <End Role="Youtube_Comment" Type="Self.Youtube_Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Youtube_CommentThread">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Youtube_Comment">
+              <PropertyRef Name="CommentThreadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Youtube_C__Video__3E52440B">
+          <End Role="Youtube_Video" Type="Self.Youtube_Video" Multiplicity="1" />
+          <End Role="Youtube_CommentThread" Type="Self.Youtube_CommentThread" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Youtube_Video">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Youtube_CommentThread">
+              <PropertyRef Name="VideoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Youtube_P__Playl__46E78A0C">
+          <End Role="Youtube_Channel" Type="Self.Youtube_Channel" Multiplicity="1" />
+          <End Role="Youtube_Playlist" Type="Self.Youtube_Playlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Youtube_Channel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Youtube_Playlist">
+              <PropertyRef Name="PlaylistSnippet_ChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Youtube_P__Playl__49C3F6B7">
+          <End Role="Youtube_Playlist" Type="Self.Youtube_Playlist" Multiplicity="1" />
+          <End Role="Youtube_PlaylistItem" Type="Self.Youtube_PlaylistItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Youtube_Playlist">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Youtube_PlaylistItem">
+              <PropertyRef Name="PlaylistItemSnippet_PlaylistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Youtube_R__Video__440B1D61">
+          <End Role="Youtube_Video" Type="Self.Youtube_Video" Multiplicity="1" />
+          <End Role="Youtube_RegionRestriction" Type="Self.Youtube_RegionRestriction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Youtube_Video">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Youtube_RegionRestriction">
+              <PropertyRef Name="VideoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Youtube_V__Video__35BCFE0A">
+          <End Role="Youtube_Channel" Type="Self.Youtube_Channel" Multiplicity="0..1" />
+          <End Role="Youtube_Video" Type="Self.Youtube_Video" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Youtube_Channel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Youtube_Video">
+              <PropertyRef Name="VideoSnippet_ChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Youtube_V__Video__38996AB5">
+          <End Role="Youtube_Video" Type="Self.Youtube_Video" Multiplicity="1" />
+          <End Role="Youtube_VideoStatistics" Type="Self.Youtube_VideoStatistics" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Youtube_Video">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Youtube_VideoStatistics">
+              <PropertyRef Name="VideoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Youtube_V__Video__3B75D760">
+          <End Role="Youtube_Video" Type="Self.Youtube_Video" Multiplicity="1" />
+          <End Role="Youtube_VideoStatus" Type="Self.Youtube_VideoStatus" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Youtube_Video">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Youtube_VideoStatus">
+              <PropertyRef Name="VideoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OpenJournalistModelStoreContainer">
+          <EntitySet Name="SocialMediaLink" EntityType="Self.SocialMediaLink" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserEmail" EntityType="Self.UserEmail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Youtube_Channel" EntityType="Self.Youtube_Channel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Youtube_ChannelSettings" EntityType="Self.Youtube_ChannelSettings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Youtube_ChannelSnippet" EntityType="Self.Youtube_ChannelSnippet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Youtube_Comment" EntityType="Self.Youtube_Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Youtube_CommentThread" EntityType="Self.Youtube_CommentThread" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Youtube_Playlist" EntityType="Self.Youtube_Playlist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Youtube_PlaylistItem" EntityType="Self.Youtube_PlaylistItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Youtube_RegionRestriction" EntityType="Self.Youtube_RegionRestriction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Youtube_SearchResult" EntityType="Self.Youtube_SearchResult" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Youtube_Video" EntityType="Self.Youtube_Video" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Youtube_VideoStatistics" EntityType="Self.Youtube_VideoStatistics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Youtube_VideoStatus" EntityType="Self.Youtube_VideoStatus" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__SocialMed__UserI__267ABA7A" Association="Self.FK__SocialMed__UserI__267ABA7A">
+            <End Role="User" EntitySet="User" />
+            <End Role="SocialMediaLink" EntitySet="SocialMediaLink" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserEmail__UserI__29572725" Association="Self.FK__UserEmail__UserI__29572725">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserEmail" EntitySet="UserEmail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Youtube_C__Chann__300424B4" Association="Self.FK__Youtube_C__Chann__300424B4">
+            <End Role="Youtube_Channel" EntitySet="Youtube_Channel" />
+            <End Role="Youtube_ChannelSettings" EntitySet="Youtube_ChannelSettings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Youtube_C__Chann__32E0915F" Association="Self.FK__Youtube_C__Chann__32E0915F">
+            <End Role="Youtube_Channel" EntitySet="Youtube_Channel" />
+            <End Role="Youtube_ChannelSnippet" EntitySet="Youtube_ChannelSnippet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Youtube_C__Comme__412EB0B6" Association="Self.FK__Youtube_C__Comme__412EB0B6">
+            <End Role="Youtube_CommentThread" EntitySet="Youtube_CommentThread" />
+            <End Role="Youtube_Comment" EntitySet="Youtube_Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Youtube_C__Video__3E52440B" Association="Self.FK__Youtube_C__Video__3E52440B">
+            <End Role="Youtube_Video" EntitySet="Youtube_Video" />
+            <End Role="Youtube_CommentThread" EntitySet="Youtube_CommentThread" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Youtube_P__Playl__46E78A0C" Association="Self.FK__Youtube_P__Playl__46E78A0C">
+            <End Role="Youtube_Channel" EntitySet="Youtube_Channel" />
+            <End Role="Youtube_Playlist" EntitySet="Youtube_Playlist" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Youtube_P__Playl__49C3F6B7" Association="Self.FK__Youtube_P__Playl__49C3F6B7">
+            <End Role="Youtube_Playlist" EntitySet="Youtube_Playlist" />
+            <End Role="Youtube_PlaylistItem" EntitySet="Youtube_PlaylistItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Youtube_R__Video__440B1D61" Association="Self.FK__Youtube_R__Video__440B1D61">
+            <End Role="Youtube_Video" EntitySet="Youtube_Video" />
+            <End Role="Youtube_RegionRestriction" EntitySet="Youtube_RegionRestriction" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Youtube_V__Video__35BCFE0A" Association="Self.FK__Youtube_V__Video__35BCFE0A">
+            <End Role="Youtube_Channel" EntitySet="Youtube_Channel" />
+            <End Role="Youtube_Video" EntitySet="Youtube_Video" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Youtube_V__Video__38996AB5" Association="Self.FK__Youtube_V__Video__38996AB5">
+            <End Role="Youtube_Video" EntitySet="Youtube_Video" />
+            <End Role="Youtube_VideoStatistics" EntitySet="Youtube_VideoStatistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Youtube_V__Video__3B75D760" Association="Self.FK__Youtube_V__Video__3B75D760">
+            <End Role="Youtube_Video" EntitySet="Youtube_Video" />
+            <End Role="Youtube_VideoStatus" EntitySet="Youtube_VideoStatus" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OpenJournalistModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="SocialMediaLink">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Handle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SocialMediaName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK__SocialMed__UserI__267ABA7A" FromRole="SocialMediaLink" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Handle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Subsystem" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SocialMediaLinks" Relationship="Self.FK__SocialMed__UserI__267ABA7A" FromRole="User" ToRole="SocialMediaLink" />
+          <NavigationProperty Name="UserEmails" Relationship="Self.FK__UserEmail__UserI__29572725" FromRole="User" ToRole="UserEmail" />
+        </EntityType>
+        <EntityType Name="UserEmail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK__UserEmail__UserI__29572725" FromRole="UserEmail" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Youtube_Channel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CommunityGuidelinesGoodStanding" Type="Boolean" />
+          <Property Name="ContentIdClaimsGoodStanding" Type="Boolean" />
+          <Property Name="CopyrightStrikesGoodStanding" Type="Boolean" />
+          <Property Name="BannerExternalUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BannerImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ChannelContentDetails_RelatedPlaylistsData_Favorites" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ChannelContentDetails_RelatedPlaylistsData_Likes" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ChannelContentDetails_RelatedPlaylistsData_Uploads" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ChannelContentDetails_RelatedPlaylistsData_WatchHistory" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ChannelContentDetails_RelatedPlaylistsData_WatchLater" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ContentOwnerDetails_ContentOwner" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContentOwnerDetails_TimeLinkedDateTimeOffset" Type="DateTimeOffset" />
+          <Property Name="Statistics_CommentCount" Type="Int64" />
+          <Property Name="Statistics_HiddenSubscriberCount" Type="Boolean" />
+          <Property Name="Statistics_SubscriberCount" Type="Int64" />
+          <Property Name="Statistics_VideoCount" Type="Int64" />
+          <Property Name="Statistics_ViewCount" Type="Int64" />
+          <Property Name="Status_MadeForKids" Type="Boolean" />
+          <Property Name="Status_PrivacyStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status_SelfDeclaredMadeForKids" Type="Boolean" />
+          <NavigationProperty Name="Youtube_ChannelSettings" Relationship="Self.FK__Youtube_C__Chann__300424B4" FromRole="Youtube_Channel" ToRole="Youtube_ChannelSettings" />
+          <NavigationProperty Name="Youtube_ChannelSnippet" Relationship="Self.FK__Youtube_C__Chann__32E0915F" FromRole="Youtube_Channel" ToRole="Youtube_ChannelSnippet" />
+          <NavigationProperty Name="Youtube_Playlist" Relationship="Self.FK__Youtube_P__Playl__46E78A0C" FromRole="Youtube_Channel" ToRole="Youtube_Playlist" />
+          <NavigationProperty Name="Youtube_Video" Relationship="Self.FK__Youtube_V__Video__35BCFE0A" FromRole="Youtube_Channel" ToRole="Youtube_Video" />
+        </EntityType>
+        <EntityType Name="Youtube_ChannelSettings">
+          <Key>
+            <PropertyRef Name="ChannelId" />
+          </Key>
+          <Property Name="ChannelId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DefaultLanguage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ProfileColor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TrackingAnalyticsAccountId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Youtube_Channel" Relationship="Self.FK__Youtube_C__Chann__300424B4" FromRole="Youtube_ChannelSettings" ToRole="Youtube_Channel" />
+        </EntityType>
+        <EntityType Name="Youtube_ChannelSnippet">
+          <Key>
+            <PropertyRef Name="ChannelId" />
+          </Key>
+          <Property Name="ChannelId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DefaultLanguage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Localized_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Localized_Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PublishedAtDateTimeOffset" Type="DateTimeOffset" />
+          <Property Name="ThumbnailDetails_Default__Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Youtube_Channel" Relationship="Self.FK__Youtube_C__Chann__32E0915F" FromRole="Youtube_ChannelSnippet" ToRole="Youtube_Channel" />
+        </EntityType>
+        <EntityType Name="Youtube_Comment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CommentThreadId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AuthorChannelId_Value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AuthorChannelUrl" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="AuthorDisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AuthorProfileImageUrl" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="IsTopLevelComment" Type="Boolean" Nullable="false" />
+          <Property Name="LikeCount" Type="Int64" />
+          <Property Name="ModerationStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PublishedAtDateTimeOffset" Type="DateTimeOffset" />
+          <Property Name="TextDisplay" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TextOriginal" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedAtDateTimeOffset" Type="DateTimeOffset" />
+          <NavigationProperty Name="Youtube_CommentThread" Relationship="Self.FK__Youtube_C__Comme__412EB0B6" FromRole="Youtube_Comment" ToRole="Youtube_CommentThread" />
+        </EntityType>
+        <EntityType Name="Youtube_CommentThread">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VideoId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsPublic" Type="Boolean" />
+          <Property Name="TotalReplyCount" Type="Int64" />
+          <NavigationProperty Name="Youtube_Comment" Relationship="Self.FK__Youtube_C__Comme__412EB0B6" FromRole="Youtube_CommentThread" ToRole="Youtube_Comment" />
+          <NavigationProperty Name="Youtube_Video" Relationship="Self.FK__Youtube_C__Video__3E52440B" FromRole="Youtube_CommentThread" ToRole="Youtube_Video" />
+        </EntityType>
+        <EntityType Name="Youtube_Playlist">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PlaylistSnippet_ChannelId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PlaylistSnippet_PublishedAtDateTimeOffset" Type="DateTimeOffset" />
+          <Property Name="PlaylistSnippet_Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PlaylistSnippet_ThumnailDetails_Default__Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Youtube_Channel" Relationship="Self.FK__Youtube_P__Playl__46E78A0C" FromRole="Youtube_Playlist" ToRole="Youtube_Channel" />
+          <NavigationProperty Name="Youtube_PlaylistItem" Relationship="Self.FK__Youtube_P__Playl__49C3F6B7" FromRole="Youtube_Playlist" ToRole="Youtube_PlaylistItem" />
+        </EntityType>
+        <EntityType Name="Youtube_PlaylistItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PlaylistContentDetails_Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PlaylistContentDetails_VideoId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PlaylistContentDetails_VideoPublishedAtDateTimeOffset" Type="DateTimeOffset" />
+          <Property Name="PlaylistItemSnippet_PlaylistId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PlaylistItemSnippet_Position" Type="Int64" />
+          <Property Name="PlaylistItemSnippet_PublishedAtDateTimeOffset" Type="DateTimeOffset" />
+          <Property Name="PlaylistItemSnippet_ThumbnailDetails_Default_Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PlaylistItemSnippet_Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PlaylistItemSnippet_VideoOwnerChannelId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PlaylistItemSnippet_VideoOwnerChannelTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PlaylistItemStatus_PrivacyStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Youtube_Playlist" Relationship="Self.FK__Youtube_P__Playl__49C3F6B7" FromRole="Youtube_PlaylistItem" ToRole="Youtube_Playlist" />
+        </EntityType>
+        <EntityType Name="Youtube_RegionRestriction">
+          <Key>
+            <PropertyRef Name="Our_Id" />
+          </Key>
+          <Property Name="Our_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VideoId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Youtube_Video" Relationship="Self.FK__Youtube_R__Video__440B1D61" FromRole="Youtube_RegionRestriction" ToRole="Youtube_Video" />
+        </EntityType>
+        <EntityType Name="Youtube_SearchResult">
+          <Key>
+            <PropertyRef Name="Our_Id" />
+          </Key>
+          <Property Name="Our_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_ChannelId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Id_VideoId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Id_PlaylistId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Snippet_ChannelId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Snippet_ChannelTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Snippet_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Snippet_PublishedAtDateTimeOffset" Type="DateTimeOffset" />
+          <Property Name="Snippet_Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Snippet_ThumbnailDetails_Default__Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Youtube_Video">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VideoSnippet_CategoryId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VideoSnippet_ChannelId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VideoSnippet_DefaultLanguage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VideoSnippet_Localized_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="VideoSnippet_Localized_Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="VideoSnippet_PublishedAtDateTimeOffset" Type="DateTimeOffset" />
+          <Property Name="VideoSnippet_ThumbnailDetails_Default_Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VideoSnippet_ContentDetails_Caption" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MonetizationDetails_AccessPolicy_Allowed" Type="Boolean" />
+          <NavigationProperty Name="Youtube_Channel" Relationship="Self.FK__Youtube_V__Video__35BCFE0A" FromRole="Youtube_Video" ToRole="Youtube_Channel" />
+          <NavigationProperty Name="Youtube_CommentThread" Relationship="Self.FK__Youtube_C__Video__3E52440B" FromRole="Youtube_Video" ToRole="Youtube_CommentThread" />
+          <NavigationProperty Name="Youtube_RegionRestriction" Relationship="Self.FK__Youtube_R__Video__440B1D61" FromRole="Youtube_Video" ToRole="Youtube_RegionRestriction" />
+          <NavigationProperty Name="Youtube_VideoStatistics" Relationship="Self.FK__Youtube_V__Video__38996AB5" FromRole="Youtube_Video" ToRole="Youtube_VideoStatistics" />
+          <NavigationProperty Name="Youtube_VideoStatus" Relationship="Self.FK__Youtube_V__Video__3B75D760" FromRole="Youtube_Video" ToRole="Youtube_VideoStatus" />
+        </EntityType>
+        <EntityType Name="Youtube_VideoStatistics">
+          <Key>
+            <PropertyRef Name="VideoId" />
+          </Key>
+          <Property Name="VideoId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CommentCount" Type="Int64" />
+          <Property Name="DislikeCount" Type="Int64" />
+          <Property Name="FavoriteCount" Type="Int64" Nullable="false" />
+          <Property Name="LikeCount" Type="Int64" Nullable="false" />
+          <Property Name="ViewCount" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Youtube_Video" Relationship="Self.FK__Youtube_V__Video__38996AB5" FromRole="Youtube_VideoStatistics" ToRole="Youtube_Video" />
+        </EntityType>
+        <EntityType Name="Youtube_VideoStatus">
+          <Key>
+            <PropertyRef Name="VideoId" />
+          </Key>
+          <Property Name="VideoId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="License" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MadeForKids" Type="Boolean" />
+          <Property Name="PrivacyStatus" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PublishAtDateTimeOffset" Type="DateTimeOffset" />
+          <Property Name="RejectionReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SelfDeclaredMadeForKids" Type="Boolean" />
+          <Property Name="UploadStatus" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Youtube_Video" Relationship="Self.FK__Youtube_V__Video__3B75D760" FromRole="Youtube_VideoStatus" ToRole="Youtube_Video" />
+        </EntityType>
+        <Association Name="FK__SocialMed__UserI__267ABA7A">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="SocialMediaLink" Type="Self.SocialMediaLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SocialMediaLink">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserEmail__UserI__29572725">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserEmail" Type="Self.UserEmail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserEmail">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Youtube_C__Chann__300424B4">
+          <End Role="Youtube_Channel" Type="Self.Youtube_Channel" Multiplicity="1" />
+          <End Role="Youtube_ChannelSettings" Type="Self.Youtube_ChannelSettings" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Youtube_Channel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Youtube_ChannelSettings">
+              <PropertyRef Name="ChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Youtube_C__Chann__32E0915F">
+          <End Role="Youtube_Channel" Type="Self.Youtube_Channel" Multiplicity="1" />
+          <End Role="Youtube_ChannelSnippet" Type="Self.Youtube_ChannelSnippet" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Youtube_Channel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Youtube_ChannelSnippet">
+              <PropertyRef Name="ChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Youtube_P__Playl__46E78A0C">
+          <End Role="Youtube_Channel" Type="Self.Youtube_Channel" Multiplicity="1" />
+          <End Role="Youtube_Playlist" Type="Self.Youtube_Playlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Youtube_Channel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Youtube_Playlist">
+              <PropertyRef Name="PlaylistSnippet_ChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Youtube_V__Video__35BCFE0A">
+          <End Role="Youtube_Channel" Type="Self.Youtube_Channel" Multiplicity="0..1" />
+          <End Role="Youtube_Video" Type="Self.Youtube_Video" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Youtube_Channel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Youtube_Video">
+              <PropertyRef Name="VideoSnippet_ChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Youtube_C__Comme__412EB0B6">
+          <End Role="Youtube_CommentThread" Type="Self.Youtube_CommentThread" Multiplicity="1" />
+          <End Role="Youtube_Comment" Type="Self.Youtube_Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Youtube_CommentThread">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Youtube_Comment">
+              <PropertyRef Name="CommentThreadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Youtube_C__Video__3E52440B">
+          <End Role="Youtube_Video" Type="Self.Youtube_Video" Multiplicity="1" />
+          <End Role="Youtube_CommentThread" Type="Self.Youtube_CommentThread" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Youtube_Video">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Youtube_CommentThread">
+              <PropertyRef Name="VideoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Youtube_P__Playl__49C3F6B7">
+          <End Role="Youtube_Playlist" Type="Self.Youtube_Playlist" Multiplicity="1" />
+          <End Role="Youtube_PlaylistItem" Type="Self.Youtube_PlaylistItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Youtube_Playlist">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Youtube_PlaylistItem">
+              <PropertyRef Name="PlaylistItemSnippet_PlaylistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Youtube_R__Video__440B1D61">
+          <End Role="Youtube_Video" Type="Self.Youtube_Video" Multiplicity="1" />
+          <End Role="Youtube_RegionRestriction" Type="Self.Youtube_RegionRestriction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Youtube_Video">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Youtube_RegionRestriction">
+              <PropertyRef Name="VideoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Youtube_V__Video__38996AB5">
+          <End Role="Youtube_Video" Type="Self.Youtube_Video" Multiplicity="1" />
+          <End Role="Youtube_VideoStatistics" Type="Self.Youtube_VideoStatistics" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Youtube_Video">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Youtube_VideoStatistics">
+              <PropertyRef Name="VideoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Youtube_V__Video__3B75D760">
+          <End Role="Youtube_Video" Type="Self.Youtube_Video" Multiplicity="1" />
+          <End Role="Youtube_VideoStatus" Type="Self.Youtube_VideoStatus" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Youtube_Video">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Youtube_VideoStatus">
+              <PropertyRef Name="VideoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OpenJournalistEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SocialMediaLinks" EntityType="Self.SocialMediaLink" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserEmails" EntityType="Self.UserEmail" />
+          <EntitySet Name="Youtube_Channel" EntityType="Self.Youtube_Channel" />
+          <EntitySet Name="Youtube_ChannelSettings" EntityType="Self.Youtube_ChannelSettings" />
+          <EntitySet Name="Youtube_ChannelSnippet" EntityType="Self.Youtube_ChannelSnippet" />
+          <EntitySet Name="Youtube_Comment" EntityType="Self.Youtube_Comment" />
+          <EntitySet Name="Youtube_CommentThread" EntityType="Self.Youtube_CommentThread" />
+          <EntitySet Name="Youtube_Playlist" EntityType="Self.Youtube_Playlist" />
+          <EntitySet Name="Youtube_PlaylistItem" EntityType="Self.Youtube_PlaylistItem" />
+          <EntitySet Name="Youtube_RegionRestriction" EntityType="Self.Youtube_RegionRestriction" />
+          <EntitySet Name="Youtube_SearchResult" EntityType="Self.Youtube_SearchResult" />
+          <EntitySet Name="Youtube_Video" EntityType="Self.Youtube_Video" />
+          <EntitySet Name="Youtube_VideoStatistics" EntityType="Self.Youtube_VideoStatistics" />
+          <EntitySet Name="Youtube_VideoStatus" EntityType="Self.Youtube_VideoStatus" />
+          <AssociationSet Name="FK__SocialMed__UserI__267ABA7A" Association="Self.FK__SocialMed__UserI__267ABA7A">
+            <End Role="User" EntitySet="Users" />
+            <End Role="SocialMediaLink" EntitySet="SocialMediaLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserEmail__UserI__29572725" Association="Self.FK__UserEmail__UserI__29572725">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserEmail" EntitySet="UserEmails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Youtube_C__Chann__300424B4" Association="Self.FK__Youtube_C__Chann__300424B4">
+            <End Role="Youtube_Channel" EntitySet="Youtube_Channel" />
+            <End Role="Youtube_ChannelSettings" EntitySet="Youtube_ChannelSettings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Youtube_C__Chann__32E0915F" Association="Self.FK__Youtube_C__Chann__32E0915F">
+            <End Role="Youtube_Channel" EntitySet="Youtube_Channel" />
+            <End Role="Youtube_ChannelSnippet" EntitySet="Youtube_ChannelSnippet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Youtube_P__Playl__46E78A0C" Association="Self.FK__Youtube_P__Playl__46E78A0C">
+            <End Role="Youtube_Channel" EntitySet="Youtube_Channel" />
+            <End Role="Youtube_Playlist" EntitySet="Youtube_Playlist" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Youtube_V__Video__35BCFE0A" Association="Self.FK__Youtube_V__Video__35BCFE0A">
+            <End Role="Youtube_Channel" EntitySet="Youtube_Channel" />
+            <End Role="Youtube_Video" EntitySet="Youtube_Video" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Youtube_C__Comme__412EB0B6" Association="Self.FK__Youtube_C__Comme__412EB0B6">
+            <End Role="Youtube_CommentThread" EntitySet="Youtube_CommentThread" />
+            <End Role="Youtube_Comment" EntitySet="Youtube_Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Youtube_C__Video__3E52440B" Association="Self.FK__Youtube_C__Video__3E52440B">
+            <End Role="Youtube_Video" EntitySet="Youtube_Video" />
+            <End Role="Youtube_CommentThread" EntitySet="Youtube_CommentThread" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Youtube_P__Playl__49C3F6B7" Association="Self.FK__Youtube_P__Playl__49C3F6B7">
+            <End Role="Youtube_Playlist" EntitySet="Youtube_Playlist" />
+            <End Role="Youtube_PlaylistItem" EntitySet="Youtube_PlaylistItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Youtube_R__Video__440B1D61" Association="Self.FK__Youtube_R__Video__440B1D61">
+            <End Role="Youtube_Video" EntitySet="Youtube_Video" />
+            <End Role="Youtube_RegionRestriction" EntitySet="Youtube_RegionRestriction" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Youtube_V__Video__38996AB5" Association="Self.FK__Youtube_V__Video__38996AB5">
+            <End Role="Youtube_Video" EntitySet="Youtube_Video" />
+            <End Role="Youtube_VideoStatistics" EntitySet="Youtube_VideoStatistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Youtube_V__Video__3B75D760" Association="Self.FK__Youtube_V__Video__3B75D760">
+            <End Role="Youtube_Video" EntitySet="Youtube_Video" />
+            <End Role="Youtube_VideoStatus" EntitySet="Youtube_VideoStatus" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OpenJournalistModelStoreContainer" CdmEntityContainer="OpenJournalistEntities">
+          <EntitySetMapping Name="SocialMediaLinks">
+            <EntityTypeMapping TypeName="OpenJournalistModel.SocialMediaLink">
+              <MappingFragment StoreEntitySet="SocialMediaLink">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Handle" ColumnName="Handle" />
+                <ScalarProperty Name="SocialMediaName" ColumnName="SocialMediaName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="OpenJournalistModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Handle" ColumnName="Handle" />
+                <ScalarProperty Name="Subsystem" ColumnName="Subsystem" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserEmails">
+            <EntityTypeMapping TypeName="OpenJournalistModel.UserEmail">
+              <MappingFragment StoreEntitySet="UserEmail">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Youtube_Channel">
+            <EntityTypeMapping TypeName="OpenJournalistModel.Youtube_Channel">
+              <MappingFragment StoreEntitySet="Youtube_Channel">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CommunityGuidelinesGoodStanding" ColumnName="CommunityGuidelinesGoodStanding" />
+                <ScalarProperty Name="ContentIdClaimsGoodStanding" ColumnName="ContentIdClaimsGoodStanding" />
+                <ScalarProperty Name="CopyrightStrikesGoodStanding" ColumnName="CopyrightStrikesGoodStanding" />
+                <ScalarProperty Name="BannerExternalUrl" ColumnName="BannerExternalUrl" />
+                <ScalarProperty Name="BannerImageUrl" ColumnName="BannerImageUrl" />
+                <ScalarProperty Name="ChannelContentDetails_RelatedPlaylistsData_Favorites" ColumnName="ChannelContentDetails_RelatedPlaylistsData_Favorites" />
+                <ScalarProperty Name="ChannelContentDetails_RelatedPlaylistsData_Likes" ColumnName="ChannelContentDetails_RelatedPlaylistsData_Likes" />
+                <ScalarProperty Name="ChannelContentDetails_RelatedPlaylistsData_Uploads" ColumnName="ChannelContentDetails_RelatedPlaylistsData_Uploads" />
+                <ScalarProperty Name="ChannelContentDetails_RelatedPlaylistsData_WatchHistory" ColumnName="ChannelContentDetails_RelatedPlaylistsData_WatchHistory" />
+                <ScalarProperty Name="ChannelContentDetails_RelatedPlaylistsData_WatchLater" ColumnName="ChannelContentDetails_RelatedPlaylistsData_WatchLater" />
+                <ScalarProperty Name="ContentOwnerDetails_ContentOwner" ColumnName="ContentOwnerDetails_ContentOwner" />
+                <ScalarProperty Name="ContentOwnerDetails_TimeLinkedDateTimeOffset" ColumnName="ContentOwnerDetails_TimeLinkedDateTimeOffset" />
+                <ScalarProperty Name="Statistics_CommentCount" ColumnName="Statistics_CommentCount" />
+                <ScalarProperty Name="Statistics_HiddenSubscriberCount" ColumnName="Statistics_HiddenSubscriberCount" />
+                <ScalarProperty Name="Statistics_SubscriberCount" ColumnName="Statistics_SubscriberCount" />
+                <ScalarProperty Name="Statistics_VideoCount" ColumnName="Statistics_VideoCount" />
+                <ScalarProperty Name="Statistics_ViewCount" ColumnName="Statistics_ViewCount" />
+                <ScalarProperty Name="Status_MadeForKids" ColumnName="Status_MadeForKids" />
+                <ScalarProperty Name="Status_PrivacyStatus" ColumnName="Status_PrivacyStatus" />
+                <ScalarProperty Name="Status_SelfDeclaredMadeForKids" ColumnName="Status_SelfDeclaredMadeForKids" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Youtube_ChannelSettings">
+            <EntityTypeMapping TypeName="OpenJournalistModel.Youtube_ChannelSettings">
+              <MappingFragment StoreEntitySet="Youtube_ChannelSettings">
+                <ScalarProperty Name="ChannelId" ColumnName="ChannelId" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="DefaultLanguage" ColumnName="DefaultLanguage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ProfileColor" ColumnName="ProfileColor" />
+                <ScalarProperty Name="TrackingAnalyticsAccountId" ColumnName="TrackingAnalyticsAccountId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Youtube_ChannelSnippet">
+            <EntityTypeMapping TypeName="OpenJournalistModel.Youtube_ChannelSnippet">
+              <MappingFragment StoreEntitySet="Youtube_ChannelSnippet">
+                <ScalarProperty Name="ChannelId" ColumnName="ChannelId" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="CustomUrl" ColumnName="CustomUrl" />
+                <ScalarProperty Name="DefaultLanguage" ColumnName="DefaultLanguage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Localized_Description" ColumnName="Localized_Description" />
+                <ScalarProperty Name="Localized_Title" ColumnName="Localized_Title" />
+                <ScalarProperty Name="PublishedAtDateTimeOffset" ColumnName="PublishedAtDateTimeOffset" />
+                <ScalarProperty Name="ThumbnailDetails_Default__Url" ColumnName="ThumbnailDetails_Default__Url" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Youtube_Comment">
+            <EntityTypeMapping TypeName="OpenJournalistModel.Youtube_Comment">
+              <MappingFragment StoreEntitySet="Youtube_Comment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CommentThreadId" ColumnName="CommentThreadId" />
+                <ScalarProperty Name="AuthorChannelId_Value" ColumnName="AuthorChannelId_Value" />
+                <ScalarProperty Name="AuthorChannelUrl" ColumnName="AuthorChannelUrl" />
+                <ScalarProperty Name="AuthorDisplayName" ColumnName="AuthorDisplayName" />
+                <ScalarProperty Name="AuthorProfileImageUrl" ColumnName="AuthorProfileImageUrl" />
+                <ScalarProperty Name="IsTopLevelComment" ColumnName="IsTopLevelComment" />
+                <ScalarProperty Name="LikeCount" ColumnName="LikeCount" />
+                <ScalarProperty Name="ModerationStatus" ColumnName="ModerationStatus" />
+                <ScalarProperty Name="PublishedAtDateTimeOffset" ColumnName="PublishedAtDateTimeOffset" />
+                <ScalarProperty Name="TextDisplay" ColumnName="TextDisplay" />
+                <ScalarProperty Name="TextOriginal" ColumnName="TextOriginal" />
+                <ScalarProperty Name="UpdatedAtDateTimeOffset" ColumnName="UpdatedAtDateTimeOffset" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Youtube_CommentThread">
+            <EntityTypeMapping TypeName="OpenJournalistModel.Youtube_CommentThread">
+              <MappingFragment StoreEntitySet="Youtube_CommentThread">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VideoId" ColumnName="VideoId" />
+                <ScalarProperty Name="IsPublic" ColumnName="IsPublic" />
+                <ScalarProperty Name="TotalReplyCount" ColumnName="TotalReplyCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Youtube_Playlist">
+            <EntityTypeMapping TypeName="OpenJournalistModel.Youtube_Playlist">
+              <MappingFragment StoreEntitySet="Youtube_Playlist">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PlaylistSnippet_ChannelId" ColumnName="PlaylistSnippet_ChannelId" />
+                <ScalarProperty Name="PlaylistSnippet_PublishedAtDateTimeOffset" ColumnName="PlaylistSnippet_PublishedAtDateTimeOffset" />
+                <ScalarProperty Name="PlaylistSnippet_Title" ColumnName="PlaylistSnippet_Title" />
+                <ScalarProperty Name="PlaylistSnippet_ThumnailDetails_Default__Url" ColumnName="PlaylistSnippet_ThumnailDetails_Default__Url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Youtube_PlaylistItem">
+            <EntityTypeMapping TypeName="OpenJournalistModel.Youtube_PlaylistItem">
+              <MappingFragment StoreEntitySet="Youtube_PlaylistItem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PlaylistContentDetails_Note" ColumnName="PlaylistContentDetails_Note" />
+                <ScalarProperty Name="PlaylistContentDetails_VideoId" ColumnName="PlaylistContentDetails_VideoId" />
+                <ScalarProperty Name="PlaylistContentDetails_VideoPublishedAtDateTimeOffset" ColumnName="PlaylistContentDetails_VideoPublishedAtDateTimeOffset" />
+                <ScalarProperty Name="PlaylistItemSnippet_PlaylistId" ColumnName="PlaylistItemSnippet_PlaylistId" />
+                <ScalarProperty Name="PlaylistItemSnippet_Position" ColumnName="PlaylistItemSnippet_Position" />
+                <ScalarProperty Name="PlaylistItemSnippet_PublishedAtDateTimeOffset" ColumnName="PlaylistItemSnippet_PublishedAtDateTimeOffset" />
+                <ScalarProperty Name="PlaylistItemSnippet_ThumbnailDetails_Default_Url" ColumnName="PlaylistItemSnippet_ThumbnailDetails_Default_Url" />
+                <ScalarProperty Name="PlaylistItemSnippet_Title" ColumnName="PlaylistItemSnippet_Title" />
+                <ScalarProperty Name="PlaylistItemSnippet_VideoOwnerChannelId" ColumnName="PlaylistItemSnippet_VideoOwnerChannelId" />
+                <ScalarProperty Name="PlaylistItemSnippet_VideoOwnerChannelTitle" ColumnName="PlaylistItemSnippet_VideoOwnerChannelTitle" />
+                <ScalarProperty Name="PlaylistItemStatus_PrivacyStatus" ColumnName="PlaylistItemStatus_PrivacyStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Youtube_RegionRestriction">
+            <EntityTypeMapping TypeName="OpenJournalistModel.Youtube_RegionRestriction">
+              <MappingFragment StoreEntitySet="Youtube_RegionRestriction">
+                <ScalarProperty Name="Our_Id" ColumnName="Our_Id" />
+                <ScalarProperty Name="VideoId" ColumnName="VideoId" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Youtube_SearchResult">
+            <EntityTypeMapping TypeName="OpenJournalistModel.Youtube_SearchResult">
+              <MappingFragment StoreEntitySet="Youtube_SearchResult">
+                <ScalarProperty Name="Our_Id" ColumnName="Our_Id" />
+                <ScalarProperty Name="Id_ChannelId" ColumnName="Id_ChannelId" />
+                <ScalarProperty Name="Id_VideoId" ColumnName="Id_VideoId" />
+                <ScalarProperty Name="Id_PlaylistId" ColumnName="Id_PlaylistId" />
+                <ScalarProperty Name="Snippet_ChannelId" ColumnName="Snippet_ChannelId" />
+                <ScalarProperty Name="Snippet_ChannelTitle" ColumnName="Snippet_ChannelTitle" />
+                <ScalarProperty Name="Snippet_Description" ColumnName="Snippet_Description" />
+                <ScalarProperty Name="Snippet_PublishedAtDateTimeOffset" ColumnName="Snippet_PublishedAtDateTimeOffset" />
+                <ScalarProperty Name="Snippet_Title" ColumnName="Snippet_Title" />
+                <ScalarProperty Name="Snippet_ThumbnailDetails_Default__Url" ColumnName="Snippet_ThumbnailDetails_Default__Url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Youtube_Video">
+            <EntityTypeMapping TypeName="OpenJournalistModel.Youtube_Video">
+              <MappingFragment StoreEntitySet="Youtube_Video">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VideoSnippet_CategoryId" ColumnName="VideoSnippet_CategoryId" />
+                <ScalarProperty Name="VideoSnippet_ChannelId" ColumnName="VideoSnippet_ChannelId" />
+                <ScalarProperty Name="VideoSnippet_DefaultLanguage" ColumnName="VideoSnippet_DefaultLanguage" />
+                <ScalarProperty Name="VideoSnippet_Localized_Description" ColumnName="VideoSnippet_Localized_Description" />
+                <ScalarProperty Name="VideoSnippet_Localized_Title" ColumnName="VideoSnippet_Localized_Title" />
+                <ScalarProperty Name="VideoSnippet_PublishedAtDateTimeOffset" ColumnName="VideoSnippet_PublishedAtDateTimeOffset" />
+                <ScalarProperty Name="VideoSnippet_ThumbnailDetails_Default_Url" ColumnName="VideoSnippet_ThumbnailDetails_Default_Url" />
+                <ScalarProperty Name="VideoSnippet_ContentDetails_Caption" ColumnName="VideoSnippet_ContentDetails_Caption" />
+                <ScalarProperty Name="MonetizationDetails_AccessPolicy_Allowed" ColumnName="MonetizationDetails_AccessPolicy_Allowed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Youtube_VideoStatistics">
+            <EntityTypeMapping TypeName="OpenJournalistModel.Youtube_VideoStatistics">
+              <MappingFragment StoreEntitySet="Youtube_VideoStatistics">
+                <ScalarProperty Name="VideoId" ColumnName="VideoId" />
+                <ScalarProperty Name="CommentCount" ColumnName="CommentCount" />
+                <ScalarProperty Name="DislikeCount" ColumnName="DislikeCount" />
+                <ScalarProperty Name="FavoriteCount" ColumnName="FavoriteCount" />
+                <ScalarProperty Name="LikeCount" ColumnName="LikeCount" />
+                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Youtube_VideoStatus">
+            <EntityTypeMapping TypeName="OpenJournalistModel.Youtube_VideoStatus">
+              <MappingFragment StoreEntitySet="Youtube_VideoStatus">
+                <ScalarProperty Name="VideoId" ColumnName="VideoId" />
+                <ScalarProperty Name="License" ColumnName="License" />
+                <ScalarProperty Name="MadeForKids" ColumnName="MadeForKids" />
+                <ScalarProperty Name="PrivacyStatus" ColumnName="PrivacyStatus" />
+                <ScalarProperty Name="PublishAtDateTimeOffset" ColumnName="PublishAtDateTimeOffset" />
+                <ScalarProperty Name="RejectionReason" ColumnName="RejectionReason" />
+                <ScalarProperty Name="SelfDeclaredMadeForKids" ColumnName="SelfDeclaredMadeForKids" />
+                <ScalarProperty Name="UploadStatus" ColumnName="UploadStatus" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
