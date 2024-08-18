@@ -6,19 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="OpenJournalistEntityModel.edmx" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EntityDeploy Include="OpenJournalistEntityModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>OpenJournalistEntityModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.5.1" />
-    <PackageReference Include="Google.Apis.YouTube.v3" Version="1.68.0.3421" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,11 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="OpenJournalistEntityModel.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>OpenJournalistEntityModel.edmx</DependentUpon>
-    </Compile>
+    <Folder Include="Service\Model\Rumble\" />
   </ItemGroup>
 
 </Project>

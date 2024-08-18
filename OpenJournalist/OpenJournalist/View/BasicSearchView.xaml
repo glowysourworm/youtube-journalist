@@ -10,7 +10,6 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel Orientation="Horizontal">
         <TextBox x:Name="SearchTB" Width="300" Margin="5" Padding="5" FontSize="14" VerticalContentAlignment="Center" />
-        <utilities:EnumComboBox x:Name="PlatformCB" Margin="5" Width="140" FontSize="14" EnumType="{x:Type application:PlatformType}" EnumValueChanged="PlatformCB_EnumValueChanged" />
         <Button x:Name="SearchButton" Margin="5" Padding="5" Content="Search" FontSize="14" Click="SearchButton_Click" />
     </StackPanel>
 </UserControl>

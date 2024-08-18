@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:converter="clr-namespace:OpenJournalist.Converter"
-             xmlns:viewModel="clr-namespace:OpenJournalist.ViewModel"
+             xmlns:youtubeViewModel="clr-namespace:OpenJournalist.ViewModel.Youtube"
              xmlns:xceed="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -12,7 +12,7 @@
         <converter:BoolVisibilityCollapseConverter x:Key="BoolVisibilityCollapseConverter" />
 
         <!-- Thread Replies -->
-        <HierarchicalDataTemplate x:Key="CommentDataTemplate" DataType="{x:Type viewModel:CommentViewModel}">
+        <HierarchicalDataTemplate x:Key="CommentDataTemplate" DataType="{x:Type youtubeViewModel:YoutubeCommentViewModel}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -79,7 +79,7 @@
         </HierarchicalDataTemplate>
 
         <!-- Thread Header / Comment -->
-        <HierarchicalDataTemplate x:Key="CommentThreadTemplate" DataType="{x:Type viewModel:CommentThreadViewModel}"
+        <HierarchicalDataTemplate x:Key="CommentThreadTemplate" DataType="{x:Type youtubeViewModel:YoutubeCommentThreadViewModel}"
                                   ItemsSource="{Binding Replies}" ItemTemplate="{StaticResource CommentDataTemplate}">
             <StackPanel HorizontalAlignment="Stretch">
 

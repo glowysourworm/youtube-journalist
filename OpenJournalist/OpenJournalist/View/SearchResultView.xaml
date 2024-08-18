@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:converter="clr-namespace:OpenJournalist.Converter"
              xmlns:wpfConverter="clr-namespace:WpfCustomUtilities.UI.Converter;assembly=WpfCustomUtilities"
-             xmlns:coreConstant="clr-namespace:OpenJournalist.Core.Service.Model;assembly=OpenJournalist.Core"
+             xmlns:coreConstant="clr-namespace:OpenJournalist.Service.Model;assembly=OpenJournalist.Service"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>

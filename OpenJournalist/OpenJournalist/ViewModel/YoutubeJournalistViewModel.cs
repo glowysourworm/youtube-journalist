@@ -2,6 +2,10 @@
 using System.Collections.Specialized;
 using System.Linq;
 
+using OpenJournalist.ViewModel.Local;
+using OpenJournalist.ViewModel.SearchResult;
+using OpenJournalist.ViewModel.Youtube;
+
 using WpfCustomUtilities.Extensions;
 using WpfCustomUtilities.Extensions.Event;
 
@@ -12,7 +16,7 @@ namespace OpenJournalist.ViewModel
         ConfigurationViewModel _configuration;
 
         ChannelViewModel _selectedChannel;
-        CommentThreadViewModel _selectedCommentThread;
+        YoutubeCommentThreadViewModel _selectedCommentThread;
 
         // Platform parameters
         PlatformType _selectedPlatform;
@@ -21,8 +25,8 @@ namespace OpenJournalist.ViewModel
 
         // Data collections
         ObservableCollection<ChannelViewModel> _channels;
-        ObservableCollection<SearchResultViewModel> _searchResults;
-        ObservableCollection<SearchResultViewModel> _localSearchResults;
+        ObservableCollection<YoutubeSearchResultViewModel> _searchResults;
+        ObservableCollection<YoutubeSearchResultViewModel> _localSearchResults;
         ObservableCollection<LogViewModel> _outputLog;
 
         public SimpleEventHandler<string> GetChannelDetailsEvent;
@@ -52,7 +56,7 @@ namespace OpenJournalist.ViewModel
             get { return _selectedChannel; }
             set { this.RaiseAndSetIfChanged(ref _selectedChannel, value); }
         }
-        public CommentThreadViewModel SelectedCommentThread
+        public YoutubeCommentThreadViewModel SelectedCommentThread
         {
             get { return _selectedCommentThread; }
             set { this.RaiseAndSetIfChanged(ref _selectedCommentThread, value); }
@@ -62,12 +66,12 @@ namespace OpenJournalist.ViewModel
             get { return _channels; }
             set { this.RaiseAndSetIfChanged(ref _channels, value); }
         }
-        public ObservableCollection<SearchResultViewModel> SearchResults
+        public ObservableCollection<YoutubeSearchResultViewModel> SearchResults
         {
             get { return _searchResults; }
             set { this.RaiseAndSetIfChanged(ref _searchResults, value); }
         }
-        public ObservableCollection<SearchResultViewModel> LocalSearchResults
+        public ObservableCollection<YoutubeSearchResultViewModel> LocalSearchResults
         {
             get { return _localSearchResults; }
             set { this.RaiseAndSetIfChanged(ref _localSearchResults, value); }
@@ -84,8 +88,8 @@ namespace OpenJournalist.ViewModel
             this.SelectedPlatform = PlatformType.LocalDB;
             this.SelectedPlatformEnable = true;
             this.SelectedPlatformBasicSearch = "";
-            this.SearchResults = new ObservableCollection<SearchResultViewModel>();
-            this.LocalSearchResults = new ObservableCollection<SearchResultViewModel>();
+            this.SearchResults = new ObservableCollection<YoutubeSearchResultViewModel>();
+            this.LocalSearchResults = new ObservableCollection<YoutubeSearchResultViewModel>();
             this.OutputLog = new ObservableCollection<LogViewModel>();
             this.Channels = new ObservableCollection<ChannelViewModel>();
 
@@ -97,17 +101,17 @@ namespace OpenJournalist.ViewModel
             // Rehook events
             if (e.OldItems != null)
             {
-                foreach (var item in e.OldItems.Cast<SearchResultViewModel>())
+                foreach (var item in e.OldItems.Cast<YoutubeSearchResultViewModel>())
                 {
-                    item.GetChannelDetailsEvent -= OnGetChannelDetails;
+                    //item.GetChannelDetailsEvent -= OnGetChannelDetails;
                 }
             }
 
             if (e.NewItems != null)
             {
-                foreach (var item in e.NewItems.Cast<SearchResultViewModel>())
+                foreach (var item in e.NewItems.Cast<YoutubeSearchResultViewModel>())
                 {
-                    item.GetChannelDetailsEvent += OnGetChannelDetails;
+                    //item.GetChannelDetailsEvent += OnGetChannelDetails;
                 }
             }
         }

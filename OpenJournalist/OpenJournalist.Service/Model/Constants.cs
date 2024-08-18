@@ -1,4 +1,4 @@
-﻿namespace OpenJournalist.Core.Service.Model
+﻿namespace OpenJournalist.Service.Model
 {
     public enum PagingBehavior
     {

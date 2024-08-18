@@ -2,15 +2,14 @@
 using System.Linq;
 using System.Windows;
 
-using WpfCustomUtilities.Extensions;
-using WpfCustomUtilities.Extensions.ObservableCollection;
-using WpfCustomUtilities.Extensions.Collection;
-
-using OpenJournalist.Core.Extension;
-using OpenJournalist.Core.Service.Model;
 using OpenJournalist.Event;
+using OpenJournalist.Service.Model;
+using OpenJournalist.Service.Model.Message;
 using OpenJournalist.ViewModel;
-using Google.Apis.Util;
+using OpenJournalist.ViewModel.SearchResult;
+
+using WpfCustomUtilities.Extensions.Collection;
+using WpfCustomUtilities.Extensions.ObservableCollection;
 
 namespace OpenJournalist
 {
@@ -70,21 +69,23 @@ namespace OpenJournalist
             }
         }
 
-        private void RefreshLocal()
+        private async void RefreshLocal()
         {
             try
             {
-                _viewModel.Channels.Clear();
-                _viewModel.LocalSearchResults.Clear();
+                //_viewModel.Channels.Clear();
+                //_viewModel.LocalSearchResults.Clear();
 
-                _viewModel.SelectedChannel = null;
-                _viewModel.SelectedCommentThread = null;
+                //_viewModel.SelectedChannel = null;
+                //_viewModel.SelectedCommentThread = null;
 
-                _viewModel.Channels.AddRange(_controller.GetChannels());
-                _viewModel.LocalSearchResults.AddRange(_controller.GetSearchResults());
+                //var results = await _controller.GetLocalSearchResults(new LocalPaginatedRequest(OnMessageCallback));
 
-                if (_viewModel.Channels.Count > 0)
-                    this.ChannelTab.IsSelected = true;
+                //_viewModel.Channels.AddRange(_controller.GetChannels());
+                //_viewModel.LocalSearchResults.AddRange(_controller.GetSearchResults());
+
+                //if (_viewModel.Channels.Count > 0)
+                //    this.ChannelTab.IsSelected = true;
             }
             catch (Exception ex)
             {
@@ -92,7 +93,7 @@ namespace OpenJournalist
             }
         }
 
-        private void ExecuteGetChannelDetails(string channelId)
+        private void ExecuteGetChannelDetails(int channelId)
         {
             // Procedure
             // 
@@ -106,16 +107,16 @@ namespace OpenJournalist
 
             try
             {
-                var channel = _controller.SearchUpdateChannelDetails(new YoutubeChannelDetailsRequest()
-                {
-                    ChannelId = channelId
-                });
+                //var channel = _controller.SearchUpdateChannelDetails(new YoutubeChannelDetailsRequest()
+                //{
+                //    ChannelId = channelId
+                //});
 
-                if (channel == null)
-                {
-                    OnLog(string.Format("Youtube channel not found:  {0}", channelId), true);
-                    return;
-                }
+                //if (channel == null)
+                //{
+                //    OnLog(string.Format("Youtube channel not found:  {0}", channelId), true);
+                //    return;
+                //}
 
                 //var playlists = _controller.SearchUpdatePlaylistDetails(new YoutubePlaylistRequest()
                 //{
@@ -158,12 +159,12 @@ namespace OpenJournalist
                 //channel.Playlists.AddRange(chan);
                 //channel.Videos.AddRange(videos);
 
-                _viewModel.Channels.Remove(x => x.Id == channel.Id);
-                _viewModel.Channels.Add(channel);
+                //_viewModel.Channels.Remove(x => x.Id == channel.Id);
+                //_viewModel.Channels.Add(channel);
 
-                _viewModel.SelectedChannel = channel;
+                //_viewModel.SelectedChannel = channel;
 
-                this.ChannelTab.IsSelected = true;
+                //this.ChannelTab.IsSelected = true;
             }
             catch (Exception ex)
             {
@@ -175,17 +176,17 @@ namespace OpenJournalist
         {
             try
             {
-                if (_controller.HasChannel(channelId))
-                {
-                    _viewModel.SelectedChannel = _viewModel.Channels.First(x => x.Id == channelId);
-                }
-                else
-                {
-                    ExecuteGetChannelDetails(channelId);
-                }
+                //if (_controller.HasChannel(channelId))
+                //{
+                //    _viewModel.SelectedChannel = _viewModel.Channels.First(x => x.Id == channelId);
+                //}
+                //else
+                //{
+                //    ExecuteGetChannelDetails(channelId);
+                //}
 
-                // Select Local Channel Tab
-                this.ChannelTab.IsSelected = true;
+                //// Select Local Channel Tab
+                //this.ChannelTab.IsSelected = true;
             }
             catch (Exception ex)
             {
@@ -217,38 +218,53 @@ namespace OpenJournalist
             }
         }
 
-        private void BasicSearchControl_SearchEvent(object sender, string searchText)
+        private async void OnLocalBasicSearch(object sender, string searchText)
         {
-            try
-            {
-                // Local
-                if (!_viewModel.SelectedPlatformEnable)
-                {
-                    RefreshLocal();
-                }
+            //try
+            //{
+            //    // Local
+            //    var results = await _controller.GetSearchResults(new LocalPaginatedRequest(OnMessageCallback, searchText));
 
-                // Youtube
-                else
-                {
-                    var result = _controller.BasicSearch(new YoutubeBasicSearchRequest()
-                    {
-                        WildCard = searchText
-                    });
 
-                    _viewModel.SearchResults.AddRange(result);
+            //    RefreshLocal();
+            //}
+            //catch (Exception ex)
+            //{
+            //    OnException(ex);
+            //}
+        }
+        private void OnPlatformBasicSearch(object sender, string searchText)
+        {
+            //try
+            //{
+            //    // Local
+            //    if (!_viewModel.SelectedPlatformEnable)
+            //    {
+            //        RefreshLocal();
+            //    }
 
-                    RefreshLocal();
-                }
-            }
-            catch (Exception ex)
-            {
-                OnException(ex);
-            }
+            //    // Youtube
+            //    else
+            //    {
+            //        var result = _controller.BasicSearch(new YoutubeBasicSearchRequest()
+            //        {
+            //            WildCard = searchText
+            //        });
+
+            //        _viewModel.SearchResults.AddRange(result);
+
+            //        RefreshLocal();
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    OnException(ex);
+            //}
         }
 
         private void OnSearchResultDoubleClick(object sender, RoutedEventArgs e)
         {
-            var viewModel = (e as CustomRoutedEventArgs<SearchResultViewModel>).Data;
+            var viewModel = (e as CustomRoutedEventArgs<YoutubeSearchResultViewModel>).Data;
 
             OnGetChannelDetails(viewModel.ChannelId);
         }
@@ -256,6 +272,46 @@ namespace OpenJournalist
         private void OnSelectedChannelRefreshEvent(object sender, EventArgs e)
         {
             ExecuteGetChannelDetails(_viewModel.SelectedChannel.Id);
+        }
+
+        private void OnMessageCallback(MessagingCallbackEventArgsBase args)
+        {
+            switch (args.CallbackType)
+            {
+                case MessageCallbackType.SimpleMessage:
+
+                    if (args is ServiceMessageEventArgs)
+                    {
+                        OnLog(args.Message, false);
+                    }
+                    else
+                        throw new Exception("Unhandled service callback event args type:  MainWindow.OnMessageCallback");
+
+                    break;
+                case MessageCallbackType.ErrorMessage:
+
+                    OnLog(args.Message, true);
+
+                    break;
+                case MessageCallbackType.PagedResultsMessage:
+
+                    if (args is PaginatedCallbackEventArgs)
+                    {
+                        var eventArgs = args as PaginatedCallbackEventArgs;
+
+
+                        var message = string.Format("Retrieved results {0} to {1} of {2}",
+                                                    eventArgs.ResultFrom, eventArgs.ResultTo, eventArgs.ResultTotal);
+
+                        OnLog(message, false);
+                    }
+                    else
+                        throw new Exception("Unhandled service callback event args type:  MainWindow.OnMessageCallback");
+
+                    break;
+                default:
+                    throw new Exception("Unhandled service callback event args type:  MainWindow.OnMessageCallback");
+            }
         }
 
         private void OnLog(string message, bool isError)

@@ -45,10 +45,6 @@
             <view:PlatformSelectorView />
         </Border>
 
-        <!-- Youtube Basic Search -->
-        <!--view:BasicSearchView x:Name="BasicSearchControl" Grid.Row="1" Grid.Column="1" 
-                              SearchEvent="BasicSearchControl_SearchEvent"  /-->
-
         <!-- Primary Results -->
         <TabControl Grid.Column="1" Grid.Row="2" Grid.RowSpan="1" Margin="3">
 
@@ -64,13 +60,21 @@
 
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
+                    
+                    <!-- Platform Basic Search Filter -->
+                    <view:BasicSearchView x:Name="PlatformBasicSearchControl" Grid.Row="1" Grid.Column="1" SearchEvent="OnPlatformBasicSearch"  />
 
                     <!-- Youtube Search -->
                     <view:SearchResultView SearchResultDoubleClick="OnSearchResultDoubleClick" DataContext="{Binding SearchResults}" />
 
+                    <!-- Local Basic Search Filter -->
+                    <view:BasicSearchView x:Name="LocalBasicSearchControl" Grid.Row="1" Grid.Column="1" SearchEvent="OnLocalBasicSearch"  />                    
+                    
                     <!-- Local Search -->
                     <view:SearchResultView Grid.Row="1" SearchResultDoubleClick="OnSearchResultDoubleClick" DataContext="{Binding LocalSearchResults}" />
 

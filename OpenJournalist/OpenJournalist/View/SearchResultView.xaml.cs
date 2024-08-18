@@ -7,6 +7,7 @@ using WpfCustomUtilities.Extensions.Event;
 
 using OpenJournalist.Event;
 using OpenJournalist.ViewModel;
+using OpenJournalist.ViewModel.SearchResult;
 
 namespace OpenJournalist.View
 {
@@ -31,9 +32,9 @@ namespace OpenJournalist.View
 
         private void OnItemMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var viewModel = (sender as ListBoxItem).DataContext as SearchResultViewModel;
+            var viewModel = (sender as ListBoxItem).DataContext as YoutubeSearchResultViewModel;
 
-            RaiseEvent(new CustomRoutedEventArgs<SearchResultViewModel>(SearchResultDoubleClickEvent, viewModel));
+            RaiseEvent(new CustomRoutedEventArgs<YoutubeSearchResultViewModel>(SearchResultDoubleClickEvent, viewModel));
         }
     }
 }

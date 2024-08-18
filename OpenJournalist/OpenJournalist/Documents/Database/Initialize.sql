@@ -11,38 +11,89 @@ GO
 USE OpenJournalist;
 GO
 
--- Our Table for helping to manage users
-Create Table "User"(
+Create Table SocialMediaSystem(
+
 	Id int NOT NULL IDENTITY(1,1),
-	Handle varchar(50),
-	Subsystem varchar(50),
-	Comment varchar(max),
+	"Name" varchar(50)
 
 	Primary Key (Id)
 );
 GO
 
-Create Table SocialMediaLink(
+Create Table SocialMediaUser(
+
 	Id int NOT NULL IDENTITY(1,1),
-	UserId int NOT NULL,
+	SocialMediaSystemId int NOT NULL,
 	Handle varchar(50),
-	SocialMediaName varchar(50)
-
-	Primary Key (Id),
-	Foreign Key (UserId) References "User"(Id)
-);
-GO
-
-Create Table UserEmail(
-	Id int NOT NULL IDENTITY(1,1),
-	UserId int NOT NULL,
 	Email varchar(100),
 	Comment varchar(max),
+	CapturedDateTime datetime not null,
 
-	Primary Key (Id),
-	Foreign Key (UserId) References "User"(Id)
+	Primary Key (Id)
 );
 GO
+
+Create Table PlatformResult(
+
+	Id int NOT NULL IDENTITY(1,1),
+	SocialMediaSystemId int NOT NULL,
+	YoutubeId varchar(50) null,
+	RumbleId int null,
+	CapturedDateTime datetime not null,
+
+	Primary Key(Id),
+	Foreign Key(SocialMediaSystemId) References SocialMediaSystem(Id)
+);
+
+Create Table ChannelSearchResult(
+
+	Id int not null,				-- PlatformResult.Id
+	Title varchar(max),
+	"Description" varchar(max),
+	ImageUrl varchar(max)
+
+	Primary Key(Id),
+	Foreign Key(Id) References PlatformResult(Id)
+);
+
+Create Table Channel(
+	
+	Id int not null,
+
+	Primary Key(Id),
+	Foreign Key(Id) References PlatformResult(Id)
+
+);
+
+Create Table Video(
+	
+	Id int not null,
+	ChannelId int not null,
+
+	Primary Key(Id),
+	Foreign Key(Id) References PlatformResult(Id),
+	Foreign Key(ChannelId) References Channel(Id),
+);
+
+Create Table CommentThread(
+	
+	Id int not null,
+	VideoId int not null,
+
+	Primary Key(Id),
+	Foreign Key(Id) References PlatformResult(Id),
+	Foreign Key(VideoId) References Video(Id)
+);
+
+Create Table Comment(
+	
+	Id int not null,
+	CommentThreadId int not null, 
+
+	Primary Key(Id),
+	Foreign Key(Id) References PlatformResult(Id),
+	Foreign Key(CommentThreadId) References CommentThread(Id)
+);
 
 Create Table Youtube_SearchResult(
 
@@ -273,4 +324,142 @@ Create Table Youtube_PlaylistItem(
 	Foreign Key(PlaylistItemSnippet_PlaylistId) References Youtube_Playlist(Id)
 	
 );
+GO
+
+-- Initialize Social Media Table Values
+INSERT INTO SocialMediaSystem VALUES ('Youtube'), ('Rumble')
+GO
+
+CREATE VIEW ChannelView AS
+SELECT localResult.Id 'Id', 
+	   socialMedia.Name 'Platform',
+	   result.YoutubeId,
+	   result.RumbleId,
+	   snippet.Localized_Title 'Title', 
+	   snippet.Localized_Description 'Description',
+	   snippet.ThumbnailDetails_Default__Url 'ImageUrl',
+	   result.CapturedDateTime 'CapturedDateTime'
+
+FROM   Channel localResult JOIN
+	   PlatformResult result ON result.Id = localResult.Id JOIN
+	   SocialMediaSystem socialMedia ON socialMedia.Id = result.SocialMediaSystemId JOIN
+	   Youtube_Channel channel ON channel.Id = result.YoutubeId JOIN
+	   Youtube_ChannelSnippet snippet ON result.YoutubeId = snippet.ChannelId
+
+WHERE result.YoutubeId is not null
+GO
+
+CREATE VIEW VideoView AS
+SELECT localResult.Id 'Id', 
+	   socialMedia.Name 'Platform',
+	   localResult.ChannelId 'ChannelId',
+	   result.YoutubeId,
+	   result.RumbleId,
+	   result.CapturedDateTime 'CapturedDateTime',
+	   video.VideoSnippet_Localized_Title 'Title',
+	   video.VideoSnippet_Localized_Description 'Description',
+	   video.VideoSnippet_ThumbnailDetails_Default_Url 'ImageUrl'
+
+FROM   Video localResult JOIN
+	   PlatformResult result ON result.Id = localResult.Id JOIN
+	   SocialMediaSystem socialMedia ON socialMedia.Id = result.SocialMediaSystemId JOIN
+	   Youtube_Video video ON video.Id = result.YoutubeId
+
+WHERE result.YoutubeId is not null
+GO
+
+CREATE VIEW CommentThreadView AS
+SELECT localResult.Id 'Id', 
+	   socialMedia.Name 'Platform',
+	   localResult.VideoId 'VideoId',
+	   result.YoutubeId,
+	   result.RumbleId,
+	   result.CapturedDateTime 'CapturedDateTime',
+	   comment.AuthorChannelId_Value 'AuthorChannelId',
+	   comment.AuthorDisplayName 'AuthorDisplayName',
+	   comment.AuthorChannelUrl 'AuthorChannelUrl',
+	   CONVERT(datetime, comment.PublishedAtDateTimeOffset) 'PublishedDateTime',
+	   CONVERT(datetime, comment.UpdatedAtDateTimeOffset) 'UpdatedDateTime',
+	   comment.TextDisplay,
+	   comment.ModerationStatus
+
+FROM   CommentThread localResult JOIN
+	   PlatformResult result ON result.Id = localResult.Id JOIN
+	   SocialMediaSystem socialMedia ON socialMedia.Id = result.SocialMediaSystemId JOIN
+	   Youtube_CommentThread commentThread ON commentThread.Id = result.YoutubeId JOIN
+	   Youtube_Comment comment ON comment.CommentThreadId = commentThread.Id
+
+WHERE result.YoutubeId is not null
+GO
+
+CREATE VIEW CommentView AS
+SELECT localResult.Id 'Id', 
+	   socialMedia.Name 'Platform',
+	   localResult.CommentThreadId 'CommentThreadId',
+	   result.YoutubeId,
+	   result.RumbleId,
+	   result.CapturedDateTime 'CapturedDateTime',
+	   comment.AuthorChannelId_Value 'AuthorChannelId',
+	   comment.AuthorDisplayName 'AuthorDisplayName',
+	   comment.AuthorChannelUrl 'AuthorChannelUrl',
+	   CONVERT(datetime, comment.PublishedAtDateTimeOffset) 'PublishedDateTime',
+	   CONVERT(datetime, comment.UpdatedAtDateTimeOffset) 'UpdatedDateTime',
+	   comment.TextDisplay,
+	   comment.ModerationStatus
+
+FROM   Comment localResult JOIN
+	   PlatformResult result ON result.Id = localResult.Id JOIN
+	   SocialMediaSystem socialMedia ON socialMedia.Id = result.SocialMediaSystemId JOIN
+	   Youtube_Comment comment ON comment.Id = result.YoutubeId
+
+WHERE result.YoutubeId is not null
+GO
+
+CREATE VIEW ChannelSearchResultView AS
+SELECT localResult.Id 'Id', 
+	   socialMedia.Name 'Platform',
+	   result.YoutubeId,
+	   result.RumbleId,
+	   localResult.Title 'Title', 
+	   localResult.Description 'Description',
+	   localResult.ImageUrl 'ImageUrl',
+	   result.CapturedDateTime 'CapturedDateTime'
+
+FROM   ChannelSearchResult localResult JOIN
+	   PlatformResult result ON result.Id = localResult.Id JOIN
+	   SocialMediaSystem socialMedia ON socialMedia.Id = result.SocialMediaSystemId
+
+WHERE result.YoutubeId is not null
+GO
+
+Create View YoutubeChannelSearchResultView AS
+SELECT searchResult.Snippet_ChannelId 'Id', 
+	   searchResult.Snippet_ChannelTitle 'Title', 
+	   searchResult.Snippet_Description 'Description',
+	   searchResult.Snippet_ThumbnailDetails_Default__Url 'ImageUrl',
+	   CONVERT(datetime, searchResult.Snippet_PublishedAtDateTimeOffset) 'PublishedDateTime',
+	   result.CapturedDateTime 'LastCaptureDateTime'
+
+FROM   ChannelSearchResult localResult JOIN
+	   PlatformResult result ON result.Id = localResult.Id JOIN
+	   Youtube_SearchResult searchResult ON result.YoutubeId = searchResult.Snippet_ChannelId
+
+WHERE result.YoutubeId is not null
+GO
+
+CREATE VIEW YoutubeChannelView AS
+SELECT		snippet.ChannelId as 'Id',
+			snippet.Localized_Description 'Description',
+			snippet.Localized_Title 'Title',
+			channel.BannerImageUrl,
+		    snippet.ThumbnailDetails_Default__Url 'ImageUrl',
+ 		    CONVERT(datetime, snippet.PublishedAtDateTimeOffset) 'PublishedDateTime', 
+		    result.CapturedDateTime 'LastCaptureDateTime'
+
+FROM   Channel localResult JOIN
+	   PlatformResult result ON result.Id = localResult.Id JOIN
+	   Youtube_ChannelSnippet snippet ON result.YoutubeId = snippet.ChannelId JOIN
+	   Youtube_Channel channel ON channel.Id = snippet.ChannelId
+
+WHERE result.YoutubeId is not null
 GO

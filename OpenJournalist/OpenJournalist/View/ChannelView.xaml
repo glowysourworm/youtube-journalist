@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:viewModel="clr-namespace:OpenJournalist.ViewModel"
+             xmlns:youtubeViewModel="clr-namespace:OpenJournalist.ViewModel.Youtube"
              xmlns:wpfConverter="clr-namespace:WpfCustomUtilities.UI.Converter;assembly=WpfCustomUtilities"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -173,7 +173,7 @@
         <!-- Channel Video List -->
         <ListView ItemsSource="{Binding Videos}" Grid.Row="2" BorderBrush="LightGray" BorderThickness="1">
             <ListView.ItemTemplate>
-                <DataTemplate DataType="{x:Type viewModel:VideoViewModel}">
+                <DataTemplate DataType="{x:Type youtubeViewModel:YoutubeVideoViewModel}">
                     <Expander ExpandDirection="Down" 
                               IsExpanded="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListViewItem}}">
                         <Expander.Header>
@@ -259,7 +259,7 @@
                                       ItemsSource="{Binding Comments}" 
                                       SelectedItem="{Binding SelectedCommentThread, RelativeSource={RelativeSource AncestorType=Window}}">
                                 <ListView.ItemTemplate>
-                                    <DataTemplate DataType="{x:Type viewModel:CommentThreadViewModel}">
+                                    <DataTemplate DataType="{x:Type youtubeViewModel:YoutubeCommentThreadViewModel}">
                                         <StackPanel Orientation="Horizontal">
                                             <Border Width="20" Height="20" Margin="3">
                                                 <Grid>

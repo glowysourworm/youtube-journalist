@@ -27,7 +27,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\wpf-custom-utilities\src\WpfCustomUtilities\WpfCustomUtilities.csproj" />
-    <ProjectReference Include="..\OpenJournalist.Core\OpenJournalist.Core.csproj" />
+    <ProjectReference Include="..\OpenJournalist.Data\OpenJournalist.Data.csproj" />
+    <ProjectReference Include="..\OpenJournalist.Service\OpenJournalist.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>
