@@ -1,14 +1,16 @@
 ﻿using System;
-using System.Linq;
+using System.ComponentModel;
 using System.Windows;
 
 using OpenJournalist.Event;
 using OpenJournalist.Service.Model;
+using OpenJournalist.Service.Model.Local;
 using OpenJournalist.Service.Model.Message;
+using OpenJournalist.Service.Model.Youtube;
 using OpenJournalist.ViewModel;
 using OpenJournalist.ViewModel.SearchResult;
 
-using WpfCustomUtilities.Extensions.Collection;
+using WpfCustomUtilities.Extensions.Event;
 using WpfCustomUtilities.Extensions.ObservableCollection;
 
 namespace OpenJournalist
@@ -31,10 +33,36 @@ namespace OpenJournalist
             _viewModel = new YoutubeJournalistViewModel(configuration);
 
             _viewModel.GetChannelDetailsEvent += OnGetChannelDetails;
+            _viewModel.PropertyChanged += OnViewModelPropertyChanged;
 
             this.DataContext = _viewModel;
 
+
             this.Loaded += OnLoaded;
+        }
+
+        private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            // Selected Platform Changed
+            if (e.PropertyName == "SelectedPlatform")
+            {
+                // TODO: Refresh proper data
+
+                switch (_viewModel.SelectedPlatform)
+                {
+                    case PlatformType.LocalDB:
+                        this.LocalTab.IsSelected = true;
+                        break;
+                    case PlatformType.Youtube:
+                        this.YoutubeTab.IsSelected = true;
+                        break;
+                    case PlatformType.Rumble:
+                        this.RumbleTab.IsSelected = true;
+                        break;
+                    default:
+                        throw new Exception("Unhandled Platform Type MainWindow.cs");
+                }
+            }
         }
 
         // TODO: Use Application -> Exit to and IOC container to complete the proper shutdown
@@ -49,6 +77,8 @@ namespace OpenJournalist
         {
             try
             {
+                _viewModel.SelectedPlatform = PlatformType.LocalDB;
+
                 RefreshLocal();
             }
             catch (Exception ex)
@@ -73,16 +103,12 @@ namespace OpenJournalist
         {
             try
             {
-                //_viewModel.Channels.Clear();
-                //_viewModel.LocalSearchResults.Clear();
+                _viewModel.LocalSearchResults.Clear();
 
-                //_viewModel.SelectedChannel = null;
-                //_viewModel.SelectedCommentThread = null;
-
-                //var results = await _controller.GetLocalSearchResults(new LocalPaginatedRequest(OnMessageCallback));
+                var localResults = await _controller.GetLocalSearchResults(new SearchPaginatedRequest(OnMessageCallback));
 
                 //_viewModel.Channels.AddRange(_controller.GetChannels());
-                //_viewModel.LocalSearchResults.AddRange(_controller.GetSearchResults());
+                _viewModel.LocalSearchResults.AddRange(localResults);
 
                 //if (_viewModel.Channels.Count > 0)
                 //    this.ChannelTab.IsSelected = true;
@@ -220,18 +246,7 @@ namespace OpenJournalist
 
         private async void OnLocalBasicSearch(object sender, string searchText)
         {
-            //try
-            //{
-            //    // Local
-            //    var results = await _controller.GetSearchResults(new LocalPaginatedRequest(OnMessageCallback, searchText));
 
-
-            //    RefreshLocal();
-            //}
-            //catch (Exception ex)
-            //{
-            //    OnException(ex);
-            //}
         }
         private void OnPlatformBasicSearch(object sender, string searchText)
         {
@@ -262,6 +277,25 @@ namespace OpenJournalist
             //}
         }
 
+        private async void OnYoutubeBasicSearchEvent(string searchText)
+        {
+            try
+            {
+                // Youtube 
+                //
+                var results = await _controller.Execute_Youtube_BasicSearch(new YoutubeBasicSearchRequest(searchText, OnMessageCallback));
+
+                // Add new search items
+                _viewModel.SearchResults.AddRange(results.Items);
+
+                RefreshLocal();
+            }
+            catch (Exception ex)
+            {
+                OnException(ex);
+            }
+        }
+
         private void OnSearchResultDoubleClick(object sender, RoutedEventArgs e)
         {
             var viewModel = (e as CustomRoutedEventArgs<YoutubeSearchResultViewModel>).Data;
@@ -276,42 +310,24 @@ namespace OpenJournalist
 
         private void OnMessageCallback(MessagingCallbackEventArgsBase args)
         {
-            switch (args.CallbackType)
+            var message = "";
+            var error = args.ServiceException != null;
+
+            if (args is ServiceMessageEventArgs)
             {
-                case MessageCallbackType.SimpleMessage:
-
-                    if (args is ServiceMessageEventArgs)
-                    {
-                        OnLog(args.Message, false);
-                    }
-                    else
-                        throw new Exception("Unhandled service callback event args type:  MainWindow.OnMessageCallback");
-
-                    break;
-                case MessageCallbackType.ErrorMessage:
-
-                    OnLog(args.Message, true);
-
-                    break;
-                case MessageCallbackType.PagedResultsMessage:
-
-                    if (args is PaginatedCallbackEventArgs)
-                    {
-                        var eventArgs = args as PaginatedCallbackEventArgs;
-
-
-                        var message = string.Format("Retrieved results {0} to {1} of {2}",
-                                                    eventArgs.ResultFrom, eventArgs.ResultTo, eventArgs.ResultTotal);
-
-                        OnLog(message, false);
-                    }
-                    else
-                        throw new Exception("Unhandled service callback event args type:  MainWindow.OnMessageCallback");
-
-                    break;
-                default:
-                    throw new Exception("Unhandled service callback event args type:  MainWindow.OnMessageCallback");
+                message = args.Message;
             }
+            else if (args is PaginatedCallbackEventArgs)
+            {
+                var eventArgs = args as PaginatedCallbackEventArgs;
+
+                message = string.Format("Retrieved results {0} to {1} of {2}",
+                                            eventArgs.ResultFrom, eventArgs.ResultTo, eventArgs.ResultTotal);
+            }
+            else
+                throw new Exception("Unhandled service callback event args type:  MainWindow.OnMessageCallback");
+
+            this.Dispatcher.BeginInvoke(new SimpleEventHandler<string, bool>(OnLog), message, error);
         }
 
         private void OnLog(string message, bool isError)

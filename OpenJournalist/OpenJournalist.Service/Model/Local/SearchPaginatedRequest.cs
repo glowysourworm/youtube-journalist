@@ -15,7 +15,7 @@ namespace OpenJournalist.Service.Model.Local
         public string SearchTerm { get; private set; }
 
         public SearchPaginatedRequest(SimpleEventHandler<MessagingCallbackEventArgsBase> messageHandler, string searchTerm = "")
-            : base(0, PagingBehavior.NoPaging, messageHandler, YoutubeConstants.MaxResults)
+            : base(0, PagingBehavior.RunSynchronouslyToPageLimit, messageHandler, YoutubeConstants.MaxResults)
         {
             this.SearchTerm = searchTerm;
         }

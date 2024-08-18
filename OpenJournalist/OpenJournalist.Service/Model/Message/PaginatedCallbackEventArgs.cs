@@ -28,7 +28,6 @@ namespace OpenJournalist.Service.Model.Message
         public PagingBehavior PagingBehavior { get; private set; }
 
         public PaginatedCallbackEventArgs(int from, int to, int total, PagingBehavior pagingBehavior) 
-            : base(MessageCallbackType.PagedResultsMessage)
         {
             this.ResultFrom = from;
             this.ResultTo = to;

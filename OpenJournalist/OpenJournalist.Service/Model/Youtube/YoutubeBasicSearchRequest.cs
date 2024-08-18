@@ -12,6 +12,13 @@ namespace OpenJournalist.Service.Model.Youtube
         public string Search { get; protected set; }
 
         public YoutubeBasicSearchRequest(string search,
+                                         SimpleEventHandler<MessagingCallbackEventArgsBase> messageHandler)
+            : base(null, PagingBehavior.SinglePageResult, messageHandler, YoutubeConstants.MaxResults)
+        {
+            this.Search = search;
+        }
+
+        public YoutubeBasicSearchRequest(string search,
                                          string pageToken,
                                          PagingBehavior pagingBehavior,
                                          SimpleEventHandler<MessagingCallbackEventArgsBase> messageHandler)

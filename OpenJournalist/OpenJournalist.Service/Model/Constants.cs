@@ -18,22 +18,4 @@
         /// </summary>
         RunSynchronouslyToPageLimit
     }
-
-    public enum MessageCallbackType
-    {
-        /// <summary>
-        /// Simple text message to be displayed to the user
-        /// </summary>
-        SimpleMessage = 0,
-
-        /// <summary>
-        /// Error message that should involve an Exception object returned from the service
-        /// </summary>
-        ErrorMessage = 1,
-
-        /// <summary>
-        /// Message with the page data to show progress to the user
-        /// </summary>
-        PagedResultsMessage = 2
-    }
 }

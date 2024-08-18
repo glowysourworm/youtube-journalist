@@ -48,11 +48,11 @@ namespace OpenJournalist
         /// <summary>
         /// Returns entire collection of search results from local database
         /// </summary>
-        public Task<IEnumerable<YoutubeSearchResultViewModel>> GetLocalSearchResults(SearchPaginatedRequest request)
+        public async Task<IEnumerable<YoutubeSearchResultViewModel>> GetLocalSearchResults(SearchPaginatedRequest request)
         {
             try
             {
-                return new Task<IEnumerable<YoutubeSearchResultViewModel>>(() =>
+                return await Task.Run(() =>
                 {
                     request.MessageHandler(new ServiceMessageEventArgs(null, "Connecting to local database"));
 
@@ -79,11 +79,11 @@ namespace OpenJournalist
         /// <summary>
         /// Returns entire set of channel entities from local database
         /// </summary>
-        public Task<IEnumerable<ChannelViewModel>> GetLocalChannels(SearchPaginatedRequest request)
+        public async Task<IEnumerable<ChannelViewModel>> GetLocalChannels(SearchPaginatedRequest request)
         {
             try
             {
-                return new Task<IEnumerable<ChannelViewModel>>(() =>
+                return await Task.Run(() =>
                 {
                     using (var unitOfWork = CreateConnection())
                     {
@@ -106,11 +106,11 @@ namespace OpenJournalist
         /// <summary>
         /// Returns channel from local database
         /// </summary>
-        public Task<YoutubeChannelViewModel> GetChannel(string channelId)
+        public async Task<YoutubeChannelViewModel> GetChannel(string channelId)
         {
             try
             {
-                return new Task<YoutubeChannelViewModel>(() =>
+                return await Task.Run(() =>
                 {
                     using (var unitOfWork = CreateConnection())
                     {
@@ -129,11 +129,11 @@ namespace OpenJournalist
         /// <summary>
         /// Executes basic search as a user on the Youtube platform, and stores the results in the local database
         /// </summary>
-        public Task<PaginatedVirtualScrollResult<YoutubeSearchResultViewModel>> Execute_Youtube_BasicSearch(YoutubeBasicSearchRequest request)
+        public async Task<PaginatedVirtualScrollResult<YoutubeSearchResultViewModel>> Execute_Youtube_BasicSearch(YoutubeBasicSearchRequest request)
         {
             try
             {
-                return new Task<PaginatedVirtualScrollResult<YoutubeSearchResultViewModel>>(() =>
+                return await Task.Run(() =>
                 {
                     using (var unitOfWork = CreateConnection())
                     {
@@ -163,11 +163,11 @@ namespace OpenJournalist
         /// <summary>
         /// Executes search for channel details, and updates local database
         /// </summary>
-        public Task<YoutubeChannelViewModel> Execute_Youtube_ChannelList(YoutubeChannelDetailsRequest request)
+        public async Task<YoutubeChannelViewModel> Execute_Youtube_ChannelList(YoutubeChannelDetailsRequest request)
         {
             try
             {
-                return new Task<YoutubeChannelViewModel>(() =>
+                return await Task.Run(() =>
                 {
                     using (var unitOfWork = CreateConnection())
                     {
@@ -194,11 +194,11 @@ namespace OpenJournalist
         /// Get will apply service request to look for specific channel, video, or playlist entities,
         /// pulling over extended detail about the entity.
         /// </summary>
-        public Task<PaginatedVirtualScrollResult<YoutubeVideoViewModel>> Execute_Youtube_Video_List(YoutubeVideoDetailsRequest request)
+        public async Task<PaginatedVirtualScrollResult<YoutubeVideoViewModel>> Execute_Youtube_Video_List(YoutubeVideoDetailsRequest request)
         {
             try
             {
-                return new Task<PaginatedVirtualScrollResult<YoutubeVideoViewModel>>(() =>
+                return await Task.Run(() =>
                 {
                     using (var unitOfWork = CreateConnection())
                     {
@@ -227,11 +227,11 @@ namespace OpenJournalist
         /// <summary>
         /// Search that retrieves comment threads for:  1) An entire channel, or 2) A set of video (ids)
         /// </summary>
-        public Task<PaginatedVirtualScrollResult<YoutubeCommentThreadViewModel>> Execute_Youtube_CommentThread_List(YoutubeCommentThreadRequest request)
+        public async Task<PaginatedVirtualScrollResult<YoutubeCommentThreadViewModel>> Execute_Youtube_CommentThread_List(YoutubeCommentThreadRequest request)
         {
             try
             {
-                return new Task<PaginatedVirtualScrollResult<YoutubeCommentThreadViewModel>>(() =>
+                return await Task.Run(() =>
                 {
                     using (var unitOfWork = CreateConnection())
                     {

@@ -14,22 +14,10 @@ namespace OpenJournalist.Service.Model.Message
         /// </summary>
         public Exception ServiceException { get; private set; }
 
-        /// <summary>
-        /// Callback type for the message
-        /// </summary>
-        public MessageCallbackType CallbackType { get; private set; }
-
         public MessagingCallbackEventArgsBase(Exception serviceException = null, string message = null)
         {
             this.Message = message;
             this.ServiceException = serviceException;
-            this.CallbackType = serviceException != null ? MessageCallbackType.ErrorMessage : MessageCallbackType.SimpleMessage;
-        }
-
-        public MessagingCallbackEventArgsBase(MessageCallbackType messageCallbackType = MessageCallbackType.PagedResultsMessage)
-        {
-            this.Message = "";
-            this.ServiceException = null;
         }
     }
 }

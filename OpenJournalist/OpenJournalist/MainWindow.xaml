@@ -6,6 +6,7 @@
         xmlns:converter="clr-namespace:OpenJournalist.Converter"
         xmlns:wpfConverter="clr-namespace:WpfCustomUtilities.UI.Converter;assembly=WpfCustomUtilities"
         xmlns:wpfView="clr-namespace:WpfCustomUtilities.UI.View;assembly=WpfCustomUtilities"
+        xmlns:local="clr-namespace:OpenJournalist"
         xmlns:view="clr-namespace:OpenJournalist.View"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         WindowState="Maximized"
@@ -16,6 +17,7 @@
         <converter:BoolVisibilityCollapseInverseConverter x:Key="BoolVisibilityCollapseInverseConverter" />
         <wpfConverter:ParameterEqualityInverseBoolConverter x:Key="ParameterEqualityInverseBoolConverter" />
         <wpfConverter:NonNullBoolConverter x:Key="NonNullBoolConverter" />
+        <wpfConverter:ParameterVisibilityCollapsedConverter x:Key="ParameterVisibilityCollapsedConverter" />
     </Window.Resources>
     <Grid>
 
@@ -48,38 +50,16 @@
         <!-- Primary Results -->
         <TabControl Grid.Column="1" Grid.Row="2" Grid.RowSpan="1" Margin="3">
 
-            <TabItem>
+            <TabItem x:Name="LocalTab" Header="LocalDB" Visibility="{Binding SelectedPlatform, Converter={StaticResource ParameterVisibilityCollapsedConverter}, ConverterParameter={x:Static local:PlatformType.LocalDB}}">
+                <view:LocalSearchView />
+            </TabItem>
 
-                <TabItem.Header>
-                    <TextBlock>
-                        <Run Text="Youtube Search (" />
-                        <Run Text="{Binding SearchResults.Count, Mode=OneWay}" />
-                        <Run Text=")" />
-                    </TextBlock>
-                </TabItem.Header>
+            <TabItem x:Name="YoutubeTab" Header="Youtube" Visibility="{Binding SelectedPlatform, Converter={StaticResource ParameterVisibilityCollapsedConverter}, ConverterParameter={x:Static local:PlatformType.Youtube}}">
+                <view:YoutubeSearchView YoutubeBasicSearchEvent="OnYoutubeBasicSearchEvent" />
+            </TabItem>
 
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    
-                    <!-- Platform Basic Search Filter -->
-                    <view:BasicSearchView x:Name="PlatformBasicSearchControl" Grid.Row="1" Grid.Column="1" SearchEvent="OnPlatformBasicSearch"  />
-
-                    <!-- Youtube Search -->
-                    <view:SearchResultView SearchResultDoubleClick="OnSearchResultDoubleClick" DataContext="{Binding SearchResults}" />
-
-                    <!-- Local Basic Search Filter -->
-                    <view:BasicSearchView x:Name="LocalBasicSearchControl" Grid.Row="1" Grid.Column="1" SearchEvent="OnLocalBasicSearch"  />                    
-                    
-                    <!-- Local Search -->
-                    <view:SearchResultView Grid.Row="1" SearchResultDoubleClick="OnSearchResultDoubleClick" DataContext="{Binding LocalSearchResults}" />
-
-                </Grid>
-
+            <TabItem x:Name="RumbleTab" Header="Rumble" Visibility="{Binding SelectedPlatform, Converter={StaticResource ParameterVisibilityCollapsedConverter}, ConverterParameter={x:Static local:PlatformType.Rumble}}">
+                <view:RumbleSearchView />
             </TabItem>
 
             <TabItem x:Name="ChannelTab">
